@@ -1,0 +1,30 @@
+name: Backup Strapi
+
+on:
+  workflow_dispatch:
+
+jobs:
+  backup_strapi:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: pull deployment-scripts repo
+      uses: actions/checkout@v3
+      with:
+        repository: Civiconnect/deployment-scripts
+        ref: v1
+        token: ${{ secrets.GH_TOKEN }}
+        path: './deployment_scripts'
+
+    - name: Run playbook
+      uses: dawidd6/action-ansible-playbook@v2
+      with:
+        playbook: backup-strapi.ansible.yml
+        directory: ./deployment_scripts/ansible
+        key: ${{secrets.PRIVATE_SSH_KEY}}
+        inventory: |
+          [remote]
+          ${{ inputs.hostName || secrets.HOST_USER }}@${{ inputs.hostIP || secrets.HOST_IP }}
+        options: |
+          --extra-vars "{HOST: remote, AWS_BACKUP_PUBLIC_KEY: "${{ secrets.AWS_BACKUP_PUBLIC_KEY }}", AWS_BACKUP_PRIVATE_KEY: "${{ secrets.AWS_BACKUP_PRIVATE_KEY }}", AWS_REGION: "${{ secrets.AWS_REGION }}", NEXTJS_REPO_ID: "${{ secrets.NEXTJS_REPO_ID }}"}"
+          --verbose

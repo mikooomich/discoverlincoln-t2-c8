@@ -1,0 +1,139 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      instance_name:
+        description: 'name given to created instance'
+        default: 'lightsail_instance_name'
+        required: true
+        type: string
+      bundle_id:
+        description: 'Bundle ID'
+        default: 'micro_2_0'
+        required: true
+        type: choice
+        options:
+        - nano_2_0
+        - micro_2_0
+        - small_2_0
+        - medium_2_0
+        - large_2_0
+        - xlarge_2_0
+        - 2xlarge_2_0
+        - nano_win_2_0
+        - micro_win_2_0
+        - small_win_2_0
+        - medium_win_2_0
+        - large_win_2_0
+        - xlarge_win_2_0
+        - 2xlarge_win_2_0
+      bucket_name:
+        description: 'name given to created bucket'
+        default: 's3-bucket-name'
+        required: true
+        type: string
+      create_static_ip:
+        description: 'create a static IP for the instance'
+        default: false
+        required: true
+        type: boolean
+      create_godaddy_records:
+        description: 'create GoDaddy records'
+        default: true
+        required: true
+        type: boolean
+      setup_certbot_ssl:
+        description: 'setup certbot SSL'
+        default: true
+        required: true
+        type: boolean
+      certbot_email:
+        description: 'email for certbot'
+        default: ""
+        required: false
+      existing_resource_behavior:
+        description: 'behavior when AWS resource already exists'
+        default: 'fail'
+        required: true
+        type: choice
+        options:
+        - 'fail'
+        - 'skip'
+        # 'replace'
+jobs:
+  create_lightsail_instance:
+    uses: ./.github/workflows/create-lightsail-instance.yml
+    with:
+      instance_name: ${{ inputs.instance_name }}
+      create_static_ip: ${{ inputs.create_static_ip }}
+      existing_resource_behavior: ${{ inputs.existing_resource_behavior }}
+      bundle_id: ${{ inputs.bundle_id }}
+    secrets: inherit
+
+  create_s3_bucket:
+    uses: ./.github/workflows/create-s3-bucket.yml
+    with:
+      bucket_name: ${{ inputs.bucket_name }}
+      existing_resource_behavior: ${{ inputs.existing_resource_behavior }}
+    secrets: inherit
+
+  set_go_daddy_records:
+    if: ${{ inputs.create_godaddy_records }}
+    uses: ./.github/workflows/set-go-daddy-records.yml
+    needs: [create_lightsail_instance]
+    with:
+      hostIP: ${{ needs.create_lightsail_instance.outputs.OUT_INSTANCE_IP }}
+      existing_resource_behavior: ${{ inputs.existing_resource_behavior }}
+    secrets: inherit
+
+  setup_infisical:
+    uses: ./.github/workflows/setup-infisical.yml
+    needs: create_lightsail_instance
+    with:
+      hostIP: ${{ needs.create_lightsail_instance.outputs.OUT_INSTANCE_IP }}
+      hostName: ${{ needs.create_lightsail_instance.outputs.OUT_HOST_NAME }}
+    secrets: inherit
+
+  setup_strapi_backups:
+    uses: ./.github/workflows/setup-strapi-backups.yml
+    needs: [create_lightsail_instance, setup_infisical]
+    with:
+      hostIP: ${{ needs.create_lightsail_instance.outputs.OUT_INSTANCE_IP }}
+      hostName: ${{ needs.create_lightsail_instance.outputs.OUT_HOST_NAME }}
+    secrets: inherit
+
+  setup_nginx:
+    uses: ./.github/workflows/setup-nginx.yml
+    needs: [create_lightsail_instance, setup_infisical]
+    with:
+      hostIP: ${{ needs.create_lightsail_instance.outputs.OUT_INSTANCE_IP }}
+      hostName: ${{ needs.create_lightsail_instance.outputs.OUT_HOST_NAME }}
+    secrets: inherit
+
+  setup_postgres:
+    uses: ./.github/workflows/setup-postgres.yml
+    needs: [create_lightsail_instance, setup_nginx]
+    with:
+      hostIP: ${{ needs.create_lightsail_instance.outputs.OUT_INSTANCE_IP }}
+      hostName: ${{ needs.create_lightsail_instance.outputs.OUT_HOST_NAME }}
+    secrets: inherit
+
+  setup_certbot:
+    if: ${{ inputs.setup_certbot_ssl }}
+    uses: ./.github/workflows/setup-certbot.yml
+    needs: [create_lightsail_instance, setup_nginx, setup_postgres]
+    with:
+      hostIP: ${{ needs.create_lightsail_instance.outputs.OUT_INSTANCE_IP }}
+      hostName: ${{ needs.create_lightsail_instance.outputs.OUT_HOST_NAME }}
+      certbotEmail: ${{ inputs.certbot_email }}
+    secrets: inherit
+
+  pull_repos:
+    uses: ./.github/workflows/pull-repos.yml
+    needs: [create_lightsail_instance, create_s3_bucket, setup_postgres]
+    with:
+      hostIP: ${{ needs.create_lightsail_instance.outputs.OUT_INSTANCE_IP }}
+      hostName: ${{ needs.create_lightsail_instance.outputs.OUT_HOST_NAME }}
+    secrets: inherit
+

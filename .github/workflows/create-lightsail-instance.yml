@@ -1,0 +1,158 @@
+# Provisions an instance on AWS Lightsail.
+# Secrets: 
+#  - AWS_ACCESS_KEY_ID: public key for AWS IAM user with Lightsail access
+#  - AWS_SECRET_ACCESS_KEY: private key for AWS IAM user with Lightsail access
+#  - PUBLIC_SSH_KEY: public key for SSH access to instance, will be added to authorized_keys
+#  - GH_TOKEN: token for accessing deployment-scripts repo
+# Variables:
+#  - AWS_REGION: region to create instance in. e.g. us-east-1
+#  - AVAILABILITY_ZONE: availability zone to create instance in. e.g. us-east-1a
+#  - BLUEPRINT_ID: blueprint to use for instance. e.g. nodejs
+#  - BUNDLE_ID: bundle to use for instance. e.g. micro_2_0
+# Inputs:
+#  - instance_name: name given to created instance
+
+name: Create Lightsail Instance
+
+on:
+  workflow_dispatch:
+    inputs:
+      instance_name:
+        description: 'name given to created instance'
+        default: 'lightsail_instance_name'
+        required: true
+        type: string
+      create_static_ip:
+        description: 'create a static IP for the instance'
+        default: false
+        required: true
+        type: boolean
+      existing_resource_behavior:
+        description: 'behavior when AWS resource already exists'
+        default: 'fail'
+        required: true
+        type: choice
+        options:
+        - 'fail'
+        - 'skip'
+        # - 'replace'
+      bundle_id:
+        description: 'Bundle ID'
+        default: 'micro_2_0'
+        required: true
+        type: choice
+        options:
+        - nano_2_0
+        - micro_2_0
+        - small_2_0
+        - medium_2_0
+        - large_2_0
+        - xlarge_2_0
+        - 2xlarge_2_0
+        - nano_win_2_0
+        - micro_win_2_0
+        - small_win_2_0
+        - medium_win_2_0
+        - large_win_2_0
+        - xlarge_win_2_0
+        - 2xlarge_win_2_0
+
+  workflow_call:
+    inputs:
+      instance_name:
+        description: 'name given to created instance'
+        required: true
+        type: string
+      create_static_ip:
+        description: 'create a static IP for the instance'
+        default: false
+        required: true
+        type: boolean
+      existing_resource_behavior:
+        description: 'behavior when AWS resource already exists'
+        default: 'fail'
+        required: true
+        type: string
+      bundle_id:
+        description: 'Bundle ID'
+        default: 'micro_2_0'
+        required: true
+        type: string
+    outputs:
+      OUT_INSTANCE_IP:
+        description: 'IP address of created instance'
+        value: ${{ jobs.launch_instance.outputs.OUT_INSTANCE_IP }}
+
+      OUT_HOST_NAME:
+        description: 'hostname of created instance'
+        value: ${{ jobs.launch_instance.outputs.OUT_HOST_NAME }}
+jobs:
+  launch_instance:
+    runs-on: ubuntu-latest
+    outputs:
+      OUT_INSTANCE_IP: ${{ steps.run_script.outputs.OUT_INSTANCE_IP }}
+      OUT_HOST_NAME: ${{ steps.run_script.outputs.OUT_HOST_NAME }}
+    steps:
+    - name: install Node
+      uses: actions/setup-node@v2-beta
+      with:
+        node-version: '16'
+
+    - name: pull deployment-scripts repo
+      uses: actions/checkout@v3
+      with:
+        repository: Civiconnect/deployment-scripts
+        ref: v1
+        token: ${{ secrets.GH_TOKEN }}
+        path: './deployment_scripts'
+
+    - name: install deps and run
+      id: run_script
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
+        AVAILABILITY_ZONE: ${{ secrets.AVAILABILITY_ZONE }}
+        BLUEPRINT_ID: nodejs
+        BUNDLE_ID: ${{ inputs.bundle_id || secrets.BUNDLE_ID }}
+        INSTANCE_NAME: ${{ inputs.instance_name }}
+        PUBLIC_SSH_KEY: ${{ secrets.PUBLIC_SSH_KEY }}
+        CREATE_STATIC_IP: ${{ inputs.create_static_ip }}
+        EXISTING_RESOURCE_BEHAVIOR: ${{ inputs.existing_resource_behavior }}
+        PROJECT_ID: ${{ secrets.PROJECT_ID}}
+      run: |
+        cd ./deployment_scripts
+        npm install
+        node launchInstance.js
+        echo "::set-output name=OUT_INSTANCE_IP::$(cat ./instance_public_ip.txt)"
+        echo "::set-output name=OUT_HOST_NAME::$(cat ./host_name.txt)"
+
+    - name: update infisical ip and hostname variables
+      uses: AustinGoodman/infisical-secrets@v1
+      with:
+        create: |
+          [
+            {
+              "path": "/github",
+              "env": "dev",
+              "token": "${{ secrets.INFISICAL_TOKEN_DEVELOPMENT_GITHUB }}",
+              "secrets": ["HOST_USER", "HOST_IP"],
+              "secretValues": ["bitnami", "${{ steps.run_script.outputs.OUT_INSTANCE_IP }}"]
+            }
+          ]
+        domain: https://infisical.civiconnect.net
+
+    - name: Block until instance connected to
+      uses: dawidd6/action-ansible-playbook@v2
+      with:
+        playbook: block-until-connection.ansible.yml
+        directory: ./deployment_scripts/ansible
+        key: ${{secrets.PRIVATE_SSH_KEY}}
+        inventory: |
+          [remote]
+          ${{ steps.run_script.outputs.OUT_HOST_NAME }}@${{ steps.run_script.outputs.OUT_INSTANCE_IP }}
+        options: |
+          --extra-vars "{HOST: remote}"
+          --verbose
+
+

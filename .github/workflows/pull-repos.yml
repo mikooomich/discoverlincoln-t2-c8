@@ -1,0 +1,58 @@
+# Pulls, builds and starts the NextJS and Strapi programs on a remote server. Processes are managed
+# by PM2 and will remain active after a server restart.
+# Secrets: 
+#  - HOST_USER: user for SSH access to instance, e.g. bitnami
+#  - HOST_IP: IP address of instance
+#  - PRIVATE_SSH_KEY: private key for SSH access to instance
+#  - GH_TOKEN: token for accessing deployment-scripts repo, nextjs repo and strapi repo
+#  - GH_USER: username for accessing deployment-scripts repo, nextjs repo and strapi repo
+#  - NEXTJS_ENV: entire content of the .env.local file for the NextJS app
+#  - STRAPI_ENV: entire content of the .env file for the Strapi app
+# Variables:
+#  - NEXTJS_REPO_ID: ID of the NextJS repo
+#  - NEXTJS_REPO_BRANCH: branch of the NextJS repo
+#  - STRAPI_REPO_ID: ID of the Strapi repo
+#  - STRAPI_REPO_BRANCH: branch of the Strapi repo
+
+name: Pull Repos
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      hostIP:
+        description: 'IP address of instance'
+        type: string
+        required: false
+      hostName:
+        description: 'Name of instance user'
+        type: string
+        required: false
+  push:
+    branches: ["development", "production"]
+
+jobs:
+  pull_repos:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: pull deployment-scripts repo
+      uses: actions/checkout@v3
+      with:
+        repository: Civiconnect/deployment-scripts
+        ref: v1
+        token: ${{ secrets.GH_TOKEN }}
+        path: './deployment_scripts'
+
+    - name: Run playbook
+      uses: dawidd6/action-ansible-playbook@v2
+      with:
+        playbook: pull-repos.ansible.yml
+        directory: ./deployment_scripts/ansible
+        key: ${{secrets.PRIVATE_SSH_KEY}}
+        inventory: |
+          [remote]
+          ${{ inputs.hostName || secrets.HOST_USER }}@${{ inputs.hostIP || secrets.HOST_IP }}
+        options: |
+          --extra-vars "{HOST: remote, NEXTJS_REPO_ID: "${{ secrets.NEXTJS_REPO_ID }}", NEXTJS_REPO_BRANCH: "${{ secrets.NEXTJS_REPO_BRANCH }}", STRAPI_REPO_ID: "${{ secrets.STRAPI_REPO_ID }}", STRAPI_REPO_BRANCH: "${{ secrets.STRAPI_REPO_BRANCH }}", GH_USER: "${{ secrets.GH_USER }}", GH_TOKEN: "${{ secrets.GH_TOKEN }}", PRODUCTION: "${{ secrets.PRODUCTION }}", DEVELOPMENT: "${{ secrets.DEVELOPMENT }}", INFISICAL_TOKEN_DEVELOPMENT_NEXTJS: "${{ secrets.INFISICAL_TOKEN_DEVELOPMENT_NEXTJS }}", INFISICAL_TOKEN_PRODUCTION_NEXTJS: "${{ secrets.INFISICAL_TOKEN_PRODUCTION_NEXTJS }}", INFISICAL_TOKEN_DEVELOPMENT_STRAPI: "${{ secrets.INFISICAL_TOKEN_DEVELOPMENT_STRAPI }}", INFISICAL_TOKEN_PRODUCTION_STRAPI: "${{ secrets.INFISICAL_TOKEN_PRODUCTION_STRAPI }}", INFISICAL_TOKEN_DEVELOPMENT_GITHUB: "${{ secrets.INFISICAL_TOKEN_DEVELOPMENT_GITHUB }}"}"
+          --verbose

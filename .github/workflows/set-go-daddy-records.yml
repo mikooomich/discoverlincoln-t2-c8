@@ -1,0 +1,56 @@
+name: Set GoDaddy Records
+
+on:
+  workflow_dispatch:
+    inputs:
+      existing_resource_behavior:
+        description: 'behavior when GoDaddy resources already exist'
+        default: 'fail'
+        required: true
+        type: choice
+        options:
+        - 'fail'
+        - 'skip'
+        # - 'replace'
+
+  workflow_call:
+    inputs:
+      hostIP:
+        description: 'IP address of instance'
+        type: string
+        required: false
+      existing_resource_behavior:
+        description: 'behavior when GoDaddy resources already exist'
+        default: 'fail'
+        required: true
+        type: string
+jobs:
+  set_records:
+    runs-on: ubuntu-latest
+    steps:
+    - name: install Node
+      uses: actions/setup-node@v2-beta
+      with:
+        node-version: '16'
+
+    - name: pull deployment-scripts repo
+      uses: actions/checkout@v3
+      with:
+        repository: Civiconnect/deployment-scripts
+        ref: v1
+        token: ${{ secrets.GH_TOKEN }}
+        path: './deployment_scripts'
+
+    - name: install deps and run
+      id: run_script
+      env:
+        HOST_IP: ${{ inputs.hostIP || secrets.HOST_IP }}
+        GO_DADDY_PUBLIC_KEY: ${{ secrets.GO_DADDY_PUBLIC_KEY }}
+        GO_DADDY_PRIVATE_KEY: ${{ secrets.GO_DADDY_PRIVATE_KEY }}
+        DOMAIN: ${{ secrets.DOMAIN }}
+        STRAPI_DOMAIN_PREFIX: ${{ secrets.STRAPI_DOMAIN_PREFIX }}
+        EXISTING_RESOURCE_BEHAVIOR: ${{ inputs.existing_resource_behavior }}
+      run: |
+        cd ./deployment_scripts
+        npm install
+        node createGoDaddyRecords.js

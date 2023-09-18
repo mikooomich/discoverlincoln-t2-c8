@@ -1,0 +1,50 @@
+# Installs NGINX on the remote server and sets up the reverse proxy for the NEXTJS and Strapi apps.
+# Secrets:
+# - GH_TOKEN: token for accessing deployment-scripts repo
+# - HOST_USER: user for SSH access to instance. e.g. bitnami
+# - HOST_IP: IP address of instance
+# - PRIVATE_SSH_KEY: private key for SSH access to instance
+# Variables:
+# - DOMAIN: domain name for the website. e.g. myproject.domain.com
+# - STRAPI_DOMAIN_PREFIX: subdomain prefix for the Strapi app. e.g. strapi for strapi.myproject.domain.com
+
+name: Setup NGINX
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      hostIP:
+        description: 'IP address of instance'
+        type: string
+        required: false
+      hostName:
+        description: 'Name of instance user'
+        type: string
+        required: false
+
+jobs:
+  setup_nginx:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: pull deployment-scripts repo
+      uses: actions/checkout@v3
+      with:
+        repository: Civiconnect/deployment-scripts
+        ref: v1
+        token: ${{ secrets.GH_TOKEN }}
+        path: './deployment_scripts'
+
+    - name: Run playbook
+      uses: dawidd6/action-ansible-playbook@v2
+      with:
+        playbook: setup-nginx.ansible.yml
+        directory: ./deployment_scripts/ansible
+        key: ${{secrets.PRIVATE_SSH_KEY}}
+        inventory: |
+          [remote]
+          ${{ inputs.hostName || secrets.HOST_USER }}@${{ inputs.hostIP || secrets.HOST_IP }}
+        options: |
+          --extra-vars "{HOST: remote, DOMAIN: "${{ secrets.DOMAIN }}", DOMAIN_PRODUCTION: "${{ secrets.DOMAIN_PRODUCTION }}", STRAPI_DOMAIN_PREFIX: "${{ secrets.STRAPI_DOMAIN_PREFIX }}"}"
+          --verbose

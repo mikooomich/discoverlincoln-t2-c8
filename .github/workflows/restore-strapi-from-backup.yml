@@ -1,0 +1,47 @@
+name: Restore Strapi from Backup
+
+on:
+  workflow_dispatch:
+    inputs:
+      s3_object_url:
+        description: 'S3 Object URL'
+        default: ''
+        required: true
+        type: string
+
+  workflow_call:
+    inputs:
+      hostIP:
+        description: 'IP address of instance'
+        type: string
+        required: false
+      hostName:
+        description: 'Name of instance user'
+        type: string
+        required: false
+
+jobs:
+  restore_strapi_from_backup:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: pull deployment-scripts repo
+      uses: actions/checkout@v3
+      with:
+        repository: Civiconnect/deployment-scripts
+        ref: v1
+        token: ${{ secrets.GH_TOKEN }}
+        path: './deployment_scripts'
+
+    - name: Run playbook
+      uses: dawidd6/action-ansible-playbook@v2
+      with:
+        playbook: restore-strapi-from-backup.ansible.yml
+        directory: ./deployment_scripts/ansible
+        key: ${{secrets.PRIVATE_SSH_KEY}}
+        inventory: |
+          [remote]
+          ${{ inputs.hostName || secrets.HOST_USER }}@${{ inputs.hostIP || secrets.HOST_IP }}
+        options: |
+          --extra-vars "{HOST: remote, AWS_BACKUP_PUBLIC_KEY: "${{ secrets.AWS_BACKUP_PUBLIC_KEY }}", AWS_BACKUP_PRIVATE_KEY: "${{ secrets.AWS_BACKUP_PRIVATE_KEY }}", AWS_REGION: "${{ secrets.AWS_REGION }}", S3_OBJECT_URL: "${{ inputs.s3_object_url }}"}"
+          --verbose

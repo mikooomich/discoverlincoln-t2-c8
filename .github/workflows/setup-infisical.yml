@@ -1,0 +1,40 @@
+name: Setup Infisical
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      hostIP:
+        description: 'IP address of instance'
+        type: string
+        required: false
+      hostName:
+        description: 'Name of instance user'
+        type: string
+        required: false
+
+jobs:
+  setup_infisical:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: pull deployment-scripts repo
+      uses: actions/checkout@v3
+      with:
+        repository: Civiconnect/deployment-scripts
+        ref: v1
+        token: ${{ secrets.GH_TOKEN }}
+        path: './deployment_scripts'
+
+    - name: Run playbook
+      uses: dawidd6/action-ansible-playbook@v2
+      with:
+        playbook: setup-infisical.ansible.yml
+        directory: ./deployment_scripts/ansible
+        key: ${{secrets.PRIVATE_SSH_KEY}}
+        inventory: |
+          [remote]
+          ${{ inputs.hostName || secrets.HOST_USER }}@${{ inputs.hostIP || secrets.HOST_IP }}
+        options: |
+          --extra-vars "{HOST: remote, INFISICAL_TOKEN_DEVELOPMENT_GITHUB: "${{ secrets.INFISICAL_TOKEN_DEVELOPMENT_GITHUB }}", INFISICAL_TOKEN_DEVELOPMENT_NEXTJS: "${{ secrets.INFISICAL_TOKEN_DEVELOPMENT_NEXTJS }}", INFISICAL_TOKEN_PRODUCTION_NEXTJS: "${{ secrets.INFISICAL_TOKEN_PRODUCTION_NEXTJS }}", INFISICAL_TOKEN_DEVELOPMENT_STRAPI: "${{ secrets.INFISICAL_TOKEN_DEVELOPMENT_STRAPI }}", INFISICAL_TOKEN_PRODUCTION_STRAPI: "${{ secrets.INFISICAL_TOKEN_PRODUCTION_STRAPI }}"}"
+          --verbose

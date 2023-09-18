@@ -1,0 +1,72 @@
+# Creates an S3 bucket with permissions configured for the Strapi S3 Upload plugin.
+# Secrets:
+# - GH_TOKEN: token for accessing deployment-scripts repo
+# - AWS_ACCESS_KEY_ID: AWS access key ID
+# - AWS_SECRET_ACCESS_KEY: AWS secret access key
+# Variables:
+# - AWS_REGION: region to create bucket in. e.g. us-east-1
+# Inputs:
+# - bucket_name: name given to S3 bucket
+
+name: Create S3 Bucket
+
+on:
+  workflow_dispatch:
+    inputs:
+      bucket_name:
+        description: 'name given to S3 bucket'
+        default: 's3-bucket-name'
+        required: true
+        type: string
+      existing_resource_behavior:
+        description: 'behavior when AWS resource already exists'
+        default: 'fail'
+        required: true
+        type: choice
+        options:
+        - 'fail'
+        - 'skip'
+        #- 'replace'
+
+  workflow_call:
+    inputs:
+      bucket_name:
+        description: 'name given to S3 bucket'
+        default: 's3-bucket-name'
+        required: true
+        type: string
+      existing_resource_behavior:
+        description: 'behavior when AWS resource already exists'
+        default: 'fail'
+        required: true
+        type: string
+
+jobs:
+  create_bucket:
+    runs-on: ubuntu-latest
+    steps:
+    - name: install Node
+      uses: actions/setup-node@v2-beta
+      with:
+        node-version: '16'
+
+    - name: pull deployment-scripts repo
+      uses: actions/checkout@v3
+      with:
+        repository: Civiconnect/deployment-scripts
+        ref: v1
+        token: ${{ secrets.GH_TOKEN }}
+        path: './deployment_scripts'
+
+    - name: install deps and run
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
+        S3_BUCKET_NAME: ${{ inputs.bucket_name }}
+        EXISTING_RESOURCE_BEHAVIOR: ${{ inputs.existing_resource_behavior }}
+        PROJECT_ID: ${{ secrets.PROJECT_ID}}
+      run: |
+        cd ./deployment_scripts
+        npm install
+        node createBucket.js
