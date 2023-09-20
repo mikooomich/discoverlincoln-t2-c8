@@ -30,7 +30,7 @@ export default function Navbar() {
                         <a href="#">Profile</a>
                     </div>
                     <div class="footer-subscription">
-                        <h1 class="subscribe-text">Subscribe to Town of Lincoln</h1>
+                        <h2 class="subscribe-text">Subscribe to Town of Lincoln</h2>
                         <div class="subscription-inputs">
                             <input type="text" class="email-input" placeholder="Enter email"></input>
                             <button type="button" class="button-style">Submit</button>

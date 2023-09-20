@@ -51,6 +51,8 @@
     background-color: #005731;
     overflow: hidden;
     justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .footer-wrap{
@@ -87,6 +89,10 @@
     flex-direction: row;
     padding: 5px;
     gap: 5px;
+}
+
+.subscribe-text{
+    font-weight: bold;
 }
 .email-input{
     display: inline-flex;
