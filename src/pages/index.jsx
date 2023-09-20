@@ -1,3 +1,4 @@
+//Austin
 //Michael 
 //sanjae
 
@@ -14,6 +15,7 @@ import "../styles/globals.css";
 import "../styles/test.css"
 
 const inter = Inter({ subsets: ["latin"] });
+
 
 export default function Home({ faqData }) {
 	const { data: session } = useSession();
