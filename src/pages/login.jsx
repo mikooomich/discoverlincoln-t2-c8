@@ -42,6 +42,13 @@ export default function login() {
                                 <p>Something very unusually long that takes up way to much space so that this is multi-lined.</p>
                                 <button className='dismissBtn'>X</button>
                         </div>
+
+                        <div className='toast toastMobile'>
+                                <div className='accent'></div>
+                                <rect className='icon'> </rect>
+                                <p>This is a mobile webpage toast</p>
+                                <button className='dismissBtn'>X</button>
+                        </div>
                 </div>
 
         </div>

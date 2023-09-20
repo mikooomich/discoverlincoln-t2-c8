@@ -80,6 +80,8 @@ input {
         float: right;      
 }
 
+
+
 .toast {
         background-color: #FF7253;
         width: 400px;
@@ -112,6 +114,25 @@ input {
         width: 100%;
 }
 
+/* hidden by default */
+.toastMobile {
+        display: none;
+        width: 100%;
+}
+
+@media only screen and (max-width: 500px){
+        .toastBox {
+                width: 100%; 
+                bottom: 0;
+        }
+        .toast {
+                /* width: 100%; */
+                display: none;
+        } 
+        .toastMobile {
+                display: flex;
+        }
+}
 
 
 
