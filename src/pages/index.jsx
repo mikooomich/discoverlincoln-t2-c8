@@ -1,3 +1,7 @@
+//Austin
+//Michael 
+//sanjae
+
 import Image from "next/image";
 import Link from "next/link";
 import { Inter } from "next/font/google";
@@ -10,7 +14,9 @@ import axios from "axios";
 import "../styles/globals.css";
 import "../styles/test.css";
 
+
 const inter = Inter({ subsets: ["latin"] });
+
 
 export default function Home({ faqData }) {
 	const { data: session } = useSession();
