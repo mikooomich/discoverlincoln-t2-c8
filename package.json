@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "infisical run --path nextjs -- next dev",
-    "build": "infisical run --path nextjs -- next build",
-    "start": "infisical run --path nextjs -- next start",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
