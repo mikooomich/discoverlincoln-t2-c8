@@ -4,7 +4,6 @@ import "@/styles/navbar.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { SessionProvider } from "next-auth/react";
-import "../styles/login.css"
 config.autoAddCss = false;
 
 export default function App({
@@ -26,7 +25,7 @@ export default function App({
 					--color-background-decoration: #F2F2F2;
 					--color-dividers: #DFDFDF;
 					--color-font-primary: #000000;
-					--color-font-primary: #5C5C5C;
+					--color-font-secondary: #5C5C5C;
 
 					--font-calps: "Calps", sans-serif;
 					--font-roboto: "Roboto Condensed", sans-serif;
@@ -37,10 +36,20 @@ export default function App({
 
 					--font-size-body-S: 12px;
 					--font-size-body-M: 14px;
+					--font-size-body-Mplus: 16px;
 					--font-size-body-L: 20px;
 
-					--shadow-box: 0px 4px 2px rgba(0, 0, 0, 0.381);
+					--font-weight-titles: "bold";
+
+
+					--padding-btn-default: 5px 20px;
+
+
+
+					--shadow-box-buttons: 0px 4px 2px rgba(0, 0, 0, 0.381);
+					--shadow-box-massive-card:  2px 4px 10px rgba(0, 0, 0, 0.762);
 					--border-radius-pill: max(100vh, 100vw);
+					--border-grey-thin: 1px solid rgb(209, 209, 209);
 				}
 			`}</style>
 		</>
