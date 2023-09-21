@@ -1,7 +1,12 @@
 import React from 'react'
 
+import TestComponent from '../components/TestComponent'
+
 export default function test() {
   return (
-	<div>test</div>
+    <TestComponent color={"red"}>
+      <div>
+      </div>
+    </TestComponent>
   )
 }
