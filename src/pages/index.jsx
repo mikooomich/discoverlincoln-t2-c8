@@ -12,7 +12,8 @@ import { signOut } from "next-auth/react";
 import axios from "axios";
 
 import "../styles/globals.css";
-import "../styles/test.css"
+import "../styles/test.css";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
