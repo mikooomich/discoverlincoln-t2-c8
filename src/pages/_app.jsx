@@ -5,7 +5,6 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { SessionProvider } from "next-auth/react";
 import "../styles/login.css"
-import "../styles/events-attractions.css"
 
 config.autoAddCss = false;
 
