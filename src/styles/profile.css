@@ -1,0 +1,45 @@
+html, body, #app, #app>div{
+    height: 100%;
+}
+
+.profile-page{
+}
+
+.account-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    height: 300px;
+    padding: 20px;
+}
+
+.account-info img{
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+.account-info h1{
+    color: black;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.event-ticket-wrap{
+    background-color: grey;
+    height: 100%;
+}
+
+.event-tickets{
+    display: flex;
+    background-color: black;
+    padding-left: 100px;
+    padding-right: 100px;
+
+    border-color: grey;
+    border-style: solid;
+    border-width: 2px;
+
+}
