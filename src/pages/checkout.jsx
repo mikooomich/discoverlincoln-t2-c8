@@ -8,35 +8,50 @@ export default function checkout() {
         <style jsx>
         {`
 
+                h1 {
+                        font-weight: var(--font-weight-title);
+                        font-size: var(--font-size-header-S);
+                        font-family: var(--font-calps);
+                }
+                h3 {
+                        font-weight: var(--font-weight-title);
+                        font-size: var(--font-size-header-XS);
+                        font-family: var(--font-calps);
+                }
+
+
                 #checkoutPsudoBody {
                         margin: auto;
                         max-width: 1200px;
-
                 }
-
+{/* confirm order and summary card section*/}
                 .actionBar {
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
-                        margin: 20px 0px;
+                        margin: 30px 0px;
+                        width: 100%;
                 }
 
-
+{/* Event form */}
                 .infoContainer {
                         display: flex;
+                        flex-wrap: wrap;
                         justify-content: center;
                         align-items: center;
-                        
                 }
-                
+            
                 .infoContainer ul {
-                        width: 100%;
-                        border: 1px solid black;
+                        max-width: 50%;
+                        min-width:450px;
+                        {/* border: 1px solid black; */}
+
+                        margin-bottom: 40px;
                 }
+
                 li {
                         display: flex;
                         align-items: center;
-                       
                 }
                 
                 li * {
@@ -47,19 +62,24 @@ export default function checkout() {
                 .verticalList {
                         display: flex;
                         flex-direction: column;
-                      
                         align-items: start;
-                       
+
+                        font-size: var(--font-size-body-Mplus);
+                        font-family: var(--font-roboto);
                 }
 
 
-                #nameInput {
+                #nameInput, #discountCodeInput {
+                        padding: var(--padding-btn-default);
                         border: var(--border-grey-thin);
                 }
 
 
-
-
+                #discountCodeInput {
+                        {/* this is used such that it applies on top of .actionBar */}
+                        width:100%;
+                        margin-right: 50px;
+                }
 
 
                 .costBox  {
@@ -68,7 +88,6 @@ export default function checkout() {
                         flex-direction: column;
                       
                         align-items: start;
-
                 }
 
                 .costEntry {
@@ -77,6 +96,39 @@ export default function checkout() {
                         justify-content: space-between;
                 }
 
+                .costEntry p {
+                        font-weight: var(--font-weight-title);
+                        font-size: var(--font-size-header-S);
+                        font-family: var(--font-calps);
+                        margin-top: 0px;
+                        margin-bottom: 0px;
+                }
+
+
+{/* TOS and proceeed */}
+                .tos {
+                        display: flex;
+                        flex-direction: column;
+                        font-weight: var(--font-weight-titles);
+                }
+
+                #checkoutButton {
+                        align-self: end;
+                }
+
+
+                @media screen and (max-width:1300px) {
+                        #checkoutPsudoBody {
+                                padding: 0px 50px;
+                        }
+                }
+
+                @media screen and (max-width:550px) {
+                        /* Mobile view. */
+                        #checkoutPsudoBody {
+                                padding: 0px 20px;
+                        }
+                }
 
              /* Placeholder cards */
         .card {
@@ -180,9 +232,10 @@ export default function checkout() {
 
                                 <ul>
                                         <li>
-                                                
-                                                <input id="nameInput" type='text' placeholder='Discount Code'></input>
-                                                <DefaultButton text={"Apply"}></DefaultButton>
+                                                <span className='actionBar'>
+                                                        <input id="discountCodeInput" type='text' placeholder='Discount Code'></input>
+                                                        <DefaultButton text={"Apply"}></DefaultButton>
+                                                </span>
                                         </li>
                                         <li className='costBox'>
                                                 <span className='costEntry'>
@@ -206,11 +259,12 @@ export default function checkout() {
                 </div>
 
                 {/* TOS part */}
-                <div>
+                <div className='tos'>
                         <h3>Terms of Use</h3>
                         <p>By continuing, you agree to... blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day.  blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day.  blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day. blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day.  blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day.  blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day. blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day.  blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day.  blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day. </p>
-
+                        <span id="checkoutButton">
                         <DefaultButton text={"Proceed to Checkout"}></DefaultButton>
+                        </span>
                 </div>
 
 
