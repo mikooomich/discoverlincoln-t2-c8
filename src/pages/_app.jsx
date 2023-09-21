@@ -4,7 +4,6 @@ import "@/styles/navbar.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { SessionProvider } from "next-auth/react";
-import "../styles/login.css"
 config.autoAddCss = false;
 
 export default function App({
@@ -41,6 +40,7 @@ export default function App({
 
 					--shadow-box: 0px 4px 2px rgba(0, 0, 0, 0.381);
 					--border-radius-pill: max(100vh, 100vw);
+					--border-grey-thin: 1px solid rgb(209, 209, 209);
 				}
 			`}</style>
 		</>
