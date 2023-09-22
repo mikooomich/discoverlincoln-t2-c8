@@ -1,5 +1,4 @@
 import "@/styles/globals.css";
-import "@/styles/navbar.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { SessionProvider } from "next-auth/react";
@@ -42,6 +41,7 @@ export default function App({
 
 
 					--padding-btn-default: 5px 20px;
+					--padding-input-default: 12px 20px;
 
 
 

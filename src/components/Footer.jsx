@@ -1,4 +1,5 @@
 import React from 'react'
+import TextInput from './TextInput'
 
 export default function Footer() {
 	//code
@@ -22,7 +23,7 @@ export default function Footer() {
                     <div className="footer-subscription">
                         <h2 className="subscribe-text">Subscribe to Town of Lincoln</h2>
                         <div className="subscription-inputs">
-                            <input type="text" className="email-input" placeholder="Enter email"></input>
+                            <TextInput type="text" className="email-input" placeholder="Enter email"></TextInput>
                             <button type="button" className="button-style">Submit</button>
                         </div>
                     </div>
@@ -88,11 +89,6 @@ export default function Footer() {
 
                     .subscribe-text{
                         font-weight: bold;
-                    }
-                    .email-input{
-                        display: inline-flex;
-                        padding: 2px 30px 2px 8px;
-                        align-items: center;
                     }
                     .button-style{
                         display: flex;

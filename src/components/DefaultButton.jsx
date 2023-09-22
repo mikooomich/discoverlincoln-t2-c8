@@ -38,13 +38,14 @@ textColor = "#FFFFFF", fontSize = "var(--font-size-body-L)", padding = "var(--pa
 			.signBtn {
 				background-color: var(--color-elevated-green);
 				color: white;
-				box-shadow: var(--shadow-box);
+				box-shadow: var(--shadow-box-buttons);
 				border-radius: var(--border-radius-pill);
 			
 				padding: var(--padding-btn-default);
 				min-width: 150px;
 				font-size: var(-font-size-body-L);
 				font-weight: bold;
+				margin: 15px 0px;
 			}
 
 			.signBtn:hover {

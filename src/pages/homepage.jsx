@@ -1,3 +1,4 @@
+import TextInput from '@/components/TextInput'
 import React from 'react'
 
 export default function homepage() {
@@ -26,7 +27,7 @@ export default function homepage() {
                                 <button className="see-lincoln">SEE LINCOLN</button>
                                 <div className = "search-button-area">
                                     <button className="search-button"></button>
-                                    <input type="text" className="search-input" placeholder="Search..."></input>
+                                    <TextInput ype="text" className="search-input" placeholder="Search..."></TextInput>
                                 </div>
                             </div>
                         </div>
@@ -236,12 +237,6 @@ export default function homepage() {
                     height: 40px;
                 }
 
-                .search-input{
-                    width: 300px;
-                    height: 40px;
-                    padding: 12px 20px;
-                }
-
                 .upcoming-events-wrap{
                     display: flex;
                     flex-flow: column wrap;
@@ -395,11 +390,7 @@ export default function homepage() {
                     font-weight: 700;
                     line-height: normal;
                 }
-                }
-
                 
-
-                }
 		`}</style>
     </>
 

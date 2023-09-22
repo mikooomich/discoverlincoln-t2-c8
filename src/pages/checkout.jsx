@@ -1,5 +1,6 @@
 import React from 'react'
 import DefaultButton from '@/components/DefaultButton'
+import TextInput from '@/components/TextInput'
 
 
 export default function checkout() {
@@ -69,17 +70,8 @@ export default function checkout() {
                 }
 
 
-                #nameInput, #discountCodeInput {
-                        padding: var(--padding-btn-default);
-                        border: var(--border-grey-thin);
-                }
 
-
-                #discountCodeInput {
-                        {/* this is used such that it applies on top of .actionBar */}
-                        width:100%;
-                        margin-right: 50px;
-                }
+                
 
 
                 .costBox  {
@@ -196,7 +188,7 @@ export default function checkout() {
                                 <ul>
                                         <li>
                                                 <h3>Name:</h3>
-                                                <input id="nameInput" type='text' placeholder='Enter answer'></input>
+                                                <TextInput className="checkoutInput" type='text' placeholder='Enter answer'></TextInput>
                                         </li>
                                         <li>
                                                 <h3>Vehicles:</h3>
@@ -234,7 +226,7 @@ export default function checkout() {
                                 <ul>
                                         <li>
                                                 <span className='actionBar'>
-                                                        <input id="discountCodeInput" type='text' placeholder='Discount Code'></input>
+                                                        <TextInput className="checkoutInput" type='text' placeholder='Discount Code'></TextInput>
                                                         <DefaultButton children="Apply"></DefaultButton>
                                                 </span>
                                         </li>
