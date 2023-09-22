@@ -1,5 +1,7 @@
 import FontAwesomeExample from '@/components/FontAwesomeExample'
 import ImageExample from '@/components/ImageExample'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 import React from 'react'
 
 import TestComponent from '../components/TestComponent'
@@ -7,6 +9,7 @@ import TestComponent from '../components/TestComponent'
 export default function test() {
   return (
     <>
+      <Navbar></Navbar>
       <TestComponent color={"red"}>
         <div>
         </div>
@@ -14,6 +17,7 @@ export default function test() {
 
       <ImageExample></ImageExample>
       <FontAwesomeExample></FontAwesomeExample>
+      <Footer></Footer>
     </>
   )
 }
