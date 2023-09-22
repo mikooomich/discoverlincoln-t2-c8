@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Toast from '@/components/Toast';
+
 export default function login() {
   return (
         <>
@@ -90,103 +92,13 @@ export default function login() {
 
 
 
-                .toast {
-                        background-color: #FF7253;
-                        width: 400px;
-                        min-height: 100px;
-                        margin: 5px 0px;
-
-
-                        display: flex;
-                        align-items: stretch;
-                        justify-content: start;
-                        
-
-                        font-size: var(--font-size-body-L);
-                        font-family: var(--font-roboto);
-                }
-                .toast:hover {
-                        filter: brightness(110%);
-                }
-
-                .toast * {
-                        align-self: center;
-                        margin-right: 10px;
-                }
-                .toast div { 
-                        /*for override accent height*/
-                        align-self: stretch;
-                }
-
-                .toast p {
-                        width: 100%;
-                }
-
-                /* hidden by default */
-                .toastMobile {
-                        display: none;
-                        width: 100%;
-                }
-
                 @media only screen and (max-width: 500px){
                         .toastBox {
                                 width: 100%; 
                                 bottom: 0;
                         }
-                        .toast {
-                                /* width: 100%; */
-                                display: none;
-                        } 
-                        .toastMobile {
-                                display: flex;
-                        }
                 }
-
-
-
-                .accent {
-                        height: auto;
-                        width: 15px;
-                        background-color: #f00;
-                        border-radius: 0px 8px 8px 0px;
-                }
-
-                .icon {
-                        width: 40px;
-                        height: 40px;
-                        background-color: black;
-                }
-
-                .dismissBtn {
-                        padding: 0px 16px;
-                        text-align: center;
-                        background-color: #f00;
-                        font-weight:bolder;
-                        font-size: var(--font-size-body-M);
-                        border-radius: 0px 0px 10px 10px;
-                        
-                        align-self: start;
-                        position: sticky;
-                }
-
-                .dismissBtn:hover {
-                        filter: brightness(70%);
-                }
-
-
-
-
-                /* overrides for colours of sucess toasts */
-                .sucessToast {
-                        background-color: #87C259;
-                }
-
-                .sucessAccent {
-                        background-color: #7FFB74;
-                }
-                        
-                        
-                `}
+        `}
         </style>
 
         <div className='psudoBody'>
@@ -211,31 +123,12 @@ export default function login() {
 
                 {/* remind me to figure out how to pin toasts on screen without adding extra space below */}
                 <div className='toastBox'>
-                        <div className='toast'>
-                                <div className='accent'></div>
-                                <rect className='icon'></rect>
-                                <p>Incorrect username or password</p>
-                                <button className='dismissBtn'>X</button>
-                        </div>
-                        <div className='toast sucessToast'>
-                                <div className='accent sucessAccent'> </div>
-                                <rect className='icon'></rect>
-                                <p>Login Sucess!</p>
-                                <button className='dismissBtn'>X</button>
-                        </div>
-                        <div className='toast'>
-                                <div className='accent'></div>
-                                <rect className='icon'> </rect>
-                                <p>Something very unusually long that takes up way to much space so that this is multi-lined.</p>
-                                <button className='dismissBtn'>X</button>
-                        </div>
-
-                        <div className='toast toastMobile'>
-                                <div className='accent'></div>
-                                <rect className='icon'> </rect>
-                                <p>This is a mobile webpage toast</p>
-                                <button className='dismissBtn'>X</button>
-                        </div>
+                        <Toast bgColor="err" text='Incorrect username or password'></Toast>
+                        <Toast bgColor="success" text='Login Sucess!'></Toast>
+                        <Toast bgColor="err" text='Something very unusually long that takes up way to much space so that this is multi-lined.'></Toast>
+                        
+                        {/* Mobile toast example */}
+                        <Toast clasName="toast toastMobile" bgColor="err" text='This is an example of a mobile toast.'></Toast>
                 </div>
 
         </div>
