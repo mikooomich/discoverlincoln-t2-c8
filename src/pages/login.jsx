@@ -1,3 +1,4 @@
+import DefaultButton from '@/components/DefaultButton'
 import React from 'react'
 
 export default function login() {
@@ -46,17 +47,7 @@ export default function login() {
 
 
                 /* inner elements */
-                .signBtn {
-                        background-color: var(--color-elevated-green);
-                        color: white;
-                        box-shadow: var(--shadow-box);
-                        border-radius: var(--border-radius-pill);
-                
-                        padding: var(--padding-btn-default);
-                        min-width: 150px;
-                        font-size: var(-font-size-body-L);
-                        font-weight: bold;
-                }
+            
 
                 input { 
                         display: block;
@@ -67,11 +58,6 @@ export default function login() {
                         line-height: 25px;
                         padding: var(--padding-btn-default);
                 }
-
-                .signBtn:hover {
-                        filter: brightness(70%);
-                }
-
 
 
                 /* toasts */
@@ -157,21 +143,7 @@ export default function login() {
                         background-color: black;
                 }
 
-                .dismissBtn {
-                        padding: 0px 16px;
-                        text-align: center;
-                        background-color: #f00;
-                        font-weight:bolder;
-                        font-size: var(--font-size-body-M);
-                        border-radius: 0px 0px 10px 10px;
-                        
-                        align-self: start;
-                        position: sticky;
-                }
-
-                .dismissBtn:hover {
-                        filter: brightness(70%);
-                }
+             
 
 
 
@@ -196,7 +168,7 @@ export default function login() {
                                 <h2 className='loginTitle'>LOG IN</h2>
                                 <input id="loginEmail" type="email" placeholder="Enter email address"></input>
                                 <input id="loginPassword" type="password" placeholder="Enter password"></input>
-                                <button className="signBtn" onclick="alert('waaaah')">Sign in</button>
+                                <DefaultButton className="signBtn" children="Sign in"></DefaultButton>
                                 <p className='tooltip'>Don't have an account? Sign up below!</p>
                         </div>  
 
@@ -205,7 +177,7 @@ export default function login() {
                                 <input id="makeAcctEmail" type="email" placeholder="Enter email address"></input>
                                 <input id="makeAcctPassword" type="password" placeholder="Enter password"></input>
                                 <input id="makeAcctPasswordConfirm" type="password" placeholder="Confirm password"></input>
-                                <button className="signBtn" onclick="alert('waaaah')">Sign up</button>
+                                <DefaultButton className="signBtn" children="Sign up"></DefaultButton>
                         </div>  
                 </div>
 
@@ -215,26 +187,26 @@ export default function login() {
                                 <div className='accent'></div>
                                 <rect className='icon'></rect>
                                 <p>Incorrect username or password</p>
-                                <button className='dismissBtn'>X</button>
+                                <DefaultButton className="dismissBtn" children="X"></DefaultButton>
                         </div>
                         <div className='toast sucessToast'>
                                 <div className='accent sucessAccent'> </div>
                                 <rect className='icon'></rect>
                                 <p>Login Sucess!</p>
-                                <button className='dismissBtn'>X</button>
+                                <DefaultButton className="dismissBtn" children="X"></DefaultButton>
                         </div>
                         <div className='toast'>
                                 <div className='accent'></div>
                                 <rect className='icon'> </rect>
                                 <p>Something very unusually long that takes up way to much space so that this is multi-lined.</p>
-                                <button className='dismissBtn'>X</button>
+                                <DefaultButton className="dismissBtn" children="X"></DefaultButton>
                         </div>
 
                         <div className='toast toastMobile'>
                                 <div className='accent'></div>
                                 <rect className='icon'> </rect>
                                 <p>This is a mobile webpage toast</p>
-                                <button className='dismissBtn'>X</button>
+                                <DefaultButton className="dismissBtn" children="X"></DefaultButton>
                         </div>
                 </div>
 

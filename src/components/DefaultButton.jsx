@@ -31,6 +31,45 @@ textColor = "#FFFFFF", fontSize = "var(--font-size-body-L)", padding = "var(--pa
 			a {
 				{/* TODO: Style the links */}
 			}
+
+
+
+			{/* style classes for various buttons */}
+			.signBtn {
+				background-color: var(--color-elevated-green);
+				color: white;
+				box-shadow: var(--shadow-box);
+				border-radius: var(--border-radius-pill);
+			
+				padding: var(--padding-btn-default);
+				min-width: 150px;
+				font-size: var(-font-size-body-L);
+				font-weight: bold;
+			}
+
+			.signBtn:hover {
+                        	filter: brightness(70%);
+                	}
+
+
+
+			.dismissBtn {
+				padding: 0px 16px;
+				text-align: center;
+				background-color: #f00;
+				font-weight:bolder;
+				font-size: var(--font-size-body-M);
+				border-radius: 0px 0px 10px 10px;
+				
+				margin-right: 10px;
+				align-self: start;
+				position: sticky;
+			}
+
+			.dismissBtn:hover {
+				filter: brightness(70%);
+			}
+
 		`}</style>
 		</>
 	)
