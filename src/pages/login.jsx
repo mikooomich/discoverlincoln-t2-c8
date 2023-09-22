@@ -2,6 +2,7 @@ import DefaultButton from '@/components/DefaultButton'
 import React from 'react'
 
 import Toast from '@/components/Toast';
+import TextInput from '@/components/TextInput';
 
 export default function login() {
   return (
@@ -51,17 +52,6 @@ export default function login() {
                 /* inner elements */
             
 
-                input { 
-                        display: block;
-                        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.194);
-                        border: var(--border-grey-thin);
-
-                        min-width: 400px;
-                        line-height: 25px;
-                        padding: var(--padding-btn-default);
-                }
-
-
                 /* toasts */
                 .toastBox {
                         display: flex;
@@ -92,17 +82,17 @@ export default function login() {
                 <div id= "mainContent">
                         <div className='logindiv'>
                                 <h2 className='loginTitle'>LOG IN</h2>
-                                <input id="loginEmail" type="email" placeholder="Enter email address"></input>
-                                <input id="loginPassword" type="password" placeholder="Enter password"></input>
+                                <TextInput className="loginInput" placeholder="Enter email address"></TextInput>
+                                <TextInput className="loginInput" placeholder="Enter password"></TextInput>
                                 <DefaultButton className="signBtn" children="Sign in"></DefaultButton>
                                 <p className='tooltip'>Don't have an account? Sign up below!</p>
                         </div>  
 
                         <div className="logindiv" id="makeAccountDiv">
                                 <h2 className='loginTitle'>CREATE ACCOUNT</h2>
-                                <input id="makeAcctEmail" type="email" placeholder="Enter email address"></input>
-                                <input id="makeAcctPassword" type="password" placeholder="Enter password"></input>
-                                <input id="makeAcctPasswordConfirm" type="password" placeholder="Confirm password"></input>
+                                <TextInput className="loginInput" placeholder="Enter email address"></TextInput>
+                                <TextInput className="loginInput" placeholder="Enter password"></TextInput>
+                                <TextInput className="loginInput" placeholder="Confirm password"></TextInput>
                                 <DefaultButton className="signBtn" children="Sign up"></DefaultButton>
                         </div>  
                 </div>
