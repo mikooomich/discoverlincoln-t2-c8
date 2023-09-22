@@ -1,5 +1,7 @@
 import React from 'react'
 
+import DefaultButton from './DefaultButton';
+
 /**
  * bgColour = sucess creates a green toast, err (or anything else) will create a red toast
  * type = "toast" for desktop toast, "toast toastMobile" = mobile toast
@@ -26,7 +28,7 @@ export default function Toast({bgColor = "err", accentColor, fontSize, clasName:
                         <div className='accent'></div>
                         <rect className='icon'></rect>
                         <p>{text}</p>
-                        <button className='dismissBtn'>X</button>
+                        <DefaultButton className="dismissBtn" children="X"></DefaultButton>
                 </div>
 
 
@@ -83,21 +85,6 @@ export default function Toast({bgColor = "err", accentColor, fontSize, clasName:
                                 width: 40px;
                                 height: 40px;
                                 background-color: black;
-                        }
-
-                        .dismissBtn {
-                                padding: 0px 16px;
-                                text-align: center;
-                                background-color: #f00;
-                                font-weight:bolder;
-                                font-size: var(--font-size-body-M);
-                                border-radius: 0px 0px 10px 10px;
-                                
-                                align-self: start;  
-                        }
-
-                        .dismissBtn:hover {
-                                filter: brightness(70%);
                         }
 
                        
