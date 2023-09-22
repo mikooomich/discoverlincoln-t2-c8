@@ -1,3 +1,4 @@
+import DefaultButton from '@/components/DefaultButton'
 import React from 'react'
 
 import Toast from '@/components/Toast';
@@ -48,17 +49,7 @@ export default function login() {
 
 
                 /* inner elements */
-                .signBtn {
-                        background-color: var(--color-elevated-green);
-                        color: white;
-                        box-shadow: var(--shadow-box);
-                        border-radius: var(--border-radius-pill);
-                
-                        padding: var(--padding-btn-default);
-                        min-width: 150px;
-                        font-size: var(-font-size-body-L);
-                        font-weight: bold;
-                }
+            
 
                 input { 
                         display: block;
@@ -69,11 +60,6 @@ export default function login() {
                         line-height: 25px;
                         padding: var(--padding-btn-default);
                 }
-
-                .signBtn:hover {
-                        filter: brightness(70%);
-                }
-
 
 
                 /* toasts */
@@ -108,7 +94,7 @@ export default function login() {
                                 <h2 className='loginTitle'>LOG IN</h2>
                                 <input id="loginEmail" type="email" placeholder="Enter email address"></input>
                                 <input id="loginPassword" type="password" placeholder="Enter password"></input>
-                                <button className="signBtn" onclick="alert('waaaah')">Sign in</button>
+                                <DefaultButton className="signBtn" children="Sign in"></DefaultButton>
                                 <p className='tooltip'>Don't have an account? Sign up below!</p>
                         </div>  
 
@@ -117,7 +103,7 @@ export default function login() {
                                 <input id="makeAcctEmail" type="email" placeholder="Enter email address"></input>
                                 <input id="makeAcctPassword" type="password" placeholder="Enter password"></input>
                                 <input id="makeAcctPasswordConfirm" type="password" placeholder="Confirm password"></input>
-                                <button className="signBtn" onclick="alert('waaaah')">Sign up</button>
+                                <DefaultButton className="signBtn" children="Sign up"></DefaultButton>
                         </div>  
                 </div>
 
