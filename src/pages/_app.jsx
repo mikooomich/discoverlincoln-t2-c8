@@ -1,4 +1,4 @@
-import "@/styles/globals.css";
+import cssReset from "../reset";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { SessionProvider } from "next-auth/react";
@@ -13,6 +13,11 @@ export default function App({
 			<SessionProvider session={session}>
 				<Component {...pageProps} />
 			</SessionProvider>
+
+			{/* css reset */}
+			<style jsx global>
+				{cssReset}
+			</style>
 
 			{/* Global Styles */}
 			<style jsx global>{`
