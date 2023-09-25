@@ -32,6 +32,7 @@ export default function App({
 
 					--font-calps: "Calps", sans-serif;
 					--font-roboto: "Roboto Condensed", sans-serif;
+					--font-size-header-XL: 128px;
 					--font-size-header-L: 96px;
 					--font-size-header-M: 64px;
 					--font-size-header-S: 48px;
