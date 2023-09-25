@@ -7,6 +7,7 @@ import Footer from '@/components/Footer'
 import React from 'react'
 
 import TestComponent from '../components/TestComponent'
+import BuisnessCard from '@/components/BuisnessCard'
 
 export default function test() {
   return (
