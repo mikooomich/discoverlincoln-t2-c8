@@ -5,7 +5,7 @@ import Footer from '@/components/Footer'
 import React from 'react'
 
 import TestComponent from '../components/TestComponent'
-import BuisnessCard from '@/components/BuisnessCard'
+import BusinessCard from '@/components/BusinessCard'
 
 export default function test() {
   return (
@@ -16,24 +16,24 @@ export default function test() {
         </div>
       </TestComponent>
 
-      <BuisnessCard title={"Emergency Services"}>
+      <BusinessCard title={"Emergency Services"}>
         <p>Number one <br />
           number two number <br />
           three aaaaaaaaaaa some long phrase idk</p>
-      </BuisnessCard>
+      </BusinessCard>
 
 
-      <BuisnessCard title={"Emergency Services"} theme='light'>
+      <BusinessCard title={"Emergency Services"} theme='light'>
         <p>Number one <br />
           number two number <br />
           three aaaaaaaaaaa</p>
-      </BuisnessCard>
+      </BusinessCard>
 
-      <BuisnessCard isMobile="true" title={"Emergency Services"} theme='light'>
+      <BusinessCard isMobile="true" title={"Emergency Services"} theme='light'>
         <p>Number one <br />
           number two number <br />
           three aaaaaaaaaaa</p>
-      </BuisnessCard>
+      </BusinessCard>
 
       <ImageExample></ImageExample>
       <FontAwesomeExample></FontAwesomeExample>
