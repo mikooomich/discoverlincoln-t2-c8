@@ -1,5 +1,6 @@
 import React from 'react'
 import DefaultButton from '@/components/DefaultButton'
+import TextInput from '@/components/TextInput'
 
 
 export default function checkout() {
@@ -69,17 +70,8 @@ export default function checkout() {
                 }
 
 
-                #nameInput, #discountCodeInput {
-                        padding: var(--padding-btn-default);
-                        border: var(--border-grey-thin);
-                }
 
-
-                #discountCodeInput {
-                        {/* this is used such that it applies on top of .actionBar */}
-                        width:100%;
-                        margin-right: 50px;
-                }
+                
 
 
                 .costBox  {
@@ -113,8 +105,9 @@ export default function checkout() {
                 }
 
                 #checkoutButton {
-                        align-self: end;
-                }
+                        {/* THIS IS THE SPAN, NOT A BUTTON */}
+		        align-self: end;
+		}
 
 
                 @media screen and (max-width:1300px) {
@@ -179,7 +172,7 @@ export default function checkout() {
                 <div className='orderSumamry'>
                         <div className='actionBar'>
                                 <h1>Confirm Your Order</h1>
-                                <DefaultButton text={"< Back"}></DefaultButton>
+                                <DefaultButton children="< Back"></DefaultButton>
                         </div>
 
                         <div className='card'>
@@ -195,7 +188,7 @@ export default function checkout() {
                                 <ul>
                                         <li>
                                                 <h3>Name:</h3>
-                                                <input id="nameInput" type='text' placeholder='Enter answer'></input>
+                                                <TextInput className="checkoutInput" type='text' placeholder='Enter answer'></TextInput>
                                         </li>
                                         <li>
                                                 <h3>Vehicles:</h3>
@@ -233,8 +226,8 @@ export default function checkout() {
                                 <ul>
                                         <li>
                                                 <span className='actionBar'>
-                                                        <input id="discountCodeInput" type='text' placeholder='Discount Code'></input>
-                                                        <DefaultButton text={"Apply"}></DefaultButton>
+                                                        <TextInput className="checkoutInput" type='text' placeholder='Discount Code'></TextInput>
+                                                        <DefaultButton children="Apply"></DefaultButton>
                                                 </span>
                                         </li>
                                         <li className='costBox'>
@@ -263,7 +256,7 @@ export default function checkout() {
                         <h3>Terms of Use</h3>
                         <p>By continuing, you agree to... blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day.  blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day.  blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day. blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day.  blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day.  blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day. blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day.  blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day.  blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day. </p>
                         <span id="checkoutButton">
-                        <DefaultButton text={"Proceed to Checkout"}></DefaultButton>
+                        <DefaultButton children="Proceed to Checkout"></DefaultButton>
                         </span>
                 </div>
 
