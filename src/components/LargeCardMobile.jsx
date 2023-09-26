@@ -3,14 +3,15 @@ import { faStar as faStarfilled } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarOutline } from "@fortawesome/free-regular-svg-icons";
 
-export default function LargeCardDesktop({
+export default function TestComponent({
   title = "Title",
   address = "101 Address Street, Lincoln, ON",
   category = "restaurant",
-  description = "Explore endless fields of vines and grapes, with twists and turns to your hearts content. Fun for the whole family. Enjoy a warm, sunny day, in the relaxing yards of vine. Hurry up! Space is limited! Our Vineyards are open to the public between April 23 and November 4th. Please note that weather circumstances may change, please dress accordingly and prepare for the weather. We are not responsible for lost belongings.",
+  description = "Explore endless fields of vines and grapes, with twists and turns to your hearts content. Fun for the whole family. Enjoy a warm, sunny day, in the relaxing yards of vine. Hurry up! Space is limited!",
   hoursOfOperation = [],
-  rating,
+  rating=2,
 }) {
+  //code
   function renderStars() {
     const stars = [];
     for (let i = 0; i < 3; i++) {
@@ -20,13 +21,13 @@ export default function LargeCardDesktop({
     return stars;
   }
   const categoryColors = {
-    restaurant: "red",
+    restaurant: "orange",
     music: "purple",
   };
   //html
   return (
     <>
-      <div className="large-card-desktop">
+      <div className="large-card-mobile">
         <div className="image-container"></div>
         <div className="card-information-wrap">
           <div className="large-info-wrap">
@@ -70,7 +71,7 @@ export default function LargeCardDesktop({
           <div className="description-wrap">
             <div className="description-text">{description}</div>
             <div className="border-line"></div>
-            <div className="description2-text">
+            <div className="description2-wrap">
               <h1 className="hours-title">Hours of Operation:</h1>
               <p className="hours-description">
                 Monday: 11am - 6pm
@@ -92,20 +93,19 @@ export default function LargeCardDesktop({
         </div>
       </div>
 
-      {/* styles */}
       <style jsx>{`
-        .large-card-desktop {
+        .large-card-mobile {
           display: flex;
-          flex-direction: row;
-          max-width: 1200px;
-          max-height: 408px;
-          overflow: hidden;
+          flex-direction: column;
+          max-width: 360px;
+          max-height: 400px;
+		  overflow: hidden;
 		  box-shadow: var(--shadow-box-massive-card);
         }
 
         .image-container {
-          width: 519px;
-          height: 408px;
+          width: 360px;
+          height: 156px;
           background-position: center center;
           background-repeat: no-repeat;
           background-image: url("https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg");
@@ -115,19 +115,18 @@ export default function LargeCardDesktop({
         .card-information-wrap {
           display: flex;
           flex-direction: column;
-          padding: 32px;
+          padding: 10px 15px;
         }
 
-        .large-info-wrap {
+		.large-info-wrap {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
-        }
-
-        .star-container {
+		}
+		.star-container {
           display: flex;
-          gap: 4px;
-          margin-top: 5px;
+          gap: 3px;
+          margin-top: 2px;
         }
 
         .category-tag {
@@ -136,8 +135,8 @@ export default function LargeCardDesktop({
           background-color: ${categoryColors[category]};
           padding: 8px 12px;
           font-weight: 800;
-          font-family: var(--font-roboto);
-          font-size: var(--font-size-body-M);
+		  font-family: var(--font-roboto);
+		  font-size: var(--font-size-body-M);
         }
 
         .title {
@@ -156,49 +155,53 @@ export default function LargeCardDesktop({
         .address {
           padding-left: 5px;
           font-family: var(--font-roboto);
-          font-size: var(--font-size-body-Mplus);
+          font-size: var(--font-size-body-M);
           font-weight: 400;
+		  padding-bottom: 2px;
         }
 
         .description-wrap {
           display: flex;
           flex-direction: row;
-          width: 700px;
-          margin-top: 10px;
+          width: 360px;
           align-items: center;
         }
 
         .description-text {
           font-family: var(--font-roboto);
           font-size: var(--font-size-body-M);
-          font-weight: 500;
-          width: 400px;
-          padding-right: 20px;
           line-height: 1.6;
+		  max-width: 55%;
+		  font-weight: 400px;
+
         }
 
         .border-line {
           border-left: 1px solid grey;
-          height: 215px;
+          height: 150px;
+		  margin-left: 5px;
+		  margin-right: 5px;
         }
 
-        .description2-text {
-          padding-left: 30px;
+        .description2-wrap {
+			display: flex;
+			flex-direction: column;
         }
 
         .hours-title {
           font-family: var(--font-roboto);
-          font-size: var(--font-size-body-Mplus);
+          font-size: var(--font-size-body-M);
           font-weight: 700;
           padding-bottom: 10px;
+		  padding-left: 4px;
         }
 
         .hours-description {
           font-family: var(--font-roboto);
-          font-size: var(--font-size-body-M);
+          font-size: var(--font-size-body-S);
           font-weight: 400;
-          line-height: 2;
-          padding-left: 30px;
+          line-height: 1.5;
+		  padding-left: 10px;
         }
       `}</style>
     </>
