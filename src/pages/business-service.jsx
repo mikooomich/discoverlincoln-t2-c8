@@ -1,6 +1,6 @@
 import React from 'react'
 import DefaultButton from '@/components/DefaultButton'
-import BuisnessCard from '@/components/BuisnessCard'
+import BusinessCard from '@/components/BusinessCard'
 
 
 export default function business() {
@@ -154,17 +154,17 @@ export default function business() {
 					<div className='buisnessCardBox'>
 						<div>
 							<span className='card1'>
-								<BuisnessCard theme='white' title="Need Information?" isAltOrientation="true">
+								<BusinessCard theme='white' title="Need Information?" isAltOrientation="true">
 									<p>Have a question about your ventures? Visit
 										an information center or
 										<DefaultButton isLink="true"> Click here </DefaultButton>
 										to view a map of our in person information centers.</p>
-								</BuisnessCard>
+								</BusinessCard>
 							</span>
 
 
 							<span className='card2'>
-								<BuisnessCard theme='black' title="Our Partners" isAltOrientation={true}>
+								<BusinessCard theme='black' title="Our Partners" isAltOrientation={true}>
 									<p>
 										Megasoft
 										<br />
@@ -176,14 +176,14 @@ export default function business() {
 										<br />
 										SUNGSAM
 									</p>
-								</BuisnessCard>
+								</BusinessCard>
 							</span>
 
 						</div>
 
 						<div>
 							<span className='card1'>
-								<BuisnessCard theme='black' title="Emergency Services">
+								<BusinessCard theme='black' title="Emergency Services">
 									<p>
 										Emergency
 										<br />
@@ -205,11 +205,11 @@ export default function business() {
 										555-555-555
 										
 									</p>
-								</BuisnessCard>
+								</BusinessCard>
 							</span>
 
 							<span className='card2'>
-								<BuisnessCard theme='white' title="Other Useful Contacts">
+								<BusinessCard theme='white' title="Other Useful Contacts">
 									<p>
 										City Hall
 										<br />
@@ -232,7 +232,7 @@ export default function business() {
 										<br />
 										555-555-555
 									</p>
-								</BuisnessCard>
+								</BusinessCard>
 							</span>
 						</div>
 
