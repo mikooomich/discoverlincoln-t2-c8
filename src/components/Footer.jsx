@@ -2,7 +2,7 @@ import React from 'react'
 import TextInput from './TextInput'
 
 export default function Footer() {
-	//code
+  //code
 
 	//html
 	return (
@@ -29,63 +29,62 @@ export default function Footer() {
                     </div>
             </div>
 
-			{/* styles */}
-			<style jsx>{`
-				p {
-                    .footer{
-                        display: flex;
-                        flex-direction: row;
-                        justify-items: stretch;
-                        width: 100%;
-                        height: 95px;
-                        background-color: #005731;
-                        overflow: hidden;
-                        justify-content: space-between;
-                        padding-left: 20px;
-                        padding-right: 20px;
-                    }
+      {/* styles */}
+      <style jsx>{`
+        .footer {
+          display: flex;
+          flex-direction: row;
+          justify-items: stretch;
+          width: 100%;
+          height: 95px;
+          background-color: #005731;
+          overflow: hidden;
+          justify-content: space-between;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
 
-                    .logo{
-                        float: left;
-                        width: 300px;
-                        display: center;
-                    }
+        .logo {
+          float: left;
+          width: 300px;
+          display: center;
+        }
 
-                    .footer-wrap{
-                        display: flex;
-                        flex-direction: row;
-                    }
+        .footer-wrap {
+          display: flex;
+          flex-direction: row;
+        }
 
-                    .footer-links{
-                        display: flex;
-                        flex-direction: row;
-                        align-items: center;
-                    }
+        .footer-links {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+        }
 
-                    .footer-links a{
-                        float: left;
-                        color: white;
-                        padding: 10px;
-                        font-size: 15px;
-                    }
+        .footer-links a {
+          float: left;
+          color: white;
+          padding: 10px;
+          font-size: 15px;
+        }
 
-                    .footer-links a:hover{
-                        text-decoration: underline;
-                        transform: scale(1.05);
-                        transition: 0.3s;
-                    }
+        .footer-links a:hover {
+          text-decoration: underline;
+          transform: scale(1.05);
+          transition: 0.3s;
+        }
 
-                    .footer-subscription{
-                        display: flex;
-                        flex-direction: column;
-                    }
+        .footer-subscription {
+          display: flex;
+          flex-direction: column;
+        }
 
-                    .subscription-inputs{
-                        display: flex;
-                        flex-direction: row;
-                        padding: 5px;
-                        gap: 5px;
-                    }
+        .subscription-inputs {
+          display: flex;
+          flex-direction: row;
+          padding: 5px;
+          gap: 5px;
+        }
 
                     .subscribe-text{
                         font-weight: bold;
@@ -102,13 +101,12 @@ export default function Footer() {
                         color: white;
                     }
 
-                    .subscribe-text{
-                        color: white;
-                        padding: 5px;
-                        font-size: 15px;
-                    }
-				}
-			`}</style>
-		</>
-	)
+        .subscribe-text {
+          color: white;
+          padding: 5px;
+          font-size: 15px;
+        }
+      `}</style>
+    </>
+  );
 }
