@@ -37,6 +37,8 @@ textColor = "#FFFFFF", fontSize = "var(--font-size-body-L)", padding = "var(--pa
 
 
 			{/* style classes for various buttons */}
+
+			{/* login page */}
 			.signBtn {
 				background-color: var(--color-elevated-green);
 				color: white;
@@ -74,7 +76,7 @@ textColor = "#FFFFFF", fontSize = "var(--font-size-body-L)", padding = "var(--pa
 			}
 
 
-
+			{/* Nav bar */}
 			.mobileNav {
 				background-color: transparent;
 				color: white;
@@ -92,6 +94,11 @@ textColor = "#FFFFFF", fontSize = "var(--font-size-body-L)", padding = "var(--pa
 			.mobileNav:hover {
 				background-color: #004527;
 				{/* font-size: 28px; */}
+			}
+
+			{/* search page */}
+			.filter-sort-btn {
+				margin: 10px;
 			}
 
 			

@@ -3,6 +3,7 @@ import DefaultButton from '@/components/DefaultButton'
 import BusinessCard from '@/components/BusinessCard'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import CardCarousel from '@/components/CardCarousel'
 
 
 export default function business() {
@@ -53,11 +54,7 @@ export default function business() {
 			}
 
 
-			{/* AKA our fine selections */}
-			.selectionsTitle {
-				align-self: end;
-
-			}
+			
 		
 
 			.selectionsContent {
@@ -69,16 +66,13 @@ export default function business() {
 				font-weight: var(--font-weight-titles);
 			}
 
-			.cardCarousel {
-		
-			}
+			{/* for card spacing */}
 			li {
 				margin: 20px;
 			}
 
-			ul {
-				display: flex;
-				overflow-x:scroll;
+			.selectionsBtn {
+				align-self: end;
 			}
 
 			.cardPlaceholder {
@@ -124,12 +118,11 @@ export default function business() {
 				</div>
 				<div id="buisnessPsudoBody">
 					<div className='selectionsContent'>
-						<h3 className='selectionsTitle'>Our Fine Selections</h3>
+						{/* <h3 className='selectionsTitle'>Our Fine Selections</h3> */}
 						{/* placeholder, steal the ones used on home page and modify it? */}
 
-
-						<ul className='cardCarousel'>
-							<li>
+						<CardCarousel title="Our Fine Selections" alignTitle='end'>
+						<li>
 								<div className='cardPlaceholder'></div>
 							</li>
 							<li>
@@ -141,11 +134,9 @@ export default function business() {
 							<li>
 								<div className='cardPlaceholder'></div>
 							</li>
+						</CardCarousel>
 
-						</ul>
-
-
-						<div className='selectionsTitle'>
+						<div className='selectionsBtn'>
 							<DefaultButton>
 								{"<---"}
 							</DefaultButton>
