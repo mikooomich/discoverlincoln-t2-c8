@@ -1,9 +1,6 @@
 import React from "react";
-import { faStar as faStarfilled } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar as faStarOutline } from "@fortawesome/free-regular-svg-icons";
 
-export default function LargeCardDesktop({
+export default function TestComponent({
   title = "Title",
   address = "101 Address Street, Lincoln, ON",
   category = "restaurant",
@@ -11,6 +8,7 @@ export default function LargeCardDesktop({
   hoursOfOperation = [],
   rating,
 }) {
+  //code
   function renderStars() {
     const stars = [];
     for (let i = 0; i < 3; i++) {
@@ -26,7 +24,7 @@ export default function LargeCardDesktop({
   //html
   return (
     <>
-      <div className="large-card-desktop">
+      <div className="large-card-mobile">
         <div className="image-container"></div>
         <div className="card-information-wrap">
           <div className="large-info-wrap">
@@ -68,9 +66,9 @@ export default function LargeCardDesktop({
             </div>
           </div>
           <div className="description-wrap">
-            <div className="description-text">{description}</div>
+            <div className="description-text"></div>
             <div className="border-line"></div>
-            <div className="description2-text">
+            <div className="description2-wrap">
               <h1 className="hours-title">Hours of Operation:</h1>
               <p className="hours-description">
                 Monday: 11am - 6pm
@@ -92,21 +90,19 @@ export default function LargeCardDesktop({
         </div>
       </div>
 
-      {/* styles */}
       <style jsx>{`
-        .large-card-desktop {
+        .large-card-mobile {
           display: flex;
-          flex-direction: row;
-          max-width: 1200px;
-          max-height: 408px;
-          overflow: hidden;
+          flex-direction: column;
+          max-width: 360px;
+          max-height: 361px;
+		  overflow: hidden;
 		  box-shadow: var(--shadow-box-massive-card);
-		  border: 2px solid black;
         }
 
         .image-container {
-          width: 519px;
-          height: 408px;
+          width: 360px;
+          height: 156px;
           background-position: center center;
           background-repeat: no-repeat;
           background-image: url("https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg");
@@ -116,16 +112,15 @@ export default function LargeCardDesktop({
         .card-information-wrap {
           display: flex;
           flex-direction: column;
-          padding: 32px;
+          padding: 15px;
         }
 
-        .large-info-wrap {
+		.large-info-wrap {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
-        }
 
-        .star-container {
+		.star-container {
           display: flex;
           gap: 4px;
           margin-top: 5px;
@@ -157,8 +152,9 @@ export default function LargeCardDesktop({
         .address {
           padding-left: 5px;
           font-family: var(--font-roboto);
-          font-size: var(--font-size-body-Mplus);
+          font-size: var(--font-size-body-M);
           font-weight: 400;
+		  padding-bottom: 2px;
         }
 
         .description-wrap {
@@ -171,7 +167,7 @@ export default function LargeCardDesktop({
 
         .description-text {
           font-family: var(--font-roboto);
-          font-size: var(--font-size-body-M);
+          font-size: var(--font-size-body-S);
           font-weight: 500;
           width: 400px;
           padding-right: 20px;
@@ -189,7 +185,7 @@ export default function LargeCardDesktop({
 
         .hours-title {
           font-family: var(--font-roboto);
-          font-size: var(--font-size-body-Mplus);
+          font-size: var(--font-size-body-S);
           font-weight: 700;
           padding-bottom: 10px;
         }
