@@ -8,11 +8,13 @@ import React from 'react'
 
 import TestComponent from '../components/TestComponent'
 import BusinessCard from '@/components/BusinessCard'
+import MobileHamburgerMenu from '@/components/MobileHamburgerMenu'
 
 export default function test() {
   return (
     <>
       <Navbar></Navbar>
+      <MobileHamburgerMenu></MobileHamburgerMenu>
       <TestComponent color={"red"}>
         <div>
         </div>
