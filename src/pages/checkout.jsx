@@ -1,6 +1,8 @@
 import React from 'react'
 import DefaultButton from '@/components/DefaultButton'
 import TextInput from '@/components/TextInput'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 
 
 export default function checkout() {
@@ -22,7 +24,7 @@ export default function checkout() {
 
 
                 #checkoutPsudoBody {
-                        margin: auto;
+                        margin: 40px auto;
                         max-width: 1200px;
                 }
 {/* confirm order and summary card section*/}
@@ -167,7 +169,7 @@ export default function checkout() {
 
         </style>
        
-
+        <Navbar></Navbar>
         <div id="checkoutPsudoBody">
                 <div className='orderSumamry'>
                         <div className='actionBar'>
@@ -262,6 +264,7 @@ export default function checkout() {
 
 
         </div>
+        <Footer></Footer>
         </>
 
   )
