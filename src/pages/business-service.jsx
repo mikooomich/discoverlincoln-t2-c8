@@ -1,6 +1,8 @@
 import React from 'react'
 import DefaultButton from '@/components/DefaultButton'
 import BusinessCard from '@/components/BusinessCard'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 
 
 export default function business() {
@@ -11,6 +13,7 @@ export default function business() {
 	
 			#buisnessPsudoBody {
 				margin: auto;
+				margin-bottom: 80px;
 				max-width: 1200px;
 				display: flex;
 				flex-direction: column;
@@ -24,7 +27,7 @@ export default function business() {
 				{/* filter: blur(10px); */}
 
 				width: 100%;
-				padding: 20px 40px 60px 80px;
+				padding: 80px 40px 80px 80px;
 				color: white;
 			}
 
@@ -110,6 +113,8 @@ export default function business() {
 			</style>
 
 			<div>
+				<Navbar></Navbar>
+
 				<div className='banner'>
 					<div className='bannerTxt'>
 						<h1>Explore Local</h1>
@@ -241,6 +246,7 @@ export default function business() {
 
 					</div>
 				</div>
+				<Footer></Footer>
 			</div>
 		</>
 

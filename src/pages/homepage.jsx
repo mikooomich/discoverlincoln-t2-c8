@@ -11,7 +11,7 @@ export default function homepage() {
                     <div className="header-links">
                         <a href="#">Home</a>
                         <a href="#">Search</a>
-                        <a href="#">Upcoming Events</a>
+                        <a href="./events-attractions">Upcoming Events</a>
                         <a href="#">Attractions</a>
                         <a href="#">Businesses & Services</a>
                         <a href="#">Profile</a>
