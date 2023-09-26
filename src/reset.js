@@ -52,4 +52,7 @@ export default css.global`
 		border-collapse: collapse;
 		border-spacing: 0;
 	}
+	button, a {
+		border: none;
+	}
 `;

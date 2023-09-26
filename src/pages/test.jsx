@@ -8,6 +8,7 @@ import React from 'react'
 
 import TestComponent from '../components/TestComponent'
 import BusinessCard from '@/components/BusinessCard'
+import Section from '@/components/Section'
 import MobileHamburgerMenu from '@/components/MobileHamburgerMenu'
 
 export default function test() {
@@ -41,6 +42,13 @@ export default function test() {
 
       <ImageExample></ImageExample>
       <FontAwesomeExample></FontAwesomeExample>
+
+      <Section>
+        <div style={{ background: "red", width: "100%" }}>
+          <p>section test</p>
+        </div>
+      </Section>
+
       <Footer></Footer>
       <LargeCardDesktop></LargeCardDesktop>
     </>

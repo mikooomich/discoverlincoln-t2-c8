@@ -1,9 +1,41 @@
 import "@/styles/globals.css";
 import cssReset from "../reset";
+import localFont from 'next/font/local'
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { SessionProvider } from "next-auth/react";
 config.autoAddCss = false;
+
+// Fonts
+import { Roboto_Condensed } from "next/font/google"
+const roboto_condensed = Roboto_Condensed({
+	subsets: ['latin'],
+	weight: ['300', '400', '700']
+})
+const calps = localFont({
+	src: [
+		{
+			path: '../fonts/Calps-Medium.ttf',
+			weight: '300',
+			style: 'normal',
+		},
+		{
+			path: '../fonts/Calps-Bold.ttf',
+			weight: '500',
+			style: 'normal',
+		},
+		{
+			path: '../fonts/Calps-Black.ttf',
+			weight: '700',
+			style: 'normal',
+		},
+		{
+			path: '../fonts/Calps-ExtraBlack.ttf',
+			weight: '900',
+			style: 'normal',
+		}
+	]
+})
 
 export default function App({
 	Component,
@@ -23,6 +55,7 @@ export default function App({
 			{/* Global Styles */}
 			<style jsx global>{`
 				:root {
+					/* Colors */
 					--color-elevated-green: #005837;
 					--color-topographic-green: #00A62E;
 					--color-background: #FCFCFC;
@@ -31,8 +64,10 @@ export default function App({
 					--color-font-primary: #000000;
 					--color-font-secondary: #5C5C5C;
 
-					--font-calps: "Calps", sans-serif;
-					--font-roboto: "Roboto Condensed", sans-serif;
+					/* Fonts */
+					--font-calps: ${calps.style.fontFamily};
+					--font-roboto: ${roboto_condensed.style.fontFamily};
+
 					--font-size-header-XL: 128px;
 					--font-size-header-L: 96px;
 					--font-size-header-M: 64px;
@@ -46,16 +81,26 @@ export default function App({
 
 					--font-weight-titles: "bold";
 
-
+					/* Spacing */
 					--padding-btn-default: 5px 20px;
 					--padding-input-default: 12px 20px;
 
-
-
+					/* Shadows, Border Radius */
 					--shadow-box-buttons: 0px 4px 2px rgba(0, 0, 0, 0.381);
 					--shadow-box-massive-card:  2px 4px 10px rgba(0, 0, 0, 0.762);
 					--border-radius-pill: max(100vh, 100vw);
 					--border-grey-thin: 1px solid rgb(209, 209, 209);
+
+					/* Page Layout */
+					--section-max-width: 1200px;
+					--section-padding: 36px;
+					
+					/* Default Styles */
+					body {
+						background-color: var(--color-background);
+						color: var(--color-font-primary);
+						font-family: var(--font-roboto);
+					}
 				}
 			`}</style>
 		</>
