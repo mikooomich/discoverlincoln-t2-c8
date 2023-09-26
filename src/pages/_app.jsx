@@ -22,6 +22,7 @@ export default function App({
 			{/* Global Styles */}
 			<style jsx global>{`
 				:root {
+					/* Colors */
 					--color-elevated-green: #005837;
 					--color-topographic-green: #00A62E;
 					--color-background: #FCFCFC;
@@ -30,8 +31,10 @@ export default function App({
 					--color-font-primary: #000000;
 					--color-font-secondary: #5C5C5C;
 
+					/* Fonts */
 					--font-calps: "Calps", sans-serif;
 					--font-roboto: "Roboto Condensed", sans-serif;
+
 					--font-size-header-XL: 128px;
 					--font-size-header-L: 96px;
 					--font-size-header-M: 64px;
@@ -45,16 +48,19 @@ export default function App({
 
 					--font-weight-titles: "bold";
 
-
+					/* Spacing */
 					--padding-btn-default: 5px 20px;
 					--padding-input-default: 12px 20px;
 
-
-
+					/* Shadows, Border Radius */
 					--shadow-box-buttons: 0px 4px 2px rgba(0, 0, 0, 0.381);
 					--shadow-box-massive-card:  2px 4px 10px rgba(0, 0, 0, 0.762);
 					--border-radius-pill: max(100vh, 100vw);
 					--border-grey-thin: 1px solid rgb(209, 209, 209);
+
+					/* Page Layout */
+					--section-max-width: 1200px;
+					--section-padding: 36px;
 				}
 			`}</style>
 		</>
