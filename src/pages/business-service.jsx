@@ -3,7 +3,7 @@ import DefaultButton from '@/components/DefaultButton'
 import BuisnessCard from '@/components/BuisnessCard'
 
 
-export default function checkout() {
+export default function business() {
 	return (
 		<>
 			<style jsx>
@@ -141,8 +141,12 @@ export default function checkout() {
 
 
 						<div className='selectionsTitle'>
-							<DefaultButton children="<---"></DefaultButton>
-							<DefaultButton children="--->"></DefaultButton>
+							<DefaultButton>
+								{"<---"}
+							</DefaultButton>
+							<DefaultButton>
+								{"--->"}
+							</DefaultButton>
 						</div>
 					</div>
 
