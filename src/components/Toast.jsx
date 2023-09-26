@@ -1,6 +1,8 @@
 import React from 'react'
 
 import DefaultButton from './DefaultButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTriangleExclamation, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 
 /**
  * bgColour = sucess creates a green toast, err (or anything else) will create a red toast
@@ -8,10 +10,13 @@ import DefaultButton from './DefaultButton';
  */
 export default function Toast({bgColor = "err", accentColor, fontSize, clasName: type = "toast", text = "Placeholder"}) {
 
+        let icon;
+
         if (bgColor == "success") {
                 bgColor = "#87C259";
                 if (accentColor == undefined) {
                         accentColor = "#7FFB74";
+                        icon = <FontAwesomeIcon icon={faCircleCheck} />
                 }
         }
 
@@ -19,6 +24,7 @@ export default function Toast({bgColor = "err", accentColor, fontSize, clasName:
                 bgColor = "#FF7253";
                 if (accentColor == undefined) {
                         accentColor = "#f00";
+                        icon = <FontAwesomeIcon icon={faTriangleExclamation} />
                 }
         }
 
@@ -26,7 +32,7 @@ export default function Toast({bgColor = "err", accentColor, fontSize, clasName:
 		<>
                 <div className = {type}>
                         <div className='accent'></div>
-                        <rect className='icon'></rect>
+                        <div className='icon'>{icon}</div>
                         <p>{text}</p>
                         <DefaultButton className="dismissBtn" children="X"></DefaultButton>
                 </div>
@@ -84,7 +90,14 @@ export default function Toast({bgColor = "err", accentColor, fontSize, clasName:
                         .icon {
                                 width: 40px;
                                 height: 40px;
-                                background-color: black;
+                                display: flex;
+                                justify-content: center;
+
+                                {/* background-color: black; */}
+                                font-size: 40px;
+
+                                align-self: center;
+                                margin-top: 30px; {/* ???????? why is my align self not working????? */}
                         }
 
                        
