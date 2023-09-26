@@ -3,17 +3,21 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperclip } from '@fortawesome/free-solid-svg-icons' //find icon name at https://fontawesome.com/search?o=r&m=freeortawesome/react-fontawesome';
 
-export default function BusinessCard({
-	theme = "dark",
-	fontColor,
+export default function BuisnessCard({
+	theme = "black",
 	title,
 	isMobile = false,
+	isAltOrientation = false,
 	children,
-	icons = faPaperclip }) {
+	icons = faPaperclip 
+}) {
 
+	let fontColor;
 	let className = "businessCard";
-
-	if (theme == "light" || theme == "#FFFFFF") {
+	let titleClass = "";
+	
+	// handle theme, variants from props
+	if (theme == "white" || theme == "#FFFFFF") {
 		theme = "#FFFFFF";
 		fontColor = "#000000";
 	}
@@ -26,12 +30,17 @@ export default function BusinessCard({
 		className = "businessCard mobileBusinessCard";
 	}
 
+	if (isAltOrientation) {
+		isAltOrientation += " orientationAlt";
+		titleClass = "cardTitleAlt";
+	}
+
 
 	return (
 		<>
 			<div className={className}>
-				<span>
-					<h3>{title}</h3>
+				<span className={isAltOrientation}>
+					<h3 className={titleClass}>{title}</h3>
 					{children}
 				</span>
 				<div className='icon'>
@@ -77,6 +86,16 @@ export default function BusinessCard({
 				background-color: #E25C09;
 				{/* do this later */}
 			}
+
+			{/* so uh this will make title and body stack vertically instead of side by side.
+			This is designed to override the .businessCard and h3 classes respectibly */}
+			.orientationAlt {
+				{/* I now love flex box */}
+				flex-direction: column;
+			}
+			.cardTitleAlt {
+				min-width: 260px;
+			}
                         
 
                         h3 {
@@ -85,7 +104,8 @@ export default function BusinessCard({
                                 margin-bottom: 20px;
                                 align-self: start;
                                 max-width: 150px; /* maybe needed to control title length but it overlaps so idk*/
-                        }
+				margin-right: 20px;
+			}
 
 			p {
 				width: 100%;

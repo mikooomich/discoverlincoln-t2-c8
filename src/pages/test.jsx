@@ -1,17 +1,21 @@
 import FontAwesomeExample from '@/components/FontAwesomeExample'
 import ImageExample from '@/components/ImageExample'
+import LargeCardDesktop from '@/components/LargeCardDesktop'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+
 import React from 'react'
 
 import TestComponent from '../components/TestComponent'
 import BusinessCard from '@/components/BusinessCard'
 import Section from '@/components/Section'
+import MobileHamburgerMenu from '@/components/MobileHamburgerMenu'
 
 export default function test() {
   return (
     <>
       <Navbar></Navbar>
+      <MobileHamburgerMenu></MobileHamburgerMenu>
       <TestComponent color={"red"}>
         <div>
         </div>
@@ -46,6 +50,7 @@ export default function test() {
       </Section>
 
       <Footer></Footer>
+      <LargeCardDesktop></LargeCardDesktop>
     </>
   )
 }

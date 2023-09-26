@@ -1,3 +1,4 @@
+import "@/styles/globals.css";
 import cssReset from "../reset";
 import localFont from 'next/font/local'
 import { config } from "@fortawesome/fontawesome-svg-core";
