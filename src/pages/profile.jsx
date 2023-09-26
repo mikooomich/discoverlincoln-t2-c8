@@ -1,8 +1,11 @@
+import Footer from '@/components/Footer';
+import Navbar from '@/components/Navbar';
 import React from 'react'
 
 export default function test() {
   return (
     <>
+    <Navbar></Navbar>
       <div className="profile-page">
           <div className="account-info">
               <img src="https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg"></img>
@@ -13,6 +16,7 @@ export default function test() {
               </div>
           </div>
       </div>
+      <Footer></Footer>
 
       <style jsx> {`
             .account-info{

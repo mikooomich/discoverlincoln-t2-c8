@@ -1,5 +1,7 @@
 import React from 'react'
 import DefaultButton from '../components/DefaultButton'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 
 
 export default function test() {
@@ -222,6 +224,8 @@ export default function test() {
 
         `}
         </style>
+        <Navbar></Navbar>
+
 	<div className='psudoBody'>
   
                 <div className='iconBackdrop'></div>
@@ -312,6 +316,7 @@ export default function test() {
                
 
   	</div>
+        <Footer></Footer>
         </>
   )
 }

@@ -3,6 +3,8 @@ import React from 'react'
 
 import Toast from '@/components/Toast';
 import TextInput from '@/components/TextInput';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 export default function login() {
   return (
@@ -15,6 +17,9 @@ export default function login() {
                         display: flex;
                         flex-direction: column;
                         align-items: center;
+                        margin-bottom: -200px; 
+                        {/* hax: margin Removes space taken up by toastBox. 
+                        maybe limit to one toast or fixed toast box size...?*/}
                 }
 
                 .tooltip {
@@ -47,7 +52,10 @@ export default function login() {
                         background-color: var(--color-background-decoration);
                 }
 
-
+                .bot {
+                        position: fixed;
+                        bottom:0;
+                }
 
                 /* inner elements */
             
@@ -63,7 +71,8 @@ export default function login() {
                         position: sticky;
                         
                         bottom: 200px;
-                        float: right;      
+                        float: right;    
+                        
                 }
 
 
@@ -76,7 +85,8 @@ export default function login() {
                 }
         `}
         </style>
-
+        
+        <Navbar></Navbar>
         <div className='psudoBody'>
                 
                 <div id= "mainContent">
@@ -97,7 +107,6 @@ export default function login() {
                         </div>  
                 </div>
 
-                {/* remind me to figure out how to pin toasts on screen without adding extra space below */}
                 <div className='toastBox'>
                         <Toast bgColor="err" text='Incorrect username or password'></Toast>
                         <Toast bgColor="success" text='Login Sucess!'></Toast>
@@ -108,6 +117,7 @@ export default function login() {
                 </div>
 
         </div>
+        <Footer></Footer>
 
         </>
 
