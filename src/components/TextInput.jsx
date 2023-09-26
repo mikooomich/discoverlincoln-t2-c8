@@ -1,7 +1,15 @@
 import React from 'react'
 
-export default function TextInput({textColor = "var(--color-font-secondary)",
- fontFamily = "var(--font-roboto)", padding = "var(--padding-input-default)", className = "", type, placeholder, children}) {
+export default function TextInput({
+        textColor = "var(--color-font-secondary)",
+ fontFamily = "var(--font-roboto)",
+ padding = "var(--padding-input-default)",
+ className = "", 
+ type, 
+ placeholder,
+ width,
+ children
+}) {
 	return (
 		<>
 		
@@ -14,6 +22,7 @@ export default function TextInput({textColor = "var(--color-font-secondary)",
 				color: ${textColor};
 				font-family: ${fontFamily};
                                 margin: 10px 0px;
+                                width: ${width};
 			}
 
 

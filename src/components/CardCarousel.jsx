@@ -4,6 +4,9 @@ import React from 'react'
  * title: title of carousel
  * scrollable: false for static, else will be a scrollable list
  * alignTitle: aka "align-self:". Specify the alignment fof the title according to 
+ * margin: aka "margin:". Default is 0px
+ * 
+ * THIS IS A ul, all children should be li
  * @param {*} param0 
  * @returns 
  */
@@ -11,6 +14,7 @@ export default function CardCarousel({
         title,
         scrollable = true,
         alignTitle,
+        margin = "0px",
         children,
 }) {
 
@@ -28,10 +32,12 @@ export default function CardCarousel({
 
         return (
                 <>
-                        <h3 className='carouselTitle'>{title}</h3>
-                        <ul className='cardCarousel'>
-                                {children}
-                        </ul>
+                        <div className='cardCarousel'>
+                                <h3 className='carouselTitle'>{title}</h3>
+                                <ul >
+                                        {children}
+                                </ul>
+                        </div>
 
 
                         <style jsx>
@@ -42,6 +48,7 @@ export default function CardCarousel({
 			}
 
                         .cardCarousel {
+                                margin: ${margin};
                         }
 
                         ul {
