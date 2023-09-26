@@ -150,7 +150,7 @@ export default function checkout() {
 					<div className='buisnessCardBox'>
 						<div>
 							<span className='card1'>
-								<BuisnessCard theme='light' title="Need Information?" orientation="alt">
+								<BuisnessCard theme='white' title="Need Information?" isAltOrientation="true">
 									<p>Have a question about your ventures? Visit
 										an information center or
 										<DefaultButton isLink="true"> Click here </DefaultButton>
@@ -160,7 +160,7 @@ export default function checkout() {
 
 
 							<span className='card2'>
-								<BuisnessCard theme='dark' title="Our Partners" orientation="alt">
+								<BuisnessCard theme='black' title="Our Partners" isAltOrientation={true}>
 									<p>
 										Megasoft
 										<br />
@@ -179,7 +179,7 @@ export default function checkout() {
 
 						<div>
 							<span className='card1'>
-								<BuisnessCard theme='dark' title="Emergency Services">
+								<BuisnessCard theme='black' title="Emergency Services">
 									<p>
 										Emergency
 										<br />
@@ -205,7 +205,7 @@ export default function checkout() {
 							</span>
 
 							<span className='card2'>
-								<BuisnessCard theme='light' title="Other Useful Contacts">
+								<BuisnessCard theme='white' title="Other Useful Contacts">
 									<p>
 										City Hall
 										<br />

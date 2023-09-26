@@ -4,18 +4,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperclip } from '@fortawesome/free-solid-svg-icons' //find icon name at https://fontawesome.com/search?o=r&m=freeortawesome/react-fontawesome';
 
 export default function BuisnessCard({
-	theme = "dark",
+	theme = "black",
 	title,
 	isMobile = false,
-	orientation = "main",
+	isAltOrientation = false,
 	children,
-	icons = faPaperclip }) {
+	icons = faPaperclip 
+}) {
+
 	let fontColor;
 	let className = "businessCard";
 	let titleClass = "";
-
+	
 	// handle theme, variants from props
-	if (theme == "light" || theme == "#FFFFFF") {
+	if (theme == "white" || theme == "#FFFFFF") {
 		theme = "#FFFFFF";
 		fontColor = "#000000";
 	}
@@ -28,8 +30,8 @@ export default function BuisnessCard({
 		className = "businessCard mobileBusinessCard";
 	}
 
-	if (orientation == "alt") {
-		orientation += " orientationAlt";
+	if (isAltOrientation) {
+		isAltOrientation += " orientationAlt";
 		titleClass = "cardTitleAlt";
 	}
 
@@ -37,7 +39,7 @@ export default function BuisnessCard({
 	return (
 		<>
 			<div className={className}>
-				<span className={orientation}>
+				<span className={isAltOrientation}>
 					<h3 className={titleClass}>{title}</h3>
 					{children}
 				</span>
