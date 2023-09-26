@@ -101,7 +101,6 @@ export default function LargeCardDesktop({
           max-height: 408px;
           overflow: hidden;
 		  box-shadow: var(--shadow-box-massive-card);
-		  border: 2px solid black;
         }
 
         .image-container {
@@ -137,8 +136,8 @@ export default function LargeCardDesktop({
           background-color: ${categoryColors[category]};
           padding: 8px 12px;
           font-weight: 800;
-		  font-family: var(--font-roboto);
-		  font-size: var(--font-size-body-M);
+          font-family: var(--font-roboto);
+          font-size: var(--font-size-body-M);
         }
 
         .title {

@@ -1,12 +1,15 @@
 import React from "react";
+import { faStar as faStarfilled } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar as faStarOutline } from "@fortawesome/free-regular-svg-icons";
 
 export default function TestComponent({
   title = "Title",
   address = "101 Address Street, Lincoln, ON",
   category = "restaurant",
-  description = "Explore endless fields of vines and grapes, with twists and turns to your hearts content. Fun for the whole family. Enjoy a warm, sunny day, in the relaxing yards of vine. Hurry up! Space is limited! Our Vineyards are open to the public between April 23 and November 4th. Please note that weather circumstances may change, please dress accordingly and prepare for the weather. We are not responsible for lost belongings.",
+  description = "Explore endless fields of vines and grapes, with twists and turns to your hearts content. Fun for the whole family. Enjoy a warm, sunny day, in the relaxing yards of vine. Hurry up! Space is limited!",
   hoursOfOperation = [],
-  rating,
+  rating=2,
 }) {
   //code
   function renderStars() {
@@ -18,7 +21,7 @@ export default function TestComponent({
     return stars;
   }
   const categoryColors = {
-    restaurant: "red",
+    restaurant: "orange",
     music: "purple",
   };
   //html
@@ -66,7 +69,7 @@ export default function TestComponent({
             </div>
           </div>
           <div className="description-wrap">
-            <div className="description-text"></div>
+            <div className="description-text">{description}</div>
             <div className="border-line"></div>
             <div className="description2-wrap">
               <h1 className="hours-title">Hours of Operation:</h1>
@@ -95,7 +98,7 @@ export default function TestComponent({
           display: flex;
           flex-direction: column;
           max-width: 360px;
-          max-height: 361px;
+          max-height: 400px;
 		  overflow: hidden;
 		  box-shadow: var(--shadow-box-massive-card);
         }
@@ -112,18 +115,18 @@ export default function TestComponent({
         .card-information-wrap {
           display: flex;
           flex-direction: column;
-          padding: 15px;
+          padding: 10px 15px;
         }
 
 		.large-info-wrap {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
-
+		}
 		.star-container {
           display: flex;
-          gap: 4px;
-          margin-top: 5px;
+          gap: 3px;
+          margin-top: 2px;
         }
 
         .category-tag {
@@ -160,42 +163,45 @@ export default function TestComponent({
         .description-wrap {
           display: flex;
           flex-direction: row;
-          width: 700px;
-          margin-top: 10px;
+          width: 360px;
           align-items: center;
         }
 
         .description-text {
           font-family: var(--font-roboto);
-          font-size: var(--font-size-body-S);
-          font-weight: 500;
-          width: 400px;
-          padding-right: 20px;
+          font-size: var(--font-size-body-M);
           line-height: 1.6;
+		  max-width: 55%;
+		  font-weight: 400px;
+
         }
 
         .border-line {
           border-left: 1px solid grey;
-          height: 215px;
+          height: 150px;
+		  margin-left: 5px;
+		  margin-right: 5px;
         }
 
-        .description2-text {
-          padding-left: 30px;
+        .description2-wrap {
+			display: flex;
+			flex-direction: column;
         }
 
         .hours-title {
           font-family: var(--font-roboto);
-          font-size: var(--font-size-body-S);
+          font-size: var(--font-size-body-M);
           font-weight: 700;
           padding-bottom: 10px;
+		  padding-left: 4px;
         }
 
         .hours-description {
           font-family: var(--font-roboto);
-          font-size: var(--font-size-body-M);
+          font-size: var(--font-size-body-S);
           font-weight: 400;
-          line-height: 2;
-          padding-left: 30px;
+          line-height: 1.5;
+		  padding-left: 10px;
         }
       `}</style>
     </>
