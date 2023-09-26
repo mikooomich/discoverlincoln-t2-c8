@@ -101,7 +101,7 @@ export default function BuisnessCard({
                         h3 {
                                 font-family: var(--font-calps);
                                 font-size: var(--font-size-header-XS);
-                                margin-bottom: 20px;
+                                margin-bottom: 15px;
                                 align-self: start;
                                 max-width: 150px; /* maybe needed to control title length but it overlaps so idk*/
 				margin-right: 20px;
