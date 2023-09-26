@@ -1,9 +1,10 @@
 import React from "react";
 import Image from "next/image"
 
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faUser, faHouse } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MobileHamburgerMenu from "./MobileHamburgerMenu";
+import DefaultButton from "./DefaultButton";
 
 export default function Navbar() {
 	//html
@@ -13,28 +14,38 @@ export default function Navbar() {
 			<div className="header">
 
 				<div className="linconLogo">
-					<Image src="headerIcons.svg" width={200} height={150} alt="Discover Lincon on Facebook, Instagram, Twitter"
+					<Image src="headerIcons.svg" width={100} height={95} alt="Discover Lincon on Facebook, Instagram, Twitter"
 						style={"max-width: 10px;"}
 					/>
 				</div>
 				<div className="header-links">
-					<a href="./homepage">Home</a>
+					{/* Idk how you guys want to handle these links */}
+					{/* <DefaultButton bgColor="transparent" padding="25px">
+						<FontAwesomeIcon icon={faHouse} />
+					</DefaultButton>
+
+					<DefaultButton isLink={true}>Search</DefaultButton>
+					<DefaultButton isLink={true}>Upcoming Events</DefaultButton>
+					<DefaultButton isLink={true}>Attractions</DefaultButton>
+					<DefaultButton isLink={true}>Businesses & Service</DefaultButton> */}
+
+					<a href="./homepage">Homepage</a>
 					<a href="./search">Search</a>
 					<a href="./events-attractions">Upcoming Events</a>
 					<a href="./events-attractions">Attractions</a>
 					<a href="./business-service">Businesses & Services</a>
-					<a href="./profile">Profile</a>
+
+					<DefaultButton bgColor="transparent" padding="25px">
+						<FontAwesomeIcon icon={faUser} />
+					</DefaultButton>
 				</div>
 
 				<div className="mobileNavShow">
-				<FontAwesomeIcon icon={faBars} />
+					<FontAwesomeIcon icon={faBars} />
 					<div className="mobilenav">
-					<MobileHamburgerMenu></MobileHamburgerMenu>
-
-
-						
+						<MobileHamburgerMenu></MobileHamburgerMenu>
 					</div>
-					
+
 				</div>
 			</div>
 
@@ -61,7 +72,7 @@ export default function Navbar() {
             padding: 0px 25px;
           }
 
-          .header-links a {
+          .header-links * {
             float: left;
             color: white;
             padding: 30px 16px;
