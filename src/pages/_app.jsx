@@ -1,8 +1,40 @@
 import cssReset from "../reset";
+import localFont from 'next/font/local'
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { SessionProvider } from "next-auth/react";
 config.autoAddCss = false;
+
+// Fonts
+import { Roboto_Condensed } from "next/font/google"
+const roboto_condensed = Roboto_Condensed({
+	subsets: ['latin'],
+	weight: ['300', '400', '700']
+})
+const calps = localFont({
+	src: [
+		{
+			path: '../fonts/Calps-Medium.ttf',
+			weight: '300',
+			style: 'normal',
+		},
+		{
+			path: '../fonts/Calps-Bold.ttf',
+			weight: '500',
+			style: 'normal',
+		},
+		{
+			path: '../fonts/Calps-Black.ttf',
+			weight: '700',
+			style: 'normal',
+		},
+		{
+			path: '../fonts/Calps-ExtraBlack.ttf',
+			weight: '900',
+			style: 'normal',
+		}
+	]
+})
 
 export default function App({
 	Component,
@@ -32,8 +64,8 @@ export default function App({
 					--color-font-secondary: #5C5C5C;
 
 					/* Fonts */
-					--font-calps: "Calps", sans-serif;
-					--font-roboto: "Roboto Condensed", sans-serif;
+					--font-calps: ${calps.style.fontFamily};
+					--font-roboto: ${roboto_condensed.style.fontFamily};
 
 					--font-size-header-XL: 128px;
 					--font-size-header-L: 96px;
@@ -61,6 +93,13 @@ export default function App({
 					/* Page Layout */
 					--section-max-width: 1200px;
 					--section-padding: 36px;
+					
+					/* Default Styles */
+					body {
+						background-color: var(--color-background);
+						color: var(--color-font-primary);
+						font-family: var(--font-roboto);
+					}
 				}
 			`}</style>
 		</>
