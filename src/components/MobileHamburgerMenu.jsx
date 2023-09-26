@@ -67,6 +67,7 @@ export default function MobileHamburgerMenu() {
 				{/* align icon and heading */}
 				h2 {
 					margin-left: 20px;
+					text-align: left;
 				}
          
 				
