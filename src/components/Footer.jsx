@@ -1,42 +1,45 @@
 import React from 'react'
 import TextInput from './TextInput'
+import Image from "next/image"
 
 export default function Footer() {
-  //code
+	//code
 
 	//html
 	return (
 		<>
 			{/* html */}
 			<div className="footer">
-                <div className="footer-logos"> 
-                    <img src="https://en.expensereduction.com/wp-content/uploads/2018/02/logo-placeholder.png" className="logo"></img>
-                </div>
-                    <div className="footer-links">
-                        <a href="#">Home</a>
-                        <a href="#">Search</a>
-                        <a href="#">Upcoming Events</a>
-                        <a href="#">Attractions</a>
-                        <a href="#">Businesses & Services</a>
-                        <a href="#">Profile</a>
-                    </div>
-                    <div className="footer-subscription">
-                        <h2 className="subscribe-text">Subscribe to Town of Lincoln</h2>
-                        <div className="subscription-inputs">
-                            <TextInput type="text" className="email-input" placeholder="Enter email"></TextInput>
-                            <button type="button" className="button-style">Submit</button>
-                        </div>
-                    </div>
-            </div>
+				<div className="footer-logos">
+					<Image src="footerIcons.svg" width={200} height={150} alt="Discover Lincon on Facebook, Instagram, Twitter"
+						style={"max-width: 10px;"}
+					/>
+				</div>
+				<div className="footer-links">
+					<a href="./homepage">Home</a>
+					<a href="./search">Search</a>
+					<a href="./events-attractions">Upcoming Events</a>
+					<a href="./events-attractions">Attractions</a>
+					<a href="./business-service">Businesses & Services</a>
+					<a href="./profile">Profile</a>
+				</div>
+				<div className="footer-subscription">
+					<h2 className="subscribe-text">Subscribe to Town of Lincoln</h2>
+					<div className="subscription-inputs">
+						<TextInput type="text" className="email-input" placeholder="Enter email"></TextInput>
+						<button type="button" className="button-style">Submit</button>
+					</div>
+				</div>
+			</div>
 
-      {/* styles */}
-      <style jsx>{`
+			{/* styles */}
+			<style jsx>{`
         .footer {
           display: flex;
           flex-direction: row;
           justify-items: stretch;
           width: 100%;
-          height: 95px;
+          height: 150px;
           background-color: #005731;
           overflow: hidden;
           justify-content: space-between;
@@ -49,6 +52,12 @@ export default function Footer() {
           width: 300px;
           display: center;
         }
+
+	.footer-logos {
+		display: flex;
+		justify-content: center;
+		margin-left: 20px;
+	}
 
         .footer-wrap {
           display: flex;
@@ -77,6 +86,7 @@ export default function Footer() {
         .footer-subscription {
           display: flex;
           flex-direction: column;
+	  align-self: center;
         }
 
         .subscription-inputs {
@@ -107,6 +117,6 @@ export default function Footer() {
           font-size: 15px;
         }
       `}</style>
-    </>
-  );
+		</>
+	);
 }
