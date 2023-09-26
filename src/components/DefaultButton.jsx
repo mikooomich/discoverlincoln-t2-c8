@@ -14,8 +14,10 @@ export default function DefaultButton({isLink = false, bgColor = "var(--color-to
 textColor = "#FFFFFF", fontSize = "var(--font-size-body-L)", padding = "var(--padding-btn-default)", className = "", href = "", children}) {
 	return (
 		<>
-		{isLink && <a href= {href} className={className}>{children}</a>}
-		{!isLink && <button className={className}>{children}</button>}
+		{isLink && 
+			<a href= {href} className={className}>{children}</a>}
+		{!isLink && 
+			<button className={className}>{children}</button>}
 		
 		
 		<style jsx>
@@ -71,6 +73,29 @@ textColor = "#FFFFFF", fontSize = "var(--font-size-body-L)", padding = "var(--pa
 				filter: brightness(70%);
 			}
 
+
+
+			.mobileNav {
+				background-color: transparent;
+				color: white;
+
+				font-size: 27px;
+				font-family: var(--font-calps);
+				font-weight: bold;
+				
+				display: flex;
+				width:100vw;
+				border: none;
+				padding: 12px 20px;
+			}
+
+			.mobileNav:hover {
+				background-color: #004527;
+				{/* font-size: 28px; */}
+			}
+
+			
+	
 		`}</style>
 		</>
 	)
