@@ -1,5 +1,7 @@
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
+import LargeCardList from '@/components/LargeCardList'
+import LargeCardDesktop from '@/components/LargeCardDesktop'
 import React from 'react'
 
 export default function test() {
@@ -11,10 +13,11 @@ export default function test() {
               <img src="https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg"></img>
               <h1> John Smith</h1>
           </div>
-          <div className="event-ticket-wrap">
-              <div className="event-tickets">
-              </div>
-          </div>
+          <LargeCardList>
+                <LargeCardDesktop></LargeCardDesktop>
+                <LargeCardDesktop></LargeCardDesktop>
+                <LargeCardDesktop></LargeCardDesktop>
+          </LargeCardList>
       </div>
       <Footer></Footer>
 
@@ -48,13 +51,16 @@ export default function test() {
 
             .event-tickets{
               display: flex;
+              flex-direction: column-reverse;
               background-color: black;
+
+              
               padding-left: 100px;
               padding-right: 100px;
-
               border-color: grey;
               border-style: solid;
               border-width: 2px;
+
             }
 
       `}</style>

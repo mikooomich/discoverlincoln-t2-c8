@@ -100,7 +100,7 @@ export default function LargeCardDesktop({
           max-width: 1200px;
           max-height: 408px;
           overflow: hidden;
-		  box-shadow: var(--shadow-box-massive-card);
+		      box-shadow: var(--shadow-box-massive-card);
         }
 
         .image-container {
@@ -116,6 +116,7 @@ export default function LargeCardDesktop({
           display: flex;
           flex-direction: column;
           padding: 32px;
+          background-color: white;
         }
 
         .large-info-wrap {
@@ -136,8 +137,8 @@ export default function LargeCardDesktop({
           background-color: ${categoryColors[category]};
           padding: 8px 12px;
           font-weight: 800;
-		  font-family: var(--font-roboto);
-		  font-size: var(--font-size-body-M);
+        font-family: var(--font-roboto);
+        font-size: var(--font-size-body-M);
         }
 
         .title {
@@ -151,6 +152,7 @@ export default function LargeCardDesktop({
           flex-direction: row;
           gap: 4px;
           align-items: center;
+          margin-top: 5px;
         }
 
         .address {
@@ -172,9 +174,9 @@ export default function LargeCardDesktop({
           font-family: var(--font-roboto);
           font-size: var(--font-size-body-M);
           font-weight: 500;
-          width: 400px;
+          width: 450px;
           padding-right: 20px;
-          line-height: 1.6;
+          line-height: 2;
         }
 
         .border-line {
