@@ -3,7 +3,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperclip } from '@fortawesome/free-solid-svg-icons' //find icon name at https://fontawesome.com/search?o=r&m=freeortawesome/react-fontawesome';
 
-export default function BuisnessCard({
+export default function BusinessCard({
 	theme = "dark",
 	fontColor,
 	title,
