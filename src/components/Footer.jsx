@@ -1,52 +1,41 @@
 import React from "react";
 import TextInput from "./TextInput";
 import Image from "next/image";
+import DefaultButton from "./DefaultButton";
 
 export default function Footer() {
   //code
+  //code
 
-  //html
-  return (
-    <>
-      {/* html */}
-      <div className="footer">
-        <div className="footer-logos">
-          <Image
-            src="footerIcons.svg"
-            width={100}
-            height={100}
-            alt="Discover Lincon on Facebook, Instagram, Twitter"
-            style={"max-width: 10px;"}
-          />
-        </div>
-        <div className="footer-links">
-          <a href="./homepage">Home</a>
-          <a href="./search">Search</a>
-          <a href="./events-attractions">Upcoming Events</a>
-          <a href="./events-attractions">Attractions</a>
-          <a href="./business-service">Businesses & Services</a>
-          <a href="./profile">Profile</a>
-        </div>
-        <div className="footer-subscription">
-          <h2 className="subscribe-text">Subscribe to Town of Lincoln</h2>
-          <div className="subscription-inputs">
-            <TextInput
-              type="text"
-              className="email-input"
-              placeholder="Enter email"
-            ></TextInput>
-            <button type="button" className="button-style">
-              Submit
-            </button>
-          </div>
-        </div>
-      </div>
+	//html
+	return (
+		<>
+			{/* html */}
+			<div className="footer">
+				<div className="footer-logos">
+					<Image src="footerIcons.svg" width={100} height={100} alt="Discover Lincon on Facebook, Instagram, Twitter"
+						style={"max-width: 10px;"}
+					/>
+				</div>
+				<div className="footer-links">
+					<a href="./homepage">Home</a>
+					<a href="./search">Search</a>
+					<a href="./events-attractions">Upcoming Events</a>
+					<a href="./events-attractions">Attractions</a>
+					<a href="./business-service">Businesses & Services</a>
+					<a href="./profile">Profile</a>
+				</div>
+				<div className="footer-subscription">
+					<h2 className="subscribe-text">Subscribe to Town of Lincoln</h2>
+					<div className="subscription-inputs">
+						<TextInput type="text" className="email-input" placeholder="Enter email"></TextInput>
+						<DefaultButton padding="2px 15px" href="">{"SUBMIT"}</DefaultButton>
+					</div>
+				</div>
+			</div>
 
       {/* styles */}
       <style jsx>{`
-
-		
-
         .footer {
           display: flex;
           flex-direction: row;
@@ -111,7 +100,7 @@ export default function Footer() {
         .footer-subscription {
           display: flex;
           flex-direction: column;
-          align-self: center;
+	  align-self: center;
         }
 
 		@media only screen and (max-width: 1019px){

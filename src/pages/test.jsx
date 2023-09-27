@@ -4,19 +4,27 @@ import LargeCardDesktop from '@/components/LargeCardDesktop'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import LargeCardMobile from '@/components/LargeCardMobile'
-
+import Image from "next/image";
 import React from 'react'
 
 import TestComponent from '../components/TestComponent'
 import BusinessCard from '@/components/BusinessCard'
 import Section from '@/components/Section'
 import MobileHamburgerMenu from '@/components/MobileHamburgerMenu'
+import SmallCard from '@/components/SmallCard'
+import ExampleState from '@/components/ExampleState'
 
 export default function test() {
   return (
     <>
       <Navbar></Navbar>
       <MobileHamburgerMenu></MobileHamburgerMenu>
+      <SmallCard >
+
+       
+						<Image src="Icon-glass.svg" width={20} height={20} alt="uwu" />
+			
+      </SmallCard>
       <TestComponent color={"red"}>
         <div>
         </div>
@@ -52,6 +60,8 @@ export default function test() {
 
       <Footer></Footer>
       <LargeCardMobile></LargeCardMobile>
+
+      <ExampleState />
     </>
   )
 }
