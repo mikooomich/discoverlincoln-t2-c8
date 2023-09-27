@@ -3,13 +3,16 @@ import { faStar as faStarfilled } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarOutline } from "@fortawesome/free-regular-svg-icons";
 
-export default function TestComponent({
+export default function LargeCardMobile({
   title = "Title",
   address = "101 Address Street, Lincoln, ON",
   category = "restaurant",
   description = "Explore endless fields of vines and grapes, with twists and turns to your hearts content. Fun for the whole family. Enjoy a warm, sunny day, in the relaxing yards of vine. Hurry up! Space is limited!",
   hoursOfOperation = [],
-  rating=2,
+  rating,
+  isTicket = true,
+  ticketDate = "October 22nd, 2023",
+  ticketTime = "6pm to 8:30pm",
 }) {
   //code
   function renderStars() {
@@ -71,24 +74,35 @@ export default function TestComponent({
           <div className="description-wrap">
             <div className="description-text">{description}</div>
             <div className="border-line"></div>
-            <div className="description2-wrap">
-              <h1 className="hours-title">Hours of Operation:</h1>
-              <p className="hours-description">
-                Monday: 11am - 6pm
-                <br />
-                Tuesday: 11am - 6pm
-                <br />
-                Wednesday: 11am - 6pm
-                <br />
-                Thursday: 11am - 6pm
-                <br />
-                Friday: 11am - 9pm
-                <br />
-                Saturday: 9am - 9pm
-                <br />
-                Sunday: 9am - 9pm
-              </p>
-            </div>
+            {isTicket ? (
+              <div className="ticket-wrap">
+                <p className="ticket-text">Date: {ticketDate}</p>
+                <p className="ticket-text">Time: {ticketTime}</p>
+                <img
+                  src="https://i.stack.imgur.com/oSqy5.png"
+                  className="ticket-code-img"
+                ></img>
+              </div>
+            ) : (
+              <div className="description2-text">
+                <h1 className="hours-title">Hours of Operation:</h1>
+                <p className="hours-description">
+                  Monday: 11am - 6pm
+                  <br />
+                  Tuesday: 11am - 6pm
+                  <br />
+                  Wednesday: 11am - 6pm
+                  <br />
+                  Thursday: 11am - 6pm
+                  <br />
+                  Friday: 11am - 9pm
+                  <br />
+                  Saturday: 9am - 9pm
+                  <br />
+                  Sunday: 9am - 9pm
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -99,8 +113,8 @@ export default function TestComponent({
           flex-direction: column;
           max-width: 360px;
           max-height: 400px;
-		  overflow: hidden;
-		  box-shadow: var(--shadow-box-massive-card);
+          overflow: hidden;
+          box-shadow: var(--shadow-box-massive-card);
         }
 
         .image-container {
@@ -118,12 +132,12 @@ export default function TestComponent({
           padding: 10px 15px;
         }
 
-		.large-info-wrap {
+        .large-info-wrap {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
-		}
-		.star-container {
+        }
+        .star-container {
           display: flex;
           gap: 3px;
           margin-top: 2px;
@@ -135,8 +149,8 @@ export default function TestComponent({
           background-color: ${categoryColors[category]};
           padding: 8px 12px;
           font-weight: 800;
-		  font-family: var(--font-roboto);
-		  font-size: var(--font-size-body-M);
+          font-family: var(--font-roboto);
+          font-size: var(--font-size-body-M);
         }
 
         .title {
@@ -157,7 +171,7 @@ export default function TestComponent({
           font-family: var(--font-roboto);
           font-size: var(--font-size-body-M);
           font-weight: 400;
-		  padding-bottom: 2px;
+          padding-bottom: 2px;
         }
 
         .description-wrap {
@@ -171,29 +185,27 @@ export default function TestComponent({
           font-family: var(--font-roboto);
           font-size: var(--font-size-body-M);
           line-height: 1.6;
-		  max-width: 55%;
-		  font-weight: 400px;
-
+          max-width: 55%;
+          font-weight: 400px;
         }
 
         .border-line {
           border-left: 1px solid grey;
           height: 150px;
-		  margin-left: 5px;
-		  margin-right: 5px;
+          margin-left: 5px;
         }
 
         .description2-wrap {
-			display: flex;
-			flex-direction: column;
+          display: flex;
+          flex-direction: column;
         }
 
         .hours-title {
           font-family: var(--font-roboto);
           font-size: var(--font-size-body-M);
           font-weight: 700;
-          padding-bottom: 10px;
-		  padding-left: 4px;
+          padding-bottom: 5px;
+          padding-left: 4px;
         }
 
         .hours-description {
@@ -201,7 +213,21 @@ export default function TestComponent({
           font-size: var(--font-size-body-S);
           font-weight: 400;
           line-height: 1.5;
-		  padding-left: 10px;
+          padding-left: 10px;
+        }
+
+        .ticket-wrap {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .ticket-text {
+          font-family: var(--font-roboto);
+          font-size: var(--font-size-body-S);
+          line-height: 1.4;
+		  padding-right: 10px;
         }
       `}</style>
     </>
