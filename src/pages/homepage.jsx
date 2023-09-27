@@ -1,13 +1,19 @@
 import TextInput from '@/components/TextInput'
 import React from 'react'
 
+import Image from 'next/image'
+
 export default function homepage() {
   return (
     <>
         <div className="homepage">
             <div className="landing-view">
                 <div className="header-1">
-                    <img src="https://www.adaptivewfs.com/wp-content/uploads/2020/07/logo-placeholder-image.png" className="header-logo"></img>
+                    <div className='header-logo'>
+                    <Image src="logoIcon.svg" width={60} height={60} alt="Lincon logo"/>
+                    </div>
+						style={"max-width: 10px;"}
+					
                     <div className="header-links">
                         <a href="#">Home</a>
                         <a href="#">Search</a>
