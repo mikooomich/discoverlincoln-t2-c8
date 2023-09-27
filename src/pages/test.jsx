@@ -11,6 +11,7 @@ import TestComponent from '../components/TestComponent'
 import BusinessCard from '@/components/BusinessCard'
 import Section from '@/components/Section'
 import MobileHamburgerMenu from '@/components/MobileHamburgerMenu'
+import ExampleState from '@/components/ExampleState'
 
 export default function test() {
   return (
@@ -52,6 +53,8 @@ export default function test() {
 
       <Footer></Footer>
       <LargeCardMobile></LargeCardMobile>
+
+      <ExampleState />
     </>
   )
 }
