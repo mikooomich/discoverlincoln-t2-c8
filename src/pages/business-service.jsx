@@ -5,6 +5,8 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import CardCarousel from '@/components/CardCarousel'
 
+import { faWindowRestore, faCircleInfo, faTruckMedical, faStore, faUtensils, faCarrot, faStrikethrough, faCrown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function business() {
 	return (
@@ -22,9 +24,12 @@ export default function business() {
 
 			{/* Titles */}
 			.banner {
-				background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Golden_Delicious_apples.jpg/500px-Golden_Delicious_apples.jpg");
+				background-image: url("/local.svg");
 				background-color: #DFDFDF;
-				background-size: contain;
+				background-size: 110% auto;
+				background-repeat: no-repeat;
+				background-position: center;
+				
 				{/* filter: blur(10px); */}
 
 				width: 100%;
@@ -90,6 +95,9 @@ export default function business() {
 			}
 
 
+			{/* p {
+				font-size: 16px;
+			} */}
 			.cardBodyTxt {
 				margin-left: 20px;
 			}
@@ -103,6 +111,42 @@ export default function business() {
 				top: -30px;
 				right: -120px;	
 			}
+
+			{/* start This is all for the partners card */}
+			.partnersCard {
+				display: flex;
+				justify-content: space-between;
+			}
+
+			.iconsBox {
+				position: relative;
+				bottom: 40px;
+			}
+			.icon {
+				font-size: 20pt;
+				position: relative;
+			}
+
+			#icon1 {
+				right:120px;
+			}
+			#icon2 {
+				right:60px;
+				bottom: 30px;
+			}
+			#icon3 {
+				right:90px;
+				bottom: 20px;
+			}
+			#icon4 {
+				right:40px;
+				bottom: 40px;
+			}
+			#icon5 {
+				right:70px;
+				bottom: 30px;
+			}
+			{/* end This is all for the partners card */}
 		`}
 			</style>
 
@@ -122,7 +166,7 @@ export default function business() {
 						{/* placeholder, steal the ones used on home page and modify it? */}
 
 						<CardCarousel title="Our Fine Selections" alignTitle='end'>
-						<li>
+							<li>
 								<div className='cardPlaceholder'></div>
 							</li>
 							<li>
@@ -150,7 +194,7 @@ export default function business() {
 					<div className='buisnessCardBox'>
 						<div>
 							<span className='card1'>
-								<BusinessCard theme='white' title="Need Information?" isAltOrientation="true">
+								<BusinessCard theme='white' title="Need Information?" isAltOrientation="true" icons={faCircleInfo}>
 									<p>Have a question about your ventures? Visit
 										an information center or
 										<DefaultButton isLink="true"> Click here </DefaultButton>
@@ -160,18 +204,46 @@ export default function business() {
 
 
 							<span className='card2'>
-								<BusinessCard theme='black' title="Our Partners" isAltOrientation={true}>
-									<p>
-										Megasoft
-										<br />
-										Months Inn
-										<br />
-										Burger Queen
-										<br />
-										Rotten Potatoes
-										<br />
-										SUNGSAM
-									</p>
+								<BusinessCard theme='black' title="Our Partners" isAltOrientation={true} icons={null}>
+									<div className='partnersCard'>
+
+
+										<p>
+											Megasoft
+											<br />
+											Months Inn
+											<br />
+											Burger Queen
+											<br />
+											Rotten Potatoes
+											<br />
+											SUNGSAM
+										</p>
+
+										<div className='iconsBox'>
+											<div id='icon1' className='icon'>
+												<FontAwesomeIcon icon={faUtensils} />
+											</div>
+											<div id='icon2' className='icon'>
+												<FontAwesomeIcon icon={faWindowRestore} />
+											</div>
+
+											<div id='icon3' className='icon'>
+												<FontAwesomeIcon icon={faCarrot} />
+											</div>
+
+											<div id='icon4' className='icon'>
+												<FontAwesomeIcon icon={faStrikethrough} />
+											</div>
+
+											<div id='icon5' className='icon'>
+												<FontAwesomeIcon icon={faCrown} />
+											</div>
+										</div>
+									</div>
+
+
+
 								</BusinessCard>
 							</span>
 
@@ -179,7 +251,7 @@ export default function business() {
 
 						<div>
 							<span className='card1'>
-								<BusinessCard theme='black' title="Emergency Services">
+								<BusinessCard theme='black' title="Emergency Services" icons={faTruckMedical}>
 									<p>
 										Emergency
 										<br />
@@ -199,13 +271,13 @@ export default function business() {
 										555-555-555
 										<br />
 										555-555-555
-										
+
 									</p>
 								</BusinessCard>
 							</span>
 
 							<span className='card2'>
-								<BusinessCard theme='white' title="Other Useful Contacts">
+								<BusinessCard theme='white' title="Other Useful Contacts" icons={faStore}>
 									<p>
 										City Hall
 										<br />
@@ -218,7 +290,7 @@ export default function business() {
 										Weather Info
 									</p>
 									<p className='cardBodyTxt'>
-									555-555-555
+										555-555-555
 										<br />
 										555-555-555
 										<br />
@@ -238,7 +310,7 @@ export default function business() {
 					</div>
 				</div>
 				<Footer></Footer>
-			</div>
+			</div >
 		</>
 
 	)
