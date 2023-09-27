@@ -3,6 +3,7 @@ import Section from '@/components/Section'
 import LargeCardMobile from '@/components/LargeCardMobile'
 import CardCarousel from '@/components/CardCarousel'
 import React from 'react'
+import DefaultButton from '@/components/DefaultButton'
 
 export default function homepage() {
 	return (
@@ -109,6 +110,7 @@ export default function homepage() {
 							<LargeCardMobile></LargeCardMobile>
 						</li>
 					</CardCarousel>
+					<DefaultButton>See More</DefaultButton>
 					<hr />
 					<CardCarousel title="Attractions" margin="40px 0px 40px 0px">
 						<li>
@@ -124,6 +126,7 @@ export default function homepage() {
 							<LargeCardMobile></LargeCardMobile>
 						</li>
 					</CardCarousel>
+					<DefaultButton>See More</DefaultButton>
 					<hr />
 
 					<CardCarousel title="Business" margin="40px 0px 40px 0px">
@@ -140,6 +143,7 @@ export default function homepage() {
 							<LargeCardMobile></LargeCardMobile>
 						</li>
 					</CardCarousel>
+					<DefaultButton className="">See More</DefaultButton>
 				</Section>
 
 			</div>
@@ -150,6 +154,7 @@ export default function homepage() {
 				  li {
 						margin: 20px;
 					}
+					
 
                 .homepage{
                     display: flex;
