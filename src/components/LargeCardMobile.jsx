@@ -152,7 +152,7 @@ export default function LargeCardMobile({
           font-family: var(--font-roboto);
           font-size: var(--font-size-body-M);
         }
-        style={"max-width: 10px;"}
+    
         .title {
           font-family: var(--font-calps);
           font-size: var(--font-size-header-XS);

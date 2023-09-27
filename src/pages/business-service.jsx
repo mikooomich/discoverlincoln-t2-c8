@@ -99,14 +99,12 @@ export default function business() {
 				flex-direction: column;
 			}
 
-			.waa {
+			.buisnessCardBoxMobile-wrap {
 				display: flex;
 				justify-items: center;
 			}
 
-			{/* p {
-				font-size: 16px;
-			} */}
+			
 			.cardBodyTxt {
 				margin-left: 20px;
 			}
@@ -114,21 +112,7 @@ export default function business() {
 			{/* .card1 {
 
 			} */}
-			.card2 {
-				{/* lower card */}
-				position: relative;
-				top: -30px;
-				right: -120px;	
-			}
 
-
-			
-			.card2M, .card1M {
-				margin-bottom: 20px;
-			}
-			.card1M {
-				align-self: end;
-			}
 
 			{/* start This is all for the partners card */}
 			.partnersCard {
@@ -168,6 +152,22 @@ export default function business() {
 
 
 
+			{/* mobile cards */}
+			.card2 {
+				{/* lower card */}
+				position: relative;
+				top: -30px;
+				right: -120px;	
+			}
+			.card2M, .card1M {
+				margin-bottom: 20px;
+			}
+			.card1M {
+				align-self: end;
+			}
+
+
+
 			{/* colapse cards in a bit */}
 			@media screen and (max-width: 1200px) {
 				.card2 {
@@ -188,17 +188,18 @@ export default function business() {
 			}
 
 			
-
+			{/* Make banner smaller to fit */}
 			@media screen and (max-width: 720px) {
 				h1 {
 					font-size: var(--font-size-header-S);
 				}
+
 				h3 {
 					font-size: var(--font-size-body-L);
 					font-weight: normal;
-
 					margin-top: 15px;
 				}
+
 				.bannerTxt p {
 					font-size: var(--font-size-body-M);
 					margin-top: 20px;
@@ -209,6 +210,7 @@ export default function business() {
 				}
 			}
 
+			{/* Mobile view */}
 			@media screen and (max-width: 500px) {
 				.selectionsContent {
 					margin-top: 20px;
@@ -222,7 +224,6 @@ export default function business() {
 					display: flex;
 
 				}
-				{/* show mobile cards now */}
 			}
 
 
@@ -380,127 +381,119 @@ export default function business() {
 						</div>
 					</div>
 
-					</Section>
-					<Section usePadding={false}>
-						<div className='waa'>
+				</Section>
+				<Section usePadding={false}>
+					<div className='buisnessCardBoxMobile-wrap'>
 						<div className='buisnessCardBoxMobile'>
 
-						<div className='card1M'>
-							<BusinessCard theme='white' title="Need Information?" isAltOrientation="true" icons={faCircleInfo}>
-								<p>Have a question about your ventures? Visit
-									an information center or
-									<DefaultButton isLink="true"> Click here </DefaultButton>
-									to view a map of our in person information centers.</p>
-							</BusinessCard>
-						</div>
+							<div className='card1M'>
+								<BusinessCard theme='white' title="Need Information?" isAltOrientation="true" icons={faCircleInfo}>
+									<p>Have a question about your ventures? Visit
+										an information center or
+										<DefaultButton isLink="true"> Click here </DefaultButton>
+										to view a map of our in person information centers.</p>
+								</BusinessCard>
+							</div>
 
 
-						<span className='card2M'>
-							<BusinessCard theme='black' title="Our Partners" isAltOrientation={true} icons={null}>
-								<div className='partnersCard'>
-									<p>
-										Megasoft
-										<br />
-										Months Inn
-										<br />
-										Burger Queen
-										<br />
-										Rotten Potatoes
-										<br />
-										SUNGSAM
-									</p>
+							<span className='card2M'>
+								<BusinessCard theme='black' title="Our Partners" isAltOrientation={true} icons={null}>
+									<div className='partnersCard'>
+										<p>
+											Megasoft
+											<br />
+											Months Inn
+											<br />
+											Burger Queen
+											<br />
+											Rotten Potatoes
+											<br />
+											SUNGSAM
+										</p>
 
-									<div className='iconsBox'>
-										<div id='icon1' className='icon'>
-											<FontAwesomeIcon icon={faUtensils} />
-										</div>
-										<div id='icon2' className='icon'>
-											<FontAwesomeIcon icon={faWindowRestore} />
-										</div>
+										<div className='iconsBox'>
+											<div id='icon1' className='icon'>
+												<FontAwesomeIcon icon={faUtensils} />
+											</div>
+											<div id='icon2' className='icon'>
+												<FontAwesomeIcon icon={faWindowRestore} />
+											</div>
 
-										<div id='icon3' className='icon'>
-											<FontAwesomeIcon icon={faCarrot} />
-										</div>
+											<div id='icon3' className='icon'>
+												<FontAwesomeIcon icon={faCarrot} />
+											</div>
 
-										<div id='icon4' className='icon'>
-											<FontAwesomeIcon icon={faStrikethrough} />
-										</div>
+											<div id='icon4' className='icon'>
+												<FontAwesomeIcon icon={faStrikethrough} />
+											</div>
 
-										<div id='icon5' className='icon'>
-											<FontAwesomeIcon icon={faCrown} />
+											<div id='icon5' className='icon'>
+												<FontAwesomeIcon icon={faCrown} />
+											</div>
 										</div>
 									</div>
-								</div>
+								</BusinessCard>
+							</span>
 
 
+							<div className='card1M'>
+								<BusinessCard theme='white' title="Emergency Services" icons={faTruckMedical}>
+									<p>
+										Emergency
+										<br />
+										Police
+										<br />
+										Fire
+										<br />
+										Roadside
+										<br />
+										Assistance
+									</p>
+									<p className='cardBodyTxt'>
+										911
+										<br />
+										555-555-555
+										<br />
+										555-555-555
+										<br />
+										555-555-555
 
-							</BusinessCard>
-						</span>
+									</p>
+								</BusinessCard>
+							</div>
 
+							<div className='card2M'>
+								<BusinessCard theme='black' title="Other Useful Contacts" icons={faStore}>
+									<p>
+										City Hall
+										<br />
+										Ontario Parks
+										<br />
+										Vineland
+										<br />
+										Support Line
+										<br />
+										Weather Info
+									</p>
+									<p className='cardBodyTxt'>
+										555-555-555
+										<br />
+										555-555-555
+										<br />
+										555-555-555
+										<br />
+										555-555-555
+										<br />
+										555-555-555
+									</p>
+								</BusinessCard>
+							</div>
 
-						<div className='card1M'>
-							<BusinessCard theme='white' title="Emergency Services" icons={faTruckMedical}>
-								<p>
-									Emergency
-									<br />
-									Police
-									<br />
-									Fire
-									<br />
-									Roadside
-									<br />
-									Assistance
-								</p>
-								<p className='cardBodyTxt'>
-									911
-									<br />
-									555-555-555
-									<br />
-									555-555-555
-									<br />
-									555-555-555
-
-								</p>
-							</BusinessCard>
-						</div>
-
-						<div className='card2M'>
-							<BusinessCard theme='black' title="Other Useful Contacts" icons={faStore}>
-								<p>
-									City Hall
-									<br />
-									Ontario Parks
-									<br />
-									Vineland
-									<br />
-									Support Line
-									<br />
-									Weather Info
-								</p>
-								<p className='cardBodyTxt'>
-									555-555-555
-									<br />
-									555-555-555
-									<br />
-									555-555-555
-									<br />
-									555-555-555
-									<br />
-									555-555-555
-								</p>
-							</BusinessCard>
 						</div>
 
 					</div>
-
-					</div>
-
-
-
-
-
-					{/* </div> */}
 				</Section>
+
 				<Footer></Footer>
 			</div >
 		</>

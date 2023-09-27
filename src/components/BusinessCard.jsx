@@ -35,6 +35,12 @@ export default function BuisnessCard({
 		titleClass = "cardTitleAlt";
 	}
 
+	// ugly hax
+	if (title == "Our Partners") {
+		console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+		className += " spacingFix";
+	}
+
 
 	return (
 		<>
@@ -77,7 +83,7 @@ export default function BuisnessCard({
                                 align-items: center;
                                 justify-content: start;
                                 padding: 0px 0px 40px 40px; 
-                                
+			        
                                 font-size: var(--font-size-body-S);
                                 font-family: var(--font-roboto);
                         }
@@ -117,6 +123,11 @@ export default function BuisnessCard({
                                 margin-top: 40px;
 				width: 100%;
                         }
+
+			.spacingFix {
+				padding: 0px 0px 00px 40px; 
+				height: 100px;
+			}
                 
 			`}</style>
 		</>
