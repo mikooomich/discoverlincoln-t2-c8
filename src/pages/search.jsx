@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Section from "@/components/Section";
 import TextInput from "@/components/TextInput";
+import LargeCardMobile from '@/components/LargeCardMobile'
 import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -79,53 +80,54 @@ export default function search() {
         </div>
       </Section>
 
-      <Section marginBottom="40px">
-        <CardCarousel title="Events" margin="0px 0px 40px 0px">
-          <li>
-            <div className="cardPlaceholder"></div>
-          </li>
-          <li>
-            <div className="cardPlaceholder"></div>
-          </li>
-          <li>
-            <div className="cardPlaceholder"></div>
-          </li>
-          <li>
-            <div className="cardPlaceholder"></div>
-          </li>
-        </CardCarousel>
-        <hr />
-        <CardCarousel title="Attractions" margin="40px 0px 40px 0px">
-          <li>
-            <div className="cardPlaceholder"></div>
-          </li>
-          <li>
-            <div className="cardPlaceholder"></div>
-          </li>
-          <li>
-            <div className="cardPlaceholder"></div>
-          </li>
-          <li>
-            <div className="cardPlaceholder"></div>
-          </li>
-        </CardCarousel>
-        <hr />
 
-        <CardCarousel title="Business" margin="40px 0px 40px 0px">
-          <li>
-            <div className="cardPlaceholder"></div>
-          </li>
-          <li>
-            <div className="cardPlaceholder"></div>
-          </li>
-          <li>
-            <div className="cardPlaceholder"></div>
-          </li>
-          <li>
-            <div className="cardPlaceholder"></div>
-          </li>
-        </CardCarousel>
-      </Section>
+                        <Section marginBottom='40px'>
+                                <CardCarousel title="Events" margin="0px 0px 40px 0px">
+                                        <li>
+                                                <LargeCardMobile></LargeCardMobile>
+                                        </li>
+                                        <li>
+                                                <LargeCardMobile></LargeCardMobile>
+                                        </li>
+                                        <li>
+                                                <LargeCardMobile></LargeCardMobile>
+                                        </li>
+                                        <li>
+                                                <LargeCardMobile></LargeCardMobile>
+                                        </li>
+                                </CardCarousel>
+                                <hr />
+                                <CardCarousel title="Attractions" margin="40px 0px 40px 0px">
+                                        <li>
+                                                <LargeCardMobile></LargeCardMobile>
+                                        </li>
+                                        <li>
+                                                <LargeCardMobile></LargeCardMobile>
+                                        </li>
+                                        <li>
+                                                <LargeCardMobile></LargeCardMobile>
+                                        </li>
+                                        <li>
+                                                <LargeCardMobile></LargeCardMobile>
+                                        </li>
+                                </CardCarousel>
+                                <hr />
+
+                                <CardCarousel title="Business" margin="40px 0px 40px 0px">
+                                        <li>
+                                                <LargeCardMobile></LargeCardMobile>
+                                        </li>
+                                        <li>
+                                                <LargeCardMobile></LargeCardMobile>
+                                        </li>
+                                        <li>
+                                                <LargeCardMobile></LargeCardMobile>
+                                        </li>
+                                        <li>
+                                                <LargeCardMobile></LargeCardMobile>
+                                        </li>
+                                </CardCarousel>
+                        </Section>
 
       <Footer></Footer>
     </>
