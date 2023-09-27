@@ -34,7 +34,7 @@ export default function Toast({bgColor = "err", accentColor, fontSize, clasName:
                         <div className='accent'></div>
                         <div className='icon'>{icon}</div>
                         <p>{text}</p>
-                        <DefaultButton className="dismissBtn" children="X"></DefaultButton>
+                        <DefaultButton className="dismissBtn">X</DefaultButton>
                 </div>
 
 

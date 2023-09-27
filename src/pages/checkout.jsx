@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export default function checkout() {
-  return (
+        return (
     <>
       <style jsx>
         {`
