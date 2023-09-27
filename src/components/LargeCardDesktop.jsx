@@ -10,6 +10,9 @@ export default function LargeCardDesktop({
   description = "Explore endless fields of vines and grapes, with twists and turns to your hearts content. Fun for the whole family. Enjoy a warm, sunny day, in the relaxing yards of vine. Hurry up! Space is limited! Our Vineyards are open to the public between April 23 and November 4th. Please note that weather circumstances may change, please dress accordingly and prepare for the weather. We are not responsible for lost belongings.",
   hoursOfOperation = [],
   rating,
+  isTicket = true,
+  ticketDate = "October 22nd, 2023",
+  ticketTime = "6pm to 8:30pm",
 }) {
   function renderStars() {
     const stars = [];
@@ -70,24 +73,33 @@ export default function LargeCardDesktop({
           <div className="description-wrap">
             <div className="description-text">{description}</div>
             <div className="border-line"></div>
-            <div className="description2-text">
-              <h1 className="hours-title">Hours of Operation:</h1>
-              <p className="hours-description">
-                Monday: 11am - 6pm
-                <br />
-                Tuesday: 11am - 6pm
-                <br />
-                Wednesday: 11am - 6pm
-                <br />
-                Thursday: 11am - 6pm
-                <br />
-                Friday: 11am - 9pm
-                <br />
-                Saturday: 9am - 9pm
-                <br />
-                Sunday: 9am - 9pm
-              </p>
-            </div>
+
+            {isTicket ? (
+              <div className="ticket-wrap">
+                <p className="ticket-text">Date: {ticketDate}</p>
+                <p className="ticket-text">Time: {ticketTime}</p>
+                <img src="https://i.stack.imgur.com/oSqy5.png" className="ticket-code-img"></img>
+              </div>
+            ) : (
+              <div className="description2-text">
+                <h1 className="hours-title">Hours of Operation:</h1>
+                <p className="hours-description">
+                  Monday: 11am - 6pm
+                  <br />
+                  Tuesday: 11am - 6pm
+                  <br />
+                  Wednesday: 11am - 6pm
+                  <br />
+                  Thursday: 11am - 6pm
+                  <br />
+                  Friday: 11am - 9pm
+                  <br />
+                  Saturday: 9am - 9pm
+                  <br />
+                  Sunday: 9am - 9pm
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -100,7 +112,7 @@ export default function LargeCardDesktop({
           max-width: 1200px;
           max-height: 408px;
           overflow: hidden;
-		      box-shadow: var(--shadow-box-massive-card);
+          box-shadow: var(--shadow-box-massive-card);
         }
 
         .image-container {
@@ -137,8 +149,8 @@ export default function LargeCardDesktop({
           background-color: ${categoryColors[category]};
           padding: 8px 12px;
           font-weight: 800;
-        font-family: var(--font-roboto);
-        font-size: var(--font-size-body-M);
+          font-family: var(--font-roboto);
+          font-size: var(--font-size-body-M);
         }
 
         .title {
@@ -185,7 +197,10 @@ export default function LargeCardDesktop({
         }
 
         .description2-text {
-          padding-left: 30px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 0px 15px;
         }
 
         .hours-title {
@@ -201,6 +216,20 @@ export default function LargeCardDesktop({
           font-weight: 400;
           line-height: 2;
           padding-left: 30px;
+        }
+
+        .ticket-wrap{
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 0px 15px;
+        }
+
+        .ticket-text{
+          font-family: var(--font-roboto);
+          font-size: var(--font-size-body-L);
+          line-height: 1.4;
         }
       `}</style>
     </>
