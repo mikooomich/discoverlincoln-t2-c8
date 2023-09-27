@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 /**
  * title: title of carousel
@@ -8,8 +8,8 @@ import React from 'react'
  * singleLineDisplay: display content on a single line. Default is false
  * 
  * THIS IS A ul, all children should be li
- * @param {*} param0 
- * @returns 
+ * @param {*} param0
+ * @returns
  */
 export default function CardCarousel({
         title,
@@ -20,14 +20,11 @@ export default function CardCarousel({
         singleLineDisplay = false,
         children,
 }) {
-
-
         // handle theme, variants from props
 
         if (!scrollable) {
                 scrollable = "hidden";
-        }
-        else {
+        } else {
                 scrollable = "scroll";
         }
 
@@ -37,7 +34,6 @@ export default function CardCarousel({
         else {
                 singleLineDisplay = "single-ul multi-ul"
         }
-
 
 
 
