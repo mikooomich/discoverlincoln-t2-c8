@@ -94,7 +94,7 @@ export default function login() {
                                 <h2 className='loginTitle'>LOG IN</h2>
                                 <TextInput className="loginInput" placeholder="Enter email address"></TextInput>
                                 <TextInput className="loginInput" placeholder="Enter password"></TextInput>
-                                <DefaultButton className="signBtn" children="Sign in"></DefaultButton>
+                                <DefaultButton className="signBtn">Sign in</DefaultButton>
                                 <p className='tooltip'>Don't have an account? Sign up below!</p>
                         </div>  
 
@@ -103,7 +103,7 @@ export default function login() {
                                 <TextInput className="loginInput" placeholder="Enter email address"></TextInput>
                                 <TextInput className="loginInput" placeholder="Enter password"></TextInput>
                                 <TextInput className="loginInput" placeholder="Confirm password"></TextInput>
-                                <DefaultButton className="signBtn" children="Sign up"></DefaultButton>
+                                <DefaultButton className="signBtn">Sign up</DefaultButton>
                         </div>  
                 </div>
 
