@@ -1,39 +1,48 @@
-import React from 'react'
-import TextInput from './TextInput'
-import Image from "next/image"
+import React from "react";
+import TextInput from "./TextInput";
+import Image from "next/image";
+import DefaultButton from "./DefaultButton";
 
 export default function Footer() {
-	//code
+  //code
 
-	//html
-	return (
-		<>
-			{/* html */}
-			<div className="footer">
-				<div className="footer-logos">
-					<Image src="footerIcons.svg" width={100} height={100} alt="Discover Lincon on Facebook, Instagram, Twitter"
-						style={"max-width: 10px;"}
-					/>
-				</div>
-				<div className="footer-links">
-					<a href="./homepage">Home</a>
-					<a href="./search">Search</a>
-					<a href="./events-attractions">Upcoming Events</a>
-					<a href="./events-attractions">Attractions</a>
-					<a href="./business-service">Businesses & Services</a>
-					<a href="./profile">Profile</a>
-				</div>
-				<div className="footer-subscription">
-					<h2 className="subscribe-text">Subscribe to Town of Lincoln</h2>
-					<div className="subscription-inputs">
-						<TextInput type="text" className="email-input" placeholder="Enter email"></TextInput>
-						<button type="button" className="button-style">Submit</button>
-					</div>
-				</div>
-			</div>
+  //html
+  return (
+    <>
+      {/* html */}
+      <div className="footer">
+        <div className="footer-logos">
+          <Image
+            src="footerIcons.svg"
+            width={100}
+            height={100}
+            alt="Discover Lincon on Facebook, Instagram, Twitter"
+            style={"max-width: 10px;"}
+          />
+        </div>
+        <div className="footer-links">
+          <a href="./homepage">Home</a>
+          <a href="./search">Search</a>
+          <a href="./events-attractions">Upcoming Events</a>
+          <a href="./events-attractions">Attractions</a>
+          <a href="./business-service">Businesses & Services</a>
+          <a href="./profile">Profile</a>
+        </div>
+        <div className="footer-subscription">
+          <h2 className="subscribe-text">Subscribe to Town of Lincoln</h2>
+          <div className="subscription-inputs">
+            <TextInput
+              type="text"
+              className="email-input"
+              placeholder="Enter email"
+            ></TextInput>
+            <DefaultButton padding="2px 15px" href="">{"SUBMIT"}</DefaultButton> 
+          </div>
+        </div>
+      </div>
 
-			{/* styles */}
-			<style jsx>{`
+      {/* styles */}
+      <style jsx>{`
         .footer {
           display: flex;
           flex-direction: row;
@@ -53,11 +62,11 @@ export default function Footer() {
           display: center;
         }
 
-	.footer-logos {
-		display: flex;
-		justify-content: center;
-		margin-left: 20px;
-	}
+        .footer-logos {
+          display: flex;
+          justify-content: center;
+          margin-left: 20px;
+        }
 
         .footer-wrap {
           display: flex;
@@ -75,6 +84,8 @@ export default function Footer() {
           color: white;
           padding: 10px;
           font-size: 15px;
+		  font-family: var(--font-roboto);
+		  font-size: var(--font-size-body-L);
         }
 
         .footer-links a:hover {
@@ -86,7 +97,7 @@ export default function Footer() {
         .footer-subscription {
           display: flex;
           flex-direction: column;
-	  align-self: center;
+          align-self: center;
         }
 
         .subscription-inputs {
@@ -94,22 +105,27 @@ export default function Footer() {
           flex-direction: row;
           padding: 5px;
           gap: 5px;
+		  height: 60px;
         }
 
-                    .subscribe-text{
-                        font-weight: bold;
-                    }
-                    .button-style{
-                        display: flex;
-                        width: 81px;
-                        height: 30px;
-                        padding: 3px 15px;
-                        gap: 10px;
-                        flex-shrink: 0;
-                        background: var(--TOPOGRAPHIC-GREEN, #00A62E);
-                        backdrop-filter: blur(2px);
-                        color: white;
-                    }
+        .subscribe-text {
+          font-weight: bold;
+		  font-family: var(--font-roboto);
+        }
+		.email-input{
+			height: 60px;
+		}
+        .button-style {
+          display: flex;
+          width: 81px;
+          height: 30px;
+          padding: 3px 15px;
+          gap: 10px;
+          flex-shrink: 0;
+          background: var(--TOPOGRAPHIC-GREEN, #00a62e);
+          backdrop-filter: blur(2px);
+          color: white;
+        }
 
         .subscribe-text {
           color: white;
@@ -117,6 +133,6 @@ export default function Footer() {
           font-size: 15px;
         }
       `}</style>
-		</>
-	);
+    </>
+  );
 }
