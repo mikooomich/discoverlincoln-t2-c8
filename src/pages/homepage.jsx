@@ -3,6 +3,10 @@ import React from 'react'
 
 import Image from 'next/image'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
+import DefaultButton from '@/components/DefaultButton'
+
 export default function homepage() {
   return (
     <>
@@ -32,7 +36,10 @@ export default function homepage() {
                             <div className="search-area">
                                 <button className="see-lincoln">SEE LINCOLN</button>
                                 <div className = "search-button-area">
-                                    <button className="search-button"></button>
+                                    {/* <button className="search-button"></button> */}
+                                    <DefaultButton>
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                                    </DefaultButton>
                                     <TextInput ype="text" className="search-input" placeholder="Search..."></TextInput>
                                 </div>
                             </div>
