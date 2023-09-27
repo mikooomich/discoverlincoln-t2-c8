@@ -8,6 +8,7 @@ import LargeCardMobile from '@/components/LargeCardMobile'
 
 import { faWindowRestore, faCircleInfo, faTruckMedical, faStore, faUtensils, faCarrot, faStrikethrough, faCrown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Section from '@/components/Section'
 
 export default function business() {
 	return (
@@ -40,19 +41,23 @@ export default function business() {
 
 			.banner * {
 				text-shadow: var(--shadow-box-massive-card);
-				font-family: var(--font-calps)
+				
 			}
 
 			h1 {
 				font-size: var(--font-size-header-XL);
 				font-weight: var(--font-weight-titles);
+				font-family: var(--font-calps);
 			}
 			h3 {
 				font-size: var(--font-size-header-S);
+				font-family: var(--font-roboto);
+				
 			}
 			.bannerTxt p {
 				font-size: var(--font-size-body-L);
 				margin-top: 20px;
+				font-family: var(--font-roboto);
 			}
 
 			.bannerTxt {
@@ -81,13 +86,6 @@ export default function business() {
 				align-self: end;
 			}
 
-			.cardPlaceholder {
-				width: 360px;
-				height: 360px;
-				background-color: grey;
-			}
-
-
 
 			{/* Buisness cards */}
 			.buisnessCardBox {
@@ -95,6 +93,16 @@ export default function business() {
 				justify-content: space-around;
 			}
 
+			.buisnessCardBoxMobile {
+				width:500px;
+				display: none;
+				flex-direction: column;
+			}
+
+			.waa {
+				display: flex;
+				justify-items: center;
+			}
 
 			{/* p {
 				font-size: 16px;
@@ -111,6 +119,15 @@ export default function business() {
 				position: relative;
 				top: -30px;
 				right: -120px;	
+			}
+
+
+			
+			.card2M, .card1M {
+				margin-bottom: 20px;
+			}
+			.card1M {
+				align-self: end;
 			}
 
 			{/* start This is all for the partners card */}
@@ -148,6 +165,67 @@ export default function business() {
 				bottom: 30px;
 			}
 			{/* end This is all for the partners card */}
+
+
+
+			{/* colapse cards in a bit */}
+			@media screen and (max-width: 1200px) {
+				.card2 {
+					right: -20px;	
+				}
+			}
+
+
+			{/* Show "in between mobile and desktop" card layout */}
+			@media screen and (max-width: 900px) {
+				.buisnessCardBox {
+					{/* display: none; */}
+					flex-wrap: wrap;
+				}
+				.card2 {
+					right: -40px;	
+				}	
+			}
+
+			
+
+			@media screen and (max-width: 720px) {
+				h1 {
+					font-size: var(--font-size-header-S);
+				}
+				h3 {
+					font-size: var(--font-size-body-L);
+					font-weight: normal;
+
+					margin-top: 15px;
+				}
+				.bannerTxt p {
+					font-size: var(--font-size-body-M);
+					margin-top: 20px;
+				}
+
+				.banner {
+					padding: 20px;
+				}
+			}
+
+			@media screen and (max-width: 500px) {
+				.selectionsContent {
+					margin-top: 20px;
+				}
+
+				.buisnessCardBox {
+					display: none;
+
+				}
+				.buisnessCardBoxMobile {
+					display: flex;
+
+				}
+				{/* show mobile cards now */}
+			}
+
+
 		`}
 			</style>
 
@@ -161,11 +239,9 @@ export default function business() {
 						<p>– Lincoln Destination Tourism Strategy and Action Plan 2020 – 2025</p>
 					</div>
 				</div>
-				<div id="buisnessPsudoBody">
+				{/* <div id="buisnessPsudoBody"> */}
+				<Section usePadding={true}>
 					<div className='selectionsContent'>
-						{/* <h3 className='selectionsTitle'>Our Fine Selections</h3> */}
-						{/* placeholder, steal the ones used on home page and modify it? */}
-
 						<CardCarousel title="Our Fine Selections" alignTitle='end' singleLineDisplay={true}>
 							<li>
 								<LargeCardMobile></LargeCardMobile>
@@ -194,21 +270,19 @@ export default function business() {
 
 					<div className='buisnessCardBox'>
 						<div>
-							<span className='card1'>
+							<div className='card1'>
 								<BusinessCard theme='white' title="Need Information?" isAltOrientation="true" icons={faCircleInfo}>
 									<p>Have a question about your ventures? Visit
 										an information center or
 										<DefaultButton isLink="true"> Click here </DefaultButton>
 										to view a map of our in person information centers.</p>
 								</BusinessCard>
-							</span>
+							</div>
 
 
 							<span className='card2'>
 								<BusinessCard theme='black' title="Our Partners" isAltOrientation={true} icons={null}>
 									<div className='partnersCard'>
-
-
 										<p>
 											Megasoft
 											<br />
@@ -251,7 +325,7 @@ export default function business() {
 						</div>
 
 						<div>
-							<span className='card1'>
+							<div className='card1'>
 								<BusinessCard theme='black' title="Emergency Services" icons={faTruckMedical}>
 									<p>
 										Emergency
@@ -275,9 +349,9 @@ export default function business() {
 
 									</p>
 								</BusinessCard>
-							</span>
+							</div>
 
-							<span className='card2'>
+							<div className='card2'>
 								<BusinessCard theme='white' title="Other Useful Contacts" icons={faStore}>
 									<p>
 										City Hall
@@ -302,14 +376,131 @@ export default function business() {
 										555-555-555
 									</p>
 								</BusinessCard>
-							</span>
+							</div>
+						</div>
+					</div>
+
+					</Section>
+					<Section usePadding={false}>
+						<div className='waa'>
+						<div className='buisnessCardBoxMobile'>
+
+						<div className='card1M'>
+							<BusinessCard theme='white' title="Need Information?" isAltOrientation="true" icons={faCircleInfo}>
+								<p>Have a question about your ventures? Visit
+									an information center or
+									<DefaultButton isLink="true"> Click here </DefaultButton>
+									to view a map of our in person information centers.</p>
+							</BusinessCard>
 						</div>
 
 
+						<span className='card2M'>
+							<BusinessCard theme='black' title="Our Partners" isAltOrientation={true} icons={null}>
+								<div className='partnersCard'>
+									<p>
+										Megasoft
+										<br />
+										Months Inn
+										<br />
+										Burger Queen
+										<br />
+										Rotten Potatoes
+										<br />
+										SUNGSAM
+									</p>
 
+									<div className='iconsBox'>
+										<div id='icon1' className='icon'>
+											<FontAwesomeIcon icon={faUtensils} />
+										</div>
+										<div id='icon2' className='icon'>
+											<FontAwesomeIcon icon={faWindowRestore} />
+										</div>
+
+										<div id='icon3' className='icon'>
+											<FontAwesomeIcon icon={faCarrot} />
+										</div>
+
+										<div id='icon4' className='icon'>
+											<FontAwesomeIcon icon={faStrikethrough} />
+										</div>
+
+										<div id='icon5' className='icon'>
+											<FontAwesomeIcon icon={faCrown} />
+										</div>
+									</div>
+								</div>
+
+
+
+							</BusinessCard>
+						</span>
+
+
+						<div className='card1M'>
+							<BusinessCard theme='white' title="Emergency Services" icons={faTruckMedical}>
+								<p>
+									Emergency
+									<br />
+									Police
+									<br />
+									Fire
+									<br />
+									Roadside
+									<br />
+									Assistance
+								</p>
+								<p className='cardBodyTxt'>
+									911
+									<br />
+									555-555-555
+									<br />
+									555-555-555
+									<br />
+									555-555-555
+
+								</p>
+							</BusinessCard>
+						</div>
+
+						<div className='card2M'>
+							<BusinessCard theme='black' title="Other Useful Contacts" icons={faStore}>
+								<p>
+									City Hall
+									<br />
+									Ontario Parks
+									<br />
+									Vineland
+									<br />
+									Support Line
+									<br />
+									Weather Info
+								</p>
+								<p className='cardBodyTxt'>
+									555-555-555
+									<br />
+									555-555-555
+									<br />
+									555-555-555
+									<br />
+									555-555-555
+									<br />
+									555-555-555
+								</p>
+							</BusinessCard>
+						</div>
 
 					</div>
-				</div>
+
+					</div>
+
+
+
+
+
+					{/* </div> */}
+				</Section>
 				<Footer></Footer>
 			</div >
 		</>

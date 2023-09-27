@@ -15,6 +15,7 @@ export default function CardCarousel({
         title,
         scrollable = true,
         alignTitle,
+        // titleSize = "var(--font-size-header-S)",
         titleWeight,
         margin = "0px",
         singleLineDisplay = false,
@@ -81,10 +82,7 @@ export default function CardCarousel({
 			}
 
 
-                        h3 {
-				font-size: var(--font-size-header-S);
-                                font-family: var(--font-calps)
-			}
+                    
 
                         {/* For mobile vertical scrolling*/}
                         @media screen and (max-width:500px) and ${singleLineDisplay} {
@@ -95,6 +93,15 @@ export default function CardCarousel({
                                         max-height: 800px;
                                 }
                         }
+
+
+                        
+			@media screen and (max-width: 720px) {
+				.carouselTitle {
+					font-size: var(--font-size-header-XS);
+                                        align-self: center;
+				}
+			}
                                 
 			`}</style>
                 </>

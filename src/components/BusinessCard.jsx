@@ -67,7 +67,7 @@ export default function BuisnessCard({
                                 background-color: ${theme};
                                 color: ${fontColor};
 
-                                width: 420px;
+                                width: 400px;
                                 min-height: 210px;
 
 				border-radius: 5px;
