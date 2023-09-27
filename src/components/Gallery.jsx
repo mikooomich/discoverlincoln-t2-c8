@@ -1,20 +1,11 @@
 import React from 'react'
 
-export default function Gallery() {
+export default function Gallery({children}) {
+
 	return (
 		<>
 			<div className="container">
-				<div style={{ width: "300px", height: "800px", background: "red" }}>
-
-				</div>
-
-				<div style={{ width: "300px", height: "300px", background: "red" }}>
-
-				</div>
-
-				<div style={{ width: "300px", height: "300px", background: "red" }}>
-
-				</div>
+				{children}
 			</div>
 
 			<style jsx>{`
@@ -22,8 +13,8 @@ export default function Gallery() {
 					display: flex;
 					flex-direction: row;
 					flex-wrap: wrap;
+					gap: 32px;
 					width: 100%;
-					gap: 128px;
 				}
 			`}</style>
 		</>

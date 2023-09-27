@@ -8,6 +8,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import DefaultButton from '@/components/DefaultButton'
 import Gallery from '@/components/Gallery'
 import Section from '@/components/Section'
+import GalleryImage from '@/components/GalleryImage'
 
 export default function homepage() {
     return (
@@ -105,30 +106,39 @@ export default function homepage() {
                         </div>
                     </div>
                 </div>
-                <div className="events-attractions-businesses">
-                    <div className="events-wrap">
-                        <h1 className="events-title">Events</h1>
-                        <div className="events-cards">
-
-                        </div>
-                    </div>
-                    <div className="attractions-wrap">
-                        <h1 className="attractions-title">Attractions</h1>
-                        <div className="attractions-cards">
-
-                        </div>
-                    </div>
-                    <div className="businesses-wrap">
-                        <h1 className="businesses-title">Businesses</h1>
-                        <div className="business-cards">
-
-                        </div>
-                    </div>
-                </div>
 
                 <Section>
-                    <Gallery>
+                    <div className="events-attractions-businesses">
+                        <div className="events-wrap">
+                            <h1 className="events-title">Events</h1>
+                            <div className="events-cards">
 
+                            </div>
+                        </div>
+                        <div className="attractions-wrap">
+                            <h1 className="attractions-title">Attractions</h1>
+                            <div className="attractions-cards">
+
+                            </div>
+                        </div>
+                        <div className="businesses-wrap">
+                            <h1 className="businesses-title">Businesses</h1>
+                            <div className="business-cards">
+
+                            </div>
+                        </div>
+                    </div>
+                </Section>
+
+                <Section>
+                    <h1 className="events-title">Gallery</h1>
+
+                    <Gallery>
+                        <GalleryImage src="/pascal-bullan-8JdbMz_p_yg-unsplash 1(4).png" />
+                        <GalleryImage src="/pascal-bullan-8JdbMz_p_yg-unsplash 1(3).png" />
+                        <GalleryImage src="/pascal-bullan-8JdbMz_p_yg-unsplash 1(2).png" />
+                        <GalleryImage src="/pascal-bullan-8JdbMz_p_yg-unsplash 1(1).png" />
+                        <GalleryImage src="/pascal-bullan-8JdbMz_p_yg-unsplash 1.png" />
                     </Gallery>
                 </Section>
 
@@ -372,18 +382,18 @@ export default function homepage() {
                 .events-wrap{
                     display: flex;
                     flex-direction: column;
-                    padding: 100px 100px 50px 100px;
+                    padding: 100px 0 50px 0;
                 }
 
                 .attractions-wrap{
                     display: flex;
                     flex-direction: column;
-                    padding: 100px 100px 50px 100px;
+                    padding: 100px 0 50px 0;
                 }
                 .businesses-wrap{
                     display: flex;
                     flex-direction: column;
-                    padding: 100px 100px 50px 100px;
+                    padding: 100px 0 50px 0;
                 }
 
                 .events-title{
