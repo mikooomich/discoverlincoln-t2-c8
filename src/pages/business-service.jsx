@@ -24,9 +24,12 @@ export default function business() {
 
 			{/* Titles */}
 			.banner {
-				background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Golden_Delicious_apples.jpg/500px-Golden_Delicious_apples.jpg");
+				background-image: url("/local.svg");
 				background-color: #DFDFDF;
-				background-size: contain;
+				background-size: 110% auto;
+				background-repeat: no-repeat;
+				background-position: center;
+				
 				{/* filter: blur(10px); */}
 
 				width: 100%;
