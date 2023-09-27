@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import DefaultButton from '@/components/DefaultButton'
 import Gallery from '@/components/Gallery'
+import Section from '@/components/Section'
 
 export default function homepage() {
     return (
@@ -125,9 +126,12 @@ export default function homepage() {
                     </div>
                 </div>
 
-                <Gallery>
+                <Section>
+                    <Gallery>
 
-                </Gallery>
+                    </Gallery>
+                </Section>
+
 
             </div>
             <style jsx>{`
