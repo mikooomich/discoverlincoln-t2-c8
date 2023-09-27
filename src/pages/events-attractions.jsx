@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import LargeCardDesktop from "@/components/LargeCardDesktop";
 import LargeCardList from "@/components/LargeCardList";
+import MapCard from "@/components/MapCard";
 
 export default function EventsAndAttractions() {
   return (
@@ -20,13 +21,11 @@ export default function EventsAndAttractions() {
             background-color: rgb(170, 170, 170);
           }
 
-          .map {
+          .mapPlaceholder {
+            outline: #000000 solid 1px;
+            background-color: rgba(244,112,180,0.11);
             min-height: 400px;
-            width: 100%;
-            margin-bottom: 50px;
-
-            background-color: #a83434;
-            box-shadow: var(--shadow-box-massive-card);
+            width:100%;
           }
 
           .psudoBody {
@@ -221,7 +220,12 @@ export default function EventsAndAttractions() {
             <p>There is always something around the corner</p>
           </div>
 
-          <div className="map"></div>
+          
+          <MapCard>
+            <div className="mapPlaceholder">
+              Map goes here
+            </div>
+          </MapCard>
 
           <div className="offerings">
             <h1 className="offerings-text">All Offerings</h1>
