@@ -174,7 +174,7 @@ export default function checkout() {
                 <div className='orderSumamry'>
                         <div className='actionBar'>
                                 <h1>Confirm Your Order</h1>
-                                <DefaultButton children="< Back"></DefaultButton>
+                                <DefaultButton>{"< Back"}</DefaultButton>
                         </div>
 
                         <div className='card'>
@@ -229,7 +229,7 @@ export default function checkout() {
                                         <li>
                                                 <span className='actionBar'>
                                                         <TextInput className="checkoutInput" type='text' placeholder='Discount Code'></TextInput>
-                                                        <DefaultButton children="Apply"></DefaultButton>
+                                                        <DefaultButton>Apply</DefaultButton>
                                                 </span>
                                         </li>
                                         <li className='costBox'>
@@ -258,7 +258,7 @@ export default function checkout() {
                         <h3>Terms of Use</h3>
                         <p>By continuing, you agree to... blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day.  blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day.  blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day. blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day.  blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day.  blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day. blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day.  blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day.  blah blah legal stuff blah blah more fine print blah bluh you can’t sue us blah blah have a nice day. </p>
                         <span id="checkoutButton">
-                        <DefaultButton children="Proceed to Checkout"></DefaultButton>
+                        <DefaultButton>Proceed to Checkout</DefaultButton>
                         </span>
                 </div>
 
