@@ -4,6 +4,7 @@ import BusinessCard from '@/components/BusinessCard'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import CardCarousel from '@/components/CardCarousel'
+import LargeCardMobile from '@/components/LargeCardMobile'
 
 
 export default function business() {
@@ -121,18 +122,18 @@ export default function business() {
 						{/* <h3 className='selectionsTitle'>Our Fine Selections</h3> */}
 						{/* placeholder, steal the ones used on home page and modify it? */}
 
-						<CardCarousel title="Our Fine Selections" alignTitle='end'>
-						<li>
-								<div className='cardPlaceholder'></div>
+						<CardCarousel title="Our Fine Selections" alignTitle='end' singleLineDisplay={true}>
+							<li>
+								<LargeCardMobile></LargeCardMobile>
 							</li>
 							<li>
-								<div className='cardPlaceholder'></div>
+								<LargeCardMobile></LargeCardMobile>
 							</li>
 							<li>
-								<div className='cardPlaceholder'></div>
+								<LargeCardMobile></LargeCardMobile>
 							</li>
 							<li>
-								<div className='cardPlaceholder'></div>
+								<LargeCardMobile></LargeCardMobile>
 							</li>
 						</CardCarousel>
 
@@ -199,7 +200,7 @@ export default function business() {
 										555-555-555
 										<br />
 										555-555-555
-										
+
 									</p>
 								</BusinessCard>
 							</span>
@@ -218,7 +219,7 @@ export default function business() {
 										Weather Info
 									</p>
 									<p className='cardBodyTxt'>
-									555-555-555
+										555-555-555
 										<br />
 										555-555-555
 										<br />

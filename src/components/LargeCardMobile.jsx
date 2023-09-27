@@ -3,7 +3,7 @@ import { faStar as faStarfilled } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarOutline } from "@fortawesome/free-regular-svg-icons";
 
-export default function TestComponent({
+export default function LargeCardMobile({
   title = "Title",
   address = "101 Address Street, Lincoln, ON",
   category = "restaurant",
