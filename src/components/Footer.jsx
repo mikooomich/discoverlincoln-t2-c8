@@ -38,15 +38,19 @@ export default function Footer() {
       <style jsx>{`
         .footer {
           display: flex;
+          flex-wrap: wrap;
           flex-direction: row;
           justify-items: stretch;
+          gap: 12px;
           width: 100%;
-          height: 150px;
+          min-height: 150px;
           background-color: #005731;
           overflow: hidden;
           justify-content: space-between;
-          padding-left: 20px;
+          padding-left: 40px;
           padding-right: 20px;
+          padding-top: 20px;
+          padding-bottom: 20px;
         }
 
         .logo {
@@ -57,7 +61,7 @@ export default function Footer() {
         .footer-logos {
           display: flex;
           justify-content: center;
-          margin-left: 20px;
+          margin: auto;
 		  flex-shrink: 0;
 		  max-width: 100%;
         }
@@ -75,20 +79,19 @@ export default function Footer() {
           display: inline-flex;
           flex-direction: row;
           align-items: center;
+          justify-content: center;
           flex-wrap: wrap;
-		  margin-left: 180px;
-		  
+          flex-basis: 0%;
+          flex-grow: 1;
         }
 
         .footer-links a {
-          float: left;
           color: white;
           padding: 10px;
           font-size: 15px;
-		  line-height: 5px;
 		  font-family: var(--font-roboto);
 		  font-size: var(--font-size-body-Mplus);
-		  
+          text-align: center;
         }
 
         .footer-links a:hover {
@@ -116,13 +119,8 @@ export default function Footer() {
 		}
 
 		@media only screen and (max-width: 725px){
-			.footer-links a{
-				font-size: var(--font-size-body-M);
-			}
-			.footer{
-				padding-left: 5px;
-				padding-right: 5px;
-			}
+
+
 		}
  
         .subscription-inputs {
