@@ -13,13 +13,13 @@ import Section from '@/components/Section'
 import MobileHamburgerMenu from '@/components/MobileHamburgerMenu'
 import SmallCard from '@/components/SmallCard'
 import ExampleState from '@/components/ExampleState'
+import StrapiExample from '@/components/StrapiExample'
 
 export default function test() {
   return (
     <>
       <Navbar></Navbar>
-      <MobileHamburgerMenu></MobileHamburgerMenu>
-      <SmallCard >
+      <SmallCard>
 
        
 						<Image src="Icon-glass.svg" width={20} height={20} alt="uwu" />
@@ -62,6 +62,8 @@ export default function test() {
       <LargeCardMobile></LargeCardMobile>
 
       <ExampleState />
+
+      <StrapiExample></StrapiExample>
     </>
   )
 }

@@ -26,13 +26,19 @@ export default function BuisnessCard({
 		fontColor = "#FFFFFF";
 	}
 
-	if (isMobile == "true") {
+	if (isMobile == true) {
 		className = "businessCard mobileBusinessCard";
+		console.log("using mobile card format")
 	}
 
 	if (isAltOrientation) {
 		isAltOrientation += " orientationAlt";
 		titleClass = "cardTitleAlt";
+	}
+
+	// ugly hax
+	if (title == "Our Partners") {
+		className += " spacingFix";
 	}
 
 
@@ -60,14 +66,15 @@ export default function BuisnessCard({
                                 position: relative;
 
 				margin: 20px 20px 0px 0px;
-                                font-size: 40px;
+                                font-size: 30px;
                         }
 
                         .businessCard {
                                 background-color: ${theme};
                                 color: ${fontColor};
 
-                                width: 420px;
+                                max-width: 400px;
+				min-width: 200px;
                                 min-height: 210px;
 
 				border-radius: 5px;
@@ -76,16 +83,12 @@ export default function BuisnessCard({
                                 display: flex;
                                 align-items: center;
                                 justify-content: start;
-                                padding: 0px 0px 40px 40px; 
-                                
+                                padding: 0px 0px 40px 30px; 
+			        
                                 font-size: var(--font-size-body-S);
                                 font-family: var(--font-roboto);
                         }
 
-			.mobileBusinessCard {
-				background-color: #E25C09;
-				{/* do this later */}
-			}
 
 			{/* so uh this will make title and body stack vertically instead of side by side.
 			This is designed to override the .businessCard and h3 classes respectibly */}
@@ -93,8 +96,11 @@ export default function BuisnessCard({
 				{/* I now love flex box */}
 				flex-direction: column;
 			}
+
 			.cardTitleAlt {
-				min-width: 260px;
+				{/* min-width: 210px; */}
+				align-self: start;
+				justify-self: start;
 			}
                         
 
@@ -117,6 +123,30 @@ export default function BuisnessCard({
                                 margin-top: 40px;
 				width: 100%;
                         }
+
+			.spacingFix {
+				padding: 0px 0px 0px 40px; 
+				height: 100px;
+			}
+
+
+			{/* Ultra-mobile view */}
+			@media screen and (max-width: 420px) {
+				.icon {
+					margin: 20px 20px 0px 0px;
+					font-size: 30px;
+                       		}
+
+				h3 {
+					font-size: var(--font-size-body-XL);
+					margin-right: 0px;
+				}
+				
+				.businessCard {
+					padding: 0px 0px 0px 20px;
+					width: 100vw;
+				}
+			}
                 
 			`}</style>
 		</>

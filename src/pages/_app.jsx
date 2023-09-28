@@ -78,6 +78,7 @@ export default function App({
 					--font-size-body-M: 14px;
 					--font-size-body-Mplus: 16px;
 					--font-size-body-L: 20px;
+					--font-size-body-XL: 24px;
 
 					--font-weight-titles: "bold";
 

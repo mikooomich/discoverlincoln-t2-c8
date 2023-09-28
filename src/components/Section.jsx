@@ -40,6 +40,16 @@ export default function Section({ fullWidth = false, usePadding = true, marginTo
 					width: 100%;
 					max-width: ${fullWidth ? '100%' : 'var(--section-max-width)'};
 				}
+
+
+
+				{/* colapse cards in a bit */}
+				@media screen and (max-width: 1200px) {
+					.outer-container {
+						padding: 0px;
+					}
+				}
+
 			`}</style>
 		</>
 	)

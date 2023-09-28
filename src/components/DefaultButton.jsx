@@ -99,7 +99,7 @@ export default function DefaultButton({
 			}
 
 			.mobileNav:hover {
-				background-color: #004527;
+				filter: brightness(70%);
 				{/* font-size: 28px; */}
 			}
 
