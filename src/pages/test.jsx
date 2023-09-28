@@ -18,8 +18,7 @@ export default function test() {
   return (
     <>
       <Navbar></Navbar>
-      <MobileHamburgerMenu></MobileHamburgerMenu>
-      <SmallCard >
+      <SmallCard>
 
        
 						<Image src="Icon-glass.svg" width={20} height={20} alt="uwu" />
