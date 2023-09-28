@@ -3,12 +3,15 @@ import DefaultButton from "@/components/DefaultButton";
 import TextInput from "@/components/TextInput";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Section from "@/components/Section";
+import LargeCardDesktop from "@/components/LargeCardDesktop";
+import LargeCardMobile from "@/components/LargeCardMobile";
 
 export default function checkout() {
-        return (
-    <>
-      <style jsx>
-        {`
+	return (
+		<>
+			<style jsx>
+				{`
 
                 h1 {
                         font-weight: var(--font-weight-title);
@@ -21,11 +24,7 @@ export default function checkout() {
                         font-family: var(--font-calps);
                 }
 
-
-                #checkoutPsudoBody {
-                        margin: 40px auto;
-                        max-width: 1200px;
-                }
+             
 {/* confirm order and summary card section*/}
                 .actionBar {
                         display: flex;
@@ -93,8 +92,7 @@ export default function checkout() {
                         font-weight: var(--font-weight-title);
                         font-size: var(--font-size-header-S);
                         font-family: var(--font-calps);
-                        margin-top: 0px;
-                        margin-bottom: 0px;
+          
                 }
 
 
@@ -107,182 +105,195 @@ export default function checkout() {
 
                 #checkoutButton {
                         {/* THIS IS THE SPAN, NOT A BUTTON */}
-		        align-self: end;
-		}
+		        	align-self: end;
+					margin: 20px 0px;
+				}
 
 
-                @media screen and (max-width:1300px) {
-                        #checkoutPsudoBody {
-                                padding: 0px 50px;
-                        }
-                }
+	
 
-                @media screen and (max-width:550px) {
-                        /* Mobile view. */
-                        #checkoutPsudoBody {
-                                padding: 0px 20px;
-                        }
-                }
+				.costEntry p {
+                        font-weight: normal;
+                        font-size: var(--font-size-body-L);
+                
+				}
 
-             /* Placeholder cards */
+
+             /* Card containers */
         .card {
-                max-width: 1200px;
-                min-width: 800px;
-                min-height: 400px;
-                margin-bottom: 20px;
-
-                background-color: aqua;
+                margin-bottom: 40px;
                 box-shadow: var(--shadow-box-massive-card);
         }
 
-        .info {
-                width: 700px;
-                min-height: 400px;
-                float: right;
 
-                background-color: rgb(241, 184, 70);
-        }
-
-        .Mobilecard {
-                width: 350px;
-                height: 100px;
-                margin-bottom: 20px;
-
-                background-color: aqua;
+        .mobileCard {
+				display: none;
+                margin-bottom: 40px;
                 box-shadow: var(--shadow-box);
         }
 
-        .Mobileinfo {
-                width: 250px;
-                height: 100px;
-                float: right;
 
-                background-color: rgb(241, 184, 70);
-        }
-        /* EndPlaceholder cards */
+
+
+
+			{/* mobile view */}
+			@media screen and (max-width:500px) {
+				h1 {
+					font-weight: var(--font-weight-title);
+					font-size: var(--font-size-header-XS);
+					font-family: var(--font-calps);
+				}
+				h3 {
+					font-weight: normal;
+					font-size: var(--font-size-body-XL);
+							
+                }
+				.infoContainer ul {
+					max-width: 90vw;
+					min-width: 90vw;
+					width: 90vw;
+				}
+
+				.mobileCard {
+					display: flex;
+				}
+
+				.card {
+					display: none;
+				}
+			}
         
         
         `}
-      </style>
+			</style>
 
-      <Navbar></Navbar>
-      <div id="checkoutPsudoBody">
-        <div className="orderSumamry">
-          <div className="actionBar">
-            <h1>Confirm Your Order</h1>
-            <DefaultButton children="< Back"></DefaultButton>
-          </div>
+			<Navbar></Navbar>
+			<Section marginBottom="40px" marginTop="40px">
 
-          <div className="card">
-            <div className="info"></div>
-          </div>
-        </div>
+				<div className="orderSummary">
+					<div className="actionBar">
+						<h1>Confirm Your Order</h1>
+						<DefaultButton children="< Back"></DefaultButton>
+					</div>
 
-        <div className="eventForm">
-          <h1>EventForm</h1>
+					<div className="card">
+						<LargeCardDesktop></LargeCardDesktop>
+					</div>
 
-          <div className="infoContainer">
-            <ul>
-              <li>
-                <h3>Name:</h3>
-                <TextInput
-                  className="checkoutInput"
-                  type="text"
-                  placeholder="Enter answer"
-                ></TextInput>
-              </li>
-              <li>
-                <h3>Vehicles:</h3>1<input type="radio"></input>2
-                <input type="radio"></input>
-                3+<input type="radio"></input>
-              </li>
-            </ul>
+					<div className="mobileCard">
+						<LargeCardMobile></LargeCardMobile>
+					</div>
+				</div>
+			</Section>
 
-            <ul>
-              <li>
-                <h3>Atendees:</h3>
-                <input type="range"></input>
-              </li>
-              <li>
-                <h3>Occupation:</h3>
-                <input type="file"></input>
-              </li>
-            </ul>
-          </div>
+			<Section marginBottom="40px" marginTop="40px">
+				<div className="eventForm">
+					<h1>Event Form</h1>
 
-          <div className="infoContainer">
-            <ul>
-              <li className="verticalList">
-                <h3>Notifications & Offers:</h3>
+					<div className="infoContainer">
+						<ul>
+							<li>
+								<h3>Name:</h3>
+								<TextInput
+									className="checkoutInput"
+									type="text"
+									placeholder="Enter answer"
+								></TextInput>
+							</li>
+							<li>
+								<h3>Vehicles:</h3>1<input type="radio"></input>2
+								<input type="radio"></input>
+								3+<input type="radio"></input>
+							</li>
+						</ul>
 
-                <span>
-                  <input type="checkbox"></input> I want to recieve email
-                  notifications
-                </span>
-                <span>
-                  <input type="checkbox"></input> Subscribe to email offers
-                </span>
-                <span>
-                  <input type="checkbox"></input> I agree to the terms of use
-                </span>
-              </li>
-            </ul>
+						<ul>
+							<li>
+								<h3>Atendees:</h3>
+								<input type="range"></input>
+							</li>
+							<li>
+								<h3>Occupation:</h3>
+								<input type="file"></input>
+							</li>
+						</ul>
+					</div>
 
-            <ul>
-              <li>
-                <span className="actionBar">
-                  <TextInput
-                    className="checkoutInput"
-                    type="text"
-                    placeholder="Discount Code"
-                  ></TextInput>
-                  <DefaultButton children="Apply"></DefaultButton>
-                </span>
-              </li>
-              <li className="costBox">
-                <span className="costEntry">
-                  <p>Subtotal</p>
-                  <p>${/*insert react magic*/}49.99</p>
-                </span>
-                <span className="costEntry">
-                  <p>Taxes</p>
-                  <p>${/*insert react magic*/}6.50</p>
-                </span>
-                <span className="costEntry">
-                  <p>Total</p>
-                  <p>${/*insert react magic*/}56.49</p>
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div>
+					<div className="infoContainer">
+						<ul>
+							<li className="verticalList">
+								<h3>Notifications & Offers:</h3>
 
-        {/* TOS part */}
-        <div className="tos">
-          <h3>Terms of Use</h3>
-          <p>
-            By continuing, you agree to... blah blah legal stuff blah blah more
-            fine print blah bluh you can’t sue us blah blah have a nice day.
-            blah blah legal stuff blah blah more fine print blah bluh you can’t
-            sue us blah blah have a nice day. blah blah legal stuff blah blah
-            more fine print blah bluh you can’t sue us blah blah have a nice
-            day. blah blah legal stuff blah blah more fine print blah bluh you
-            can’t sue us blah blah have a nice day. blah blah legal stuff blah
-            blah more fine print blah bluh you can’t sue us blah blah have a
-            nice day. blah blah legal stuff blah blah more fine print blah bluh
-            you can’t sue us blah blah have a nice day. blah blah legal stuff
-            blah blah more fine print blah bluh you can’t sue us blah blah have
-            a nice day. blah blah legal stuff blah blah more fine print blah
-            bluh you can’t sue us blah blah have a nice day. blah blah legal
-            stuff blah blah more fine print blah bluh you can’t sue us blah blah
-            have a nice day.{" "}
-          </p>
-          <span id="checkoutButton">
-            <DefaultButton children="Proceed to Checkout"></DefaultButton>
-          </span>
-        </div>
-      </div>
-      <Footer></Footer>
-    </>
-  );
+								<span>
+									<input type="checkbox"></input> I want to recieve email
+									notifications
+								</span>
+								<span>
+									<input type="checkbox"></input> Subscribe to email offers
+								</span>
+								<span>
+									<input type="checkbox"></input> I agree to the terms of use
+								</span>
+							</li>
+						</ul>
+
+						<ul>
+							<li>
+								<span className="actionBar">
+									<TextInput
+										className="checkoutInput"
+										type="text"
+										placeholder="Discount Code"
+									></TextInput>
+									<DefaultButton children="Apply"></DefaultButton>
+								</span>
+							</li>
+							<li className="costBox">
+								<span className="costEntry">
+									<p>Subtotal</p>
+									<p>${/*insert react magic*/}49.99</p>
+								</span>
+								<span className="costEntry">
+									<p>Taxes</p>
+									<p>${/*insert react magic*/}6.50</p>
+								</span>
+								<span className="costEntry">
+									<p>Total</p>
+									<p>${/*insert react magic*/}56.49</p>
+								</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				{/* TOS part */}
+				<div className="tos">
+					<h3>Terms of Use</h3>
+					<p>
+						By continuing, you agree to... blah blah legal stuff blah blah more
+						fine print blah bluh you can’t sue us blah blah have a nice day.
+						blah blah legal stuff blah blah more fine print blah bluh you can’t
+						sue us blah blah have a nice day. blah blah legal stuff blah blah
+						more fine print blah bluh you can’t sue us blah blah have a nice
+						day. blah blah legal stuff blah blah more fine print blah bluh you
+						can’t sue us blah blah have a nice day. blah blah legal stuff blah
+						blah more fine print blah bluh you can’t sue us blah blah have a
+						nice day. blah blah legal stuff blah blah more fine print blah bluh
+						you can’t sue us blah blah have a nice day. blah blah legal stuff
+						blah blah more fine print blah bluh you can’t sue us blah blah have
+						a nice day. blah blah legal stuff blah blah more fine print blah
+						bluh you can’t sue us blah blah have a nice day. blah blah legal
+						stuff blah blah more fine print blah bluh you can’t sue us blah blah
+						have a nice day.{" "}
+					</p>
+					<span id="checkoutButton">
+						<DefaultButton children="Proceed to Checkout"></DefaultButton>
+					</span>
+				</div>
+
+
+			</Section>
+			<Footer></Footer>
+		</>
+	);
 }
