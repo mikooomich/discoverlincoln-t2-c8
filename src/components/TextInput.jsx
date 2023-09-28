@@ -34,7 +34,8 @@ export default function TextInput({
                                 box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.194);
                                 border: var(--border-grey-thin);
 
-                                min-width: 400px;
+                                {/* min-width: 400px; */}
+                                width:100%;
                                 line-height: 25px;
                                 padding: var(--padding-btn-default);
                                 font-family: var(--font-calps);

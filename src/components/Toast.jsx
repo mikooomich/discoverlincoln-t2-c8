@@ -44,7 +44,7 @@ export default function Toast({bgColor = "err", accentColor, fontSize, clasName:
                         .toast {
                                 background-color: ${bgColor};
                                 width: 400px;
-                                min-height: 100px;
+                                min-height: 70px;
                                 margin: 5px 0px;
 
 
@@ -88,16 +88,16 @@ export default function Toast({bgColor = "err", accentColor, fontSize, clasName:
                         }
 
                         .icon {
-                                width: 40px;
-                                height: 40px;
+                                {/* width: 40px;
+                                height: 40px; */}
                                 display: flex;
                                 justify-content: center;
 
                                 {/* background-color: black; */}
-                                font-size: 40px;
+                                font-size: 30px;
 
                                 align-self: center;
-                                margin-top: 30px; {/* ???????? why is my align self not working????? */}
+                                margin-top: 20px; {/* ???????? why is my align self not working????? */}
                         }
 
                        
