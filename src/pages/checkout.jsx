@@ -14,59 +14,59 @@ export default function checkout() {
 				{`
 
                 h1 {
-                        font-weight: var(--font-weight-title);
-                        font-size: var(--font-size-header-S);
-                        font-family: var(--font-calps);
+					font-weight: var(--font-weight-title);
+					font-size: var(--font-size-header-S);
+					font-family: var(--font-calps);
                 }
                 h3 {
-                        font-weight: var(--font-weight-title);
-                        font-size: var(--font-size-header-XS);
-                        font-family: var(--font-calps);
+					font-weight: var(--font-weight-title);
+					font-size: var(--font-size-header-XS);
+					font-family: var(--font-calps);
                 }
 
              
-{/* confirm order and summary card section*/}
+				{/* confirm order and summary card section*/}
                 .actionBar {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        margin: 30px 0px;
-                        width: 100%;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					margin: 30px 0px;
+					width: 100%;
                 }
 
-{/* Event form */}
+				{/* Event form */}
                 .infoContainer {
-                        display: flex;
-                        flex-wrap: wrap;
-                        justify-content: center;
-                        align-items: center;
+					display: flex;
+					flex-wrap: wrap;
+					justify-content: center;
+					align-items: center;
                 }
             
                 .infoContainer ul {
-                        max-width: 50%;
-                        min-width:450px;
-                        {/* border: 1px solid black; */}
+					max-width: 50%;
+					min-width:450px;
+					{/* border: 1px solid black; */}
 
-                        margin-bottom: 40px;
+					margin-bottom: 40px;
                 }
 
                 li {
-                        display: flex;
-                        align-items: center;
+					display: flex;
+					align-items: center;
                 }
                 
                 li * {
-                        margin: 5px 10px;
+					margin: 5px 10px;
                 }
 
 
                 .verticalList {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: start;
+					display: flex;
+					flex-direction: column;
+					align-items: start;
 
-                        font-size: var(--font-size-body-Mplus);
-                        font-family: var(--font-roboto);
+					font-size: var(--font-size-body-Mplus);
+					font-family: var(--font-roboto);
                 }
 
 
@@ -75,95 +75,89 @@ export default function checkout() {
 
 
                 .costBox  {
-                        width: 100%
-                        display: flex;
-                        flex-direction: column;
-                      
-                        align-items: start;
+					width: 100%
+					display: flex;
+					flex-direction: column;
+					
+					align-items: start;
                 }
 
                 .costEntry {
-                        width: 100%;
-                        display: flex;
-                        justify-content: space-between;
+					width: 100%;
+					display: flex;
+					justify-content: space-between;
                 }
 
                 .costEntry p {
-                        font-weight: var(--font-weight-title);
-                        font-size: var(--font-size-header-S);
-                        font-family: var(--font-calps);
-          
+					font-weight: var(--font-weight-title);
+					font-size: var(--font-size-header-S);
+					font-family: var(--font-calps);
                 }
 
 
-{/* TOS and proceeed */}
+				{/* TOS and proceeed */}
                 .tos {
-                        display: flex;
-                        flex-direction: column;
-                        font-weight: var(--font-weight-titles);
+					display: flex;
+					flex-direction: column;
+					font-weight: var(--font-weight-titles);
                 }
 
                 #checkoutButton {
-                        {/* THIS IS THE SPAN, NOT A BUTTON */}
+					{/* THIS IS THE SPAN, NOT A BUTTON */}
 		        	align-self: end;
 					margin: 20px 0px;
 				}
 
 
-	
-
 				.costEntry p {
-                        font-weight: normal;
-                        font-size: var(--font-size-body-L);
-                
-				}
-
-
-             /* Card containers */
-        .card {
-                margin-bottom: 40px;
-                box-shadow: var(--shadow-box-massive-card);
-        }
-
-
-        .mobileCard {
-				display: none;
-                margin-bottom: 40px;
-                box-shadow: var(--shadow-box);
-        }
-
-
-
-
-
-			{/* mobile view */}
-			@media screen and (max-width:500px) {
-				h1 {
-					font-weight: var(--font-weight-title);
-					font-size: var(--font-size-header-XS);
-					font-family: var(--font-calps);
-				}
-				h3 {
 					font-weight: normal;
-					font-size: var(--font-size-body-XL);
-							
-                }
-				.infoContainer ul {
-					max-width: 90vw;
-					min-width: 90vw;
-					width: 90vw;
+					font-size: var(--font-size-body-L);
 				}
+
+
+             	{/* Card containers */}
+				.card {
+					margin-bottom: 40px;
+					box-shadow: var(--shadow-box-massive-card);
+				}
+
 
 				.mobileCard {
-					display: flex;
+					display: none;
+					margin-bottom: 40px;
+					box-shadow: var(--shadow-box);
 				}
 
-				.card {
-					display: none;
-				}
-			}
-        
-        
+
+
+
+
+				{/* mobile view */}
+				@media screen and (max-width:500px) {
+					h1 {
+						font-weight: var(--font-weight-title);
+						font-size: var(--font-size-header-XS);
+						font-family: var(--font-calps);
+					}
+					h3 {
+						font-weight: normal;
+						font-size: var(--font-size-body-XL);
+								
+					}
+					.infoContainer ul {
+						max-width: 90vw;
+						min-width: 90vw;
+						width: 90vw;
+					}
+
+					.mobileCard {
+						display: flex;
+					}
+
+					.card {
+						display: none;
+					}
+				}    
         `}
 			</style>
 
