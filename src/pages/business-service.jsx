@@ -167,15 +167,6 @@ export default function business() {
 			}
 
 
-
-			{/* colapse cards in a bit */}
-			@media screen and (max-width: 1200px) {
-				.card2 {
-					right: -20px;	
-				}
-			}
-
-
 			{/* Show "in between mobile and desktop" card layout */}
 			@media screen and (max-width: 900px) {
 				.buisnessCardBox {
@@ -231,7 +222,7 @@ export default function business() {
 			</style>
 
 			<div>
-				<Navbar></Navbar>
+				
 
 				<div className='banner'>
 					<div className='bannerTxt'>
@@ -494,7 +485,7 @@ export default function business() {
 					</div>
 				</Section>
 
-				<Footer></Footer>
+				
 			</div >
 		</>
 
