@@ -28,7 +28,7 @@ export default function business() {
 			.banner {
 				background-image: url("/local.svg");
 				background-color: #DFDFDF;
-				background-size: 110% auto;
+				background-size: 110%  auto;
 				background-repeat: no-repeat;
 				background-position: center;
 				
@@ -94,7 +94,7 @@ export default function business() {
 			}
 
 			.buisnessCardBoxMobile {
-				width:500px;
+				width: 100%;
 				display: none;
 				flex-direction: column;
 			}
@@ -104,9 +104,14 @@ export default function business() {
 				justify-items: center;
 			}
 
+			.phoneNunbers {
+				display: flex;
+				margin-left: 30px;
+			}
+
 			
 			.cardBodyTxt {
-				margin-left: 20px;
+				margin-left: 5px;
 			}
 
 			{/* .card1 {
@@ -123,6 +128,7 @@ export default function business() {
 			.iconsBox {
 				position: relative;
 				bottom: 40px;
+				width: 0px;
 			}
 			.icon {
 				font-size: 20pt;
@@ -198,6 +204,7 @@ export default function business() {
 
 				.banner {
 					padding: 20px;
+					background-size: auto auto;
 				}
 			}
 
@@ -214,6 +221,14 @@ export default function business() {
 				.buisnessCardBoxMobile {
 					display: flex;
 
+				}
+			}
+
+
+			{/* ULtra-mobile view, kill card shifting */}
+			@media screen and (max-width: 400px) {
+				.card1M {
+					align-self: start;
 				}
 			}
 
@@ -319,6 +334,7 @@ export default function business() {
 						<div>
 							<div className='card1'>
 								<BusinessCard theme='black' title="Emergency Services" icons={faTruckMedical}>
+									<div className='phoneNunbers'>
 									<p>
 										Emergency
 										<br />
@@ -333,18 +349,20 @@ export default function business() {
 									<p className='cardBodyTxt'>
 										911
 										<br />
-										555-555-555
+										555-555
 										<br />
-										555-555-555
+										555-555
 										<br />
-										555-555-555
+										555-555
 
 									</p>
+									</div>
 								</BusinessCard>
 							</div>
 
 							<div className='card2'>
 								<BusinessCard theme='white' title="Other Useful Contacts" icons={faStore}>
+									<div className='phoneNunbers'>
 									<p>
 										City Hall
 										<br />
@@ -357,16 +375,17 @@ export default function business() {
 										Weather Info
 									</p>
 									<p className='cardBodyTxt'>
-										555-555-555
+										555-555
 										<br />
-										555-555-555
+										555-555
 										<br />
-										555-555-555
+										555-555
 										<br />
-										555-555-555
+										555-555
 										<br />
-										555-555-555
+										555-555
 									</p>
+									</div>
 								</BusinessCard>
 							</div>
 						</div>
@@ -378,7 +397,7 @@ export default function business() {
 						<div className='buisnessCardBoxMobile'>
 
 							<div className='card1M'>
-								<BusinessCard theme='white' title="Need Information?" isAltOrientation="true" icons={faCircleInfo}>
+								<BusinessCard theme='white' title="Need Information?" isAltOrientation={true} icons={faCircleInfo}>
 									<p>Have a question about your ventures? Visit
 										an information center or
 										<DefaultButton isLink="true"> Click here </DefaultButton>
@@ -443,11 +462,11 @@ export default function business() {
 									<p className='cardBodyTxt'>
 										911
 										<br />
-										555-555-555
+										555-555
 										<br />
-										555-555-555
+										555-555
 										<br />
-										555-555-555
+										555-555
 
 									</p>
 								</BusinessCard>
@@ -467,15 +486,15 @@ export default function business() {
 										Weather Info
 									</p>
 									<p className='cardBodyTxt'>
-										555-555-555
+										555-555
 										<br />
-										555-555-555
+										555-555
 										<br />
-										555-555-555
+										555-555
 										<br />
-										555-555-555
+										555-555
 										<br />
-										555-555-555
+										555-555
 									</p>
 								</BusinessCard>
 							</div>
