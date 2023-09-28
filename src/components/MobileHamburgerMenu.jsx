@@ -10,28 +10,28 @@ export default function MobileHamburgerMenu() {
 	return (
 		<>
 			<div id='psudoHamburgeBody'>
-				<DefaultButton className="mobileNav">
+				<DefaultButton className="mobileNav" href="./homepage">
 					<div className='icon'>
 						<FontAwesomeIcon icon={faHouse} />
 					</div>
 					<h2>Home</h2>
 				</DefaultButton>
 
-				<DefaultButton className="mobileNav">
+				<DefaultButton className="mobileNav"  href="./search">
 					<div className='icon'>
 						<FontAwesomeIcon icon={faMagnifyingGlass} />
 					</div>
 					<h2>Search</h2>
 				</DefaultButton>
 
-				<DefaultButton className="mobileNav">
+				<DefaultButton className="mobileNav" href="./events-attractions">
 					<div className='icon'>
 						<FontAwesomeIcon icon={faCalendarCheck} />
 					</div>
 					<h2>Upcomming Events</h2>
 				</DefaultButton>
 
-				<DefaultButton className="mobileNav">
+				<DefaultButton className="mobileNav" href="./events-attractions">
 					<div className='icon'>
 						<FontAwesomeIcon icon={faCamera} />
 					</div>
@@ -39,14 +39,14 @@ export default function MobileHamburgerMenu() {
 				</DefaultButton>
 
 
-				<DefaultButton className="mobileNav">
+				<DefaultButton className="mobileNav" href="./business-service">
 					<div className='icon'>
 						<FontAwesomeIcon icon={faStore} />
 					</div>
 					<h2>Businesses & Services</h2>
 				</DefaultButton>
 
-				<DefaultButton className="mobileNav">
+				<DefaultButton className="mobileNav" href="./search">
 					<div className='icon'>
 						<FontAwesomeIcon icon={faUser} />
 					</div>
@@ -62,12 +62,14 @@ export default function MobileHamburgerMenu() {
 					padding: 20px 0px;
 				}
 
-				
-			
 				{/* align icon and heading */}
 				h2 {
 					margin-left: 20px;
 					text-align: left;
+				}
+
+				.psudoHamburgeBody DefaultButton:hover{
+					
 				}
          
 				
