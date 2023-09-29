@@ -91,6 +91,8 @@ export default function business() {
 			.buisnessCardBox {
 				display: flex;
 				justify-content: space-around;
+				margin-left: -70px;
+				margin-right: 60px;
 			}
 
 			.buisnessCardBoxMobile {
@@ -178,6 +180,8 @@ export default function business() {
 				.buisnessCardBox {
 					{/* display: none; */}
 					flex-wrap: wrap;
+					margin-left: 0px;
+					margin-right: 0px;
 				}
 				.card2 {
 					right: -40px;	
