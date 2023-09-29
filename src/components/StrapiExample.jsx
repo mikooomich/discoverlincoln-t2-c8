@@ -5,8 +5,9 @@ export default function StrapiExample() {
 
 	useEffect(() => {
 		async function fetchStrapiData() {
-			const response = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/events')
+			const response = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/events?populate=*')
 			const data = await response.json()
+			console.log(data)
 
 			setStrapiData(data.data)
 		}
@@ -14,11 +15,16 @@ export default function StrapiExample() {
 		fetchStrapiData()
 	}, [])
 
+	/*
+
+			*/
 	return (
 		<>
 			{strapiData[0] !== undefined &&
-				<p>{strapiData[0].attributes.title}</p>
-
+				<>
+					<p>{strapiData[0].attributes.title}</p>
+					<img src={strapiData[0].attributes.image.data.attributes.url}></img>
+				</>
 			}
 		</>
 
