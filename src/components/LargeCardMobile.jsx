@@ -8,11 +8,19 @@ export default function LargeCardMobile({
   address = "101 Address Street, Lincoln, ON",
   category = "restaurant",
   description = "Explore endless fields of vines and grapes, with twists and turns to your hearts content. Fun for the whole family. Enjoy a warm, sunny day, in the relaxing yards of vine. Hurry up! Space is limited!",
-  hoursOfOperation = [],
+  hoursOfOperation = [" Monday: 11am - 6pm",
+  "Tuesday: 11am - 6pm",
+  "Wednesday: 11am - 6pm",
+ "Thursday: 11am - 6pm",
+  "Friday: 11am - 9pm",
+  "Saturday: 9am - 9pm",
+  "Sunday: 9am - 9pm"],
   rating,
   isTicket = true,
   ticketDate = "October 22nd, 2023",
   ticketTime = "6pm to 8:30pm",
+  imgSrc = "https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg",
+  imgAltText
 }) {
   //code
   function renderStars() {
@@ -32,6 +40,7 @@ export default function LargeCardMobile({
     <>
       <div className="large-card-mobile">
         <div className="image-container"></div>
+		<img src={imgSrc} alt={imgAltText}></img>
         <div className="card-information-wrap">
           <div className="large-info-wrap">
             <div className="large-info-wrap-left">
@@ -87,6 +96,17 @@ export default function LargeCardMobile({
               <div className="description2-text">
                 <h1 className="hours-title">Hours of Operation:</h1>
                 <p className="hours-description">
+
+				{/* {
+					// idk why this doesnt work
+				  hoursOfOperation.map((element) => {
+					// console.log(element)
+					<>
+					<p> {element}</p>
+					<br></br>
+					</>
+                  })} */}
+
                   Monday: 11am - 6pm
                   <br />
                   Tuesday: 11am - 6pm
@@ -131,6 +151,10 @@ export default function LargeCardMobile({
           flex-direction: column;
           padding: 10px 15px;
           background-color: white;
+
+		  position: sticky;
+		  bottom: 0px;
+
         }
 
         .large-info-wrap {
