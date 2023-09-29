@@ -17,7 +17,7 @@ export default function LargeCardList({children}) {
 					align-items: center;
 					gap: 50px;
 					padding-bottom: 50px;
-
+					padding-top: 20px;
 				}
 			`}</style>
 		</>

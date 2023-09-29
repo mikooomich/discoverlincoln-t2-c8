@@ -3,6 +3,7 @@ import DefaultButton from "../components/DefaultButton";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import LargeCardDesktop from "@/components/LargeCardDesktop";
+import LargeCardMobile from "@/components/LargeCardMobile";
 import LargeCardList from "@/components/LargeCardList";
 import MapCard from "@/components/MapCard";
 
@@ -30,11 +31,11 @@ export default function EventsAndAttractions() {
 
           .psudoBody {
             margin: auto;
-            max-width: 1200px;
+            width: 100%;
           }
 
           .maincontent {
-            max-width: 1200px;
+            max-width: 100%;
             margin: 0 100px;
             display: flex;
             flex-direction: column;
@@ -44,7 +45,10 @@ export default function EventsAndAttractions() {
 
           /* Titles */
           .titleBlock {
+            display: flex;
+            flex-direction: column;
             margin-top: 50px;
+            gap: 25px;
           }
 
           .titleBlock p {
@@ -68,21 +72,10 @@ export default function EventsAndAttractions() {
             flex-direction: column;
           }
 
-          .browseButton {
-            display: flex;
-          }
           #mobileOfferingsTitles {
             display: flex;
             justify-content: space-between;
             align-items: center;
-          }
-
-          nav ul {
-            height: 1000px;
-          }
-          nav ul {
-            overflow: hidden;
-            overflow-y: scroll;
           }
 
           /* scroll bar */
@@ -94,14 +87,8 @@ export default function EventsAndAttractions() {
           }
 
           /* Placeholder cards */
-          .card {
-            max-width: 1200px;
-            min-width: 800px;
-            min-height: 400px;
-            margin-bottom: 20px;
-
-            background-color: aqua;
-            box-shadow: var(--shadow-box-massive-card);
+          .cards-mobile{
+            display: none;
           }
 
           .info {
@@ -112,27 +99,17 @@ export default function EventsAndAttractions() {
             background-color: rgb(241, 184, 70);
           }
 
-          .Mobilecard {
-            width: 350px;
-            height: 100px;
-            margin-bottom: 20px;
-
-            background-color: aqua;
-            box-shadow: var(--shadow-box);
-          }
-
-          .Mobileinfo {
-            width: 250px;
-            height: 100px;
-            float: right;
-
-            background-color: rgb(241, 184, 70);
-          }
           /* EndPlaceholder cards */
 
           h1 {
             font-family: var(--font-calps);
             font-size: var(--font-size-header-L);
+            font-weight: var(--font-weight-titles);
+          }
+
+          .offerings-text{
+            font-family: var(--font-calps);
+            font-size: var(--font-size-header-M);
             font-weight: var(--font-weight-titles);
           }
 
@@ -150,9 +127,6 @@ export default function EventsAndAttractions() {
               margin: 0 30px;
             }
 
-            h1 {
-              font-size: var(--font-size-header-M);
-            }
           }
 
           @media screen and (max-width: 550px) {
@@ -163,11 +137,11 @@ export default function EventsAndAttractions() {
             }
 
             h1 {
-              font-size: var(--font-size-header-S);
+              font-size: var(--font-size-header-M);
             }
 
             h2 {
-              font-size: (--font-size-body-L);
+              font-size: var(--font-size-body-L);
             }
 
             #offeringsSubheading {
@@ -178,7 +152,7 @@ export default function EventsAndAttractions() {
             }
 
             .titleBlock p {
-              font-size: var(--font-size-body-MpLus);
+              font-size: var(--font-size-body-Mplus);
               /* remove Hax for calps font spacing */
               margin-top: 16px;
             }
@@ -189,17 +163,27 @@ export default function EventsAndAttractions() {
 
             /* reformat cards for mobile */
             .offerings {
-              display: none;
+              
             }
 
             .offerings-text {
               font-family: var(--font-calps);
-              font-size: var(--font-size-header-XS);
+              font-size: var(--font-size-header-S);
             }
 
             .mobileOfferings {
               display: flex;
             }
+
+            
+
+            .cards-desktop{
+              display: none;
+            }
+
+            .cards-mobile{
+              display: flex;
+              flex-direction: column;
 
             nav ul {
               height: 500px;
@@ -220,22 +204,28 @@ export default function EventsAndAttractions() {
             <p>There is always something around the corner</p>
           </div>
 
-          
           <MapCard>
-            <div className="mapPlaceholder">
-              Map goes here
-            </div>
+            <div className="mapPlaceholder">Map goes here</div>
           </MapCard>
 
           <div className="offerings">
             <h1 className="offerings-text">All Offerings</h1>
 
             {/* scrollable offerings */}
-            <LargeCardList>
-              <LargeCardDesktop></LargeCardDesktop>
-              <LargeCardDesktop></LargeCardDesktop>
-              <LargeCardDesktop></LargeCardDesktop>
-            </LargeCardList>
+            <div className="cards-desktop">
+              <LargeCardList>
+                <LargeCardDesktop></LargeCardDesktop>
+                <LargeCardDesktop></LargeCardDesktop>
+                <LargeCardDesktop></LargeCardDesktop>
+              </LargeCardList>
+            </div>
+            <div className="cards-mobile">
+              <LargeCardList>
+                <LargeCardMobile></LargeCardMobile>
+                <LargeCardMobile></LargeCardMobile>
+                <LargeCardMobile></LargeCardMobile>
+              </LargeCardList>
+            </div>
 
             <div className="mobileOfferings">
               <div id="mobileOfferingsTitles">
