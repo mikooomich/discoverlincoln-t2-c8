@@ -161,7 +161,6 @@ export default function checkout() {
         `}
 			</style>
 
-			<Navbar></Navbar>
 			<Section marginBottom="40px" marginTop="40px">
 
 				<div className="orderSummary">
@@ -287,7 +286,6 @@ export default function checkout() {
 
 
 			</Section>
-			<Footer></Footer>
 		</>
 	);
 }

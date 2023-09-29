@@ -97,7 +97,6 @@ export default function login() {
         `}
 			</style>
 
-			<Navbar></Navbar>
 			<Section marginBottom='100px;'>
 
 				<div id="mainContent">
@@ -130,7 +129,6 @@ export default function login() {
 					{/* Mobile toast example */}
 					<Toast clasName="toast toastMobile" bgColor="err" text='This is an example of a mobile toast.'></Toast>
 				</div>
-			<Footer></Footer>
 
 		</>
 
