@@ -11,7 +11,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Section from '@/components/Section'
 import Link from 'next/link'
 
+import { useEffect, useState } from 'react'
+
 export default function business() {
+	const [strapiData, setStrapiData] = useState();
+
+	useEffect(() => {
+		async function fetchStrapiData() {
+			const response = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/businesses?populate=*')
+			const data = await response.json()
+			setStrapiData(data.data)
+		}
+
+		fetchStrapiData()
+	}, [])
+
+	// console.log("current data")
+	// console.log(strapiData)
+
+
 	return (
 		<>
 			<style jsx>
@@ -243,30 +261,39 @@ export default function business() {
 
 			<div>
 
-
-				<div className='banner'>
-					<div className='bannerTxt'>
-						<h1>Explore Local</h1>
-						<h3>This destination lends itself to exploration, slow travel, and serendipitous discovery</h3>
-						<p>– Lincoln Destination Tourism Strategy and Action Plan 2020 – 2025</p>
+				<Section usePadding={false} fullWidth={true}>
+					<div className='banner'>
+						<div className='bannerTxt'>
+							<h1>Explore Local</h1>
+							<h3>This destination lends itself to exploration, slow travel, and serendipitous discovery</h3>
+							<p>– Lincoln Destination Tourism Strategy and Action Plan 2020 – 2025</p>
+						</div>
 					</div>
-				</div>
+				</Section>
 				{/* <div id="buisnessPsudoBody"> */}
 				<Section usePadding={true}>
 					<div className='selectionsContent'>
 						<CardCarousel title="Our Fine Selections" alignTitle='end' singleLineDisplay={true}>
-							<li>
-								<LargeCardMobile></LargeCardMobile>
-							</li>
-							<li>
-								<LargeCardMobile></LargeCardMobile>
-							</li>
-							<li>
-								<LargeCardMobile></LargeCardMobile>
-							</li>
-							<li>
-								<LargeCardMobile></LargeCardMobile>
-							</li>
+							{
+								strapiData !== undefined &&
+								strapiData.map((element) => (
+									<li>
+										<LargeCardMobile
+											isTicket={false}
+											title={element.attributes.title}
+											description={element.attributes.description}
+											address={element.attributes.location}
+											ticketDate={`${element.attributes.dateStart} - ${element.attributes.dateEnd}`}
+											rating={element.attributes.numStars}
+											category={element.attributes.tags}
+											imgSrc={element.attributes.image.data.attributes.url}
+											imgAltText={element.attributes.image.data.attributes.alternativeText}
+										// hoursOfOperation={element.attributes.hoursOfOperation}
+										></LargeCardMobile>
+									</li>
+
+								))
+							}
 						</CardCarousel>
 
 						<div className='selectionsBtn'>

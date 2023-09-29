@@ -58,6 +58,7 @@ export default function test() {
       </Section>
 
       <LargeCardMobile></LargeCardMobile>
+      <LargeCardMobile isTicket={false}></LargeCardMobile>
 
       <ExampleState />
 
