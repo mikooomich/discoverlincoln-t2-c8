@@ -60,6 +60,7 @@ export default function test() {
 
       <Footer></Footer>
       <LargeCardMobile></LargeCardMobile>
+      <LargeCardMobile isTicket={false}></LargeCardMobile>
 
       <ExampleState />
 

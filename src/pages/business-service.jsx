@@ -10,7 +10,25 @@ import { faWindowRestore, faCircleInfo, faTruckMedical, faStore, faUtensils, faC
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Section from '@/components/Section'
 
+import { useEffect, useState } from 'react'
+
 export default function business() {
+	const [strapiData, setStrapiData] = useState();
+
+	useEffect(() => {
+		async function fetchStrapiData() {
+			const response = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/businesses')
+			const data = await response.json()
+			setStrapiData(data.data)
+		}
+
+		fetchStrapiData()
+	}, [])
+
+	// console.log("current data")
+	// console.log(strapiData)
+
+
 	return (
 		<>
 			<style jsx>
@@ -237,31 +255,41 @@ export default function business() {
 			</style>
 
 			<div>
-				
 
-				<div className='banner'>
-					<div className='bannerTxt'>
-						<h1>Explore Local</h1>
-						<h3>This destination lends itself to exploration, slow travel, and serendipitous discovery</h3>
-						<p>– Lincoln Destination Tourism Strategy and Action Plan 2020 – 2025</p>
+				<Section usePadding={false} fullWidth={true}>
+					<div className='banner'>
+						<div className='bannerTxt'>
+							<h1>Explore Local</h1>
+							<h3>This destination lends itself to exploration, slow travel, and serendipitous discovery</h3>
+							<p>– Lincoln Destination Tourism Strategy and Action Plan 2020 – 2025</p>
+						</div>
 					</div>
-				</div>
+				</Section>
 				{/* <div id="buisnessPsudoBody"> */}
 				<Section usePadding={true}>
 					<div className='selectionsContent'>
 						<CardCarousel title="Our Fine Selections" alignTitle='end' singleLineDisplay={true}>
-							<li>
-								<LargeCardMobile></LargeCardMobile>
-							</li>
-							<li>
-								<LargeCardMobile></LargeCardMobile>
-							</li>
-							<li>
-								<LargeCardMobile></LargeCardMobile>
-							</li>
-							<li>
-								<LargeCardMobile></LargeCardMobile>
-							</li>
+							{
+								strapiData !== undefined &&
+								strapiData.map((element) => (
+									<li>
+										<LargeCardMobile
+											isTicket={false}
+											title={element.attributes.title}
+											description={element.attributes.description}
+											address={element.attributes.location}
+											ticketDate={`${element.attributes.dateStart} - ${element.attributes.dateEnd}`}
+											rating={element.attributes.numStars}
+											category={element.attributes.tags}
+
+
+										// hoursOfOperation={element.attributes.hoursOfOperation}
+										// image= {}
+										></LargeCardMobile>
+									</li>
+
+								))
+							}
 						</CardCarousel>
 
 						<div className='selectionsBtn'>
@@ -335,27 +363,27 @@ export default function business() {
 							<div className='card1'>
 								<BusinessCard theme='black' title="Emergency Services" icons={faTruckMedical}>
 									<div className='phoneNunbers'>
-									<p>
-										Emergency
-										<br />
-										Police
-										<br />
-										Fire
-										<br />
-										Roadside
-										<br />
-										Assistance
-									</p>
-									<p className='cardBodyTxt'>
-										911
-										<br />
-										555-555
-										<br />
-										555-555
-										<br />
-										555-555
+										<p>
+											Emergency
+											<br />
+											Police
+											<br />
+											Fire
+											<br />
+											Roadside
+											<br />
+											Assistance
+										</p>
+										<p className='cardBodyTxt'>
+											911
+											<br />
+											555-555
+											<br />
+											555-555
+											<br />
+											555-555
 
-									</p>
+										</p>
 									</div>
 								</BusinessCard>
 							</div>
@@ -363,28 +391,28 @@ export default function business() {
 							<div className='card2'>
 								<BusinessCard theme='white' title="Other Useful Contacts" icons={faStore}>
 									<div className='phoneNunbers'>
-									<p>
-										City Hall
-										<br />
-										Ontario Parks
-										<br />
-										Vineland
-										<br />
-										Support Line
-										<br />
-										Weather Info
-									</p>
-									<p className='cardBodyTxt'>
-										555-555
-										<br />
-										555-555
-										<br />
-										555-555
-										<br />
-										555-555
-										<br />
-										555-555
-									</p>
+										<p>
+											City Hall
+											<br />
+											Ontario Parks
+											<br />
+											Vineland
+											<br />
+											Support Line
+											<br />
+											Weather Info
+										</p>
+										<p className='cardBodyTxt'>
+											555-555
+											<br />
+											555-555
+											<br />
+											555-555
+											<br />
+											555-555
+											<br />
+											555-555
+										</p>
 									</div>
 								</BusinessCard>
 							</div>
@@ -504,7 +532,7 @@ export default function business() {
 					</div>
 				</Section>
 
-				
+
 			</div >
 		</>
 
