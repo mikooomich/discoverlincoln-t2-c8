@@ -41,7 +41,7 @@ export default function Navbar() {
             <a href="./events-attractions">Attractions</a>
             <a href="./business-service">Businesses & Services</a>
 
-            <DefaultButton bgColor="transparent" padding="14px">
+            <DefaultButton bgColor="transparent" padding="14px"isLink={true} href="./profile">
               <FontAwesomeIcon icon={faUser} />
             </DefaultButton>
           </div>
@@ -83,6 +83,7 @@ export default function Navbar() {
 
         .header-links {
           float: right;
+          margin-right: 20px;
         }
 
         .header-links * {
