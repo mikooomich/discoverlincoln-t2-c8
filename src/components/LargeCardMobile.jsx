@@ -19,6 +19,8 @@ export default function LargeCardMobile({
   isTicket = true,
   ticketDate = "October 22nd, 2023",
   ticketTime = "6pm to 8:30pm",
+  imgSrc = "https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg",
+  imgAltText
 }) {
   //code
   function renderStars() {
@@ -38,6 +40,7 @@ export default function LargeCardMobile({
     <>
       <div className="large-card-mobile">
         <div className="image-container"></div>
+		<img src={imgSrc} alt={imgAltText}></img>
         <div className="card-information-wrap">
           <div className="large-info-wrap">
             <div className="large-info-wrap-left">
@@ -148,6 +151,10 @@ export default function LargeCardMobile({
           flex-direction: column;
           padding: 10px 15px;
           background-color: white;
+
+		  position: sticky;
+		  bottom: 0px;
+
         }
 
         .large-info-wrap {

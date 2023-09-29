@@ -17,7 +17,7 @@ export default function business() {
 
 	useEffect(() => {
 		async function fetchStrapiData() {
-			const response = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/businesses')
+			const response = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/businesses?populate=*')
 			const data = await response.json()
 			setStrapiData(data.data)
 		}
@@ -281,10 +281,9 @@ export default function business() {
 											ticketDate={`${element.attributes.dateStart} - ${element.attributes.dateEnd}`}
 											rating={element.attributes.numStars}
 											category={element.attributes.tags}
-
-
+											imgSrc={element.attributes.image.data.attributes.url}
+											imgAltText={element.attributes.image.data.attributes.alternativeText}
 										// hoursOfOperation={element.attributes.hoursOfOperation}
-										// image= {}
 										></LargeCardMobile>
 									</li>
 
