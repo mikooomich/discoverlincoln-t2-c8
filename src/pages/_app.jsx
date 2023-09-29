@@ -45,11 +45,11 @@ export default function App({
 }) {
 	return (
 		<>
-			<Navbar></Navbar>
+			{!Component.overrideDefaultNavs && <Navbar></Navbar>}
 			<SessionProvider session={session}>
 				<Component {...pageProps} />
 			</SessionProvider>
-			<Footer></Footer>
+			{!Component.overrideDefaultNavs && <Footer></Footer>}
 
 			{/* css reset */}
 			<style jsx global>

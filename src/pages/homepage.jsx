@@ -419,3 +419,5 @@ export default function homepage() {
 
     )
 }
+
+homepage.overrideDefaultNavs = true;
