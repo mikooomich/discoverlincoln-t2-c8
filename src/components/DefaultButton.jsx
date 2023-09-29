@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 /**
@@ -19,17 +20,32 @@ export default function DefaultButton({
 	className = "",
 	href = "",
 	children }) {
+
+	let useMaxWidth = "";
+
+	if (className == "mobileNav") {
+		useMaxWidth = "mobileNavChildren";
+	}
+
 	return (
 		<>
 			{isLink &&
-				<a href={href} className={className}>{children}</a>}
+				<div className={`defaultStyle ${className}`}>
+					<Link href={href}>
+						<div className={`linkChildren + ${useMaxWidth}`}>
+							{children}
+						</div>
+					</Link>
+				</div>}
+
+
 			{!isLink &&
-				<button className={className}>{children}</button>}
+				<button className={`defaultStyle ${className}`}>{children}</button>}
 
 
 			<style jsx>
 				{`
-			button {
+			.defaultStyle {
 				background-color: ${bgColor};
 				font-size: ${fontSize};
 				padding: ${padding};
@@ -37,9 +53,11 @@ export default function DefaultButton({
 				font-family: var(--font-calps);
 			}
 
-			a {
-				{/* TODO: Style the links */}
+			.linkChildren {
+				display: flex;
+				flex-direction: row;
 			}
+
 
 
 
@@ -101,6 +119,11 @@ export default function DefaultButton({
 			.mobileNav:hover {
 				filter: brightness(70%);
 				{/* font-size: 28px; */}
+			}
+
+			{/* make mobile nav link stretch across entire width */}
+			.mobileNavChildren {
+				width: 100vw
 			}
 
 			{/* search page */}

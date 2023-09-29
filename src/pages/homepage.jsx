@@ -20,12 +20,12 @@ export default function homepage() {
                             <Image src="logoIcon.svg" width={60} height={60} alt="Lincon logo" />
                         </div>
                         <div className="header-links">
-                            <a href="#">Home</a>
-                            <a href="#">Search</a>
+                            <a href="./homepage">Home</a>
+                            <a href="./search">Search</a>
                             <a href="./events-attractions">Upcoming Events</a>
-                            <a href="#">Attractions</a>
-                            <a href="#">Businesses & Services</a>
-                            <a href="#">Profile</a>
+                            <a href="./events-attractions">Attractions</a>
+                            <a href="./business-service">Businesses & Services</a>
+                            <a href="./profile">Profile</a>
                         </div>
                     </div>
                     <div className="landing-view-wrap">
@@ -419,3 +419,5 @@ export default function homepage() {
 
     )
 }
+
+homepage.overrideDefaultNavs = true;
