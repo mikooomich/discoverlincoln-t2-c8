@@ -209,7 +209,6 @@ export default function EventsAndAttractions() {
           }
         `}
       </style>
-      <Navbar></Navbar>
 
       <div className="psudoBody">
         <div className="iconBackdrop"></div>
@@ -248,7 +247,6 @@ export default function EventsAndAttractions() {
           </div>
         </div>
       </div>
-      <Footer></Footer>
     </>
   );
 }

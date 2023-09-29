@@ -8,6 +8,8 @@ config.autoAddCss = false;
 
 // Fonts
 import { Roboto_Condensed } from "next/font/google"
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 const roboto_condensed = Roboto_Condensed({
 	subsets: ['latin'],
 	weight: ['300', '400', '700']
@@ -43,9 +45,11 @@ export default function App({
 }) {
 	return (
 		<>
+			<Navbar></Navbar>
 			<SessionProvider session={session}>
 				<Component {...pageProps} />
 			</SessionProvider>
+			<Footer></Footer>
 
 			{/* css reset */}
 			<style jsx global>
