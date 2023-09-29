@@ -5,12 +5,28 @@ import Navbar from "@/components/Navbar";
 import Section from "@/components/Section";
 import TextInput from "@/components/TextInput";
 import LargeCardMobile from "@/components/LargeCardMobile";
-import React from "react";
+import React, { useEffect, useState }  from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-export default function search() {
+export default function Search() {
+
+  const [strapiData, setStrapiData] = useState([]);
+
+	useEffect(() => {
+		async function fetchStrapiData() {
+			const response = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/events?populate=*')
+			const data = await response.json()
+			console.log(data)
+
+			setStrapiData(data.data)
+      console.log(strapiData)
+		}
+ 
+		fetchStrapiData()
+	}, [])
+
   return (
     <>
       <style jsx>
@@ -97,23 +113,16 @@ export default function search() {
 
       <Section marginBottom="40px">
         <CardCarousel title="Events" margin="0px 0px 40px 0px">
-          <li>
-            <LargeCardMobile></LargeCardMobile>
-          </li>
-          <li>
-            <LargeCardMobile></LargeCardMobile>
-          </li>
-          <li>
-            <LargeCardMobile></LargeCardMobile>
-          </li>
-          <li>
-            <LargeCardMobile></LargeCardMobile>
-          </li>
+          {strapiData?.map(card => {
+            <li>
+              <LargeCardMobile title={card.attributes.title}></LargeCardMobile>
+            </li>
+          })}
         </CardCarousel>
         <hr />
         <CardCarousel title="Attractions" margin="40px 0px 40px 0px">
           <li>
-            <LargeCardMobile></LargeCardMobile>
+            <LargeCardMobile title={strapiData[0].attributes.title} description={strapiData[0]?.attributes?.richTextDescription} rating={strapiData[0]?.attributes?.numStars} isTicket={strapiData[0]?.attributes?.isTicket} ticketDate={strapiData[0]?.dateTimeStart} ticketTime={strapiData[0]?.dateTimeEnd}></LargeCardMobile>
           </li>
           <li>
             <LargeCardMobile></LargeCardMobile>
