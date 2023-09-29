@@ -20,7 +20,8 @@ export default function LargeCardMobile({
   ticketDate = "October 22nd, 2023",
   ticketTime = "6pm to 8:30pm",
   imgSrc = "https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg",
-  imgAltText
+  imgAltText,
+  barcodeUID,
 }) {
   //code
   function renderStars() {

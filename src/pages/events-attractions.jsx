@@ -7,7 +7,26 @@ import LargeCardMobile from "@/components/LargeCardMobile";
 import LargeCardList from "@/components/LargeCardList";
 import MapCard from "@/components/MapCard";
 
+import { useEffect, useState } from 'react'
+
 export default function EventsAndAttractions() {
+
+	const [strapiData, setStrapiData] = useState();
+
+	useEffect(() => {
+		async function fetchStrapiData() {
+			const response = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/events?populate=*')
+			const data = await response.json()
+			setStrapiData(data.data)
+		}
+
+		fetchStrapiData()
+	}, [])
+
+	// console.log("current data")
+	// console.log(strapiData)
+
+
   return (
     <>
       <style jsx>
@@ -191,6 +210,7 @@ export default function EventsAndAttractions() {
               background-color: rgba(0, 255, 255, 0.227);
             }
           }
+		  }
         `}
       </style>
 
@@ -213,16 +233,50 @@ export default function EventsAndAttractions() {
             {/* scrollable offerings */}
             <div className="cards-desktop">
               <LargeCardList>
-                <LargeCardDesktop></LargeCardDesktop>
-                <LargeCardDesktop></LargeCardDesktop>
-                <LargeCardDesktop></LargeCardDesktop>
+				{
+					strapiData !== undefined &&
+					strapiData.map((element) => (
+							<LargeCardDesktop
+								isTicket={true}
+								title={element.attributes.title}
+								description={element.attributes.description}
+								address={element.attributes.location}
+								ticketDate={element.attributes.date}
+								ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
+								rating={element.attributes.numStars}
+								category={element.attributes.tags}
+								imgSrc={element.attributes.image.data.attributes.url}
+								imgAltText={element.attributes.image.data.attributes.alternativeText}
+								barcodeUID={element.attributes.barcodeUID}
+								
+							// hoursOfOperation={element.attributes.hoursOfOperation}
+							></LargeCardDesktop>
+					))
+				}
               </LargeCardList>
             </div>
             <div className="cards-mobile">
               <LargeCardList>
-                <LargeCardMobile></LargeCardMobile>
-                <LargeCardMobile></LargeCardMobile>
-                <LargeCardMobile></LargeCardMobile>
+				{
+					strapiData !== undefined &&
+					strapiData.map((element) => (
+							<LargeCardMobile
+								isTicket={true}
+								title={element.attributes.title}
+								description={element.attributes.description}
+								address={element.attributes.location}
+								ticketDate={element.attributes.date}
+								ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
+								rating={element.attributes.numStars}
+								category={element.attributes.tags}
+								imgSrc={element.attributes.image.data.attributes.url}
+								imgAltText={element.attributes.image.data.attributes.alternativeText}
+								barcodeUID={element.attributes.barcodeUID}
+								
+							// hoursOfOperation={element.attributes.hoursOfOperation}
+							></LargeCardMobile>
+					))
+				}
               </LargeCardList>
             </div>
 
