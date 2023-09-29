@@ -130,6 +130,7 @@ export default function LargeCardMobile({
           display: flex;
           flex-direction: column;
           padding: 10px 15px;
+          background-color: white;
         }
 
         .large-info-wrap {
