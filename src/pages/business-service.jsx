@@ -9,6 +9,7 @@ import LargeCardMobile from '@/components/LargeCardMobile'
 import { faWindowRestore, faCircleInfo, faTruckMedical, faStore, faUtensils, faCarrot, faStrikethrough, faCrown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Section from '@/components/Section'
+import Link from 'next/link'
 
 export default function business() {
 	return (
@@ -241,7 +242,7 @@ export default function business() {
 			</style>
 
 			<div>
-				
+
 
 				<div className='banner'>
 					<div className='bannerTxt'>
@@ -285,7 +286,7 @@ export default function business() {
 								<BusinessCard theme='white' title="Need Information?" isAltOrientation="true" icons={faCircleInfo}>
 									<p>Have a question about your ventures? Visit
 										an information center or
-										<DefaultButton isLink="true"> Click here </DefaultButton>
+										<Link href=""> Click here </Link>
 										to view a map of our in person information centers.</p>
 								</BusinessCard>
 							</div>
@@ -339,27 +340,27 @@ export default function business() {
 							<div className='card1'>
 								<BusinessCard theme='black' title="Emergency Services" icons={faTruckMedical}>
 									<div className='phoneNunbers'>
-									<p>
-										Emergency
-										<br />
-										Police
-										<br />
-										Fire
-										<br />
-										Roadside
-										<br />
-										Assistance
-									</p>
-									<p className='cardBodyTxt'>
-										911
-										<br />
-										555-555
-										<br />
-										555-555
-										<br />
-										555-555
+										<p>
+											Emergency
+											<br />
+											Police
+											<br />
+											Fire
+											<br />
+											Roadside
+											<br />
+											Assistance
+										</p>
+										<p className='cardBodyTxt'>
+											911
+											<br />
+											555-555
+											<br />
+											555-555
+											<br />
+											555-555
 
-									</p>
+										</p>
 									</div>
 								</BusinessCard>
 							</div>
@@ -367,28 +368,28 @@ export default function business() {
 							<div className='card2'>
 								<BusinessCard theme='white' title="Other Useful Contacts" icons={faStore}>
 									<div className='phoneNunbers'>
-									<p>
-										City Hall
-										<br />
-										Ontario Parks
-										<br />
-										Vineland
-										<br />
-										Support Line
-										<br />
-										Weather Info
-									</p>
-									<p className='cardBodyTxt'>
-										555-555
-										<br />
-										555-555
-										<br />
-										555-555
-										<br />
-										555-555
-										<br />
-										555-555
-									</p>
+										<p>
+											City Hall
+											<br />
+											Ontario Parks
+											<br />
+											Vineland
+											<br />
+											Support Line
+											<br />
+											Weather Info
+										</p>
+										<p className='cardBodyTxt'>
+											555-555
+											<br />
+											555-555
+											<br />
+											555-555
+											<br />
+											555-555
+											<br />
+											555-555
+										</p>
 									</div>
 								</BusinessCard>
 							</div>
@@ -402,10 +403,9 @@ export default function business() {
 
 							<div className='card1M'>
 								<BusinessCard theme='white' title="Need Information?" isAltOrientation={true} icons={faCircleInfo}>
-									<p>Have a question about your ventures? Visit
-										an information center or
-										<DefaultButton isLink="true"> Click here </DefaultButton>
-										to view a map of our in person information centers.</p>
+									<p>
+										Have a question about your ventures? Visit
+										an information center or <Link href="">Click here</Link> to view a map of our in person information centers.</p>
 								</BusinessCard>
 							</div>
 
@@ -508,7 +508,7 @@ export default function business() {
 					</div>
 				</Section>
 
-				
+
 			</div >
 		</>
 
