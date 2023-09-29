@@ -9,7 +9,7 @@ export default function LargeCardMobile({
   category = "restaurant",
   description = "Explore endless fields of vines and grapes, with twists and turns to your hearts content. Fun for the whole family. Enjoy a warm, sunny day, in the relaxing yards of vine. Hurry up! Space is limited!",
   hoursOfOperation = [],
-  rating,
+  rating = 1,
   isTicket = true,
   ticketDate = "October 22nd, 2023",
   ticketTime = "6pm to 8:30pm",
