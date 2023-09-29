@@ -18,7 +18,6 @@ import StrapiExample from '@/components/StrapiExample'
 export default function test() {
   return (
     <>
-      <Navbar></Navbar>
       <SmallCard>
 
        
@@ -58,7 +57,6 @@ export default function test() {
         </div>
       </Section>
 
-      <Footer></Footer>
       <LargeCardMobile></LargeCardMobile>
       <LargeCardMobile isTicket={false}></LargeCardMobile>
 

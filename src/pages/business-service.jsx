@@ -9,6 +9,7 @@ import LargeCardMobile from '@/components/LargeCardMobile'
 import { faWindowRestore, faCircleInfo, faTruckMedical, faStore, faUtensils, faCarrot, faStrikethrough, faCrown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Section from '@/components/Section'
+import Link from 'next/link'
 
 import { useEffect, useState } from 'react'
 
@@ -109,6 +110,8 @@ export default function business() {
 			.buisnessCardBox {
 				display: flex;
 				justify-content: space-around;
+				margin-left: -70px;
+				margin-right: 60px;
 			}
 
 			.buisnessCardBoxMobile {
@@ -196,6 +199,8 @@ export default function business() {
 				.buisnessCardBox {
 					{/* display: none; */}
 					flex-wrap: wrap;
+					margin-left: 0px;
+					margin-right: 0px;
 				}
 				.card2 {
 					right: -40px;	
@@ -308,7 +313,7 @@ export default function business() {
 								<BusinessCard theme='white' title="Need Information?" isAltOrientation="true" icons={faCircleInfo}>
 									<p>Have a question about your ventures? Visit
 										an information center or
-										<DefaultButton isLink="true"> Click here </DefaultButton>
+										<Link href=""> Click here </Link>
 										to view a map of our in person information centers.</p>
 								</BusinessCard>
 							</div>
@@ -425,10 +430,9 @@ export default function business() {
 
 							<div className='card1M'>
 								<BusinessCard theme='white' title="Need Information?" isAltOrientation={true} icons={faCircleInfo}>
-									<p>Have a question about your ventures? Visit
-										an information center or
-										<DefaultButton isLink="true"> Click here </DefaultButton>
-										to view a map of our in person information centers.</p>
+									<p>
+										Have a question about your ventures? Visit
+										an information center or <Link href="">Click here</Link> to view a map of our in person information centers.</p>
 								</BusinessCard>
 							</div>
 

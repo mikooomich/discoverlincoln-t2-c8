@@ -10,28 +10,28 @@ export default function MobileHamburgerMenu() {
 	return (
 		<>
 			<div id='psudoHamburgeBody'>
-				<DefaultButton className="mobileNav" href="./homepage">
+				<DefaultButton className="mobileNav" isLink={true} href="./homepage">
 					<div className='icon'>
 						<FontAwesomeIcon icon={faHouse} />
 					</div>
 					<h2>Home</h2>
 				</DefaultButton>
 
-				<DefaultButton className="mobileNav"  href="./search">
+				<DefaultButton className="mobileNav" isLink={true} href="./search">
 					<div className='icon'>
 						<FontAwesomeIcon icon={faMagnifyingGlass} />
 					</div>
 					<h2>Search</h2>
 				</DefaultButton>
 
-				<DefaultButton className="mobileNav" href="./events-attractions">
+				<DefaultButton className="mobileNav" isLink={true} href="./events-attractions">
 					<div className='icon'>
 						<FontAwesomeIcon icon={faCalendarCheck} />
 					</div>
 					<h2>Upcomming Events</h2>
 				</DefaultButton>
 
-				<DefaultButton className="mobileNav" href="./events-attractions">
+				<DefaultButton className="mobileNav" isLink={true} href="./events-attractions">
 					<div className='icon'>
 						<FontAwesomeIcon icon={faCamera} />
 					</div>
@@ -39,18 +39,25 @@ export default function MobileHamburgerMenu() {
 				</DefaultButton>
 
 
-				<DefaultButton className="mobileNav" href="./business-service">
+				<DefaultButton className="mobileNav" isLink={true} href="./business-service">
 					<div className='icon'>
 						<FontAwesomeIcon icon={faStore} />
 					</div>
 					<h2>Businesses & Services</h2>
 				</DefaultButton>
 
-				<DefaultButton className="mobileNav" href="./search">
+				<DefaultButton className="mobileNav" isLink={true} href="./search">
 					<div className='icon'>
 						<FontAwesomeIcon icon={faUser} />
 					</div>
 					<h2>Profile</h2>
+				</DefaultButton>
+
+				<DefaultButton className="mobileNav" isLink={true} href="./checkout">
+					<div className='icon'>
+						<FontAwesomeIcon icon={faUser} />
+					</div>
+					<h2>Checkout-debug link</h2>
 				</DefaultButton>
 
 			</div>

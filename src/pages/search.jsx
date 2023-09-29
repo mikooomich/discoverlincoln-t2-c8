@@ -74,7 +74,6 @@ export default function search() {
         `}
       </style>
 
-      <Navbar></Navbar>
 
       <Section marginTop="20px">
         <h1 className="search-title">Search Events & Attractions</h1>
@@ -143,7 +142,6 @@ export default function search() {
         </CardCarousel>
       </Section>
 
-      <Footer></Footer>
     </>
   );
 }
