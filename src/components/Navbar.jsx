@@ -6,6 +6,7 @@ import { faBars, faUser, faHouse } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MobileHamburgerMenu from "./MobileHamburgerMenu";
 import DefaultButton from "./DefaultButton";
+import Link from "next/link";
 
 export default function Navbar() {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
@@ -41,9 +42,9 @@ export default function Navbar() {
             <a href="./events-attractions">Attractions</a>
             <a href="./business-service">Businesses & Services</a>
 
-            <DefaultButton bgColor="transparent" padding="14px"isLink={true} href="./profile">
-              <FontAwesomeIcon icon={faUser} />
-            </DefaultButton>
+            <Link href="./profile">
+              <FontAwesomeIcon icon={faUser}  style={{paddingTop: "14px", color: "white"}} />
+            </Link>
           </div>
 
           <div
