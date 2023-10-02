@@ -1,16 +1,19 @@
+import React from 'react'
+import Image from 'next/image'
+
 import TextInput from '@/components/TextInput'
 import Section from '@/components/Section'
 import LargeCardMobile from '@/components/LargeCardMobile'
 import CardCarousel from '@/components/CardCarousel'
-import React from 'react'
-import Image from 'next/image'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import DefaultButton from '@/components/DefaultButton'
 import Gallery from '@/components/Gallery'
 import GalleryImage from '@/components/GalleryImage'
-import { useEffect, useState } from "react";
 import SmallCard from '@/components/SmallCard'
+import DefaultButton from '@/components/DefaultButton'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { useEffect, useState } from "react";
+
 
 export default function homepage() {
     const [eventsStrapiData, setEventsStrapiData] = useState([]); // events
@@ -19,9 +22,9 @@ export default function homepage() {
 
     useEffect(() => {
         async function fetchStrapiData() {
-            const response = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/events?populate=*');
-            const data = await response.json();
-            setEventsStrapiData(data.data);
+            const eventResponse = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/events?populate=*');
+            const eventData = await eventResponse.json();
+            setEventsStrapiData(eventData.data);
 
             const attractionResponse = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/attrractions?populate=*')
             const attractionData = await attractionResponse.json();
