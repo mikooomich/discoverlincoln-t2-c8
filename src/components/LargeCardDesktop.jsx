@@ -9,13 +9,22 @@ export default function LargeCardDesktop({
   address = "101 Address Street, Lincoln, ON",
   category = "restaurant",
   description = "Explore endless fields of vines and grapes, with twists and turns to your hearts content. Fun for the whole family. Enjoy a warm, sunny day, in the relaxing yards of vine. Hurry up! Space is limited! Our Vineyards are open to the public between April 23 and November 4th. Please note that weather circumstances may change, please dress accordingly and prepare for the weather. We are not responsible for lost belongings.",
-  hoursOfOperation = [],
+  hoursOfOperation = [
+    " Monday: 11am - 6pm",
+    "Tuesday: 11am - 6pm",
+    "Wednesday: 11am - 6pm",
+    "Thursday: 11am - 6pm",
+    "Friday: 11am - 9pm",
+    "Saturday: 9am - 9pm",
+    "Sunday: 9am - 9pm",
+  ],
   rating,
   isEvent = true,
   isTicket = true,
-  price = 0,
-  ticketDate = "October 22nd, 2023",
-  ticketTime = "6pm to 8:30pm",
+  ticketDate = "2023-10-17",
+  timeStart = "18:00:00",
+  timeEnd = "20:30:00",
+  ticketPrice= 0,
   imgSrc = "https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg",
   imgAltText,
   barcodeUID,
@@ -29,11 +38,20 @@ export default function LargeCardDesktop({
     return stars;
   }
 
-  
+  function tConvert(timeString) {
+    const [hourString, minute] = timeString.split(":");
+    const hour = +hourString % 24;
+    return (hour % 12 || 12) + ":" + minute + (hour < 12 ? "AM" : "PM");
+}
 
   const categoryColors = {
-    restaurant: "red",
-    music: "purple",
+    Restaurant: "red",
+    Music: "purple",
+    PerformingArts: "green",
+    Festival: "orange",
+    Sports: "blue",
+    Charity: "yellow",
+    Other: "cyan",
   };
   //html
   return (
@@ -42,7 +60,7 @@ export default function LargeCardDesktop({
         <div className="image-container">
           <img src={imgSrc} alt={imgAltText}></img>
         </div>
-        
+
         <div className="card-information-wrap">
           <div className="large-info-wrap">
             <div className="large-info-wrap-left">
@@ -86,18 +104,21 @@ export default function LargeCardDesktop({
             <div className="description-text">{description}</div>
             <div className="border-line"></div>
 
-            {isEvent ? (
+            {isEvent && isTicket ? (
               <div className="ticket-wrap">
                 <p className="ticket-text">Date: {ticketDate}</p>
-                <p className="ticket-text">Time: {ticketTime}</p>
-                {isTicket ? (
-                    <img src="https://i.stack.imgur.com/oSqy5.png" className="ticket-code-img"></img>
-                ) : (
-                  <>
-                    <h1 className="price">${price}</h1>
-                    <DefaultButton>Checkout</DefaultButton>
-                  </>
-                )}
+                <p className="ticket-text">Time: {tConvert(timeStart)} to {tConvert(timeEnd)}</p>
+                <img
+                  src="https://i.stack.imgur.com/oSqy5.png"
+                  className="ticket-code-img"
+                ></img>
+              </div>
+            ) : isEvent && !isTicket ? (
+              <div className="event-wrap">
+                <p className="ticket-text">Date: {ticketDate}</p>
+                <p className="ticket-text">Time: {tConvert(timeStart)} to {tConvert(timeEnd)}</p>
+                <h1 className="price">Price: ${(Math.round(ticketPrice * 100) / 100).toFixed(2)}</h1>
+                <DefaultButton>Purchase</DefaultButton> 
               </div>
             ) : (
               <div className="description2-text">
@@ -243,7 +264,7 @@ export default function LargeCardDesktop({
           padding-left: 30px;
         }
 
-        .ticket-wrap{
+        .ticket-wrap {
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -251,7 +272,15 @@ export default function LargeCardDesktop({
           padding: 0px 15px;
         }
 
-        .ticket-text{
+        .event-wrap {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 5px;
+          margin-left: 40px;
+        }
+
+        .ticket-text {
           font-family: var(--font-roboto);
           font-size: var(--font-size-body-L);
           line-height: 1.4;
