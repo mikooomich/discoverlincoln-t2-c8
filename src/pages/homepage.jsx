@@ -9,8 +9,36 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import DefaultButton from '@/components/DefaultButton'
 import Gallery from '@/components/Gallery'
 import GalleryImage from '@/components/GalleryImage'
+import { useEffect, useState } from "react";
+import SmallCard from '@/components/SmallCard'
 
 export default function homepage() {
+    const [eventsStrapiData, setEventsStrapiData] = useState([]); // events
+    const [attractionStrapiData, setAttractionStrapiData] = useState([]);
+    const [businessStrapiData, setBusinessStrapiData] = useState([]);
+
+    useEffect(() => {
+        async function fetchStrapiData() {
+            const response = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/events?populate=*');
+            const data = await response.json();
+            setEventsStrapiData(data.data);
+
+            const attractionResponse = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/attrractions?populate=*')
+            const attractionData = await attractionResponse.json();
+            setAttractionStrapiData(attractionData.data);
+
+            const businessResponse = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/businesses?populate=*');
+            const businessData = await businessResponse.json();
+            setBusinessStrapiData(businessData.data);
+
+            // console.log(strapiData)
+        }
+
+        fetchStrapiData()
+    }, [])
+
+
+
     return (
         <>
             <div className="homepage">
@@ -46,9 +74,24 @@ export default function homepage() {
                                 </div>
                             </div>
                             <div className="upcoming-events-wrap">
-                                <h1 className="upcoming-events-subtitle">Upcoming Events</h1>
                                 <div className="event-card-frame">
-                                    <h2>INSERT SMALL EVENT CARDS</h2>
+                                    {/* <h2>INSERT SMALL EVENT CARDS</h2> */}
+                                    <CardCarousel margin="0px 0px 40px 0px">
+                                    <h1 className="upcoming-events-subtitle">Upcoming Events</h1>
+
+                                        {eventsStrapiData?.map((card, index) => (
+                                            <li key={index} className="smallCardli">
+                                                <SmallCard
+                                                    title={card.attributes.title}
+                                                    imgSrc={card.attributes.image.data.attributes.url}
+                                                    category={card.attributes.tags}
+                                                > <Image src="Icon-glass.svg" width={20} height={20} alt="uwu" />
+                                                </SmallCard>
+                                               
+                                            </li>
+                                        ))}
+
+                                    </CardCarousel>
                                 </div>
                                 <button className="see-all-events-button">SEE ALL</button>
                             </div>
@@ -107,51 +150,63 @@ export default function homepage() {
 
                 <Section marginBottom='40px' marginTop='300px'>
                     <CardCarousel title="Events" margin="0px 0px 40px 0px">
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
+
+                        {eventsStrapiData?.map((card, index) => (
+                            <li key={index}>
+                                <LargeCardMobile
+                                    title={card.attributes.title}
+                                    imgSrc={card.attributes.image.data.attributes.url}
+                                    address={card.attributes.location}
+                                    category={card.attributes.tags}
+                                    description={card.attributes?.richTextDescription}
+                                    rating={card.attributes?.numStars} isTicket={card.attributes?.isTicket}
+                                    ticketDate={card.attributes.date} timeStart={card.attributes.startTime}
+                                    timeEnd={card.attributes.endTime}>
+                                </LargeCardMobile>
+                            </li>
+                        ))}
+
                     </CardCarousel>
                     <DefaultButton>See More</DefaultButton>
                     <hr />
                     <CardCarousel title="Attractions" margin="40px 0px 40px 0px">
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
+
+                        {attractionStrapiData?.map((card, index) => (
+                            <li key={index}>
+                                <LargeCardMobile
+                                    title={card.attributes.title}
+                                    imgSrc={card.attributes.image.data.attributes.url}
+                                    address={card.attributes.location}
+                                    category={card.attributes.tags}
+                                    description={card.attributes?.richTextDescription}
+                                    rating={card.attributes?.numStars} isTicket={card.attributes?.isTicket}
+                                    ticketDate={card.attributes.date} timeStart={card.attributes.startTime}
+                                    timeEnd={card.attributes.endTime}>
+                                </LargeCardMobile>
+                            </li>
+                        ))}
+
                     </CardCarousel>
                     <DefaultButton>See More</DefaultButton>
                     <hr />
 
                     <CardCarousel title="Business" margin="40px 0px 40px 0px">
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
+
+                        {businessStrapiData?.map((card, index) => (
+                            <li key={index}>
+                                <LargeCardMobile
+                                    title={card.attributes.title}
+                                    imgSrc={card.attributes.image.data.attributes.url}
+                                    address={card.attributes.location}
+                                    category={card.attributes.tags}
+                                    description={card.attributes?.richTextDescription}
+                                    rating={card.attributes?.numStars} isTicket={card.attributes?.isTicket}
+                                    ticketDate={card.attributes.date} timeStart={card.attributes.startTime}
+                                    timeEnd={card.attributes.endTime}>
+                                </LargeCardMobile>
+                            </li>
+                        ))}
+
                     </CardCarousel>
                     <DefaultButton className="">See More</DefaultButton>
                 </Section>
@@ -173,7 +228,11 @@ export default function homepage() {
             <style jsx>{`
                 {/* for card spacing */}
                 li {
-                    margin: 20px;
+                    margin: 20px 20px;
+                }
+
+                .smallCardli {
+                    margin: 10px 00px 5px 0px;
                 }
 
                 h2 {
@@ -315,6 +374,7 @@ export default function homepage() {
                     align-content: flex-start;
                     width: 393px;
                     height: auto;
+                    margin-right: 40px;
                 }
 
                 .upcoming-events-subtitle{
