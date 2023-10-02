@@ -15,14 +15,20 @@ import { faLocationArrow, faArrowUpFromBracket } from "@fortawesome/free-solid-s
 export default function SmallCard({
 	title = "Title wha wah",
 	category = "restaurant",
-	imgUrl = "https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg",
+	imgSrc = "https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg",
 	children
 }) {
 
 	const categoryColors = {
 		restaurant: "orange",
 		music: "purple",
+		Other: "blue"
 	};
+
+	// default to selecting other tag
+	if (categoryColors[category] == undefined) {
+		category = "Other";
+	}
 
 
 	return (
@@ -35,7 +41,7 @@ export default function SmallCard({
 						<div className="large-info-wrap-left">
 							<h1 className="title">{title}</h1>
 						</div>
-						
+
 						<div className="large-info-wrap-right">
 
 							<div className="title-wrap">
@@ -43,7 +49,7 @@ export default function SmallCard({
 									{children}
 								</div>
 								<div className="category-tag">
-									<h1>Placeholder</h1>
+									<h1>{category}</h1>
 								</div>
 							</div>
 
@@ -77,6 +83,7 @@ export default function SmallCard({
 				height: 90px;
 
 				box-shadow: var(--shadow-box-massive-card);
+				background-color: #FFFFFF;
 			}
 
 			.image-container {
@@ -84,7 +91,7 @@ export default function SmallCard({
 				height: 65px;
 				background-position: center center;
 				background-repeat: no-repeat;
-				background-image: url(${imgUrl});
+				background-image: url(${imgSrc});
 				background-size: cover;
 				border-radius: 5px;
 				border: 1px solid #B7B7B7;
@@ -105,10 +112,14 @@ export default function SmallCard({
 				color: white;
 				background-color: ${categoryColors[category]};
 				padding: 5px;
+				
 				font-weight: 500;
 				font-family: var(--font-roboto);
 				font-size: var(--font-size-body-S);
+				text-align: center;
+
 				width: fit-content;
+				min-width: 60px;
 			}
 
 			.title {
