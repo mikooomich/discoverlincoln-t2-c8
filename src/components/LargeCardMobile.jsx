@@ -2,6 +2,7 @@ import React from "react";
 import { faStar as faStarfilled } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarOutline } from "@fortawesome/free-regular-svg-icons";
+import DefaultButton from "./DefaultButton";
 
 export default function LargeCardMobile({
   title = "Title",
@@ -16,9 +17,11 @@ export default function LargeCardMobile({
   "Saturday: 9am - 9pm",
   "Sunday: 9am - 9pm"],
   rating,
-  isTicket = true,
+  isEvent = true,
+  isTicket = false,
   ticketDate = "October 22nd, 2023",
   ticketTime = "6pm to 8:30pm",
+  ticketPrice= 20.00,
   imgSrc = "https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg",
   imgAltText
 }) {
@@ -83,46 +86,44 @@ export default function LargeCardMobile({
           <div className="description-wrap">
             <div className="description-text">{description}</div>
             <div className="border-line"></div>
-            {isTicket ? (
+            {isEvent && isTicket ? (
               <div className="ticket-wrap">
-                <p className="ticket-text">Date: {ticketDate}</p>
-                <p className="ticket-text">Time: {ticketTime}</p>
-                <img
-                  src="https://i.stack.imgur.com/oSqy5.png"
-                  className="ticket-code-img"
-                ></img>
-              </div>
-            ) : (
+                  <p className="ticket-text">Date: {ticketDate}</p>
+                  <p className="ticket-text">Time: {ticketTime}</p>
+                  <img
+                    src="https://i.stack.imgur.com/oSqy5.png"
+                    className="ticket-code-img"
+                  ></img>
+                </div>
+              ) : isEvent && !isTicket ? (
+                <div className="event-wrap">
+                  <p className="ticket-text">Date: {ticketDate}</p>
+                  <p className="ticket-text">Time: {ticketTime}</p>
+                  <p className="ticket-text">Price: ${(Math.round(ticketPrice * 100) / 100).toFixed(2)}</p>
+                  <DefaultButton>Purchase</DefaultButton>
+                  
+                </div>
+              ) : (
               <div className="description2-text">
-                <h1 className="hours-title">Hours of Operation:</h1>
-                <p className="hours-description">
-
-				{/* {
-					// idk why this doesnt work
-				  hoursOfOperation.map((element) => {
-					// console.log(element)
-					<>
-					<p> {element}</p>
-					<br></br>
-					</>
-                  })} */}
-
-                  Monday: 11am - 6pm
-                  <br />
-                  Tuesday: 11am - 6pm
-                  <br />
-                  Wednesday: 11am - 6pm
-                  <br />
-                  Thursday: 11am - 6pm
-                  <br />
-                  Friday: 11am - 9pm
-                  <br />
-                  Saturday: 9am - 9pm
-                  <br />
-                  Sunday: 9am - 9pm
-                </p>
-              </div>
+                  <h1 className="hours-title">Hours of Operation:</h1>
+                  <p className="hours-description">
+                    Monday: 11am - 6pm
+                    <br />
+                    Tuesday: 11am - 6pm
+                    <br />
+                    Wednesday: 11am - 6pm
+                    <br />
+                    Thursday: 11am - 6pm
+                    <br />
+                    Friday: 11am - 9pm
+                    <br />
+                    Saturday: 9am - 9pm
+                    <br />
+                    Sunday: 9am - 9pm
+                  </p>
+                </div>
             )}
+            
           </div>
         </div>
       </div>
@@ -218,6 +219,7 @@ export default function LargeCardMobile({
           border-left: 1px solid grey;
           height: 150px;
           margin-left: 5px;
+          margin-right: 5px;
         }
 
         .description2-wrap {
@@ -244,8 +246,18 @@ export default function LargeCardMobile({
         .ticket-wrap {
           display: flex;
           flex-direction: column;
-          justify-content: center;
           align-items: center;
+          gap: 5px;
+          margin-right: 10px;
+        }
+
+        .event-wrap {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 5px;
+          margin-left: 5px;
+
         }
 
         .ticket-text {
