@@ -2,6 +2,7 @@ import React from "react";
 import { faStar as faStarfilled } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarOutline } from "@fortawesome/free-regular-svg-icons";
+import DefaultButton from "./DefaultButton";
 
 export default function LargeCardDesktop({
   title = "Title",
@@ -10,7 +11,9 @@ export default function LargeCardDesktop({
   description = "Explore endless fields of vines and grapes, with twists and turns to your hearts content. Fun for the whole family. Enjoy a warm, sunny day, in the relaxing yards of vine. Hurry up! Space is limited! Our Vineyards are open to the public between April 23 and November 4th. Please note that weather circumstances may change, please dress accordingly and prepare for the weather. We are not responsible for lost belongings.",
   hoursOfOperation = [],
   rating,
+  isEvent = true,
   isTicket = true,
+  price = 0,
   ticketDate = "October 22nd, 2023",
   ticketTime = "6pm to 8:30pm",
 }) {
@@ -74,11 +77,18 @@ export default function LargeCardDesktop({
             <div className="description-text">{description}</div>
             <div className="border-line"></div>
 
-            {isTicket ? (
+            {isEvent ? (
               <div className="ticket-wrap">
                 <p className="ticket-text">Date: {ticketDate}</p>
                 <p className="ticket-text">Time: {ticketTime}</p>
-                <img src="https://i.stack.imgur.com/oSqy5.png" className="ticket-code-img"></img>
+                {isTicket ? (
+                    <img src="https://i.stack.imgur.com/oSqy5.png" className="ticket-code-img"></img>
+                ) : (
+                  <>
+                    <h1 className="price">${price}</h1>
+                    <DefaultButton>Checkout</DefaultButton>
+                  </>
+                )}
               </div>
             ) : (
               <div className="description2-text">
