@@ -45,10 +45,16 @@ export default function LargeCardMobile({
     return (hour % 12 || 12) + ":" + minute + (hour < 12 ? "AM" : "PM");
 }
 
-  const categoryColors = {
-    restaurant: "orange",
-    music: "purple",
-  };
+const categoryColors = {
+  Restaurant: "red",
+  Music: "purple",
+  PerformingArts: "green",
+  Festival: "orange",
+  Sports: "blue",
+  Charity: "yellow",
+  Other: "cyan",
+};
+
   //html
   return (
     <>
@@ -109,7 +115,7 @@ export default function LargeCardMobile({
               ) : isEvent && !isTicket ? (
                 <div className="event-wrap">
                   <p className="ticket-text">Date: {ticketDate}</p>
-                  <p className="ticket-text">Time: {ticketTime}</p>
+                  <p className="ticket-text">Time: {tConvert(timeStart)} to {tConvert(timeEnd)}</p>
                   <p className="ticket-text">Price: ${(Math.round(ticketPrice * 100) / 100).toFixed(2)}</p>
                   <DefaultButton>Purchase</DefaultButton>
                   

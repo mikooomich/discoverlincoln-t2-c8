@@ -3,20 +3,28 @@ import { faStar as faStarfilled } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarOutline } from "@fortawesome/free-regular-svg-icons";
 import DefaultButton from "./DefaultButton";
-import DefaultButton from "./DefaultButton";
 
 export default function LargeCardDesktop({
   title = "Title",
   address = "101 Address Street, Lincoln, ON",
   category = "restaurant",
   description = "Explore endless fields of vines and grapes, with twists and turns to your hearts content. Fun for the whole family. Enjoy a warm, sunny day, in the relaxing yards of vine. Hurry up! Space is limited! Our Vineyards are open to the public between April 23 and November 4th. Please note that weather circumstances may change, please dress accordingly and prepare for the weather. We are not responsible for lost belongings.",
-  hoursOfOperation = [],
+  hoursOfOperation = [
+    " Monday: 11am - 6pm",
+    "Tuesday: 11am - 6pm",
+    "Wednesday: 11am - 6pm",
+    "Thursday: 11am - 6pm",
+    "Friday: 11am - 9pm",
+    "Saturday: 9am - 9pm",
+    "Sunday: 9am - 9pm",
+  ],
   rating,
   isEvent = true,
   isTicket = true,
-  price = 0,
-  ticketDate = "October 22nd, 2023",
-  ticketTime = "6pm to 8:30pm",
+  ticketDate = "2023-10-17",
+  timeStart = "18:00:00",
+  timeEnd = "20:30:00",
+  ticketPrice= 0,
   imgSrc = "https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg",
   imgAltText,
   barcodeUID,
@@ -29,6 +37,12 @@ export default function LargeCardDesktop({
     }
     return stars;
   }
+
+  function tConvert(timeString) {
+    const [hourString, minute] = timeString.split(":");
+    const hour = +hourString % 24;
+    return (hour % 12 || 12) + ":" + minute + (hour < 12 ? "AM" : "PM");
+}
 
   const categoryColors = {
     Restaurant: "red",
@@ -93,7 +107,7 @@ export default function LargeCardDesktop({
             {isEvent && isTicket ? (
               <div className="ticket-wrap">
                 <p className="ticket-text">Date: {ticketDate}</p>
-                <p className="ticket-text">Time: {ticketTime}</p>
+                <p className="ticket-text">Time: {tConvert(timeStart)} to {tConvert(timeEnd)}</p>
                 <img
                   src="https://i.stack.imgur.com/oSqy5.png"
                   className="ticket-code-img"
@@ -102,8 +116,8 @@ export default function LargeCardDesktop({
             ) : isEvent && !isTicket ? (
               <div className="event-wrap">
                 <p className="ticket-text">Date: {ticketDate}</p>
-                <p className="ticket-text">Time: {ticketTime}</p>
-                <h1 className="price">${price}</h1>
+                <p className="ticket-text">Time: {tConvert(timeStart)} to {tConvert(timeEnd)}</p>
+                <h1 className="price">Price: ${(Math.round(ticketPrice * 100) / 100).toFixed(2)}</h1>
                 <DefaultButton>Purchase</DefaultButton> 
               </div>
             ) : (
