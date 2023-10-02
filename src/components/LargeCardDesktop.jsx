@@ -15,7 +15,6 @@ export default function LargeCardDesktop({
   isTicket = true,
   price = 0,
   ticketDate = "October 22nd, 2023",
-  ticketTime = "6pm to 8:30pm",
 }) {
   function renderStars() {
     const stars = [];
@@ -25,6 +24,9 @@ export default function LargeCardDesktop({
     }
     return stars;
   }
+
+  
+
   const categoryColors = {
     restaurant: "red",
     music: "purple",

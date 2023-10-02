@@ -114,14 +114,14 @@ export default function Search() {
         <CardCarousel title="Events" margin="0px 0px 40px 0px">
           {strapiData?.map((card, index) => (
             <li key={index}>
-              <LargeCardMobile title={card.attributes.title} address={card.attributes.location} category={card.attributes.tags} description={card.attributes?.richTextDescription} rating={card.attributes?.numStars} isTicket={card.attributes?.isTicket} ticketDate={card.date} ticketTime={card.dateTimeEnd}></LargeCardMobile>
+              <LargeCardMobile title={card.attributes.title} imgSrc={card.attributes.image.data.attributes.url} address={card.attributes.location} category={card.attributes.tags} description={card.attributes?.richTextDescription} rating={card.attributes?.numStars} isTicket={card.attributes?.isTicket} ticketDate={card.attributes.date} timeStart={card.attributes.startTime} timeEnd={card.attributes.endTime}></LargeCardMobile>
             </li>
           ))}
         </CardCarousel>
         <hr />
         <CardCarousel title="Attractions" margin="40px 0px 40px 0px">
           <li>
-            <LargeCardMobile title={strapiData[0]?.attributes.title} description={strapiData[0]?.attributes?.richTextDescription} rating={strapiData[0]?.attributes?.numStars} isTicket={strapiData[0]?.attributes?.isTicket} ticketDate={strapiData[0]?.dateTimeStart} ticketTime={strapiData[0]?.dateTimeEnd}></LargeCardMobile>
+          <LargeCardMobile></LargeCardMobile>
           </li>
           <li>
             <LargeCardMobile></LargeCardMobile>
