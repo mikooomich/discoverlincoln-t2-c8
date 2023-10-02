@@ -5,12 +5,28 @@ import Navbar from "@/components/Navbar";
 import Section from "@/components/Section";
 import TextInput from "@/components/TextInput";
 import LargeCardMobile from "@/components/LargeCardMobile";
-import React from "react";
+import React, { useEffect, useState }  from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-export default function search() {
+export default function Search() {
+
+  const [strapiData, setStrapiData] = useState([]);
+
+	useEffect(() => {
+		async function fetchStrapiData() {
+			const response = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/events?populate=*')
+			const data = await response.json()
+			console.log(data)
+
+			setStrapiData(data.data)
+      console.log(strapiData)
+		}
+ 
+		fetchStrapiData()
+	}, [])
+
   return (
     <>
       <style jsx>
@@ -96,23 +112,16 @@ export default function search() {
 
       <Section marginBottom="40px">
         <CardCarousel title="Events" margin="0px 0px 40px 0px">
-          <li>
-            <LargeCardMobile></LargeCardMobile>
-          </li>
-          <li>
-            <LargeCardMobile></LargeCardMobile>
-          </li>
-          <li>
-            <LargeCardMobile></LargeCardMobile>
-          </li>
-          <li>
-            <LargeCardMobile></LargeCardMobile>
-          </li>
+          {strapiData?.map((card, index) => (
+            <li key={index}>
+              <LargeCardMobile title={card.attributes.title} imgSrc={card.attributes.image.data.attributes.url} address={card.attributes.location} category={card.attributes.tags} description={card.attributes?.richTextDescription} rating={card.attributes?.numStars} isTicket={card.attributes?.isTicket} ticketDate={card.attributes.date} timeStart={card.attributes.startTime} timeEnd={card.attributes.endTime}></LargeCardMobile>
+            </li>
+          ))}
         </CardCarousel>
         <hr />
         <CardCarousel title="Attractions" margin="40px 0px 40px 0px">
           <li>
-            <LargeCardMobile></LargeCardMobile>
+          <LargeCardMobile></LargeCardMobile>
           </li>
           <li>
             <LargeCardMobile></LargeCardMobile>

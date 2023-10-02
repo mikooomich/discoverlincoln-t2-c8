@@ -1,36 +1,17 @@
-import React from "react";
+import React from 'react'
+
 import DefaultButton from "../components/DefaultButton";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import LargeCardDesktop from "@/components/LargeCardDesktop";
 import LargeCardMobile from "@/components/LargeCardMobile";
 import LargeCardList from "@/components/LargeCardList";
 import MapCard from "@/components/MapCard";
 
-import { useEffect, useState } from 'react'
+export default function EventAttractionTemplate({ variant = "events", strapiDataLink }) { // for whatever reason variant is an object, so need to do variant.variant
 
-export default function EventsAndAttractions() {
-
-	const [strapiData, setStrapiData] = useState();
-
-	useEffect(() => {
-		async function fetchStrapiData() {
-			const response = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/events?populate=*')
-			const data = await response.json()
-			setStrapiData(data.data)
-		}
-
-		fetchStrapiData()
-	}, [])
-
-	// console.log("current data")
-	// console.log(strapiData)
-
-
-  return (
-    <>
-      <style jsx>
-        {`
+	return (
+		<>
+			<style jsx>
+				{`
           .iconBackdrop {
             width: 450px;
             height: 500px;
@@ -212,85 +193,85 @@ export default function EventsAndAttractions() {
           }
 		  }
         `}
-      </style>
+			</style>
 
-      <div className="psudoBody">
-        <div className="iconBackdrop"></div>
+			<div className="psudoBody">
+				<div className="iconBackdrop"></div>
 
-        <div className="maincontent">
-          <div className="titleBlock">
-            <h1>Upcomming Events</h1>
-            <p>There is always something around the corner</p>
-          </div>
+				<div className="maincontent">
+					<div className="titleBlock">
+						{variant == "events" && <>
+							<h1>Upcomming Events</h1>
+							<p>There is always something around the corner</p>
+						</>
+						}
 
-          <MapCard>
-            <div className="mapPlaceholder">Map goes here</div>
-          </MapCard>
+						{variant == "attractions" && <>
+							<h1>Attractions</h1>
+							<p>Eye spy with my little eye...</p>
+						</>
+						}
+					</div>
 
-          <div className="offerings">
-            <h1 className="offerings-text">All Offerings</h1>
+					<MapCard>
+						<div className="mapPlaceholder">Map goes here</div>
+					</MapCard>
 
-            {/* scrollable offerings */}
-            <div className="cards-desktop">
-              <LargeCardList>
-				{
-					strapiData !== undefined &&
-					strapiData.map((element) => (
-							<LargeCardDesktop
-								isTicket={true}
-								title={element.attributes.title}
-								description={element.attributes.description}
-								address={element.attributes.location}
-								ticketDate={element.attributes.date}
-								ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
-								rating={element.attributes.numStars}
-								category={element.attributes.tags}
-								imgSrc={element.attributes.image.data.attributes.url}
-								imgAltText={element.attributes.image.data.attributes.alternativeText}
-								barcodeUID={element.attributes.barcodeUID}
-								
-							// hoursOfOperation={element.attributes.hoursOfOperation}
-							></LargeCardDesktop>
-					))
-				}
-              </LargeCardList>
-            </div>
-            <div className="cards-mobile">
-              <LargeCardList>
-				{
-					strapiData !== undefined &&
-					strapiData.map((element) => (
-							<LargeCardMobile
-								isTicket={true}
-								title={element.attributes.title}
-								description={element.attributes.description}
-								address={element.attributes.location}
-								ticketDate={element.attributes.date}
-								ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
-								rating={element.attributes.numStars}
-								category={element.attributes.tags}
-								imgSrc={element.attributes.image.data.attributes.url}
-								imgAltText={element.attributes.image.data.attributes.alternativeText}
-								barcodeUID={element.attributes.barcodeUID}
-								
-							// hoursOfOperation={element.attributes.hoursOfOperation}
-							></LargeCardMobile>
-					))
-				}
-              </LargeCardList>
-            </div>
+					<div className="offerings">
+						<h1 className="offerings-text">All Offerings</h1>
 
-            <div className="mobileOfferings">
-              <div id="mobileOfferingsTitles">
-                <h2>All Offerings</h2>
-                <DefaultButton text={"Browse Events"}></DefaultButton>
-              </div>
+						{/* scrollable offerings */}
+						<div className="cards-desktop">
+							<LargeCardList>
+								{
+									strapiDataLink !== undefined &&
+									strapiDataLink.map((element) => (
+										<LargeCardDesktop
+											isTicket={true}
+											title={element.attributes.title}
+											description={element.attributes.description}
+											address={element.attributes.location}
+											ticketDate={element.attributes.date}
+											ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
+											rating={element.attributes.numStars}
+											category={element.attributes.tags}
+											imgSrc={element.attributes.image.data.attributes.url}
+											imgAltText={element.attributes.image.data.attributes.alternativeText}
+											barcodeUID={element.attributes.barcodeUID}
 
-              {/* scrollable offerings */}
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+										// hoursOfOperation={element.attributes.hoursOfOperation}
+										></LargeCardDesktop>
+									))
+								}
+							</LargeCardList>
+						</div>
+						<div className="cards-mobile">
+							<LargeCardList>
+								{
+									strapiDataLink !== undefined &&
+									strapiDataLink.map((element) => (
+										<LargeCardMobile
+											isTicket={true}
+											title={element.attributes.title}
+											description={element.attributes.description}
+											address={element.attributes.location}
+											ticketDate={element.attributes.date}
+											ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
+											rating={element.attributes.numStars}
+											category={element.attributes.tags}
+											imgSrc={element.attributes.image.data.attributes.url}
+											imgAltText={element.attributes.image.data.attributes.alternativeText}
+											barcodeUID={element.attributes.barcodeUID}
+
+										// hoursOfOperation={element.attributes.hoursOfOperation}
+										></LargeCardMobile>
+									))
+								}
+							</LargeCardList>
+						</div>
+					</div>
+				</div>
+			</div>
+		</>
+	)
 }

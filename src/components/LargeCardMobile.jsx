@@ -9,21 +9,25 @@ export default function LargeCardMobile({
   address = "101 Address Street, Lincoln, ON",
   category = "restaurant",
   description = "Explore endless fields of vines and grapes, with twists and turns to your hearts content. Fun for the whole family. Enjoy a warm, sunny day, in the relaxing yards of vine. Hurry up! Space is limited!",
-  hoursOfOperation = [" Monday: 11am - 6pm",
-  "Tuesday: 11am - 6pm",
-  "Wednesday: 11am - 6pm",
- "Thursday: 11am - 6pm",
-  "Friday: 11am - 9pm",
-  "Saturday: 9am - 9pm",
-  "Sunday: 9am - 9pm"],
+  hoursOfOperation = [
+    " Monday: 11am - 6pm",
+    "Tuesday: 11am - 6pm",
+    "Wednesday: 11am - 6pm",
+    "Thursday: 11am - 6pm",
+    "Friday: 11am - 9pm",
+    "Saturday: 9am - 9pm",
+    "Sunday: 9am - 9pm",
+  ],
   rating,
   isEvent = true,
   isTicket = false,
-  ticketDate = "October 22nd, 2023",
-  ticketTime = "6pm to 8:30pm",
+  ticketDate = "2023-10-17",
+  timeStart = "18:00:00",
+  timeEnd = "20:30:00",
   ticketPrice= 0,
   imgSrc = "https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg",
-  imgAltText
+  imgAltText,
+  barcodeUID,
 }) {
   //code
   function renderStars() {
@@ -34,6 +38,13 @@ export default function LargeCardMobile({
     }
     return stars;
   }
+
+  function tConvert(timeString) {
+    const [hourString, minute] = timeString.split(":");
+    const hour = +hourString % 24;
+    return (hour % 12 || 12) + ":" + minute + (hour < 12 ? "AM" : "PM");
+}
+
   const categoryColors = {
     restaurant: "orange",
     music: "purple",
@@ -43,7 +54,7 @@ export default function LargeCardMobile({
     <>
       <div className="large-card-mobile">
         <div className="image-container"></div>
-		<img src={imgSrc} alt={imgAltText}></img>
+        <img src={imgSrc} alt={imgAltText}></img>
         <div className="card-information-wrap">
           <div className="large-info-wrap">
             <div className="large-info-wrap-left">
@@ -89,7 +100,7 @@ export default function LargeCardMobile({
             {isEvent && isTicket ? (
               <div className="ticket-wrap">
                   <p className="ticket-text">Date: {ticketDate}</p>
-                  <p className="ticket-text">Time: {ticketTime}</p>
+                  <p className="ticket-text">Time: {tConvert(timeStart)} to {tConvert(timeEnd)}</p>
                   <img
                     src="https://i.stack.imgur.com/oSqy5.png"
                     className="ticket-code-img"
@@ -153,9 +164,8 @@ export default function LargeCardMobile({
           padding: 10px 15px;
           background-color: white;
 
-		  position: sticky;
-		  bottom: 0px;
-
+          position: sticky;
+          bottom: 0px;
         }
 
         .large-info-wrap {
@@ -178,7 +188,7 @@ export default function LargeCardMobile({
           font-family: var(--font-roboto);
           font-size: var(--font-size-body-M);
         }
-    
+
         .title {
           font-family: var(--font-calps);
           font-size: var(--font-size-header-XS);
@@ -264,7 +274,7 @@ export default function LargeCardMobile({
           font-family: var(--font-roboto);
           font-size: var(--font-size-body-S);
           line-height: 1.4;
-		  padding-right: 10px;
+          padding-right: 10px;
         }
       `}</style>
     </>

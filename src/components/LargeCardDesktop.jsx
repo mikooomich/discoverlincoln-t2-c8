@@ -3,6 +3,7 @@ import { faStar as faStarfilled } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarOutline } from "@fortawesome/free-regular-svg-icons";
 import DefaultButton from "./DefaultButton";
+import DefaultButton from "./DefaultButton";
 
 export default function LargeCardDesktop({
   title = "Title",
@@ -12,11 +13,13 @@ export default function LargeCardDesktop({
   hoursOfOperation = [],
   rating,
   isEvent = true,
-  isTicket = false,
+  isTicket = true,
+  price = 0,
   ticketDate = "October 22nd, 2023",
   ticketTime = "6pm to 8:30pm",
   imgSrc = "https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg",
-  imgAltText
+  imgAltText,
+  barcodeUID,
 }) {
   function renderStars() {
     const stars = [];
@@ -26,20 +29,24 @@ export default function LargeCardDesktop({
     }
     return stars;
   }
+
   const categoryColors = {
     Restaurant: "red",
     Music: "purple",
-    PerformingArts: "green", 
-    Festival: "orange", 
-    Sports: "blue", 
-    Charity: "yellow", 
-    Other: "cyan"
+    PerformingArts: "green",
+    Festival: "orange",
+    Sports: "blue",
+    Charity: "yellow",
+    Other: "cyan",
   };
   //html
   return (
     <>
       <div className="large-card-desktop">
-        <div className="image-container"></div>
+        <div className="image-container">
+          <img src={imgSrc} alt={imgAltText}></img>
+        </div>
+
         <div className="card-information-wrap">
           <div className="large-info-wrap">
             <div className="large-info-wrap-left">
@@ -82,40 +89,42 @@ export default function LargeCardDesktop({
           <div className="description-wrap">
             <div className="description-text">{description}</div>
             <div className="border-line"></div>
+
             {isEvent && isTicket ? (
               <div className="ticket-wrap">
-                  <p className="ticket-text">Date: {ticketDate}</p>
-                  <p className="ticket-text">Time: {ticketTime}</p>
-                  <img
-                    src="https://i.stack.imgur.com/oSqy5.png"
-                    className="ticket-code-img"
-                  ></img>
-                </div>
-              ) : isEvent && !isTicket ? (
-                <div className="event-wrap">
-                  <p className="ticket-text">Date: {ticketDate}</p>
-                  <p className="ticket-text">Time: {ticketTime}</p>
-                  <DefaultButton>Purchase</DefaultButton>
-                </div>
-              ) : (
+                <p className="ticket-text">Date: {ticketDate}</p>
+                <p className="ticket-text">Time: {ticketTime}</p>
+                <img
+                  src="https://i.stack.imgur.com/oSqy5.png"
+                  className="ticket-code-img"
+                ></img>
+              </div>
+            ) : isEvent && !isTicket ? (
+              <div className="event-wrap">
+                <p className="ticket-text">Date: {ticketDate}</p>
+                <p className="ticket-text">Time: {ticketTime}</p>
+                <h1 className="price">${price}</h1>
+                <DefaultButton>Purchase</DefaultButton> 
+              </div>
+            ) : (
               <div className="description2-text">
-                  <h1 className="hours-title">Hours of Operation:</h1>
-                  <p className="hours-description">
-                    Monday: 11am - 6pm
-                    <br />
-                    Tuesday: 11am - 6pm
-                    <br />
-                    Wednesday: 11am - 6pm
-                    <br />
-                    Thursday: 11am - 6pm
-                    <br />
-                    Friday: 11am - 9pm
-                    <br />
-                    Saturday: 9am - 9pm
-                    <br />
-                    Sunday: 9am - 9pm
-                  </p>
-                </div>
+                <h1 className="hours-title">Hours of Operation:</h1>
+                <p className="hours-description">
+                  Monday: 11am - 6pm
+                  <br />
+                  Tuesday: 11am - 6pm
+                  <br />
+                  Wednesday: 11am - 6pm
+                  <br />
+                  Thursday: 11am - 6pm
+                  <br />
+                  Friday: 11am - 9pm
+                  <br />
+                  Saturday: 9am - 9pm
+                  <br />
+                  Sunday: 9am - 9pm
+                </p>
+              </div>
             )}
           </div>
         </div>
@@ -139,6 +148,12 @@ export default function LargeCardDesktop({
           background-repeat: no-repeat;
           background-image: url("https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg");
           background-size: cover;
+        }
+
+        .image-container img {
+          object-fit: cover;
+          height: 100%;
+          width: 100%;
         }
 
         .card-information-wrap {
@@ -235,7 +250,7 @@ export default function LargeCardDesktop({
           padding-left: 30px;
         }
 
-        .ticket-wrap{
+        .ticket-wrap {
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -249,10 +264,9 @@ export default function LargeCardDesktop({
           align-items: center;
           gap: 5px;
           margin-left: 40px;
-
         }
 
-        .ticket-text{
+        .ticket-text {
           font-family: var(--font-roboto);
           font-size: var(--font-size-body-L);
           line-height: 1.4;

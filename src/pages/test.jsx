@@ -57,8 +57,8 @@ export default function test() {
         </div>
       </Section>
 
-      <LargeCardMobile isTicket={true} isEvent={true}></LargeCardMobile>
-      <LargeCardMobile isTicket={false} isEvent={true}></LargeCardMobile>
+      <LargeCardMobile isEvent={true} isTicket={false}></LargeCardMobile>
+      <LargeCardMobile isEvent={true} isTicket={true}></LargeCardMobile>
 
       <ExampleState />
 
