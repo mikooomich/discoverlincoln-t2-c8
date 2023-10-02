@@ -21,7 +21,7 @@ export default function LargeCardMobile({
   isTicket = false,
   ticketDate = "October 22nd, 2023",
   ticketTime = "6pm to 8:30pm",
-  ticketPrice= 20.00,
+  ticketPrice= 0,
   imgSrc = "https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg",
   imgAltText
 }) {
