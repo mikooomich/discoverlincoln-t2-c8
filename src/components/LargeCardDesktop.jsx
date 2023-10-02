@@ -15,6 +15,10 @@ export default function LargeCardDesktop({
   isTicket = true,
   price = 0,
   ticketDate = "October 22nd, 2023",
+  ticketTime = "6pm to 8:30pm",
+  imgSrc = "https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg",
+  imgAltText,
+  barcodeUID,
 }) {
   function renderStars() {
     const stars = [];
@@ -35,7 +39,10 @@ export default function LargeCardDesktop({
   return (
     <>
       <div className="large-card-desktop">
-        <div className="image-container"></div>
+        <div className="image-container">
+          <img src={imgSrc} alt={imgAltText}></img>
+        </div>
+        
         <div className="card-information-wrap">
           <div className="large-info-wrap">
             <div className="large-info-wrap-left">
@@ -134,6 +141,12 @@ export default function LargeCardDesktop({
           background-repeat: no-repeat;
           background-image: url("https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg");
           background-size: cover;
+        }
+
+        .image-container img {
+          object-fit: cover;
+          height: 100%;
+          width: 100%;
         }
 
         .card-information-wrap {

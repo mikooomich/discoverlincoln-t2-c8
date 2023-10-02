@@ -24,6 +24,7 @@ export default function LargeCardMobile({
   timeEnd = "20:30:00",
   imgSrc = "https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg",
   imgAltText,
+  barcodeUID,
 }) {
   //code
   function renderStars() {
