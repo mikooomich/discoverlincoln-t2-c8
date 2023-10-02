@@ -22,8 +22,8 @@ export default function homepage() {
                         <div className="header-links">
                             <a href="./homepage">Home</a>
                             <a href="./search">Search</a>
-                            <a href="./events-attractions">Upcoming Events</a>
-                            <a href="./events-attractions">Attractions</a>
+                            <a href="./events">Upcoming Events</a>
+                            <a href="./attractions">Attractions</a>
                             <a href="./business-service">Businesses & Services</a>
                             <a href="./profile">Profile</a>
                         </div>
