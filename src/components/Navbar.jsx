@@ -38,8 +38,8 @@ export default function Navbar() {
 
             <a href="./homepage">Homepage</a>
             <a href="./search">Search</a>
-            <a href="./events-attractions">Upcoming Events</a>
-            <a href="./events-attractions">Attractions</a>
+            <a href="./events">Upcoming Events</a>
+            <a href="./attractions">Attractions</a>
             <a href="./business-service">Businesses & Services</a>
 
             <Link href="./profile">
