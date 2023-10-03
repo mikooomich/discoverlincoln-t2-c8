@@ -251,6 +251,7 @@ export default function EventAttractionTemplate({ variant = "events", strapiData
 									strapiDataLink?.map((element) => (
 										<LargeCardMobile
 											isTicket={true}
+                      isEvent={false}
 											title={element.attributes.title}
 											description={element.attributes.description}
 											address={element.attributes.location}
@@ -262,8 +263,9 @@ export default function EventAttractionTemplate({ variant = "events", strapiData
 											imgAltText={element.attributes.image.data.attributes.alternativeText}
 											barcodeUID={element.attributes.barcodeUID}
 
-										// hoursOfOperation={element.attributes.hoursOfOperation}
-										></LargeCardMobile>
+                      // hoursOfOperation={element.attributes.hoursOfOperation}
+                      ></LargeCardMobile>
+              
 									))
 								}
 							</LargeCardList>

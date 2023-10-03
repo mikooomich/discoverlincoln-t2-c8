@@ -3,6 +3,7 @@ import { faStar as faStarfilled } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarOutline } from "@fortawesome/free-regular-svg-icons";
 import DefaultButton from "./DefaultButton";
+import ReactMarkdown from "react-markdown";
 
 export default function LargeCardDesktop({
   title = "Title",
@@ -21,10 +22,11 @@ export default function LargeCardDesktop({
   rating,
   isEvent = true,
   isTicket = true,
+  isRegisterable = false,
   ticketDate = "2023-10-17",
   timeStart = "18:00:00",
   timeEnd = "20:30:00",
-  ticketPrice= 0,
+  ticketPrice = 0,
   imgSrc = "https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg",
   imgAltText,
   barcodeUID,
@@ -42,7 +44,7 @@ export default function LargeCardDesktop({
     const [hourString, minute] = timeString.split(":");
     const hour = +hourString % 24;
     return (hour % 12 || 12) + ":" + minute + (hour < 12 ? "AM" : "PM");
-}
+  }
 
   const categoryColors = {
     Restaurant: "red",
@@ -107,7 +109,9 @@ export default function LargeCardDesktop({
             {isEvent && isTicket ? (
               <div className="ticket-wrap">
                 <p className="ticket-text">Date: {ticketDate}</p>
-                <p className="ticket-text">Time: {tConvert(timeStart)} to {tConvert(timeEnd)}</p>
+                <p className="ticket-text">
+                  Time: {tConvert(timeStart)} to {tConvert(timeEnd)}
+                </p>
                 <img
                   src="https://i.stack.imgur.com/oSqy5.png"
                   className="ticket-code-img"
@@ -116,28 +120,27 @@ export default function LargeCardDesktop({
             ) : isEvent && !isTicket ? (
               <div className="event-wrap">
                 <p className="ticket-text">Date: {ticketDate}</p>
-                <p className="ticket-text">Time: {tConvert(timeStart)} to {tConvert(timeEnd)}</p>
-                <h1 className="price">Price: ${(Math.round(ticketPrice * 100) / 100).toFixed(2)}</h1>
-                <DefaultButton>Purchase</DefaultButton> 
+                <p className="ticket-text">
+                  Time: {tConvert(timeStart)} to {tConvert(timeEnd)}
+                </p>
+                <h1 className="price">
+                  Price: ${(Math.round(ticketPrice * 100) / 100).toFixed(2)}
+                </h1>
+                <DefaultButton>Purchase</DefaultButton>
+              </div>
+            ) : isEvent && !isTicket && !isRegisterable ? (
+              <div className="event-wrap">
+                <p className="ticket-text">Date: {ticketDate}</p>
+                <p className="ticket-text">
+                  Time: {tConvert(timeStart)} to {tConvert(timeEnd)}
+                </p>
               </div>
             ) : (
               <div className="description2-text">
                 <h1 className="hours-title">Hours of Operation:</h1>
-                <p className="hours-description">
-                  Monday: 11am - 6pm
-                  <br />
-                  Tuesday: 11am - 6pm
-                  <br />
-                  Wednesday: 11am - 6pm
-                  <br />
-                  Thursday: 11am - 6pm
-                  <br />
-                  Friday: 11am - 9pm
-                  <br />
-                  Saturday: 9am - 9pm
-                  <br />
-                  Sunday: 9am - 9pm
-                </p>
+                <ReactMarkdown className="hours-description">
+                  {hoursOfOperation}
+                </ReactMarkdown>
               </div>
             )}
           </div>
@@ -247,6 +250,7 @@ export default function LargeCardDesktop({
           flex-direction: column;
           align-items: center;
           padding: 0px 15px;
+          max-width: 200px;
         }
 
         .hours-title {
@@ -258,9 +262,9 @@ export default function LargeCardDesktop({
 
         .hours-description {
           font-family: var(--font-roboto);
-          font-size: var(--font-size-body-M);
+          font-size: var(--font-size-body-L);
           font-weight: 400;
-          line-height: 2;
+          line-height: 4;
           padding-left: 30px;
         }
 

@@ -3,28 +3,22 @@ import { faStar as faStarfilled } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarOutline } from "@fortawesome/free-regular-svg-icons";
 import DefaultButton from "./DefaultButton";
+import ReactMarkdown from "react-markdown";
 
 export default function LargeCardMobile({
   title = "Title",
   address = "101 Address Street, Lincoln, ON",
   category = "restaurant",
   description = "Explore endless fields of vines and grapes, with twists and turns to your hearts content. Fun for the whole family. Enjoy a warm, sunny day, in the relaxing yards of vine. Hurry up! Space is limited!",
-  hoursOfOperation = [
-    " Monday: 11am - 6pm",
-    "Tuesday: 11am - 6pm",
-    "Wednesday: 11am - 6pm",
-    "Thursday: 11am - 6pm",
-    "Friday: 11am - 9pm",
-    "Saturday: 9am - 9pm",
-    "Sunday: 9am - 9pm",
-  ],
+  hoursOfOperation,
   rating,
-  isEvent = true,
+  isEvent = false,
   isTicket = false,
+  isRegisterable = false,
   ticketDate = "2023-10-17",
   timeStart = "18:00:00",
   timeEnd = "20:30:00",
-  ticketPrice= 0,
+  ticketPrice = 0,
   imgSrc = "https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg",
   imgAltText,
   barcodeUID,
@@ -43,17 +37,17 @@ export default function LargeCardMobile({
     const [hourString, minute] = timeString.split(":");
     const hour = +hourString % 24;
     return (hour % 12 || 12) + ":" + minute + (hour < 12 ? "AM" : "PM");
-}
+  }
 
-const categoryColors = {
-  Restaurant: "red",
-  Music: "purple",
-  PerformingArts: "green",
-  Festival: "orange",
-  Sports: "blue",
-  Charity: "yellow",
-  Other: "cyan",
-};
+  const categoryColors = {
+    Restaurant: "red",
+    Music: "purple",
+    PerformingArts: "green",
+    Festival: "orange",
+    Sports: "blue",
+    Charity: "yellow",
+    Other: "cyan",
+  };
 
   //html
   return (
@@ -105,42 +99,41 @@ const categoryColors = {
             <div className="border-line"></div>
             {isEvent && isTicket ? (
               <div className="ticket-wrap">
-                  <p className="ticket-text">Date: {ticketDate}</p>
-                  <p className="ticket-text">Time: {tConvert(timeStart)} to {tConvert(timeEnd)}</p>
-                  <img
-                    src="https://i.stack.imgur.com/oSqy5.png"
-                    className="ticket-code-img"
-                  ></img>
-                </div>
-              ) : isEvent && !isTicket ? (
-                <div className="event-wrap">
-                  <p className="ticket-text">Date: {ticketDate}</p>
-                  <p className="ticket-text">Time: {tConvert(timeStart)} to {tConvert(timeEnd)}</p>
-                  <p className="ticket-text">Price: ${(Math.round(ticketPrice * 100) / 100).toFixed(2)}</p>
-                  <DefaultButton>Purchase</DefaultButton>
-                  
-                </div>
-              ) : (
+                <p className="ticket-text">Date: {ticketDate}</p>
+                <p className="ticket-text">
+                  Time: {tConvert(timeStart)} to {tConvert(timeEnd)}
+                </p>
+                <img
+                  src="https://i.stack.imgur.com/oSqy5.png"
+                  className="ticket-code-img"
+                ></img>
+              </div>
+            ) : isEvent && !isTicket && isRegisterable ? (
+              <div className="event-wrap">
+                <p className="ticket-text">Date: {ticketDate}</p>
+                <p className="ticket-text">
+                  Time: {tConvert(timeStart)} to {tConvert(timeEnd)}
+                </p>
+                <p className="ticket-text">
+                  Price: ${(Math.round(ticketPrice * 100) / 100).toFixed(2)}
+                </p>
+                <DefaultButton>Purchase</DefaultButton>
+              </div>
+            ) : isEvent && !isTicket && !isRegisterable ? (
+              <div className="event-wrap">
+                <p className="ticket-text">Date: {ticketDate}</p>
+                <p className="ticket-text">
+                  Time: {tConvert(timeStart)} to {tConvert(timeEnd)}
+                </p>
+              </div>
+            ) : (
               <div className="description2-text">
-                  <h1 className="hours-title">Hours of Operation:</h1>
-                  <p className="hours-description">
-                    Monday: 11am - 6pm
-                    <br />
-                    Tuesday: 11am - 6pm
-                    <br />
-                    Wednesday: 11am - 6pm
-                    <br />
-                    Thursday: 11am - 6pm
-                    <br />
-                    Friday: 11am - 9pm
-                    <br />
-                    Saturday: 9am - 9pm
-                    <br />
-                    Sunday: 9am - 9pm
-                  </p>
-                </div>
+                <h1 className="hours-title">Hours of Operation:</h1>
+                <ReactMarkdown className="hours-description">
+                  {hoursOfOperation}
+                </ReactMarkdown>
+              </div>
             )}
-            
           </div>
         </div>
       </div>
@@ -251,7 +244,7 @@ const categoryColors = {
           padding-left: 4px;
         }
 
-        .hours-description {
+        .hours-description code{
           font-family: var(--font-roboto);
           font-size: var(--font-size-body-S);
           font-weight: 400;
@@ -273,7 +266,6 @@ const categoryColors = {
           align-items: center;
           gap: 5px;
           margin-left: 5px;
-
         }
 
         .ticket-text {

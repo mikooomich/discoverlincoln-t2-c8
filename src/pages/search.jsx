@@ -3,13 +3,12 @@ import DefaultButton from "@/components/DefaultButton";
 import Section from "@/components/Section";
 import TextInput from "@/components/TextInput";
 import LargeCardMobile from "@/components/LargeCardMobile";
-import React, { useEffect, useState }  from "react";
+import React, { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 export default function Search() {
-
   const [eventStrapiData, setEventsStrapiData] = useState([]); // events
   const [attractionStrapiData, setAttractionStrapiData] = useState([]);
   const [businessStrapiData, setBusinessStrapiData] = useState([]);
@@ -21,19 +20,23 @@ export default function Search() {
 			// console.log(data)
 			setEventsStrapiData(eventData.data)
 
-			const attractionResponse = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/attrractions?populate=*')
-			const attractionData = await attractionResponse.json()
-			setAttractionStrapiData(attractionData.data)
+      const attractionResponse = await fetch(
+        "https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/attrractions?populate=*"
+      );
+      const attractionData = await attractionResponse.json();
+      setAttractionStrapiData(attractionData.data);
 
-			const businessResponse = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/businesses?populate=*')
-			const businessData = await businessResponse.json()
-			setBusinessStrapiData(businessData.data)
+      const businessResponse = await fetch(
+        "https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/businesses?populate=*"
+      );
+      const businessData = await businessResponse.json();
+      setBusinessStrapiData(businessData.data);
 
-      		// console.log(strapiData)
-		}
- 
-		fetchStrapiData()
-	}, [])
+      // console.log(strapiData)
+    }
+
+    fetchStrapiData();
+  }, []);
 
   return (
     <>
@@ -43,7 +46,6 @@ export default function Search() {
             /* heading, search bar, filter buttons */
           }
 
-		  
           h1 {
             font-size: var(--font-size-header-M);
             font-weight: var(--font-weight-titles);
@@ -61,20 +63,20 @@ export default function Search() {
           }
           .searchBoxWithIcon {
             display: flex;
-			margin: 20px;
-			box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.25);
+            margin: 20px;
+            box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.25);
           }
 
-		  .search-title{
-			font-size: var(--font-size-header-M);
-			margin: 0px 10px;
-		  }
+          .search-title {
+            font-size: var(--font-size-header-M);
+            margin: 0px 10px;
+          }
 
-		  @media screen and (max-width: 639px) {
-			.search-title{
-				font-size: var(--font-size-header-S);
-			}
-		  }
+          @media screen and (max-width: 639px) {
+            .search-title {
+              font-size: var(--font-size-header-S);
+            }
+          }
 
           .filter-sort {
             align-self: end;
@@ -98,7 +100,6 @@ export default function Search() {
         `}
       </style>
 
-
       <Section marginTop="20px">
         <h1 className="search-title">Search Events & Attractions</h1>
         <div className="topPart">
@@ -118,66 +119,67 @@ export default function Search() {
         </div>
       </Section>
 
+      {/* Events Cards */}
       <Section marginBottom="40px">
         <CardCarousel title="Events" margin="0px 0px 40px 0px">
 			
           {eventStrapiData?.map((card, index) => (
             <li key={index}>
-				<LargeCardMobile 
-					title={card.attributes.title}
-					imgSrc={card.attributes.image.data.attributes.url} 
-					address={card.attributes.location} 
-					category={card.attributes.tags}
-					description={card.attributes?.richTextDescription}
-					rating={card.attributes?.numStars} isTicket={card.attributes?.isTicket}
-					ticketDate={card.attributes.date} timeStart={card.attributes.startTime}
-					timeEnd={card.attributes.endTime}>
-		  		</LargeCardMobile>
-	 		</li>
+              <LargeCardMobile
+                title={card.attributes.title}
+                imgSrc={card.attributes.image.data.attributes.url}
+                address={card.attributes.location}
+                category={card.attributes.tags}
+                description={card.attributes?.richTextDescription}
+                rating={card.attributes?.numStars}
+                isTicket={false}
+                isEvent={true}
+								isRegisterable={card.attributes?.isRegisterable}
+                ticketDate={card.attributes.date}
+                timeStart={card.attributes.startTime}
+                timeEnd={card.attributes.endTime}
+                ticketPrice={card.attributes.ticketCost}
+              ></LargeCardMobile>
+            </li>
           ))}
-
         </CardCarousel>
         <hr />
+
+				{/* Attractions Cards */}
         <CardCarousel title="Attractions" margin="40px 0px 40px 0px">
-        
           {attractionStrapiData?.map((card, index) => (
             <li key={index}>
-              	<LargeCardMobile 
-					title={card.attributes.title}
-					imgSrc={card.attributes.image.data.attributes.url} 
-					address={card.attributes.location} 
-					category={card.attributes.tags}
-					description={card.attributes?.richTextDescription}
-					rating={card.attributes?.numStars} isTicket={card.attributes?.isTicket}
-					ticketDate={card.attributes.date} timeStart={card.attributes.startTime}
-					timeEnd={card.attributes.endTime}>
-				</LargeCardMobile>
+              <LargeCardMobile
+                title={card.attributes.title}
+                imgSrc={card.attributes.image.data.attributes.url}
+                address={card.attributes.location}
+                category={card.attributes.tags}
+                description={card.attributes?.richTextDescription}
+                rating={card.attributes?.numStars}
+                hoursOfOperation={card.attributes?.hoursOfOperation}
+              ></LargeCardMobile>
             </li>
           ))}
-
         </CardCarousel>
         <hr />
 
+				{/* Business Cards */}
         <CardCarousel title="Business" margin="40px 0px 40px 0px">
-
-		  {businessStrapiData?.map((card, index) => (
+          {businessStrapiData?.map((card, index) => (
             <li key={index}>
-              	<LargeCardMobile 
-					title={card.attributes.title}
-					imgSrc={card.attributes.image.data.attributes.url} 
-					address={card.attributes.location} 
-					category={card.attributes.tags}
-					description={card.attributes?.richTextDescription}
-					rating={card.attributes?.numStars} isTicket={card.attributes?.isTicket}
-					ticketDate={card.attributes.date} timeStart={card.attributes.startTime}
-					timeEnd={card.attributes.endTime}>
-				</LargeCardMobile>
+              <LargeCardMobile
+                title={card.attributes.title}
+                imgSrc={card.attributes.image.data.attributes.url}
+                address={card.attributes.location}
+                category={card.attributes.tags}
+                description={card.attributes?.richTextDescription}
+                rating={card.attributes?.numStars}
+                hoursOfOperation={card.attributes?.hoursOfOperation}
+              ></LargeCardMobile>
             </li>
           ))}
-
         </CardCarousel>
       </Section>
-
     </>
   );
 }
