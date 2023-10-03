@@ -57,7 +57,7 @@ export default function test() {
         </div>
       </Section>
 
-      <LargeCardDesktop isEvent={true} isTicket={false}></LargeCardDesktop>
+      <LargeCardDesktop isEvent={true} isTicket={false} isRegisterable={false}></LargeCardDesktop>
       <LargeCardDesktop isEvent={true} isTicket={true}></LargeCardDesktop>
 
       <ExampleState />
