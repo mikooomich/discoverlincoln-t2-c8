@@ -5,7 +5,7 @@ import { faHouse, faMagnifyingGlass, faCalendarCheck, faCamera, faStore, faUser 
 import DefaultButton from './DefaultButton'
 
 
-export default function MobileHamburgerMenu() {
+export default function MobileHamburgerMenu({isHomepage = false}) {
 	//html
 	return (
 		<>
@@ -65,7 +65,11 @@ export default function MobileHamburgerMenu() {
 			{/* styles */}
 			<style jsx>{`
 				#psudoHamburgeBody {
-					background-color: #005731;
+					// ask how to hadel transparency
+					{/* homepage overrides */}
+					background-color: var(--color-elevated-green);
+					position: ${!isHomepage ? "default" : "absolute"};
+					top: 80px;
 					padding: 20px 0px;
 				}
 
@@ -75,10 +79,6 @@ export default function MobileHamburgerMenu() {
 					text-align: left;
 				}
 
-				.psudoHamburgeBody DefaultButton:hover{
-					
-				}
-         
 				
 			`}</style>
 		</>

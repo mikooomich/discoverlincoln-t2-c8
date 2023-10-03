@@ -10,16 +10,11 @@ import Link from "next/link";
 export default function Navbar({ isHomepage = false }) {
 	const [isNavExpanded, setIsNavExpanded] = useState(false);
 
-	let bgColor = "var(--color-elevated-green)";
-
-	if (isHomepage) {
-		bgColor = "transparent";
-	}
 
 	return (
 		<>
 			{/* html */}
-			<div className="header-wrap">
+			<div className="header-wrap" >
 				<div className="header">
 
 					<div className="linconLogo">
@@ -58,7 +53,7 @@ export default function Navbar({ isHomepage = false }) {
 					</div>
 				</div>
 				<div className={isNavExpanded ? "nav-expanded" : "nav-closed"}>
-					<MobileHamburgerMenu></MobileHamburgerMenu>
+					<MobileHamburgerMenu isHomepage={isHomepage}></MobileHamburgerMenu>
 				</div>
 			</div>
 
@@ -77,7 +72,8 @@ export default function Navbar({ isHomepage = false }) {
           padding: 20px;
 
 			{/* homepage overrides */}
-		  background-color: ${!isHomepage ? "var(--color-elevated-green)" : "transparent"};
+		  background-color: ${!isHomepage || isNavExpanded ? "var(--color-elevated-green)" : "transparent"};
+
 		  position: ${!isHomepage ? "default" : "absolute"};
         }
 
