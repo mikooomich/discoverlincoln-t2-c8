@@ -1,7 +1,8 @@
 import React from "react";
 import Image from "next/image";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { faBars, faUser, faHouse, faL } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MobileHamburgerMenu from "./MobileHamburgerMenu";
@@ -10,6 +11,12 @@ import Link from "next/link";
 export default function Navbar({ isHomepage = false }) {
 	const [isNavExpanded, setIsNavExpanded] = useState(false);
 
+	const router = useRouter();
+	useEffect(() => {
+		router.events.on("routeChangeComplete", () => {
+			setIsNavExpanded(false);
+		});
+	}, []);
 
 	return (
 		<>
