@@ -19,6 +19,7 @@ export default function DefaultButton({
 	padding = "var(--padding-btn-default)",
 	className = "",
 	href = "",
+	onClick,
 	children }) {
 
 	let useMaxWidth = "";
@@ -40,7 +41,7 @@ export default function DefaultButton({
 
 
 			{!isLink &&
-				<button className={`defaultStyle ${className}`}>{children}</button>}
+				<button className={`defaultStyle ${className}`} onClick={onClick}>{children}</button>}
 
 
 			<style jsx>
