@@ -9,18 +9,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 export default function Search() {
-  const [strapiData, setStrapiData] = useState([]); // events
+  const [eventStrapiData, setEventsStrapiData] = useState([]); // events
   const [attractionStrapiData, setAttractionStrapiData] = useState([]);
   const [businessStrapiData, setBusinessStrapiData] = useState([]);
 
-  useEffect(() => {
-    async function fetchStrapiData() {
-      const response = await fetch(
-        "https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/events?populate=*"
-      );
-      const data = await response.json();
-      // console.log(data)
-      setStrapiData(data.data);
+	useEffect(() => {
+		async function fetchStrapiData() {
+			const eventResponse = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/events?populate=*')
+			const eventData = await eventResponse.json()
+			// console.log(data)
+			setEventsStrapiData(eventData.data)
 
       const attractionResponse = await fetch(
         "https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/attrractions?populate=*"
@@ -124,7 +122,8 @@ export default function Search() {
       {/* Events Cards */}
       <Section marginBottom="40px">
         <CardCarousel title="Events" margin="0px 0px 40px 0px">
-          {strapiData?.map((card, index) => (
+			
+          {eventStrapiData?.map((card, index) => (
             <li key={index}>
               <LargeCardMobile
                 title={card.attributes.title}

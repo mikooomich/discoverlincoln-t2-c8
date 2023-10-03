@@ -1,16 +1,13 @@
 import React from 'react'
 import DefaultButton from '@/components/DefaultButton'
 import BusinessCard from '@/components/BusinessCard'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
 import CardCarousel from '@/components/CardCarousel'
 import LargeCardMobile from '@/components/LargeCardMobile'
-
-import { faWindowRestore, faCircleInfo, faTruckMedical, faStore, faUtensils, faCarrot, faStrikethrough, faCrown } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Section from '@/components/Section'
 import Link from 'next/link'
 
+import { faWindowRestore, faCircleInfo, faTruckMedical, faStore, faUtensils, faCarrot, faStrikethrough, faCrown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from 'react'
 
 export default function business() {
@@ -274,25 +271,24 @@ export default function business() {
 				<Section usePadding={true}>
 					<div className='selectionsContent'>
 						<CardCarousel title="Our Fine Selections" alignTitle='end' singleLineDisplay={true}>
-							{
-								strapiData !== undefined &&
-								strapiData.map((element) => (
-									<li>
-										<LargeCardMobile
-											isTicket={false}
-											title={element.attributes.title}
-											description={element.attributes.description}
-											address={element.attributes.location}
-											ticketDate={`${element.attributes.dateStart} - ${element.attributes.dateEnd}`}
-											rating={element.attributes.numStars}
-											category={element.attributes.tags}
-											imgSrc={element.attributes.image.data.attributes.url}
-											imgAltText={element.attributes.image.data.attributes.alternativeText}
-										// hoursOfOperation={element.attributes.hoursOfOperation}
-										></LargeCardMobile>
-									</li>
 
-								))
+							{strapiData?.map((element, index) => (
+								<li key={index}>
+									<LargeCardMobile
+										isTicket={false}
+										title={element.attributes.title}
+										description={element.attributes.description}
+										address={element.attributes.location}
+										ticketDate={`${element.attributes.dateStart} - ${element.attributes.dateEnd}`}
+										rating={element.attributes.numStars}
+										category={element.attributes.tags}
+										imgSrc={element.attributes.image.data.attributes.url}
+										imgAltText={element.attributes.image.data.attributes.alternativeText}
+									// hoursOfOperation={element.attributes.hoursOfOperation}
+									></LargeCardMobile>
+								</li>
+
+							))
 							}
 						</CardCarousel>
 

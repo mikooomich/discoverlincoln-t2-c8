@@ -118,7 +118,9 @@ export default function DefaultButton({
 
 			.mobileNav:hover {
 				filter: brightness(70%);
-				{/* font-size: 28px; */}
+				text-decoration: underline;
+				transform: scale(1.02);
+				transition: 0.5s;
 			}
 
 			{/* make mobile nav link stretch across entire width */}

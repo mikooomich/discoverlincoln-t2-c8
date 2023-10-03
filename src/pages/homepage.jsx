@@ -1,33 +1,56 @@
+import React from 'react'
+import Image from 'next/image'
+
 import TextInput from '@/components/TextInput'
 import Section from '@/components/Section'
 import LargeCardMobile from '@/components/LargeCardMobile'
 import CardCarousel from '@/components/CardCarousel'
-import React from 'react'
-import Image from 'next/image'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import DefaultButton from '@/components/DefaultButton'
 import Gallery from '@/components/Gallery'
 import GalleryImage from '@/components/GalleryImage'
+import SmallCard from '@/components/SmallCard'
+import DefaultButton from '@/components/DefaultButton'
+import Footer from '@/components/Footer'
+import Navbar from '@/components/Navbar'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { useEffect, useState } from "react";
+
+
 
 export default function homepage() {
+    const [eventsStrapiData, setEventsStrapiData] = useState([]); // events
+    const [attractionStrapiData, setAttractionStrapiData] = useState([]);
+    const [businessStrapiData, setBusinessStrapiData] = useState([]);
+
+    useEffect(() => {
+        async function fetchStrapiData() {
+            const eventResponse = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/events?populate=*');
+            const eventData = await eventResponse.json();
+            setEventsStrapiData(eventData.data);
+
+            const attractionResponse = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/attrractions?populate=*')
+            const attractionData = await attractionResponse.json();
+            setAttractionStrapiData(attractionData.data);
+
+            const businessResponse = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/businesses?populate=*');
+            const businessData = await businessResponse.json();
+            setBusinessStrapiData(businessData.data);
+
+            // console.log(strapiData)
+        }
+
+        fetchStrapiData()
+    }, [])
+
+
+
     return (
         <>
+            <Navbar isHomepage={true}></Navbar>
+            
             <div className="homepage">
                 <div className="landing-view">
-                    <div className="header-1">
-                        <div className='header-logo'>
-                            <Image src="logoIcon.svg" width={60} height={60} alt="Lincon logo" />
-                        </div>
-                        <div className="header-links">
-                            <a href="./homepage">Home</a>
-                            <a href="./search">Search</a>
-                            <a href="./events">Upcoming Events</a>
-                            <a href="./attractions">Attractions</a>
-                            <a href="./business-service">Businesses & Services</a>
-                            <a href="./profile">Profile</a>
-                        </div>
-                    </div>
                     <div className="landing-view-wrap">
                         <div className="landing-view-greet">
                             <div className="greeting-frame">
@@ -46,9 +69,24 @@ export default function homepage() {
                                 </div>
                             </div>
                             <div className="upcoming-events-wrap">
-                                <h1 className="upcoming-events-subtitle">Upcoming Events</h1>
                                 <div className="event-card-frame">
-                                    <h2>INSERT SMALL EVENT CARDS</h2>
+                                    {/* <h2>INSERT SMALL EVENT CARDS</h2> */}
+                                    <CardCarousel margin="0px 0px 40px 0px">
+                                    <h1 className="upcoming-events-subtitle">Upcoming Events</h1>
+
+                                        {eventsStrapiData?.map((card, index) => (
+                                            <li key={index} className="smallCardli">
+                                                <SmallCard
+                                                    title={card.attributes.title}
+                                                    imgSrc={card.attributes.image.data.attributes.url}
+                                                    category={card.attributes.tags}
+                                                > <Image src="Icon-glass.svg" width={20} height={20} alt="uwu" />
+                                                </SmallCard>
+                                               
+                                            </li>
+                                        ))}
+
+                                    </CardCarousel>
                                 </div>
                                 <button className="see-all-events-button">SEE ALL</button>
                             </div>
@@ -107,56 +145,68 @@ export default function homepage() {
 
                 <Section marginBottom='40px' marginTop='300px'>
                     <CardCarousel title="Events" margin="0px 0px 40px 0px">
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
+
+                        {eventsStrapiData?.map((card, index) => (
+                            <li key={index}>
+                                <LargeCardMobile
+                                    title={card.attributes.title}
+                                    imgSrc={card.attributes.image.data.attributes.url}
+                                    address={card.attributes.location}
+                                    category={card.attributes.tags}
+                                    description={card.attributes?.richTextDescription}
+                                    rating={card.attributes?.numStars} isTicket={card.attributes?.isTicket}
+                                    ticketDate={card.attributes.date} timeStart={card.attributes.startTime}
+                                    timeEnd={card.attributes.endTime}>
+                                </LargeCardMobile>
+                            </li>
+                        ))}
+
                     </CardCarousel>
                     <DefaultButton>See More</DefaultButton>
                     <hr />
                     <CardCarousel title="Attractions" margin="40px 0px 40px 0px">
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
+
+                        {attractionStrapiData?.map((card, index) => (
+                            <li key={index}>
+                                <LargeCardMobile
+                                    title={card.attributes.title}
+                                    imgSrc={card.attributes.image.data.attributes.url}
+                                    address={card.attributes.location}
+                                    category={card.attributes.tags}
+                                    description={card.attributes?.richTextDescription}
+                                    rating={card.attributes?.numStars} isTicket={card.attributes?.isTicket}
+                                    ticketDate={card.attributes.date} timeStart={card.attributes.startTime}
+                                    timeEnd={card.attributes.endTime}>
+                                </LargeCardMobile>
+                            </li>
+                        ))}
+
                     </CardCarousel>
                     <DefaultButton>See More</DefaultButton>
                     <hr />
 
                     <CardCarousel title="Business" margin="40px 0px 40px 0px">
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
-                        <li>
-                            <LargeCardMobile></LargeCardMobile>
-                        </li>
+
+                        {businessStrapiData?.map((card, index) => (
+                            <li key={index}>
+                                <LargeCardMobile
+                                    title={card.attributes.title}
+                                    imgSrc={card.attributes.image.data.attributes.url}
+                                    address={card.attributes.location}
+                                    category={card.attributes.tags}
+                                    description={card.attributes?.richTextDescription}
+                                    rating={card.attributes?.numStars} isTicket={card.attributes?.isTicket}
+                                    ticketDate={card.attributes.date} timeStart={card.attributes.startTime}
+                                    timeEnd={card.attributes.endTime}>
+                                </LargeCardMobile>
+                            </li>
+                        ))}
+
                     </CardCarousel>
                     <DefaultButton className="">See More</DefaultButton>
                 </Section>
 
-                <Section>
+                <Section marginBottom='200px'>
                     <h2 className="events-title">Gallery</h2>
 
                     <Gallery>
@@ -168,12 +218,18 @@ export default function homepage() {
                     </Gallery>
                 </Section>
 
+                <Footer></Footer>
+
             </div>
 
             <style jsx>{`
                 {/* for card spacing */}
                 li {
-                    margin: 20px;
+                    margin: 20px 20px;
+                }
+
+                .smallCardli {
+                    margin: 10px 00px 5px 0px;
                 }
 
                 h2 {
@@ -197,33 +253,7 @@ export default function homepage() {
                     background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url("https://dg.imgix.net/does-alcohol-still-sober-you-igdnainm-en/landscape/does-alcohol-still-sober-you-igdnainm-d3b43138ff5a2cce0d3ff444cec97153.jpg?ts=1678406840&ixlib=rails-4.3.1&auto=format%2Ccompress&fit=min&w=700&h=394&dpr=2&ch=Width%2CDPR");
                     background-size: cover;
                 }
-				.header-1{
-                    display: flex;
-                    width: 100%;
-                    height: 95px;
-                    overflow: hidden;
-                    justify-content: flex-start;
-                }
-
-                .header-logo{
-                    width: 100px;
-                    height: auto;
-                }
-
-                .header-links{
-                    padding: 0px 25px;
-                }
-
-                .header-links a{
-                    color: white;
-                    padding: 30px 16px;
-                }
-
-                .header-links a:hover{
-                    text-decoration: underline;
-                    transform: scale(1.1);
-                    transition: 0.3s;
-                }
+				
 
                 .landing-view-greet{
                     display: flex;
@@ -239,6 +269,8 @@ export default function homepage() {
                     align-content: flex-start;
                     width: 1500px;
                     padding: 0px 300px 100px 200px;
+
+                    margin-top: 200px;
                 }
                 
                 
@@ -315,6 +347,7 @@ export default function homepage() {
                     align-content: flex-start;
                     width: 393px;
                     height: auto;
+                    margin-right: 40px;
                 }
 
                 .upcoming-events-subtitle{

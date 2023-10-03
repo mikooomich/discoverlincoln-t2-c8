@@ -223,56 +223,49 @@ export default function EventAttractionTemplate({ variant = "events", strapiData
 						{/* scrollable offerings */}
 						<div className="cards-desktop">
 							<LargeCardList>
-								{
-									strapiDataLink !== undefined &&
-									strapiDataLink.map((element, index) => (
-                    <li key={index}>
-                      <LargeCardDesktop
-                        isTicket={false}
-                        isEvent={false}
-                        title={element.attributes.title}
-                        description={element.attributes.description}
-                        address={element.attributes.location}
-                        ticketDate={element.attributes.date}
-                        ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
-                        rating={element.attributes.numStars}
-                        category={element.attributes.tags}
-                        imgSrc={element.attributes.image.data.attributes.url}
-                        imgAltText={element.attributes.image.data.attributes.alternativeText}
-                        barcodeUID={element.attributes.barcodeUID}
-                        hoursOfOperation={element.attributes.hoursOfOperation}
 
-                      // hoursOfOperation={element.attributes.hoursOfOperation}
-                      ></LargeCardDesktop>
-                    </li>
-									))
+								{strapiDataLink?.map((element) => (
+
+									<LargeCardDesktop
+										isTicket={true}
+										title={element.attributes.title}
+										description={element.attributes.description}
+										address={element.attributes.location}
+										ticketDate={element.attributes.date}
+										ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
+										rating={element.attributes.numStars}
+										category={element.attributes.tags}
+										imgSrc={element.attributes.image.data.attributes.url}
+										imgAltText={element.attributes.image.data.attributes.alternativeText}
+										barcodeUID={element.attributes.barcodeUID}
+
+									// hoursOfOperation={element.attributes.hoursOfOperation}
+									></LargeCardDesktop>
+								))
 								}
 							</LargeCardList>
 						</div>
 						<div className="cards-mobile">
 							<LargeCardList>
 								{
-									strapiDataLink !== undefined &&
-									strapiDataLink.map((element, index) => (
-										<li key={index}>
-                      <LargeCardMobile
-                        isTicket={false}
-                        isEvent={false}
-                        title={element.attributes.title}
-                        description={element.attributes.description}
-                        address={element.attributes.location}
-                        ticketDate={element.attributes.date}
-                        ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
-                        rating={element.attributes.numStars}
-                        category={element.attributes.tags}
-                        imgSrc={element.attributes.image.data.attributes.url}
-                        imgAltText={element.attributes.image.data.attributes.alternativeText}
-                        barcodeUID={element.attributes.barcodeUID}
-                        hoursOfOperation={element.attributes.hoursOfOperation}
+									strapiDataLink?.map((element) => (
+										<LargeCardMobile
+											isTicket={true}
+                      isEvent={false}
+											title={element.attributes.title}
+											description={element.attributes.description}
+											address={element.attributes.location}
+											ticketDate={element.attributes.date}
+											ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
+											rating={element.attributes.numStars}
+											category={element.attributes.tags}
+											imgSrc={element.attributes.image.data.attributes.url}
+											imgAltText={element.attributes.image.data.attributes.alternativeText}
+											barcodeUID={element.attributes.barcodeUID}
 
                       // hoursOfOperation={element.attributes.hoursOfOperation}
                       ></LargeCardMobile>
-                    </li>
+              
 									))
 								}
 							</LargeCardList>

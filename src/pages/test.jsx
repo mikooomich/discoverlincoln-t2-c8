@@ -14,6 +14,7 @@ import MobileHamburgerMenu from '@/components/MobileHamburgerMenu'
 import SmallCard from '@/components/SmallCard'
 import ExampleState from '@/components/ExampleState'
 import StrapiExample from '@/components/StrapiExample'
+import AuthExample from '@/components/AuthExample'
 
 export default function test() {
   return (
@@ -63,6 +64,8 @@ export default function test() {
       <ExampleState />
 
       <StrapiExample></StrapiExample>
+
+      <AuthExample />
     </>
   )
 }
