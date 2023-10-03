@@ -9,10 +9,13 @@ import Gallery from '@/components/Gallery'
 import GalleryImage from '@/components/GalleryImage'
 import SmallCard from '@/components/SmallCard'
 import DefaultButton from '@/components/DefaultButton'
+import Footer from '@/components/Footer'
+import Navbar from '@/components/Navbar'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from "react";
+
 
 
 export default function homepage() {
@@ -44,21 +47,10 @@ export default function homepage() {
 
     return (
         <>
+            <Navbar isHomepage={true}></Navbar>
+            
             <div className="homepage">
                 <div className="landing-view">
-                    <div className="header-1">
-                        <div className='header-logo'>
-                            <Image src="logoIcon.svg" width={60} height={60} alt="Lincon logo" />
-                        </div>
-                        <div className="header-links">
-                            <a href="./homepage">Home</a>
-                            <a href="./search">Search</a>
-                            <a href="./events">Upcoming Events</a>
-                            <a href="./attractions">Attractions</a>
-                            <a href="./business-service">Businesses & Services</a>
-                            <a href="./profile">Profile</a>
-                        </div>
-                    </div>
                     <div className="landing-view-wrap">
                         <div className="landing-view-greet">
                             <div className="greeting-frame">
@@ -214,7 +206,7 @@ export default function homepage() {
                     <DefaultButton className="">See More</DefaultButton>
                 </Section>
 
-                <Section>
+                <Section marginBottom='200px'>
                     <h2 className="events-title">Gallery</h2>
 
                     <Gallery>
@@ -225,6 +217,8 @@ export default function homepage() {
                         <GalleryImage src="/pascal-bullan-8JdbMz_p_yg-unsplash 1.png" />
                     </Gallery>
                 </Section>
+
+                <Footer></Footer>
 
             </div>
 
@@ -259,33 +253,7 @@ export default function homepage() {
                     background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url("https://dg.imgix.net/does-alcohol-still-sober-you-igdnainm-en/landscape/does-alcohol-still-sober-you-igdnainm-d3b43138ff5a2cce0d3ff444cec97153.jpg?ts=1678406840&ixlib=rails-4.3.1&auto=format%2Ccompress&fit=min&w=700&h=394&dpr=2&ch=Width%2CDPR");
                     background-size: cover;
                 }
-				.header-1{
-                    display: flex;
-                    width: 100%;
-                    height: 95px;
-                    overflow: hidden;
-                    justify-content: flex-start;
-                }
-
-                .header-logo{
-                    width: 100px;
-                    height: auto;
-                }
-
-                .header-links{
-                    padding: 0px 25px;
-                }
-
-                .header-links a{
-                    color: white;
-                    padding: 30px 16px;
-                }
-
-                .header-links a:hover{
-                    text-decoration: underline;
-                    transform: scale(1.1);
-                    transition: 0.3s;
-                }
+				
 
                 .landing-view-greet{
                     display: flex;
@@ -301,6 +269,8 @@ export default function homepage() {
                     align-content: flex-start;
                     width: 1500px;
                     padding: 0px 300px 100px 200px;
+
+                    margin-top: 200px;
                 }
                 
                 

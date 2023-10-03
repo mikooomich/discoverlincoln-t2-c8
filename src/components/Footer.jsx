@@ -14,7 +14,6 @@ export default function Footer() {
 			<div className="footer">
 				<div className="footer-logos">
 					<Image src="footerIcons.svg" width={100} height={100} alt="Discover Lincon on Facebook, Instagram, Twitter"
-						style={"max-width: 10px;"}
 					/>
 				</div>
 				<div className="footer-links">
