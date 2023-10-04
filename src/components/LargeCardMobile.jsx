@@ -23,6 +23,8 @@ export default function LargeCardMobile({
   imgAltText,
   barcodeUID,
 }) {
+
+  
   //code
   function renderStars() {
     const stars = [];
@@ -97,7 +99,7 @@ export default function LargeCardMobile({
           <div className="description-wrap">
             <div className="description-text">{description}</div>
             <div className="border-line"></div>
-            {isEvent && isTicket ? (
+            {isEvent && isTicket ? ( //ticket
               <div className="ticket-wrap">
                 <p className="ticket-text">Date: {ticketDate}</p>
                 <p className="ticket-text">
@@ -108,7 +110,7 @@ export default function LargeCardMobile({
                   className="ticket-code-img"
                 ></img>
               </div>
-            ) : isEvent && !isTicket && isRegisterable ? (
+            ) : isEvent && !isTicket && isRegisterable ? ( //regiter for paid events
               <div className="event-wrap">
                 <p className="ticket-text">Date: {ticketDate}</p>
                 <p className="ticket-text">
@@ -119,18 +121,17 @@ export default function LargeCardMobile({
                 </p>
                 <DefaultButton>Purchase</DefaultButton>
               </div>
-            ) : isEvent && !isTicket && !isRegisterable ? (
+            ) : isEvent && !isTicket && !isRegisterable ? ( //free events
               <div className="event-wrap">
                 <p className="ticket-text">Date: {ticketDate}</p>
                 <p className="ticket-text">
                   Time: {tConvert(timeStart)} to {tConvert(timeEnd)}
                 </p>
               </div>
-            ) : (
+            ) : ( //business
               <div className="description2-text">
                 <h1 className="hours-title">Hours of Operation:</h1>
-                <ReactMarkdown className="hours-description">
-                  {hoursOfOperation}
+                <ReactMarkdown className="hours-description"> {hoursOfOperation}
                 </ReactMarkdown>
               </div>
             )}
@@ -244,9 +245,9 @@ export default function LargeCardMobile({
           padding-left: 4px;
         }
 
-        .hours-description code{
+        .hours-description code {
           font-family: var(--font-roboto);
-          font-size: var(--font-size-body-S);
+          font-size: 12;
           font-weight: 400;
           line-height: 1.5;
           padding-left: 10px;
