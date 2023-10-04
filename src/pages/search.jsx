@@ -135,7 +135,6 @@ export default function Search() {
             /* heading, search bar, filter buttons */
           }
 
-		  
           h1 {
             font-size: var(--font-size-header-M);
             font-weight: var(--font-weight-titles);
@@ -153,20 +152,20 @@ export default function Search() {
           }
           .searchBoxWithIcon {
             display: flex;
-			margin: 20px;
-			box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.25);
+            margin: 20px;
+            box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.25);
           }
 
-		  .search-title{
-			font-size: var(--font-size-header-M);
-			margin: 0px 10px;
-		  }
+          .search-title {
+            font-size: var(--font-size-header-M);
+            margin: 0px 10px;
+          }
 
-		  @media screen and (max-width: 639px) {
-			.search-title{
-				font-size: var(--font-size-header-S);
-			}
-		  }
+          @media screen and (max-width: 639px) {
+            .search-title {
+              font-size: var(--font-size-header-S);
+            }
+          }
 
           .filter-sort {
             align-self: end;
