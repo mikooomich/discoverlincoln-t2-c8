@@ -58,7 +58,7 @@ export default function Search() {
 		oldArray.map((item) => {
 			strapiQuery += `&filters[id][$in]=${item.id}`;
 		})
-		// console.log(strapiQuery);
+		// console.log(oldArray);
 
 		/**
 		 * Fetch data with images from strapi
@@ -104,7 +104,7 @@ export default function Search() {
 			// set the data
 			setEventsStrapiData(await reMap(searchData.events, "events"));
 			setBusinessStrapiData(await reMap(searchData.businesses, "businesses"));
-			setAttractionStrapiData(await reMap(searchData.attrractions, "attractions"));
+			setAttractionStrapiData(await reMap(searchData.attrractions, "attrractions"));
 			setSearchReq(false); // end search request
 
 			// console.log("ending data");
