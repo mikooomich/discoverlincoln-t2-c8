@@ -13,13 +13,13 @@ export default function Search() {
 	const [searchReq, setSearchReq] = useState([]); // request for a search opperation
 	const [sortFlags, setSortFlags] = useState(["title", "des"]);
 	const [reloadLocalCards, setReloadLocalCards] = useState([]); // request for a reload of local cards
-	
+
 
 	const [eventStrapiData, setEventsStrapiData] = useState([]); // events
 	const [attractionStrapiData, setAttractionStrapiData] = useState([]);
 	const [businessStrapiData, setBusinessStrapiData] = useState([]);
 
-	
+
 	useEffect(() => {
 		async function fetchStrapiData() {
 			if (searchQuery == "") {
@@ -272,7 +272,9 @@ export default function Search() {
           }
 
           .filter-sort {
+			display: flex;
             align-self: end;
+			flex-wrap: wrap;
           }
 
            {
@@ -292,14 +294,23 @@ export default function Search() {
           }
 
 
+		  {/* Sorting and filtering */}
+			.sortOptions-wrap {
+				display: flex;
+				flex-direction: column;
+				align-items: start;
+				margin-right: 20px;
+				font-size: var(--font-size-body-Mplus);
+            	font-family: var(--font-roboto);
+			}
 		  .sortOptions-wrap div {
 			display: flex;
 			justify-content: center;
+			flex-wrap: wrap;
 			{/* margin: 0px 5px */}
 		  }
 		  .sortOptions * {
-			margin: 0px 5px;
-
+			margin-right: 5px;
 		  }
         `}
 			</style>
@@ -318,16 +329,10 @@ export default function Search() {
 						</div>
 					</div>
 					<div className="filter-sort">
-						<DefaultButton className="filter-sort-btn">Filter</DefaultButton>
-						<DefaultButton className="filter-sort-btn" onClick={() => {
-							doSort(eventStrapiData, setEventsStrapiData);
-							doSort(attractionStrapiData, setAttractionStrapiData);
-							doSort(businessStrapiData, setBusinessStrapiData);
-
-						}}>Sort</DefaultButton>
 						<div className="sortOptions-wrap">
-							
+							<p style={{fontSize: "16px", marginBottom: "5px", fontWeight: "bold"}}>Sort By:</p>
 							<div className="sortOptions">
+								
 								<label htmlFor="type1">ID</label>
 								<input type="radio" id="type1" name="type" value="id" onChange={readSortType} />
 								<label htmlFor="type2">Title</label>
@@ -343,6 +348,14 @@ export default function Search() {
 								<input type="radio" id="direction2" name="direction" value="des" onChange={readDirection} />
 							</div>
 
+						</div>
+						<div>
+							<DefaultButton className="filter-sort-btn">Filter</DefaultButton>
+							<DefaultButton className="filter-sort-btn" onClick={() => {
+								doSort(eventStrapiData, setEventsStrapiData);
+								doSort(attractionStrapiData, setAttractionStrapiData);
+								doSort(businessStrapiData, setBusinessStrapiData);
+							}}>Sort</DefaultButton>
 						</div>
 					</div>
 				</div>
