@@ -11,11 +11,15 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 export default function Search() {
 	const [searchQuery, setSearchQuery] = useState([]); // the thing to search for
 	const [searchReq, setSearchReq] = useState([]); // request for a search opperation
+	const [sortFlags, setSortFlags] = useState(["title", "des"]);
+	const [reloadLocalCards, setReloadLocalCards] = useState([]); // request for a reload of local cards
+	
 
 	const [eventStrapiData, setEventsStrapiData] = useState([]); // events
 	const [attractionStrapiData, setAttractionStrapiData] = useState([]);
 	const [businessStrapiData, setBusinessStrapiData] = useState([]);
 
+	
 	useEffect(() => {
 		async function fetchStrapiData() {
 			if (searchQuery == "") {
@@ -41,6 +45,11 @@ export default function Search() {
 		fetchStrapiData()
 	}, [searchReq])
 
+
+
+	/**
+	 * Search and sort functions
+	 */
 
 	/**
 	 * {0: data...} ===> {0: attributes: {data...}}
@@ -114,7 +123,68 @@ export default function Search() {
 		}
 
 		fetchSearchResult()
-	}, [searchReq])
+	}, [searchReq, reloadLocalCards])
+
+
+
+
+	/**
+	 * Sort the data an all three strapi datas
+	 *
+	 * @param {Array} variant which data array to sort
+	 * @param {String} sortType sort by date or title
+	 * @param {String} sortDirection sort by ascending (asc) or descending (des)
+	 */
+	function doSort(variant, variantSetter, sortType, sortDirection) {
+		sortType = sortFlags[0];
+		sortDirection = sortFlags[1];
+		// console.log("sorting..." + sortType + sortDirection);
+
+		let sortedArr;
+
+		// sort by type
+		if (sortType == "id") {
+			// console.log("sorting by id")
+			sortedArr = variant.sort((a, b) => {
+				return a.id > b.id ? 1 : -1;
+			})
+		}
+
+		else if (sortType == "date") {
+			// console.log("sorting by date")
+			sortedArr = variant.sort((a, b) => {
+				let first = new Date(a.attributes.date).getTime();
+				let second = new Date(b.attributes.date).getTime();
+
+				// i think this is required for insitu
+				if (first == second) return 0;
+				else if (first > second) return 1;
+				else return -1;
+			})
+		}
+		else {
+			// console.log("sorting by title")
+			sortedArr = variant.sort((a, b) => {
+				return a.attributes.title > b.attributes.title ? 1 : -1;
+			})
+
+		}
+
+		// // reverse results if requested
+		if (sortDirection == "des") {
+			sortedArr = sortedArr.reverse();
+		}
+
+		variantSetter(sortedArr);
+		setReloadLocalCards(!reloadLocalCards);
+	}
+
+
+
+
+	/**
+	 * Misc functions
+	 */
 
 
 	/**
@@ -126,6 +196,40 @@ export default function Search() {
 		// console.log(data)
 		setSearchQuery(data)
 	}
+
+	/**
+	 * Read the type to sort by from the user
+	 * @param {*} data 
+	 */
+	const readSortType = (data) => {
+		// console.log("recieved type " + data.target.value);
+		setSortFlags([data.target.value, sortFlags[1]]);
+	}
+
+	/**
+	 * Read the direction to sort by from the user
+	 * @param {*} data 
+	 */
+	const readDirection = (data) => {
+		// console.log("recieved fdirection " + data.target.value);
+		setSortFlags([sortFlags[0], data.target.value]);
+	}
+
+	/**
+	 * Trigger a reload of the cards
+	 */
+	useEffect(() => {
+		async function fetchStrapiData() {
+			// console.log("Reloading all");
+			setEventsStrapiData(eventStrapiData);
+			setAttractionStrapiData(attractionStrapiData);
+			setBusinessStrapiData(businessStrapiData);
+			// console.log(eventStrapiData);
+		}
+
+		fetchStrapiData()
+	}, [reloadLocalCards])
+
 
 	return (
 		<>
@@ -186,6 +290,17 @@ export default function Search() {
           li {
             margin: 20px;
           }
+
+
+		  .sortOptions-wrap div {
+			display: flex;
+			justify-content: center;
+			{/* margin: 0px 5px */}
+		  }
+		  .sortOptions * {
+			margin: 0px 5px;
+
+		  }
         `}
 			</style>
 
@@ -204,14 +319,37 @@ export default function Search() {
 					</div>
 					<div className="filter-sort">
 						<DefaultButton className="filter-sort-btn">Filter</DefaultButton>
-						<DefaultButton className="filter-sort-btn">Sort</DefaultButton>
+						<DefaultButton className="filter-sort-btn" onClick={() => {
+							doSort(eventStrapiData, setEventsStrapiData);
+							doSort(attractionStrapiData, setAttractionStrapiData);
+							doSort(businessStrapiData, setBusinessStrapiData);
+
+						}}>Sort</DefaultButton>
+						<div className="sortOptions-wrap">
+							
+							<div className="sortOptions">
+								<label htmlFor="type1">ID</label>
+								<input type="radio" id="type1" name="type" value="id" onChange={readSortType} />
+								<label htmlFor="type2">Title</label>
+								<input type="radio" id="type2" name="type" value="title" onChange={readSortType} />
+								<label htmlFor="type3">Date</label>
+								<input type="radio" id="type3" name="type" value="date" onChange={readSortType} />
+							</div>
+
+							<div className="sortOptions">
+								<label htmlFor="direction1">Ascending</label>
+								<input type="radio" id="direction1" name="direction" value="asc" onChange={readDirection} />
+								<label htmlFor="direction1">Descending</label>
+								<input type="radio" id="direction2" name="direction" value="des" onChange={readDirection} />
+							</div>
+
+						</div>
 					</div>
 				</div>
 			</Section>
 
 			<Section marginBottom="40px">
 				<CardCarousel title="Events" margin="0px 0px 40px 0px">
-
 					{eventStrapiData?.map((card, index) => (
 						<li key={index}>
 							<LargeCardMobile
