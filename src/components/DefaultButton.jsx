@@ -52,7 +52,7 @@ export default function DefaultButton({
       {isLink && (
         <div className={`defaultStyle ${className}`}>
           <Link href={href}>
-            <div className={`linkChildren + ${useMaxWidth}`}>{children}</div>
+            <div className={`linkChildren + ${useMaxWidth}`} onClick={onClick}>{children}</div>
           </Link>
         </div>
       )}
