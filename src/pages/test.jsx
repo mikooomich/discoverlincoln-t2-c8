@@ -63,8 +63,6 @@ export default function test() {
 
       <ExampleState />
 
-      <StrapiExample></StrapiExample>
-
       <AuthExample />
     </>
   )

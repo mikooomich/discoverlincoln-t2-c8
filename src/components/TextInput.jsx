@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 
 
@@ -37,43 +37,44 @@ export default function TextInput({
 				width: ${width};
 			}
 
+           {
+            /* style classes for various use cases */
+          }
 
+          .loginInput {
+            display: block;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.194);
+            border: var(--border-grey-thin);
 
-			{/* style classes for various use cases */}
-			
-			.loginInput { 
-				display: block;
-				box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.194);
-				border: var(--border-grey-thin);
+             {
+              /* min-width: 400px; */
+            }
+            width: 100%;
+            line-height: 25px;
+            padding: var(--padding-btn-default);
+            font-family: var(--font-calps);
+            font-size: var(--font-size-body-L);
+          }
 
-				{/* min-width: 400px; */}
-				width:100%;
-				line-height: 25px;
-				padding: var(--padding-btn-default);
-				font-family: var(--font-calps);
-				font-size: var(--font-size-body-L);
-			}
+          .checkoutInput {
+            padding: var(--padding-btn-default);
+            border: var(--border-grey-thin);
+            width: 100%;
+            margin-right: 50px;
+          }
 
-			.checkoutInput {
-				padding: var(--padding-btn-default);
-				border: var(--border-grey-thin);
-				width:100%;
-				margin-right: 50px;
-			}
+          .search-input {
+            width: 300px;
+            height: 40px;
+          }
 
-			.search-input{
-				width: 300px;
-				height: 40px;
-			}
-
-
-			.email-input{
-				display: inline-flex;
-				padding: 2px 30px 2px 8px;
-				align-items: center;
-			}
-
-		`}</style>
-		</>
-	)
+          .email-input {
+            display: inline-flex;
+            padding: 2px 30px 2px 8px;
+            align-items: center;
+          }
+        `}
+      </style>
+    </>
+  );
 }
