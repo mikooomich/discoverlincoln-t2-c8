@@ -13,6 +13,8 @@ export default function Search() {
 	const [searchReq, setSearchReq] = useState([]); // request for a search opperation
 	const [sortFlags, setSortFlags] = useState(["title", "des"]);
 	const [reloadLocalCards, setReloadLocalCards] = useState([]); // request for a reload of local cards
+	const [allTags, setAllTags] = useState([]); // all tags avalible at the current moment
+	const [selectedTags, setSelectedTags] = useState([]); // all tags the user has selected
 
 
 	const [eventStrapiData, setEventsStrapiData] = useState([]); // events
@@ -129,6 +131,11 @@ export default function Search() {
 
 
 	/**
+	 * Filter and sort functions
+	 */
+
+
+	/**
 	 * Sort the data an all three strapi datas
 	 *
 	 * @param {Array} variant which data array to sort
@@ -180,6 +187,78 @@ export default function Search() {
 	}
 
 
+	/**
+	 * returns the tags the user selected, parsed into a filter query string
+	 * @returns
+	 */
+	function getAllSelectedTagsInFormat() {
+		let strapiQuery = "";
+		selectedTags.map((item) => {
+			strapiQuery += `&filters[tags][$in]=${item}`;
+		})
+
+		return strapiQuery;
+	}
+
+	/**
+	 * returns all tags from all strapi datas, and sets the coresponding usestate
+	 * @returns
+	 */
+	function getAllCurrentTagsArray() {
+		let allTags = [];
+
+		// Take all the tags current in a card displayed on the page
+		eventStrapiData?.map((item) => {
+			allTags.push(item.attributes.tags);
+		})
+
+		attractionStrapiData?.map((item) => {
+			allTags.push(item.attributes.tags);
+		})
+
+		businessStrapiData?.map((item) => {
+			allTags.push(item.attributes.tags);
+		})
+
+		setAllTags([...new Set(allTags)]); // remove duplicates
+		return allTags;
+	}
+
+	/**
+	 * This will request a new set of cards based on the tags selected
+	 */
+	function doFilter() {
+		getAllCurrentTagsArray(); // get all current tags
+
+		console.log("filtering...")
+		async function fetchFilterResult() {
+			// abort if no tags
+			if (selectedTags[0] === undefined) {
+				console.log("No tags, aborting, showing all results")
+				return;
+			}
+
+			/**
+			 * @param {*} variant useState to read
+			 * @param {*} setter setter for the useState
+			 */
+			async function askStrapiForFilters(variant, setter) {
+				const gotData = await fetch(
+					`https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/${variant}/?populate=*${getAllSelectedTagsInFormat()}`);
+				const searchData = await gotData.json();
+				// console.log("got data")
+				// console.log(searchData);
+				setter(searchData.data);
+			}
+
+			askStrapiForFilters("events", setEventsStrapiData);
+			askStrapiForFilters("businesses", setBusinessStrapiData);
+			askStrapiForFilters("attrractions", setAttractionStrapiData);
+		}
+
+		fetchFilterResult()
+	}
+
 
 
 	/**
@@ -213,6 +292,17 @@ export default function Search() {
 	const readDirection = (data) => {
 		// console.log("recieved fdirection " + data.target.value);
 		setSortFlags([sortFlags[0], data.target.value]);
+	}
+
+	/**
+	 * Read the tags to the user wants to filter by
+	 * @param {*} data 
+	 */
+	const readTag = (data) => {
+		// if checked, add to array, else remove from array
+		data.target.checked ? setSelectedTags([...selectedTags, data.target.value])
+			:
+			setSelectedTags([...selectedTags.filter(tag => tag != data.target.value)]);
 	}
 
 	/**
@@ -265,11 +355,6 @@ export default function Search() {
             margin: 0px 10px;
           }
 
-          @media screen and (max-width: 639px) {
-            .search-title {
-              font-size: var(--font-size-header-S);
-            }
-          }
 
           .filter-sort {
 			display: flex;
@@ -312,6 +397,23 @@ export default function Search() {
 		  .sortOptions * {
 			margin-right: 5px;
 		  }
+
+		  .filterOptions-wrap {
+			flex-wrap: wrap;
+			max-height: 60px;
+		  }
+
+
+		  @media screen and (max-width: 639px) {
+            .search-title {
+              font-size: var(--font-size-header-S);
+            }
+
+			.filterOptions-wrap {
+				max-height: none;
+				margin-bottom: 20px;
+			}
+          }
         `}
 			</style>
 
@@ -329,10 +431,24 @@ export default function Search() {
 						</div>
 					</div>
 					<div className="filter-sort">
+
+						<div className="sortOptions-wrap filterOptions-wrap ">
+						<p style={{ fontSize: "16px", marginBottom: "5px", fontWeight: "bold" }}>Filter By:</p>
+							{
+								allTags.map((tag, index) => (
+									
+									<div className="sortOptions" key={index}>
+										<input type="checkbox" id={tag} name={tag} value={tag} onChange={readTag} />
+										<label htmlFor={tag}>{tag}</label>
+									</div>
+								))
+							}
+						</div>
+
 						<div className="sortOptions-wrap">
-							<p style={{fontSize: "16px", marginBottom: "5px", fontWeight: "bold"}}>Sort By:</p>
+							<p style={{ fontSize: "16px", marginBottom: "5px", fontWeight: "bold" }}>Sort By:</p>
 							<div className="sortOptions">
-								
+
 								<label htmlFor="type1">ID</label>
 								<input type="radio" id="type1" name="type" value="id" onChange={readSortType} />
 								<label htmlFor="type2">Title</label>
@@ -350,7 +466,7 @@ export default function Search() {
 
 						</div>
 						<div>
-							<DefaultButton className="filter-sort-btn">Filter</DefaultButton>
+							<DefaultButton className="filter-sort-btn" onClick={() => { doFilter() }}>Filter</DefaultButton>
 							<DefaultButton className="filter-sort-btn" onClick={() => {
 								doSort(eventStrapiData, setEventsStrapiData);
 								doSort(attractionStrapiData, setAttractionStrapiData);
