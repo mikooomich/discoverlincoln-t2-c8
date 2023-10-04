@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 import DefaultButton from "../components/DefaultButton";
 import LargeCardDesktop from "@/components/LargeCardDesktop";
@@ -6,12 +6,16 @@ import LargeCardMobile from "@/components/LargeCardMobile";
 import LargeCardList from "@/components/LargeCardList";
 import MapCard from "@/components/MapCard";
 
-export default function EventAttractionTemplate({ variant = "events", strapiDataLink }) { // for whatever reason variant is an object, so need to do variant.variant
+export default function EventAttractionTemplate({
+  variant = "events",
+  strapiDataLink,
+}) {
+  // for whatever reason variant is an object, so need to do variant.variant
 
-	return (
-		<>
-			<style jsx>
-				{`
+  return (
+    <>
+      <style jsx>
+        {`
           .iconBackdrop {
             width: 450px;
             height: 500px;
@@ -24,9 +28,9 @@ export default function EventAttractionTemplate({ variant = "events", strapiData
 
           .mapPlaceholder {
             outline: #000000 solid 1px;
-            background-color: rgba(244,112,180,0.11);
+            background-color: rgba(244, 112, 180, 0.11);
             min-height: 400px;
-            width:100%;
+            width: 100%;
           }
 
           .psudoBody {
@@ -87,7 +91,7 @@ export default function EventAttractionTemplate({ variant = "events", strapiData
           }
 
           /* Placeholder cards */
-          .cards-mobile{
+          .cards-mobile {
             display: none;
           }
 
@@ -107,7 +111,7 @@ export default function EventAttractionTemplate({ variant = "events", strapiData
             font-weight: var(--font-weight-titles);
           }
 
-          .offerings-text{
+          .offerings-text {
             font-family: var(--font-calps);
             font-size: var(--font-size-header-M);
             font-weight: var(--font-weight-titles);
@@ -126,7 +130,6 @@ export default function EventAttractionTemplate({ variant = "events", strapiData
             .maincontent {
               margin: 0 30px;
             }
-
           }
 
           @media screen and (max-width: 550px) {
@@ -163,7 +166,6 @@ export default function EventAttractionTemplate({ variant = "events", strapiData
 
             /* reformat cards for mobile */
             .offerings {
-              
             }
 
             .offerings-text {
@@ -175,104 +177,106 @@ export default function EventAttractionTemplate({ variant = "events", strapiData
               display: flex;
             }
 
-            
-
-            .cards-desktop{
+            .cards-desktop {
               display: none;
             }
 
-            .cards-mobile{
+            .cards-mobile {
               display: flex;
               flex-direction: column;
 
-            nav ul {
-              height: 500px;
-              width: 400px;
-              background-color: rgba(0, 255, 255, 0.227);
+              nav ul {
+                height: 500px;
+                width: 400px;
+                background-color: rgba(0, 255, 255, 0.227);
+              }
             }
           }
-		  }
         `}
-			</style>
+      </style>
 
-			<div className="psudoBody">
-				<div className="iconBackdrop"></div>
+      <div className="psudoBody">
+        <div className="iconBackdrop"></div>
 
-				<div className="maincontent">
-					<div className="titleBlock">
-						{variant == "events" && <>
-							<h1>Upcomming Events</h1>
-							<p>There is always something around the corner</p>
-						</>
-						}
+        <div className="maincontent">
+          <div className="titleBlock">
+            {variant == "events" && (
+              <>
+                <h1>Upcomming Events</h1>
+                <p>There is always something around the corner</p>
+              </>
+            )}
 
-						{variant == "attractions" && <>
-							<h1>Attractions</h1>
-							<p>Eye spy with my little eye...</p>
-						</>
-						}
-					</div>
+            {variant == "attractions" && (
+              <>
+                <h1>Attractions</h1>
+                <p>Eye spy with my little eye...</p>
+              </>
+            )}
+          </div>
 
-					<MapCard>
-						<div className="mapPlaceholder">Map goes here</div>
-					</MapCard>
+          <MapCard>
+            <div className="mapPlaceholder">Map goes here</div>
+          </MapCard>
 
-					<div className="offerings">
-						<h1 className="offerings-text">All Offerings</h1>
+          <div className="offerings">
+            <h1 className="offerings-text">All Offerings</h1>
 
-						{/* scrollable offerings */}
-						<div className="cards-desktop">
-							<LargeCardList>
-
-								{strapiDataLink?.map((element) => (
-
-									<LargeCardDesktop
-										isTicket={true}
-										title={element.attributes.title}
-										description={element.attributes.description}
-										address={element.attributes.location}
-										ticketDate={element.attributes.date}
-										ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
-										rating={element.attributes.numStars}
-										category={element.attributes.tags}
-										imgSrc={element.attributes.image.data.attributes.url}
-										imgAltText={element.attributes.image.data.attributes.alternativeText}
-										barcodeUID={element.attributes.barcodeUID}
-
-									// hoursOfOperation={element.attributes.hoursOfOperation}
-									></LargeCardDesktop>
-								))
-								}
-							</LargeCardList>
-						</div>
-						<div className="cards-mobile">
-							<LargeCardList>
-								{
-									strapiDataLink?.map((element) => (
-										<LargeCardMobile
-											isTicket={true}
-                      isEvent={false}
-											title={element.attributes.title}
-											description={element.attributes.description}
-											address={element.attributes.location}
-											ticketDate={element.attributes.date}
-											ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
-											rating={element.attributes.numStars}
-											category={element.attributes.tags}
-											imgSrc={element.attributes.image.data.attributes.url}
-											imgAltText={element.attributes.image.data.attributes.alternativeText}
-											barcodeUID={element.attributes.barcodeUID}
+            {/* scrollable offerings */}
+            <div className="cards-desktop">
+              <LargeCardList>
+                {strapiDataLink?.map((element, index) => (
+                  <li key={index}>
+                    <LargeCardDesktop
+                      isTicket={true}
+                      title={element.attributes.title}
+                      description={element.attributes.description}
+                      address={element.attributes.location}
+                      ticketDate={element.attributes.date}
+                      ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
+                      rating={element.attributes.numStars}
+                      category={element.attributes.tags}
+                      imgSrc={element.attributes.image.data.attributes.url}
+                      imgAltText={
+                        element.attributes.image.data.attributes.alternativeText
+                      }
+                      barcodeUID={element.attributes.barcodeUID}
 
                       // hoursOfOperation={element.attributes.hoursOfOperation}
-                      ></LargeCardMobile>
-              
-									))
-								}
-							</LargeCardList>
-						</div>
-					</div>
-				</div>
-			</div>
-		</>
-	)
+                    ></LargeCardDesktop>
+                  </li>
+                ))}
+              </LargeCardList>
+            </div>
+            <div className="cards-mobile">
+              <LargeCardList>
+                {strapiDataLink?.map((element, index) => (
+                  <li key={index}>
+                    <LargeCardMobile
+                      isTicket={true}
+                      isEvent={false}
+                      title={element.attributes.title}
+                      description={element.attributes.description}
+                      address={element.attributes.location}
+                      ticketDate={element.attributes.date}
+                      ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
+                      rating={element.attributes.numStars}
+                      category={element.attributes.tags}
+                      imgSrc={element.attributes.image.data.attributes.url}
+                      imgAltText={
+                        element.attributes.image.data.attributes.alternativeText
+                      }
+                      barcodeUID={element.attributes.barcodeUID}
+
+                      // hoursOfOperation={element.attributes.hoursOfOperation}
+                    ></LargeCardMobile>
+                  </li>
+                ))}
+              </LargeCardList>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
