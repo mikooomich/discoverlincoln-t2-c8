@@ -1,32 +1,41 @@
 import React from "react";
 
-export default function TextInput({
-  textColor = "var(--color-font-secondary)",
-  fontFamily = "var(--font-roboto)",
-  padding = "var(--padding-input-default)",
-  className = "",
-  type,
-  placeholder,
-  width,
-  children,
-}) {
-  return (
-    <>
-      <input
-        className={className}
-        type={type}
-        placeholder={placeholder}
-      ></input>
 
-      <style jsx>
-        {`
-          input {
-            padding: ${padding};
-            color: ${textColor};
-            font-family: ${fontFamily};
-            margin: 10px 0px;
-            width: ${width};
-          }
+
+export default function TextInput({
+	textColor = "var(--color-font-secondary)",
+	fontFamily = "var(--font-roboto)",
+	padding = "var(--padding-input-default)",
+	className = "",
+	type,
+	placeholder,
+	width,
+	dataOut,
+	children
+}) {
+
+	/**
+	 * Reads info from text field, sends back to parent
+	 * @param {*} value 
+	 */
+	function read(value) {
+		dataOut && dataOut(value.target.value)
+		// console.log("sent")
+	}
+
+	return (
+		<>
+			<input className={className} type={type} placeholder={placeholder} onChange={read}></input>
+			
+			<style jsx>
+				{`
+			input {
+				padding: ${padding};
+				color: ${textColor};
+				font-family: ${fontFamily};
+				margin: 10px 0px;
+				width: ${width};
+			}
 
            {
             /* style classes for various use cases */
