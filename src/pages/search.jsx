@@ -23,13 +23,11 @@ export default function Search() {
 
 				const eventResponse = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/events?populate=*')
 				const eventData = await eventResponse.json()
-				// console.log(data)
 				setEventsStrapiData(eventData.data)
 
 				const attractionResponse = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/attrractions?populate=*')
 				const attractionData = await attractionResponse.json()
 				setAttractionStrapiData(attractionData.data)
-				console.log(attractionData)
 
 				const businessResponse = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/businesses?populate=*')
 				const businessData = await businessResponse.json()
@@ -49,37 +47,70 @@ export default function Search() {
 	 * @param {*} oldArray 
 	 * @returns 
 	 */
-	function reMap(oldArray) {
-		let newArray = [];
-		oldArray.map((attributes) => {
-			newArray.push({attributes})
+	async function reMap(oldArray, variant) {
+		if (oldArray.length <= 0) return undefined;
+
+		// let newArray = [];
+
+		let strapiQuery = ""
+
+		// get strapi query, then search for all ids
+		oldArray.map((item) => {
+			strapiQuery += `&filters[id][$in]=${item.id}`;
 		})
-		return newArray;
+		// console.log(strapiQuery);
+
+		/**
+		 * Fetch data with images from strapi
+		 * @returns 
+		 */
+		async function getImages() {
+			const imagesPulled = await fetch(`https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/${variant}?populate=*${strapiQuery}`);
+			const imageData = await imagesPulled.json();
+			// console.log("Raw images")
+			// console.log(imageData)
+
+
+			// sort the data to ensure parity
+			imageData.data.sort((a, b) => {
+				return a.id > b.id ? 1 : -1;
+			})
+
+			return imageData.data;
+		}
+
+		let newData = await getImages();
+		// console.log("New data")
+		// console.log(newData)
+
+		return newData;
 	}
 
 	useEffect(() => {
 		async function fetchSearchResult() {
-			console.log("Searching for: " + searchQuery);
-			// console.log(searchQuery)
+			// console.log("Searching for: " + searchQuery);
 
-			// 
+			// show all results if search is blank
 			if (searchQuery[0] == undefined) {
-				console.log("Blank search, not doing")
+				console.log("Blank search, showing all results")
 				return;
 			}
 
 			const gotData = await fetch(`https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/fuzzy-search/search?query=${searchQuery}`);
 			const searchData = await gotData.json();
+			// console.log("got data")
+			// console.log(searchData);
 
-			
-			setEventsStrapiData(reMap(searchData.events));
-			setBusinessStrapiData(reMap(searchData.businesses));
-			setAttractionStrapiData(reMap(searchData.attrractions));
+			// set the data
+			setEventsStrapiData(await reMap(searchData.events, "events"));
+			setBusinessStrapiData(await reMap(searchData.businesses, "businesses"));
+			setAttractionStrapiData(await reMap(searchData.attrractions, "attractions"));
+			setSearchReq(false); // end search request
 
-			console.log("got data")
-			console.log(eventStrapiData);
-			setSearchReq(false);
-
+			// console.log("ending data");
+			// console.log(eventStrapiData);
+			// console.log(attractionStrapiData);
+			// console.log(businessStrapiData);
 		}
 
 		fetchSearchResult()
@@ -88,15 +119,13 @@ export default function Search() {
 
 	/**
 	 * Read from text input component
-	 * @param {*} dat 
+	 * @param {*} data 
 	 */
-	const readQuery = (dat) => {
-		console.log("recieved")
-		console.log(dat)
-		setSearchQuery(dat)
+	const readQuery = (data) => {
+		// console.log("recieved")
+		// console.log(data)
+		setSearchQuery(data)
 	}
-
-	console.log(eventStrapiData)
 
 	return (
 		<>
@@ -206,7 +235,7 @@ export default function Search() {
 					{attractionStrapiData?.map((card, index) => (
 						<li key={index}>
 							<LargeCardMobile
-								title={card.attributes == undefined ? card.attributes.title : card.title}
+								title={card.attributes.title}
 								imgSrc={card.attributes.image.data.attributes.url}
 								address={card.attributes.location}
 								category={card.attributes.tags}
