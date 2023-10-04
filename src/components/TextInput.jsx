@@ -19,7 +19,7 @@ export default function TextInput({
 	 * @param {*} value 
 	 */
 	function read(value) {
-		dataOut(value.target.value)
+		dataOut && dataOut(value.target.value)
 		// console.log("sent")
 	}
 
