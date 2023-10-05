@@ -142,7 +142,7 @@ export default function LargeCardMobile({
 								<p className="ticket-text">
 									Price: ${(Math.round(ticketPrice * 100) / 100).toFixed(2)}
 								</p>
-								<DefaultButton>Purchase</DefaultButton>
+								<DefaultButton isLink={true} href={{pathname: "./checkout", query: {whichSelection: barcodeUID}}}>Purchase</DefaultButton>
 							</div>
 						) : isEvent && !isTicket && !isRegisterable ? ( // free events
 							<div className="event-wrap">
@@ -241,7 +241,7 @@ export default function LargeCardMobile({
           display: flex;
           flex-direction: row;
 		  {/* justify-content: space-around; */}
-          width: 360px;
+          {/* width: 360px; */} {/* commented to try to be responsive*/}
           align-items: center;
         }
 

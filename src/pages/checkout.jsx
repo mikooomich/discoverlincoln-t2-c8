@@ -1,13 +1,37 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+
 import DefaultButton from "@/components/DefaultButton";
 import TextInput from "@/components/TextInput";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import Section from "@/components/Section";
 import LargeCardDesktop from "@/components/LargeCardDesktop";
 import LargeCardMobile from "@/components/LargeCardMobile";
 
 export default function checkout() {
+
+	const [selectedCard, setSelectedCard] = useState();
+	const router = useRouter();
+
+	useEffect(() => {
+		async function fetchStrapiData() {
+			if (router.query == undefined) {
+				console.log("router is not ready yet")
+				return;
+			}
+
+			console.log("router IS READY")
+			// console.log(router.query)
+
+			const eventResponse = await fetch(`https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/events?populate=*&filters[barcodeUID][$in]=${router.query.whichSelection}`)
+			const eventData = await eventResponse.json();
+			setSelectedCard(eventData.data[0]);
+		}
+
+		fetchStrapiData()
+	}, [router])
+
+
 	return (
 		<>
 			<style jsx>
@@ -170,11 +194,55 @@ export default function checkout() {
 					</div>
 
 					<div className="card">
-						<LargeCardDesktop></LargeCardDesktop>
+						{
+							selectedCard != undefined ?
+								<LargeCardDesktop
+									isTicket={true}
+									isEvent={true}
+									title={selectedCard.attributes.title}
+									description={selectedCard.attributes.richTextDescription != undefined ? selectedCard.attributes.richTextDescription : selectedCard.attributes.description}
+									address={selectedCard.attributes.location}
+									ticketDate={selectedCard.attributes.date}
+									ticketTime={`${selectedCard.attributes.startTime} - ${selectedCard.attributes.endTime}`}
+									rating={selectedCard.attributes.numStars}
+									category={selectedCard.attributes.tags}
+									imgSrc={selectedCard.attributes.image.data.attributes.url}
+									imgAltText={selectedCard.attributes.image.data.attributes.alternativeText}
+									barcodeUID={selectedCard.attributes.barcodeUID}
+
+									isRegisterable={selectedCard.attributes.isRegisterable}
+									isFull={selectedCard.attributes.isFull}
+									isAvail={selectedCard.attributes.isAvailable}
+									hoursOfOperation={selectedCard.attributes.hoursOfOperation}
+								></LargeCardDesktop>
+								: <></>
+						}
 					</div>
 
 					<div className="mobileCard">
-						<LargeCardMobile></LargeCardMobile>
+						{
+							selectedCard != undefined ?
+								<LargeCardMobile
+									isTicket={true}
+									isEvent={true}
+									title={selectedCard.attributes.title}
+									description={selectedCard.attributes.richTextDescription != undefined ? selectedCard.attributes.richTextDescription : selectedCard.attributes.description}
+									address={selectedCard.attributes.location}
+									ticketDate={selectedCard.attributes.date}
+									ticketTime={`${selectedCard.attributes.startTime} - ${selectedCard.attributes.endTime}`}
+									rating={selectedCard.attributes.numStars}
+									category={selectedCard.attributes.tags}
+									imgSrc={selectedCard.attributes.image.data.attributes.url}
+									imgAltText={selectedCard.attributes.image.data.attributes.alternativeText}
+									barcodeUID={selectedCard.attributes.barcodeUID}
+
+									isRegisterable={selectedCard.attributes.isRegisterable}
+									isFull={selectedCard.attributes.isFull}
+									isAvail={selectedCard.attributes.isAvailable}
+									hoursOfOperation={selectedCard.attributes.hoursOfOperation}
+								></LargeCardMobile>
+								: <></>
+						}
 					</div>
 				</div>
 			</Section>
