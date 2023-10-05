@@ -48,7 +48,7 @@ export default function homepage() {
     return (
         <>
             <Navbar isHomepage={true}></Navbar>
-            
+
             <div className="homepage">
                 <div className="landing-view">
                     <div className="landing-view-wrap">
@@ -72,7 +72,7 @@ export default function homepage() {
                                 <div className="event-card-frame">
                                     {/* <h2>INSERT SMALL EVENT CARDS</h2> */}
                                     <CardCarousel margin="0px 0px 40px 0px">
-                                    <h1 className="upcoming-events-subtitle">Upcoming Events</h1>
+                                        <h1 className="upcoming-events-subtitle">Upcoming Events</h1>
 
                                         {eventsStrapiData?.map((card, index) => (
                                             <li key={index} className="smallCardli">
@@ -82,7 +82,7 @@ export default function homepage() {
                                                     category={card.attributes.tags}
                                                 > <Image src="Icon-glass.svg" width={20} height={20} alt="uwu" />
                                                 </SmallCard>
-                                               
+
                                             </li>
                                         ))}
 
@@ -149,14 +149,24 @@ export default function homepage() {
                         {eventsStrapiData?.map((card, index) => (
                             <li key={index}>
                                 <LargeCardMobile
+                                    isTicket={false}
+                                    isEvent={true}
                                     title={card.attributes.title}
-                                    imgSrc={card.attributes.image.data.attributes.url}
+                                    description={card.attributes.richTextDescription != undefined ? card.attributes.richTextDescription : card.attributes.description}
                                     address={card.attributes.location}
+                                    ticketDate={card.attributes.date}
+                                    ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
+                                    rating={card.attributes.numStars}
                                     category={card.attributes.tags}
-                                    description={card.attributes?.richTextDescription}
-                                    rating={card.attributes?.numStars} isTicket={card.attributes?.isTicket}
-                                    ticketDate={card.attributes.date} timeStart={card.attributes.startTime}
-                                    timeEnd={card.attributes.endTime}>
+                                    imgSrc={card.attributes.image.data.attributes.url}
+                                    imgAltText={card.attributes.image.data.attributes.alternativeText}
+                                    barcodeUID={card.attributes.barcodeUID}
+
+                                    isRegisterable={card.attributes.isRegisterable}
+                                    isFull={card.attributes.isFull}
+                                    isAvail={card.attributes.isAvailable}
+                                    hoursOfOperation={card.attributes.hoursOfOperation}
+                                >
                                 </LargeCardMobile>
                             </li>
                         ))}
@@ -169,14 +179,24 @@ export default function homepage() {
                         {attractionStrapiData?.map((card, index) => (
                             <li key={index}>
                                 <LargeCardMobile
+                                    isTicket={false}
+                                    isEvent={false}
                                     title={card.attributes.title}
-                                    imgSrc={card.attributes.image.data.attributes.url}
+                                    description={card.attributes.richTextDescription != undefined ? card.attributes.richTextDescription : card.attributes.description}
                                     address={card.attributes.location}
+                                    ticketDate={card.attributes.date}
+                                    ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
+                                    rating={card.attributes.numStars}
                                     category={card.attributes.tags}
-                                    description={card.attributes?.richTextDescription}
-                                    rating={card.attributes?.numStars} isTicket={card.attributes?.isTicket}
-                                    ticketDate={card.attributes.date} timeStart={card.attributes.startTime}
-                                    timeEnd={card.attributes.endTime}>
+                                    imgSrc={card.attributes.image.data.attributes.url}
+                                    imgAltText={card.attributes.image.data.attributes.alternativeText}
+                                    barcodeUID={card.attributes.barcodeUID}
+
+                                    isRegisterable={card.attributes.isRegisterable}
+                                    isFull={card.attributes.isFull}
+                                    isAvail={card.attributes.isAvailable}
+                                    hoursOfOperation={card.attributes.hoursOfOperation}
+                                >
                                 </LargeCardMobile>
                             </li>
                         ))}
@@ -190,14 +210,24 @@ export default function homepage() {
                         {businessStrapiData?.map((card, index) => (
                             <li key={index}>
                                 <LargeCardMobile
+                                    isTicket={false}
+                                    isEvent={false}
                                     title={card.attributes.title}
-                                    imgSrc={card.attributes.image.data.attributes.url}
+                                    description={card.attributes.richTextDescription != undefined ? card.attributes.richTextDescription : card.attributes.description}
                                     address={card.attributes.location}
+                                    ticketDate={card.attributes.date}
+                                    ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
+                                    rating={card.attributes.numStars}
                                     category={card.attributes.tags}
-                                    description={card.attributes?.richTextDescription}
-                                    rating={card.attributes?.numStars} isTicket={card.attributes?.isTicket}
-                                    ticketDate={card.attributes.date} timeStart={card.attributes.startTime}
-                                    timeEnd={card.attributes.endTime}>
+                                    imgSrc={card.attributes.image.data.attributes.url}
+                                    imgAltText={card.attributes.image.data.attributes.alternativeText}
+                                    barcodeUID={card.attributes.barcodeUID}
+
+                                    isRegisterable={card.attributes.isRegisterable}
+                                    isFull={card.attributes.isFull}
+                                    isAvail={card.attributes.isAvailable}
+                                    hoursOfOperation={card.attributes.hoursOfOperation}
+                                >
                                 </LargeCardMobile>
                             </li>
                         ))}

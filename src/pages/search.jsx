@@ -433,10 +433,10 @@ export default function Search() {
 					<div className="filter-sort">
 
 						<div className="sortOptions-wrap filterOptions-wrap ">
-						<p style={{ fontSize: "16px", marginBottom: "5px", fontWeight: "bold" }}>Filter By:</p>
+							<p style={{ fontSize: "16px", marginBottom: "5px", fontWeight: "bold" }}>Filter By:</p>
 							{
 								allTags.map((tag, index) => (
-									
+
 									<div className="sortOptions" key={index}>
 										<input type="checkbox" id={tag} name={tag} value={tag} onChange={readTag} />
 										<label htmlFor={tag}>{tag}</label>
@@ -482,14 +482,24 @@ export default function Search() {
 					{eventStrapiData?.map((card, index) => (
 						<li key={index}>
 							<LargeCardMobile
+								isTicket={false}
+								isEvent={true}
 								title={card.attributes.title}
-								imgSrc={card.attributes.image.data.attributes.url}
+								description={card.attributes.richTextDescription != undefined ? card.attributes.richTextDescription : card.attributes.description}
 								address={card.attributes.location}
+								ticketDate={card.attributes.date}
+								ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
+								rating={card.attributes.numStars}
 								category={card.attributes.tags}
-								description={card.attributes?.richTextDescription}
-								rating={card.attributes?.numStars} isTicket={card.attributes?.isTicket}
-								ticketDate={card.attributes.date} timeStart={card.attributes.startTime}
-								timeEnd={card.attributes.endTime}>
+								imgSrc={card.attributes.image.data.attributes.url}
+								imgAltText={card.attributes.image.data.attributes.alternativeText}
+								barcodeUID={card.attributes.barcodeUID}
+
+								isRegisterable={card.attributes.isRegisterable}
+								isFull={card.attributes.isFull}
+								isAvail={card.attributes.isAvailable}
+								hoursOfOperation={card.attributes.hoursOfOperation}
+							>
 							</LargeCardMobile>
 						</li>
 					))}
@@ -501,14 +511,24 @@ export default function Search() {
 					{attractionStrapiData?.map((card, index) => (
 						<li key={index}>
 							<LargeCardMobile
+								isTicket={false}
+								isEvent={false}
 								title={card.attributes.title}
-								imgSrc={card.attributes.image.data.attributes.url}
+								description={card.attributes.richTextDescription != undefined ? card.attributes.richTextDescription : card.attributes.description}
 								address={card.attributes.location}
+								ticketDate={card.attributes.date}
+								ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
+								rating={card.attributes.numStars}
 								category={card.attributes.tags}
-								description={card.attributes?.richTextDescription}
-								rating={card.attributes?.numStars} isTicket={card.attributes?.isTicket}
-								ticketDate={card.attributes.date} timeStart={card.attributes.startTime}
-								timeEnd={card.attributes.endTime}>
+								imgSrc={card.attributes.image.data.attributes.url}
+								imgAltText={card.attributes.image.data.attributes.alternativeText}
+								barcodeUID={card.attributes.barcodeUID}
+
+								isRegisterable={card.attributes.isRegisterable}
+								isFull={card.attributes.isFull}
+								isAvail={card.attributes.isAvailable}
+								hoursOfOperation={card.attributes.hoursOfOperation}
+							>
 							</LargeCardMobile>
 						</li>
 					))}
@@ -521,14 +541,24 @@ export default function Search() {
 					{businessStrapiData?.map((card, index) => (
 						<li key={index}>
 							<LargeCardMobile
+								isTicket={false}
+								isEvent={false}
 								title={card.attributes.title}
-								imgSrc={card.attributes.image.data.attributes.url}
+								description={card.attributes.richTextDescription != undefined ? card.attributes.richTextDescription : card.attributes.description}
 								address={card.attributes.location}
+								ticketDate={card.attributes.date}
+								ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
+								rating={card.attributes.numStars}
 								category={card.attributes.tags}
-								description={card.attributes?.richTextDescription}
-								rating={card.attributes?.numStars} isTicket={card.attributes?.isTicket}
-								ticketDate={card.attributes.date} timeStart={card.attributes.startTime}
-								timeEnd={card.attributes.endTime}>
+								imgSrc={card.attributes.image.data.attributes.url}
+								imgAltText={card.attributes.image.data.attributes.alternativeText}
+								barcodeUID={card.attributes.barcodeUID}
+
+								isRegisterable={card.attributes.isRegisterable}
+								isFull={card.attributes.isFull}
+								isAvail={card.attributes.isAvailable}
+								hoursOfOperation={card.attributes.hoursOfOperation}
+							>
 							</LargeCardMobile>
 						</li>
 					))}
