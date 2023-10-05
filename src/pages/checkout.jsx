@@ -16,9 +16,18 @@ export default function checkout() {
 	useEffect(() => {
 		async function fetchStrapiData() {
 			if (router.query == undefined) {
-				console.log("router is not ready yet")
+				console.log("router is not ready yet");
 				return;
 			}
+
+			// if (router.query.paid == true) {
+			// 	console.log("paid already, doing database stuff");
+			// 	/**
+			// 	 * do databbser stuff here?
+			// 	 */
+			// 	// now redirect to profile?
+			// 	return;
+			// }
 
 			console.log("router IS READY")
 			// console.log(router.query)
@@ -262,9 +271,9 @@ export default function checkout() {
 								></TextInput>
 							</li>
 							<li>
-								<h3>Vehicles:</h3>1<input type="radio"></input>2
-								<input type="radio"></input>
-								3+<input type="radio"></input>
+								<h3>Vehicles:</h3>1<input type="radio" name="vehicles"></input>2
+								<input type="radio" name="vehicles"></input>
+								3+<input type="radio" name="vehicles"></input>
 							</li>
 						</ul>
 
@@ -312,15 +321,15 @@ export default function checkout() {
 							<li className="costBox">
 								<span className="costEntry">
 									<p>Subtotal</p>
-									<p>${/*insert react magic*/}49.99</p>
+									<p>${selectedCard != undefined ? selectedCard.attributes.ticketCost : 0.00}</p>
 								</span>
 								<span className="costEntry">
 									<p>Taxes</p>
-									<p>${/*insert react magic*/}6.50</p>
+									<p>${selectedCard != undefined ? selectedCard.attributes.ticketCost * 0.13 : 0.00}</p>
 								</span>
 								<span className="costEntry">
 									<p>Total</p>
-									<p>${/*insert react magic*/}56.49</p>
+									<p>${selectedCard != undefined ? selectedCard.attributes.ticketCost * 0.13 + selectedCard.attributes.ticketCost : 0.00}</p>
 								</span>
 							</li>
 						</ul>
@@ -348,10 +357,9 @@ export default function checkout() {
 						have a nice day.{" "}
 					</p>
 					<span id="checkoutButton">
-						<DefaultButton children="Proceed to Checkout"></DefaultButton>
+						<DefaultButton isLink={true} href={{ pathname: "./profile", query: { whichSelection: selectedCard != undefined ? selectedCard.attributes.barcodeUID : "noBARCODE", paid: true } }}>Proceed to Checkout</DefaultButton>
 					</span>
 				</div>
-
 
 			</Section>
 		</>
