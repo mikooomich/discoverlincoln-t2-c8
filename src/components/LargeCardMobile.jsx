@@ -10,7 +10,7 @@ export default function LargeCardMobile({
   address = "101 Address Street, Lincoln, ON",
   category = "restaurant",
   description = "Explore endless fields of vines and grapes, with twists and turns to your hearts content. Fun for the whole family. Enjoy a warm, sunny day, in the relaxing yards of vine. Hurry up! Space is limited!",
-  hoursOfOperation,
+  hoursOfOperation = "",
   rating,
   isEvent = false,
   isTicket = false,
@@ -24,7 +24,7 @@ export default function LargeCardMobile({
   barcodeUID,
 }) {
 
-  
+
   //code
   function renderStars() {
     const stars = [];
@@ -131,8 +131,9 @@ export default function LargeCardMobile({
             ) : ( //business
               <div className="description2-text">
                 <h1 className="hours-title">Hours of Operation:</h1>
-                <ReactMarkdown className="hours-description"> {hoursOfOperation}
-                </ReactMarkdown>
+                  <ReactMarkdown className="hours-description">
+                    {hoursOfOperation}
+                  </ReactMarkdown>
               </div>
             )}
           </div>
