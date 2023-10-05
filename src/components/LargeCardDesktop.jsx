@@ -260,7 +260,7 @@ export default function LargeCardDesktop({
           line-height: 2;
 
 		  overflow-y: scroll;
-	  		max-height: 150px;
+	  		{/* max-height: 150px; */}
         }
 
 		{/* scroll bar settings*/}
