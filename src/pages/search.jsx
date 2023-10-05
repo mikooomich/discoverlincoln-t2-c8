@@ -11,10 +11,16 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 export default function Search() {
 	const [searchQuery, setSearchQuery] = useState([]); // the thing to search for
 	const [searchReq, setSearchReq] = useState([]); // request for a search opperation
+	const [sortFlags, setSortFlags] = useState(["title", "des"]);
+	const [reloadLocalCards, setReloadLocalCards] = useState([]); // request for a reload of local cards
+	const [allTags, setAllTags] = useState([]); // all tags avalible at the current moment
+	const [selectedTags, setSelectedTags] = useState([]); // all tags the user has selected
+
 
 	const [eventStrapiData, setEventsStrapiData] = useState([]); // events
 	const [attractionStrapiData, setAttractionStrapiData] = useState([]);
 	const [businessStrapiData, setBusinessStrapiData] = useState([]);
+
 
 	useEffect(() => {
 		async function fetchStrapiData() {
@@ -41,6 +47,11 @@ export default function Search() {
 		fetchStrapiData()
 	}, [searchReq])
 
+
+
+	/**
+	 * Search and sort functions
+	 */
 
 	/**
 	 * {0: data...} ===> {0: attributes: {data...}}
@@ -114,7 +125,145 @@ export default function Search() {
 		}
 
 		fetchSearchResult()
-	}, [searchReq])
+	}, [searchReq, reloadLocalCards])
+
+
+
+
+	/**
+	 * Filter and sort functions
+	 */
+
+
+	/**
+	 * Sort the data an all three strapi datas
+	 *
+	 * @param {Array} variant which data array to sort
+	 * @param {String} sortType sort by date or title
+	 * @param {String} sortDirection sort by ascending (asc) or descending (des)
+	 */
+	function doSort(variant, variantSetter, sortType, sortDirection) {
+		sortType = sortFlags[0];
+		sortDirection = sortFlags[1];
+		// console.log("sorting..." + sortType + sortDirection);
+
+		let sortedArr;
+
+		// sort by type
+		if (sortType == "id") {
+			// console.log("sorting by id")
+			sortedArr = variant.sort((a, b) => {
+				return a.id > b.id ? 1 : -1;
+			})
+		}
+
+		else if (sortType == "date") {
+			// console.log("sorting by date")
+			sortedArr = variant.sort((a, b) => {
+				let first = new Date(a.attributes.date).getTime();
+				let second = new Date(b.attributes.date).getTime();
+
+				// i think this is required for insitu
+				if (first == second) return 0;
+				else if (first > second) return 1;
+				else return -1;
+			})
+		}
+		else {
+			// console.log("sorting by title")
+			sortedArr = variant.sort((a, b) => {
+				return a.attributes.title > b.attributes.title ? 1 : -1;
+			})
+
+		}
+
+		// // reverse results if requested
+		if (sortDirection == "des") {
+			sortedArr = sortedArr.reverse();
+		}
+
+		variantSetter(sortedArr);
+		setReloadLocalCards(!reloadLocalCards);
+	}
+
+
+	/**
+	 * returns the tags the user selected, parsed into a filter query string
+	 * @returns
+	 */
+	function getAllSelectedTagsInFormat() {
+		let strapiQuery = "";
+		selectedTags.map((item) => {
+			strapiQuery += `&filters[tags][$in]=${item}`;
+		})
+
+		return strapiQuery;
+	}
+
+	/**
+	 * returns all tags from all strapi datas, and sets the coresponding usestate
+	 * @returns
+	 */
+	function getAllCurrentTagsArray() {
+		let allTags = [];
+
+		// Take all the tags current in a card displayed on the page
+		eventStrapiData?.map((item) => {
+			allTags.push(item.attributes.tags);
+		})
+
+		attractionStrapiData?.map((item) => {
+			allTags.push(item.attributes.tags);
+		})
+
+		businessStrapiData?.map((item) => {
+			allTags.push(item.attributes.tags);
+		})
+
+		setAllTags([...new Set(allTags)]); // remove duplicates
+		return allTags;
+	}
+
+	/**
+	 * This will request a new set of cards based on the tags selected
+	 */
+	function doFilter() {
+		getAllCurrentTagsArray(); // get all current tags
+
+		console.log("filtering...")
+		async function fetchFilterResult() {
+			// abort if no tags
+			if (selectedTags[0] === undefined) {
+				console.log("No tags, aborting, showing all results")
+				return;
+			}
+
+			/**
+			 * @param {*} variant useState to read
+			 * @param {*} setter setter for the useState
+			 */
+			async function askStrapiForFilters(variant, setter) {
+				const gotData = await fetch(
+					`https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/${variant}/?populate=*${getAllSelectedTagsInFormat()}`);
+				const searchData = await gotData.json();
+				// console.log("got data")
+				// console.log(searchData);
+				setter(searchData.data);
+			}
+
+			askStrapiForFilters("events", setEventsStrapiData);
+			askStrapiForFilters("businesses", setBusinessStrapiData);
+			askStrapiForFilters("attrractions", setAttractionStrapiData);
+		}
+
+		fetchFilterResult()
+	}
+
+
+
+	/**
+	 * Misc functions
+	 */
 
 
 	/**
@@ -126,6 +275,51 @@ export default function Search() {
 		// console.log(data)
 		setSearchQuery(data)
 	}
+
+	/**
+	 * Read the type to sort by from the user
+	 * @param {*} data 
+	 */
+	const readSortType = (data) => {
+		// console.log("recieved type " + data.target.value);
+		setSortFlags([data.target.value, sortFlags[1]]);
+	}
+
+	/**
+	 * Read the direction to sort by from the user
+	 * @param {*} data 
+	 */
+	const readDirection = (data) => {
+		// console.log("recieved fdirection " + data.target.value);
+		setSortFlags([sortFlags[0], data.target.value]);
+	}
+
+	/**
+	 * Read the tags to the user wants to filter by
+	 * @param {*} data 
+	 */
+	const readTag = (data) => {
+		// if checked, add to array, else remove from array
+		data.target.checked ? setSelectedTags([...selectedTags, data.target.value])
+			:
+			setSelectedTags([...selectedTags.filter(tag => tag != data.target.value)]);
+	}
+
+	/**
+	 * Trigger a reload of the cards
+	 */
+	useEffect(() => {
+		async function fetchStrapiData() {
+			// console.log("Reloading all");
+			setEventsStrapiData(eventStrapiData);
+			setAttractionStrapiData(attractionStrapiData);
+			setBusinessStrapiData(businessStrapiData);
+			// console.log(eventStrapiData);
+		}
+
+		fetchStrapiData()
+	}, [reloadLocalCards])
+
 
 	return (
 		<>
@@ -161,14 +355,11 @@ export default function Search() {
             margin: 0px 10px;
           }
 
-          @media screen and (max-width: 639px) {
-            .search-title {
-              font-size: var(--font-size-header-S);
-            }
-          }
 
           .filter-sort {
+			display: flex;
             align-self: end;
+			flex-wrap: wrap;
           }
 
            {
@@ -185,6 +376,43 @@ export default function Search() {
           }
           li {
             margin: 20px;
+          }
+
+
+		  {/* Sorting and filtering */}
+			.sortOptions-wrap {
+				display: flex;
+				flex-direction: column;
+				align-items: start;
+				margin-right: 20px;
+				font-size: var(--font-size-body-Mplus);
+            	font-family: var(--font-roboto);
+			}
+		  .sortOptions-wrap div {
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+			{/* margin: 0px 5px */}
+		  }
+		  .sortOptions * {
+			margin-right: 5px;
+		  }
+
+		  .filterOptions-wrap {
+			flex-wrap: wrap;
+			max-height: 60px;
+		  }
+
+
+		  @media screen and (max-width: 639px) {
+            .search-title {
+              font-size: var(--font-size-header-S);
+            }
+
+			.filterOptions-wrap {
+				max-height: none;
+				margin-bottom: 20px;
+			}
           }
         `}
 			</style>
@@ -203,15 +431,54 @@ export default function Search() {
 						</div>
 					</div>
 					<div className="filter-sort">
-						<DefaultButton className="filter-sort-btn">Filter</DefaultButton>
-						<DefaultButton className="filter-sort-btn">Sort</DefaultButton>
+
+						<div className="sortOptions-wrap filterOptions-wrap ">
+						<p style={{ fontSize: "16px", marginBottom: "5px", fontWeight: "bold" }}>Filter By:</p>
+							{
+								allTags.map((tag, index) => (
+									
+									<div className="sortOptions" key={index}>
+										<input type="checkbox" id={tag} name={tag} value={tag} onChange={readTag} />
+										<label htmlFor={tag}>{tag}</label>
+									</div>
+								))
+							}
+						</div>
+
+						<div className="sortOptions-wrap">
+							<p style={{ fontSize: "16px", marginBottom: "5px", fontWeight: "bold" }}>Sort By:</p>
+							<div className="sortOptions">
+
+								<label htmlFor="type1">ID</label>
+								<input type="radio" id="type1" name="type" value="id" onChange={readSortType} />
+								<label htmlFor="type2">Title</label>
+								<input type="radio" id="type2" name="type" value="title" onChange={readSortType} />
+								<label htmlFor="type3">Date</label>
+								<input type="radio" id="type3" name="type" value="date" onChange={readSortType} />
+							</div>
+
+							<div className="sortOptions">
+								<label htmlFor="direction1">Ascending</label>
+								<input type="radio" id="direction1" name="direction" value="asc" onChange={readDirection} />
+								<label htmlFor="direction1">Descending</label>
+								<input type="radio" id="direction2" name="direction" value="des" onChange={readDirection} />
+							</div>
+
+						</div>
+						<div>
+							<DefaultButton className="filter-sort-btn" onClick={() => { doFilter() }}>Filter</DefaultButton>
+							<DefaultButton className="filter-sort-btn" onClick={() => {
+								doSort(eventStrapiData, setEventsStrapiData);
+								doSort(attractionStrapiData, setAttractionStrapiData);
+								doSort(businessStrapiData, setBusinessStrapiData);
+							}}>Sort</DefaultButton>
+						</div>
 					</div>
 				</div>
 			</Section>
 
 			<Section marginBottom="40px">
 				<CardCarousel title="Events" margin="0px 0px 40px 0px">
-
 					{eventStrapiData?.map((card, index) => (
 						<li key={index}>
 							<LargeCardMobile
