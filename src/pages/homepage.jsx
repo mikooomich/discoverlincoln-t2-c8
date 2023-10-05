@@ -46,7 +46,7 @@ export default function Homepage() {
         "https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/gallery?populate=*"
       );
       const galleryData = await galleryResponse.json();
-      setGalleryStrapiData(galleryData);
+      setGalleryStrapiData(galleryData.data.attributes.images.data);
     }
 
     fetchStrapiData();
@@ -310,9 +310,9 @@ export default function Homepage() {
           <h2 className="events-title">Gallery</h2>
 
           <Gallery>
-            {//galleryStrapiData?.map((image, index) => (
-              //<GalleryImage src="image..." />
-            //))
+            {galleryStrapiData?.map((image, index) => (
+              <GalleryImage src={image.attributes.url} alt={"https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg"} key={index}/>
+            ))
           }
           </Gallery>
         </Section>
