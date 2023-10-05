@@ -249,9 +249,21 @@ export default function LargeCardMobile({
           font-family: var(--font-roboto);
           font-size: var(--font-size-body-M);
           line-height: 1.6;
-          max-width: 55%;
+          max-width: 50%;
+	  min-width: 50%;
           font-weight: 400px;
+
+	  overflow-y: scroll;
+	  max-height: 150px;
         }
+
+	{/* scroll bar settings*/}
+	::-webkit-scrollbar {
+		width: 5px;
+	}
+	::-webkit-scrollbar-thumb {
+		background: var(--color-topographic-green);
+	}
 
         .border-line {
           border-left: 1px solid grey;

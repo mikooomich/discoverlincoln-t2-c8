@@ -258,7 +258,20 @@ export default function LargeCardDesktop({
           width: 450px;
           padding-right: 20px;
           line-height: 2;
+
+		  overflow-y: scroll;
+	  		max-height: 150px;
         }
+
+		{/* scroll bar settings*/}
+		::-webkit-scrollbar {
+			width: 5px;
+		}
+		::-webkit-scrollbar-thumb {
+			background: var(--color-topographic-green);
+		}
+
+        
 
         .border-line {
           border-left: 1px solid grey;
