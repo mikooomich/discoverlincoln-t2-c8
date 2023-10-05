@@ -122,7 +122,7 @@ export default function LargeCardMobile({
 					<div className="description-wrap">
 						<div className="description-text">{description}</div>
 						<div className="border-line"></div>
-						{isEvent && isTicket ? (
+						{isEvent && isTicket ? ( // ticket
 							<div className="ticket-wrap">
 								<p className="ticket-text">Date: {ticketDate}</p>
 								<p className="ticket-text">
@@ -133,7 +133,7 @@ export default function LargeCardMobile({
 									className="ticket-code-img"
 								></img>
 							</div>
-						) : isEvent && !isTicket && isRegisterable ? (
+						) : isEvent && !isTicket && isRegisterable ? ( // register for paid events
 							<div className="event-wrap">
 								<p className="ticket-text">Date: {ticketDate}</p>
 								<p className="ticket-text">
@@ -144,7 +144,7 @@ export default function LargeCardMobile({
 								</p>
 								<DefaultButton>Purchase</DefaultButton>
 							</div>
-						) : isEvent && !isTicket && !isRegisterable ? (
+						) : isEvent && !isTicket && !isRegisterable ? ( // free events
 							<div className="event-wrap">
 								{!isFull ? <p className="ticket-text">Always open!</p> : <p className="ticket-text">*Currently Full*</p>}
 								<p className="ticket-text">Date: {ticketDate}</p>
@@ -152,7 +152,7 @@ export default function LargeCardMobile({
 									Time: {tConvert(timeStart)} to {tConvert(timeEnd)}
 								</p>
 							</div>
-						) : (
+						) : ( // attractions, business
 							<div className="description2-text">
 								{isAvail ? <h1 className="hours-title">Hours of Operation:</h1> : <p className="hours-title">*Currently Closed*</p>}
 								<div className="markdown-wrap">
@@ -273,9 +273,9 @@ export default function LargeCardMobile({
           padding-left: 4px;
         }
 
-        .hours-description code{
+        .hours-description code {
           font-family: var(--font-roboto);
-          font-size: var(--font-size-body-S);
+          font-size: 12;
           font-weight: 400;
           line-height: 1.5;
           padding-left: 10px;
