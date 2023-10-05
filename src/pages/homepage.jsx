@@ -246,19 +246,28 @@ export default function Homepage() {
         <Section marginBottom="40px" marginTop="300px">
           <CardCarousel title="Events" margin="0px 0px 40px 0px">
             {eventsStrapiData?.map((card, index) => (
+
               <li key={index}>
+
                 <LargeCardMobile
+                  isTicket={false}
+                  isEvent={true}
                   title={card.attributes.title}
-                  imgSrc={card.attributes.image.data.attributes.url}
+                  description={card.attributes.richTextDescription != undefined ? card.attributes.richTextDescription : card.attributes.description}
                   address={card.attributes.location}
-                  category={card.attributes.tags}
-                  description={card.attributes?.richTextDescription}
-                  rating={card.attributes?.numStars}
-                  isTicket={card.attributes?.isTicket}
                   ticketDate={card.attributes.date}
-                  timeStart={card.attributes.startTime}
-                  timeEnd={card.attributes.endTime}
-                ></LargeCardMobile>
+                  ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
+                  rating={card.attributes.numStars}
+                  category={card.attributes.tags}
+                  imgSrc={card.attributes.image.data.attributes.url}
+                  imgAltText={card.attributes.image.data.attributes.alternativeText}
+                  barcodeUID={card.attributes.barcodeUID}
+                  isRegisterable={card.attributes.isRegisterable}
+                  isFull={card.attributes.isFull}
+                  isAvail={card.attributes.isAvailable}
+                  hoursOfOperation={card.attributes.hoursOfOperation}
+                >
+                </LargeCardMobile>
               </li>
             ))}
           </CardCarousel>
@@ -268,17 +277,25 @@ export default function Homepage() {
             {attractionStrapiData?.map((card, index) => (
               <li key={index}>
                 <LargeCardMobile
+                  isTicket={false}
+                  isEvent={false}
                   title={card.attributes.title}
-                  imgSrc={card.attributes.image.data.attributes.url}
+                  description={card.attributes.richTextDescription != undefined ? card.attributes.richTextDescription : card.attributes.description}
                   address={card.attributes.location}
-                  category={card.attributes.tags}
-                  description={card.attributes?.richTextDescription}
-                  rating={card.attributes?.numStars}
-                  isTicket={card.attributes?.isTicket}
                   ticketDate={card.attributes.date}
-                  timeStart={card.attributes.startTime}
-                  timeEnd={card.attributes.endTime}
-                ></LargeCardMobile>
+                  ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
+                  rating={card.attributes.numStars}
+                  category={card.attributes.tags}
+                  imgSrc={card.attributes.image.data.attributes.url}
+                  imgAltText={card.attributes.image.data.attributes.alternativeText}
+                  barcodeUID={card.attributes.barcodeUID}
+
+                  isRegisterable={card.attributes.isRegisterable}
+                  isFull={card.attributes.isFull}
+                  isAvail={card.attributes.isAvailable}
+                  hoursOfOperation={card.attributes.hoursOfOperation}
+                >
+                </LargeCardMobile>
               </li>
             ))}
           </CardCarousel>
@@ -289,17 +306,25 @@ export default function Homepage() {
             {businessStrapiData?.map((card, index) => (
               <li key={index}>
                 <LargeCardMobile
+                  isTicket={false}
+                  isEvent={false}
                   title={card.attributes.title}
-                  imgSrc={card.attributes.image.data.attributes.url}
+                  description={card.attributes.richTextDescription != undefined ? card.attributes.richTextDescription : card.attributes.description}
                   address={card.attributes.location}
-                  category={card.attributes.tags}
-                  description={card.attributes?.richTextDescription}
-                  rating={card.attributes?.numStars}
-                  isTicket={card.attributes?.isTicket}
                   ticketDate={card.attributes.date}
-                  timeStart={card.attributes.startTime}
-                  timeEnd={card.attributes.endTime}
-                ></LargeCardMobile>
+                  ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
+                  rating={card.attributes.numStars}
+                  category={card.attributes.tags}
+                  imgSrc={card.attributes.image.data.attributes.url}
+                  imgAltText={card.attributes.image.data.attributes.alternativeText}
+                  barcodeUID={card.attributes.barcodeUID}
+
+                  isRegisterable={card.attributes.isRegisterable}
+                  isFull={card.attributes.isFull}
+                  isAvail={card.attributes.isAvailable}
+                  hoursOfOperation={card.attributes.hoursOfOperation}
+                >
+                </LargeCardMobile>
               </li>
             ))}
           </CardCarousel>
@@ -311,9 +336,9 @@ export default function Homepage() {
 
           <Gallery>
             {galleryStrapiData?.map((image, index) => (
-              <GalleryImage src={image.attributes.url} alt={"https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg"} key={index}/>
+              <GalleryImage src={image.attributes.url} alt={"https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg"} key={index} />
             ))
-          }
+            }
           </Gallery>
         </Section>
 
