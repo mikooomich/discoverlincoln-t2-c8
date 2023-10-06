@@ -179,7 +179,7 @@ export default function LargeCardDesktop({
         }
 
         .image-container {
-          width: 519px;
+          max-width: 35%;
           height: 408px;
           background-position: center center;
           background-repeat: no-repeat;
@@ -246,7 +246,7 @@ export default function LargeCardDesktop({
         .description-wrap {
           display: flex;
           flex-direction: row;
-          width: 700px;
+          {/* width: 700px; */}
           margin-top: 10px;
           align-items: center;
         }
@@ -255,7 +255,7 @@ export default function LargeCardDesktop({
           font-family: var(--font-roboto);
           font-size: var(--font-size-body-M);
           font-weight: 500;
-          width: 450px;
+          {/* width: 450px; */}
           padding-right: 20px;
           line-height: 2;
 

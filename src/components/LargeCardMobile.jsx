@@ -79,7 +79,7 @@ export default function LargeCardMobile({
 		<>
 			<div className="large-card-mobile">
 				<div className="image-container"></div>
-				<img src={imgSrc} alt={imgAltText}></img>
+				<img src={imgSrc} alt={imgAltText} className="content-img"></img>
 				<div className="card-information-wrap">
 					<div className="large-info-wrap">
 						<div className="large-info-wrap-left">
@@ -177,13 +177,17 @@ export default function LargeCardMobile({
         }
 
         .image-container {
-          width: 360px;
-          height: 156px;
+          max-width: 360px;
+          {/* height: 156px; */}
           background-position: center center;
           background-repeat: no-repeat;
           background-image: url("https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg");
           background-size: cover;
         }
+
+		.content-img {
+			object-fit: fill;
+		}
 
         .card-information-wrap {
           display: flex;
@@ -250,7 +254,7 @@ export default function LargeCardMobile({
           font-size: var(--font-size-body-M);
           line-height: 1.6;
           max-width: 50%;
-	  min-width: 50%;
+	  	  min-width: 50%;
           font-weight: 400px;
 
 	  overflow-y: scroll;
