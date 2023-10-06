@@ -49,8 +49,6 @@ export default function Homepage() {
 
   return (
     <>
-      
-
       <div className="homepage">
 	  	<Navbar isHomepage={true}></Navbar>
         <div className="landing-view-bg">
