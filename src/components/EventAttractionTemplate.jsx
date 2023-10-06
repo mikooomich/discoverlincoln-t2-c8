@@ -3,7 +3,8 @@ import React from "react";
 import LargeCardDesktop from "@/components/LargeCardDesktop";
 import LargeCardMobile from "@/components/LargeCardMobile";
 import LargeCardList from "@/components/LargeCardList";
-import MapCard from "@/components/MapCard";
+import dynamic from 'next/dynamic'
+const MapCard = dynamic(() => import("@/components/MapCard"), { ssr: false })
 
 export default function EventAttractionTemplate({
 	variant = "events",
@@ -24,8 +25,8 @@ export default function EventAttractionTemplate({
             background-color: rgb(170, 170, 170);
           }
 
-          .mapPlaceholder {
-            outline: #000000 solid 1px;
+          .mapContainer {
+            {/* outline: #000000 solid 1px; */}
             background-color: rgba(244, 112, 180, 0.11);
             min-height: 400px;
             width: 100%;
@@ -132,9 +133,9 @@ export default function EventAttractionTemplate({
 
           @media screen and (max-width: 550px) {
             /* Mobile view. Map gets thrown to bottom, collaps */
-            .map {
+            .mapContainer {
               order: 1;
-              margin: 20px auto;
+              align-self: center;
             }
 
             h1 {
@@ -213,9 +214,11 @@ export default function EventAttractionTemplate({
 						)}
 					</div>
 
-					<MapCard>
-						<div className="mapPlaceholder">Map goes here</div>
-					</MapCard>
+
+					<div className="mapContainer">
+						<MapCard></MapCard>
+					</div>
+
 
 					<div className="offerings">
 						<h1 className="offerings-text">All Offerings</h1>
@@ -241,7 +244,7 @@ export default function EventAttractionTemplate({
 
 											isRegisterable={element.attributes.isRegisterable}
 											isFull={element.attributes.isFull}
-											isAvail ={element.attributes.isAvailable}
+											isAvail={element.attributes.isAvailable}
 											hoursOfOperation={element.attributes.hoursOfOperation}
 										></LargeCardDesktop>
 									</div>
