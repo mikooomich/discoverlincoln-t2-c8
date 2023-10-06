@@ -1,21 +1,20 @@
 import React from "react";
 
-import DefaultButton from "../components/DefaultButton";
 import LargeCardDesktop from "@/components/LargeCardDesktop";
 import LargeCardMobile from "@/components/LargeCardMobile";
 import LargeCardList from "@/components/LargeCardList";
-import MapCard from "@/components/MapCard";
+import dynamic from 'next/dynamic'
+const MapCard = dynamic(() => import("@/components/MapCard"), { ssr: false })
 
 export default function EventAttractionTemplate({
-  variant = "events",
-  strapiDataLink,
+	variant = "events",
+	strapiDataLink,
 }) {
-  // for whatever reason variant is an object, so need to do variant.variant
 
-  return (
-    <>
-      <style jsx>
-        {`
+	return (
+		<>
+			<style jsx>
+				{`
           .iconBackdrop {
             width: 450px;
             height: 500px;
@@ -26,8 +25,8 @@ export default function EventAttractionTemplate({
             background-color: rgb(170, 170, 170);
           }
 
-          .mapPlaceholder {
-            outline: #000000 solid 1px;
+          .mapContainer {
+            {/* outline: #000000 solid 1px; */}
             background-color: rgba(244, 112, 180, 0.11);
             min-height: 400px;
             width: 100%;
@@ -134,9 +133,9 @@ export default function EventAttractionTemplate({
 
           @media screen and (max-width: 550px) {
             /* Mobile view. Map gets thrown to bottom, collaps */
-            .map {
+            .mapContainer {
               order: 1;
-              margin: 20px auto;
+              align-self: center;
             }
 
             h1 {
@@ -193,90 +192,95 @@ export default function EventAttractionTemplate({
             }
           }
         `}
-      </style>
+			</style>
 
-      <div className="psudoBody">
-        <div className="iconBackdrop"></div>
+			<div className="psudoBody">
+				<div className="iconBackdrop"></div>
 
-        <div className="maincontent">
-          <div className="titleBlock">
-            {variant == "events" && (
-              <>
-                <h1>Upcomming Events</h1>
-                <p>There is always something around the corner</p>
-              </>
-            )}
+				<div className="maincontent">
+					<div className="titleBlock">
+						{variant == "events" && (
+							<>
+								<h1>Upcomming Events</h1>
+								<p>There is always something around the corner</p>
+							</>
+						)}
 
-            {variant == "attractions" && (
-              <>
-                <h1>Attractions</h1>
-                <p>Eye spy with my little eye...</p>
-              </>
-            )}
-          </div>
+						{variant == "attractions" && (
+							<>
+								<h1>Attractions</h1>
+								<p>Eye spy with my little eye...</p>
+							</>
+						)}
+					</div>
 
-          <MapCard>
-            <div className="mapPlaceholder">Map goes here</div>
-          </MapCard>
 
-          <div className="offerings">
-            <h1 className="offerings-text">All Offerings</h1>
+					<div className="mapContainer">
+						<MapCard></MapCard>
+					</div>
 
-            {/* scrollable offerings */}
-            <div className="cards-desktop">
-              <LargeCardList>
-                {strapiDataLink?.map((element, index) => (
-                  <li key={index}>
-                    <LargeCardDesktop
-                      isTicket={true}
-                      title={element.attributes.title}
-                      description={element.attributes.description}
-                      address={element.attributes.location}
-                      ticketDate={element.attributes.date}
-                      ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
-                      rating={element.attributes.numStars}
-                      category={element.attributes.tags}
-                      imgSrc={element.attributes.image.data.attributes.url}
-                      imgAltText={
-                        element.attributes.image.data.attributes.alternativeText
-                      }
-                      barcodeUID={element.attributes.barcodeUID}
 
-                      // hoursOfOperation={element.attributes.hoursOfOperation}
-                    ></LargeCardDesktop>
-                  </li>
-                ))}
-              </LargeCardList>
-            </div>
-            <div className="cards-mobile">
-              <LargeCardList>
-                {strapiDataLink?.map((element, index) => (
-                  <li key={index}>
-                    <LargeCardMobile
-                      isTicket={true}
-                      isEvent={false}
-                      title={element.attributes.title}
-                      description={element.attributes.description}
-                      address={element.attributes.location}
-                      ticketDate={element.attributes.date}
-                      ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
-                      rating={element.attributes.numStars}
-                      category={element.attributes.tags}
-                      imgSrc={element.attributes.image.data.attributes.url}
-                      imgAltText={
-                        element.attributes.image.data.attributes.alternativeText
-                      }
-                      barcodeUID={element.attributes.barcodeUID}
+					<div className="offerings">
+						<h1 className="offerings-text">All Offerings</h1>
 
-                      // hoursOfOperation={element.attributes.hoursOfOperation}
-                    ></LargeCardMobile>
-                  </li>
-                ))}
-              </LargeCardList>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+						{/* scrollable offerings */}
+						<div className="cards-desktop">
+							<LargeCardList>
+								{strapiDataLink?.map((element, index) => (
+									<div key={index}>
+										<LargeCardDesktop
+											isTicket={false}
+											title={element.attributes.title}
+											isEvent={variant === "events" ? true : false}
+											description={element.attributes.description}
+											address={element.attributes.location}
+											ticketDate={element.attributes.date}
+											ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
+											rating={element.attributes.numStars}
+											category={element.attributes.tags}
+											imgSrc={element.attributes.image.data.attributes.url}
+											imgAltText={element.attributes.image.data.attributes.alternativeText}
+											barcodeUID={element.attributes.barcodeUID}
+
+											isRegisterable={element.attributes.isRegisterable}
+											isFull={element.attributes.isFull}
+											isAvail={element.attributes.isAvailable}
+											hoursOfOperation={element.attributes.hoursOfOperation}
+										></LargeCardDesktop>
+									</div>
+								))}
+							</LargeCardList>
+						</div>
+						<div className="cards-mobile">
+							<LargeCardList>
+								{strapiDataLink?.map((element, index) => (
+									<div key={index}>
+										<LargeCardMobile
+											isTicket={false}
+											isEvent={variant === "events" ? true : false}
+											title={element.attributes.title}
+											description={element.attributes.description}
+											address={element.attributes.location}
+											ticketDate={element.attributes.date}
+											ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
+											rating={element.attributes.numStars}
+											category={element.attributes.tags}
+											imgSrc={element.attributes.image.data.attributes.url}
+											imgAltText={element.attributes.image.data.attributes.alternativeText}
+											barcodeUID={element.attributes.barcodeUID}
+
+											isRegisterable={element.attributes.isRegisterable}
+											isFull={element.attributes.isFull}
+											isAvail={element.attributes.isAvailable}
+											hoursOfOperation={element.attributes.hoursOfOperation}
+										></LargeCardMobile>
+									</div>
+								))}
+							</LargeCardList>
+						</div>
+					</div>
+				</div>
+			</div>
+		</>
+	);
 }

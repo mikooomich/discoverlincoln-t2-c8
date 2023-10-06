@@ -1,6 +1,18 @@
 import React from "react";
 import Image from "next/image";
+import React from "react";
+import Image from "next/image";
 
+import TextInput from "@/components/TextInput";
+import Section from "@/components/Section";
+import LargeCardMobile from "@/components/LargeCardMobile";
+import CardCarousel from "@/components/CardCarousel";
+import Gallery from "@/components/Gallery";
+import GalleryImage from "@/components/GalleryImage";
+import SmallCard from "@/components/SmallCard";
+import DefaultButton from "@/components/DefaultButton";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 import TextInput from "@/components/TextInput";
 import Section from "@/components/Section";
 import LargeCardMobile from "@/components/LargeCardMobile";
@@ -14,13 +26,23 @@ import Navbar from "@/components/Navbar";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 
 export default function Homepage() {
   const [eventsStrapiData, setEventsStrapiData] = useState([]); // events
   const [attractionStrapiData, setAttractionStrapiData] = useState([]);
   const [businessStrapiData, setBusinessStrapiData] = useState([]);
+  const [galleryStrapiData, setGalleryStrapiData] = useState([]);
 
+  useEffect(() => {
+    async function fetchStrapiData() {
+      const eventResponse = await fetch(
+        "https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/events?populate=*"
+      );
+      const eventData = await eventResponse.json();
+      setEventsStrapiData(eventData.data);
   useEffect(() => {
     async function fetchStrapiData() {
       const eventResponse = await fetch(
@@ -34,14 +56,28 @@ export default function Homepage() {
       );
       const attractionData = await attractionResponse.json();
       setAttractionStrapiData(attractionData.data);
+      const attractionResponse = await fetch(
+        "https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/attrractions?populate=*"
+      );
+      const attractionData = await attractionResponse.json();
+      setAttractionStrapiData(attractionData.data);
 
       const businessResponse = await fetch(
         "https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/businesses?populate=*"
       );
       const businessData = await businessResponse.json();
       setBusinessStrapiData(businessData.data);
+      const businessResponse = await fetch(
+        "https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/businesses?populate=*"
+      );
+      const businessData = await businessResponse.json();
+      setBusinessStrapiData(businessData.data);
 
-      // console.log(strapiData)
+      const galleryResponse = await fetch(
+        "https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/gallery?populate=*"
+      );
+      const galleryData = await galleryResponse.json();
+      setGalleryStrapiData(galleryData.data.attributes.images.data);
     }
 
     fetchStrapiData();
@@ -313,11 +349,10 @@ export default function Homepage() {
           <h2 className="events-title">Gallery</h2>
 
           <Gallery>
-            <GalleryImage src="/pascal-bullan-8JdbMz_p_yg-unsplash 1(4).png" />
-            <GalleryImage src="/pascal-bullan-8JdbMz_p_yg-unsplash 1(3).png" />
-            <GalleryImage src="/pascal-bullan-8JdbMz_p_yg-unsplash 1(2).png" />
-            <GalleryImage src="/pascal-bullan-8JdbMz_p_yg-unsplash 1(1).png" />
-            <GalleryImage src="/pascal-bullan-8JdbMz_p_yg-unsplash 1.png" />
+            {galleryStrapiData?.map((image, index) => (
+              <GalleryImage src={image.attributes.url} alt={"https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg"} key={index} />
+            ))
+            }
           </Gallery>
         </Section>
 
