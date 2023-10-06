@@ -33,7 +33,7 @@ export default function TextInput({
 				padding: ${padding};
 				color: ${textColor};
 				font-family: ${fontFamily};
-				margin: 10px 0px;
+				margin: 0px 0px;
 				width: ${width};
 			}
 

@@ -79,8 +79,10 @@ export default function SmallCard({
 				display: flex;
 				align-items: center;
 
-				max-width: 360px;
+				
 				height: 90px;
+				width: 320px;
+				max-width: 320px;
 
 				box-shadow: var(--shadow-box-massive-card);
 				background-color: #FFFFFF;
@@ -102,7 +104,7 @@ export default function SmallCard({
 				display: flex;
 				flex-direction: column;
 				padding: 10px 15px;
-				width:100%
+				width:100%;
 			}
 
 	
