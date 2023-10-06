@@ -24,14 +24,14 @@ export default function MobileHamburgerMenu({isHomepage = false}) {
 					<h2>Search</h2>
 				</DefaultButton>
 
-				<DefaultButton className="mobileNav" isLink={true} href="./events-attractions">
+				<DefaultButton className="mobileNav" isLink={true} href="./events">
 					<div className='icon'>
 						<FontAwesomeIcon icon={faCalendarCheck} />
 					</div>
 					<h2>Upcomming Events</h2>
 				</DefaultButton>
 
-				<DefaultButton className="mobileNav" isLink={true} href="./events-attractions">
+				<DefaultButton className="mobileNav" isLink={true} href="./attractions">
 					<div className='icon'>
 						<FontAwesomeIcon icon={faCamera} />
 					</div>
