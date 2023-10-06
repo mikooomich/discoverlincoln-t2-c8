@@ -143,7 +143,7 @@ export default function LargeCardDesktop({
 								<h1 className="price">
 									Price: ${(Math.round(ticketPrice * 100) / 100).toFixed(2)}
 								</h1>
-								<DefaultButton>Purchase</DefaultButton>
+								<DefaultButton isLink={true} href={{pathname: "./checkout", query: {whichSelection: barcodeUID}}}>Purchase</DefaultButton>
 							</div>
 						) : isEvent && !isTicket && !isRegisterable ? (
 							<div className="event-wrap">
