@@ -157,7 +157,7 @@ export default function LargeCardDesktop({
 							<div className="description2-text">
 								{isAvail ? <h1 className="ticket-text">Hours of Operation:</h1> : <p className="ticket-text">Currently Closed.</p>}
 								<div className="markdown-wrap">
-									<ReactMarkdown className="hours-description">
+									<ReactMarkdown className="hours-description-lc">
 										{hoursOfOperation}
 									</ReactMarkdown>
 								</div>
@@ -179,7 +179,7 @@ export default function LargeCardDesktop({
         }
 
         .image-container {
-          width: 519px;
+          max-width: 35%;
           height: 408px;
           background-position: center center;
           background-repeat: no-repeat;
@@ -246,7 +246,7 @@ export default function LargeCardDesktop({
         .description-wrap {
           display: flex;
           flex-direction: row;
-          width: 700px;
+          {/* width: 700px; */}
           margin-top: 10px;
           align-items: center;
         }
@@ -255,7 +255,7 @@ export default function LargeCardDesktop({
           font-family: var(--font-roboto);
           font-size: var(--font-size-body-M);
           font-weight: 500;
-          width: 450px;
+          {/* width: 450px; */}
           padding-right: 20px;
           line-height: 2;
 
@@ -291,14 +291,6 @@ export default function LargeCardDesktop({
           font-size: var(--font-size-body-Mplus);
           font-weight: 700;
           padding-bottom: 10px;
-        }
-
-        .hours-description {
-          font-family: var(--font-roboto);
-          font-size: var(--font-size-body-L);
-          font-weight: 400;
-          line-height: 4;
-          padding-left: 30px;
         }
 
         .ticket-wrap {

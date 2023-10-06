@@ -2,10 +2,11 @@ import React from "react";
 import TextInput from "./TextInput";
 import Image from "next/image";
 import DefaultButton from "./DefaultButton";
+import Link from "next/link";
 
 export default function Footer() {
-  //code
-  //code
+	//code
+	//code
 
 	//html
 	return (
@@ -17,12 +18,12 @@ export default function Footer() {
 					/>
 				</div>
 				<div className="footer-links">
-					<a href="./homepage">Home</a>
-					<a href="./search">Search</a>
-					<a href="./events">Upcoming Events</a>
-					<a href="./attractions">Attractions</a>
-					<a href="./business-service">Businesses & Services</a>
-					<a href="./profile">Profile</a>
+					<div><Link href="./homepage">Homepage</Link></div>
+					<div><Link href="./search">Search</Link></div>
+					<div><Link href="./events">Upcoming Events</Link></div>
+					<div><Link href="./attractions">Attractions</Link></div>
+					<div><Link href="./business-service">Businesses & Services</Link></div>
+					<div><Link href="./profile">Profile</Link></div>
 				</div>
 				<div className="footer-subscription">
 					<h2 className="subscribe-text">Subscribe to Town of Lincoln</h2>
@@ -33,8 +34,8 @@ export default function Footer() {
 				</div>
 			</div>
 
-      {/* styles */}
-      <style jsx>{`
+			{/* styles */}
+			<style jsx>{`
         .footer {
           display: flex;
           flex-wrap: wrap;
@@ -84,16 +85,16 @@ export default function Footer() {
           flex-grow: 1;
         }
 
-        .footer-links a {
+        .footer-links div {
           color: white;
           padding: 10px;
           font-size: 15px;
-		  font-family: var(--font-roboto);
-		  font-size: var(--font-size-body-Mplus);
+          font-family: var(--font-roboto);
+          font-size: var(--font-size-body-Mplus);
           text-align: center;
         }
 
-        .footer-links a:hover {
+        .footer-links div:hover {
           text-decoration: underline;
           transform: scale(1.05);
           transition: 0.3s;
@@ -154,6 +155,6 @@ export default function Footer() {
 
         
       `}</style>
-    </>
-  );
+		</>
+	);
 }

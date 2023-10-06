@@ -3,6 +3,8 @@ import Navbar from "@/components/Navbar";
 import LargeCardList from "@/components/LargeCardList";
 import LargeCardDesktop from "@/components/LargeCardDesktop";
 import React, { useState, useEffect } from "react";
+import LargeCardMobile from "@/components/LargeCardMobile";
+import Section from "@/components/Section";
 
 export default function Profile() {
   const [userStrapiData, setUserStrapiData] = useState(null);
@@ -32,31 +34,74 @@ export default function Profile() {
   return (
     <>
       {userStrapiData && (
-        <div className="profile-page">
+        <Section>
+
           <div className="account-info">
             <img src="https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg"></img>
             <h1>{userStrapiData.username}</h1>
           </div>
-          <LargeCardList>
-            {userStrapiData?.registeredEvents?.map((card, index) => (
-              <li key={index}>
-                <LargeCardDesktop
-                  title={card.title}
-                  address={card.location}
-                  category={card.tags}
-				  imgSrc={card.image.url}
-                  description={card.description}
-                  rating={card?.numStars}
-                  isTicket={true}
-                  isEvent={true}
-                  ticketDate={card.date}
-                  timeStart={card.startTime}
-                  timeEnd={card.endTime}
-                ></LargeCardDesktop>
-              </li>
-            ))}
-          </LargeCardList>
-        </div>
+
+          <div className="event-tickets-wrap">
+            <LargeCardList>
+              {console.log(userStrapiData?.registeredEvents)}
+              {userStrapiData?.registeredEvents?.map((card, index) => (
+                <div key={index}>
+                  <LargeCardDesktop
+                    isTicket={true}
+                    isEvent={true}
+                    title={card.title}
+                    description={card.description}
+                    address={card.location}
+                    ticketDate={card.date}
+                    ticketTime={`${card.startTime} - ${card.endTime}`}
+                    rating={card.numStars}
+                    category={card.tags}
+                    imgSrc={card.image.url}
+                    imgAltText={card.image.alternativeText}
+                    barcodeUID={card.barcodeUID}
+
+                    isRegisterable={card.isRegisterable}
+                    isFull={card.isFull}
+                    isAvail={card.isAvailable}
+                    hoursOfOperation={card.hoursOfOperation}
+                  ></LargeCardDesktop>
+                </div>
+              ))}
+            </LargeCardList>
+          </div>
+
+          <div className="event-tickets-wrap-mobile">
+            <LargeCardList>
+              {console.log(userStrapiData?.registeredEvents)}
+              {userStrapiData?.registeredEvents?.map((card, index) => (
+                <div key={index}>
+                  <LargeCardMobile
+                    isTicket={true}
+                    isEvent={true}
+                    title={card.title}
+                    description={card.description}
+                    address={card.location}
+                    ticketDate={card.date}
+                    ticketTime={`${card.startTime} - ${card.endTime}`}
+                    rating={card.numStars}
+                    category={card.tags}
+                    imgSrc={card.image.url}
+                    imgAltText={card.image.alternativeText}
+                    barcodeUID={card.barcodeUID}
+
+                    isRegisterable={card.isRegisterable}
+                    isFull={card.isFull}
+                    isAvail={card.isAvailable}
+                    hoursOfOperation={card.hoursOfOperation}
+                  ></LargeCardMobile>
+                </div>
+              ))}
+            </LargeCardList>
+          </div>
+
+        </Section>
+
+
       )}
 
       <style jsx>
@@ -99,6 +144,24 @@ export default function Profile() {
             border-style: solid;
             border-width: 2px;
           }
+
+          .event-tickets-wrap-mobile {
+            display: none;
+
+          }
+
+          @media screen and (max-width: 600px) {
+            .event-tickets-wrap {
+            display: none;
+          }
+
+          .event-tickets-wrap-mobile {
+            display: flex;
+            justify-content: center;
+          }
+          }
+
+
         `}
       </style>
     </>
