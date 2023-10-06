@@ -157,7 +157,7 @@ export default function LargeCardDesktop({
 							<div className="description2-text">
 								{isAvail ? <h1 className="ticket-text">Hours of Operation:</h1> : <p className="ticket-text">Currently Closed.</p>}
 								<div className="markdown-wrap">
-									<ReactMarkdown className="hours-description">
+									<ReactMarkdown className="hours-description-lc">
 										{hoursOfOperation}
 									</ReactMarkdown>
 								</div>
@@ -291,14 +291,6 @@ export default function LargeCardDesktop({
           font-size: var(--font-size-body-Mplus);
           font-weight: 700;
           padding-bottom: 10px;
-        }
-
-        .hours-description {
-          font-family: var(--font-roboto);
-          font-size: var(--font-size-body-L);
-          font-weight: 400;
-          line-height: 4;
-          padding-left: 30px;
         }
 
         .ticket-wrap {

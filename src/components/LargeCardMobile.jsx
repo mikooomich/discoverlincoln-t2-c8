@@ -142,7 +142,7 @@ export default function LargeCardMobile({
 								<p className="ticket-text">
 									Price: ${(Math.round(ticketPrice * 100) / 100).toFixed(2)}
 								</p>
-								<DefaultButton isLink={true} href={{pathname: "./checkout", query: {whichSelection: barcodeUID}}}>Purchase</DefaultButton>
+								<DefaultButton isLink={true} href={{ pathname: "./checkout", query: { whichSelection: barcodeUID } }}>Purchase</DefaultButton>
 							</div>
 						) : isEvent && !isTicket && !isRegisterable ? ( // free events
 							<div className="event-wrap">
@@ -285,13 +285,7 @@ export default function LargeCardMobile({
           padding-left: 4px;
         }
 
-        .hours-description code {
-          font-family: var(--font-roboto);
-          font-size: 12;
-          font-weight: 400;
-          line-height: 1.5;
-          padding-left: 10px;
-        }
+      
 
         .ticket-wrap {
           display: flex;
@@ -319,6 +313,8 @@ export default function LargeCardMobile({
 		.markdown-wrap {
 		
 		}
+
+
       `}</style>
 		</>
 	);

@@ -25,3 +25,22 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+
+/* Small card hours of opp */
+.hours-description p {
+  font-family: var(--font-roboto);
+  font-size: var(--font-size-body-S);
+  font-weight: 400;
+  line-height: 1.5;
+  padding-left: 10px;
+}
+
+/* Large card hours of opp */
+.hours-description-lc {
+  font-family: var(--font-roboto);
+  font-size: var(--font-size-body-M);
+  font-weight: 400;
+  line-height: 1.5;
+  padding-left: 30px;
+}
