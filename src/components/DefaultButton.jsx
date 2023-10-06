@@ -67,16 +67,22 @@ export default function DefaultButton({
         {`
           .defaultStyle {
             background-color: ${bgColor};
-
             font-size: ${fontSize};
-
             padding: ${padding};
-
             color: ${textColor};
-
+            font-family: var(--font-calps);
+          }
+          .blank {
+            background-color: transparent;
+            font-size: default;
+            padding: 0px;
+            color: black;
             font-family: var(--font-calps);
           }
 
+          .selectedCard {
+            filter: brightness(70%);
+          }
           .linkChildren {
             display: flex;
 

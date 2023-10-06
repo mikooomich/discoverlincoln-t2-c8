@@ -17,7 +17,7 @@ export default function attractions() {
 
 	return (
 		<>
-			<EventAttractionTemplate variant="attractions" strapiDataLink= {strapiData}></EventAttractionTemplate>
+			<EventAttractionTemplate variant="attractions" strapiDataLink= {strapiData} strapiDataLinkSetter={setStrapiData}></EventAttractionTemplate>
 		</>
 	);
 }
