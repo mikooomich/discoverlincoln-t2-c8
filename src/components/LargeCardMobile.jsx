@@ -79,7 +79,7 @@ export default function LargeCardMobile({
 		<>
 			<div className="large-card-mobile">
 				<div className="image-container"></div>
-				<img src={imgSrc} alt={imgAltText}></img>
+				<img src={imgSrc} alt={imgAltText} className="content-img"></img>
 				<div className="card-information-wrap">
 					<div className="large-info-wrap">
 						<div className="large-info-wrap-left">
@@ -142,7 +142,7 @@ export default function LargeCardMobile({
 								<p className="ticket-text">
 									Price: ${(Math.round(ticketPrice * 100) / 100).toFixed(2)}
 								</p>
-								<DefaultButton isLink={true} href={{pathname: "./checkout", query: {whichSelection: barcodeUID}}}>Purchase</DefaultButton>
+								<DefaultButton isLink={true} href={{ pathname: "./checkout", query: { whichSelection: barcodeUID } }}>Purchase</DefaultButton>
 							</div>
 						) : isEvent && !isTicket && !isRegisterable ? ( // free events
 							<div className="event-wrap">
@@ -177,13 +177,17 @@ export default function LargeCardMobile({
         }
 
         .image-container {
-          width: 360px;
-          height: 156px;
+          max-width: 360px;
+          {/* height: 156px; */}
           background-position: center center;
           background-repeat: no-repeat;
           background-image: url("https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg");
           background-size: cover;
         }
+
+		.content-img {
+			object-fit: fill;
+		}
 
         .card-information-wrap {
           display: flex;
@@ -250,7 +254,7 @@ export default function LargeCardMobile({
           font-size: var(--font-size-body-M);
           line-height: 1.6;
           max-width: 50%;
-	  min-width: 50%;
+	  	  min-width: 50%;
           font-weight: 400px;
 
 	  overflow-y: scroll;
@@ -285,13 +289,7 @@ export default function LargeCardMobile({
           padding-left: 4px;
         }
 
-        .hours-description code {
-          font-family: var(--font-roboto);
-          font-size: 12;
-          font-weight: 400;
-          line-height: 1.5;
-          padding-left: 10px;
-        }
+      
 
         .ticket-wrap {
           display: flex;
@@ -319,6 +317,8 @@ export default function LargeCardMobile({
 		.markdown-wrap {
 		
 		}
+
+
       `}</style>
 		</>
 	);
