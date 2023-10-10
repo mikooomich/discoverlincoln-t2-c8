@@ -60,7 +60,7 @@ export default function Homepage() {
           <div className="landing-view-wrap">
             <div className="landing-view-greet">
               <div className="greeting-frame">
-                <h1 className="discover-text">Discover</h1>
+                <h1 className="discover-text">DISCOVER</h1>
                 <h1 className="lincoln-text">LINCOLN</h1>
                 <p className="greeting-description-text">
                   Welcome to the Town of Lincoln! The places you will go, and
@@ -376,8 +376,8 @@ export default function Homepage() {
           display: flex;
           flex-direction: column;
           background-image: linear-gradient(
-              rgba(0, 0, 0, 0.3),
-              rgba(0, 0, 0, 0.4)
+              rgba(0, 0, 0, 0.5),
+              rgba(0, 0, 0, 0.5)
             ),
             url("https://dg.imgix.net/does-alcohol-still-sober-you-igdnainm-en/landscape/does-alcohol-still-sober-you-igdnainm-d3b43138ff5a2cce0d3ff444cec97153.jpg?ts=1678406840&ixlib=rails-4.3.1&auto=format%2Ccompress&fit=min&w=700&h=394&dpr=2&ch=Width%2CDPR");
           background-size: cover;
@@ -402,7 +402,7 @@ export default function Homepage() {
         }
 
         .discover-text {
-          font-size: 75px;
+          font-size: 73px;
           font-family: var(--font-calps);
           font-style: normal;
           font-weight: 700;
