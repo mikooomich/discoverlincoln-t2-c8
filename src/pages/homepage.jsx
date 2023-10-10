@@ -279,7 +279,7 @@ export default function Homepage() {
         </div>
 
         <Section marginBottom="40px" marginTop="250px">
-          <CardCarousel title="Events" margin="0px 0px 40px 0px">
+          <CardCarousel title="Events" margin="80px 0px 80px 0px">
             {eventsStrapiData?.map((card, index) => (
               <li key={index}>
                 <LargeCardMobile
@@ -311,7 +311,7 @@ export default function Homepage() {
           <div className="carousel-padding"></div>
           <hr />
           <div className="carousel-padding"></div>
-          <CardCarousel title="Attractions" margin="40px 0px">
+          <CardCarousel title="Attractions" margin="0px 0px 80px 0px">
             {attractionStrapiData?.map((card, index) => (
               <li key={index}>
                 <LargeCardMobile
@@ -341,7 +341,7 @@ export default function Homepage() {
           </DefaultButton>
           <div className="carousel-padding"></div>
           <hr />
-          <CardCarousel title="Business" margin="40px 0px 40px 0px">
+          <CardCarousel title="Business" margin="20px 0px 80px 0px">
             {businessStrapiData?.map((card, index) => (
               <li key={index}>
                 <LargeCardMobile
@@ -370,7 +370,7 @@ export default function Homepage() {
             See More
           </DefaultButton>
         </Section>
-        <hr />
+      
         <div className="carousel-padding"></div>
 
         <Section marginBottom="100px">

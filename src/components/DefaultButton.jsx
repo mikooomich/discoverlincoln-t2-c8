@@ -213,6 +213,8 @@ export default function DefaultButton({
           .homepage-see-more {
             width: 103px;
             padding: 5px 20px;
+            float: right;
+            margin-top: -70px;
           }
 
           .hero-under-buttons {
