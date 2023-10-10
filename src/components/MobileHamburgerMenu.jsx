@@ -46,7 +46,7 @@ export default function MobileHamburgerMenu({isHomepage = false}) {
 					<h2>Businesses & Services</h2>
 				</DefaultButton>
 
-				<DefaultButton className="mobileNav" isLink={true} href="./Profile">
+				<DefaultButton className="mobileNav" isLink={true} href="./profile">
 					<div className='icon'>
 						<FontAwesomeIcon icon={faUser} />
 					</div>
