@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import TextInput from "@/components/TextInput";
 import Section from "@/components/Section";
@@ -69,11 +70,13 @@ export default function Homepage() {
                 </p>
                 <div className="search-area">
                   <DefaultButton
-                    className="see-lincoln"
+                    className=" see-lincoln"
                     fontSize={"18px"}
                     bgColor={"white"}
                     textColor={"black"}
                     padding={"0px 8px"}
+                    isLink={true}
+                    href="./business-service"
                   >
                     SEE LINCOLN
                   </DefaultButton>
@@ -119,7 +122,10 @@ export default function Homepage() {
                     ))}
                   </CardCarousel>
                 </div>
-                <button className="see-all-events-button">SEE ALL</button>
+                <DefaultButton isLink={true} href="./events" className=" blank homepage-SmallCard">
+                  SEE ALL
+                </DefaultButton>
+
               </div>
             </div>
             <div className="topology-wrap">
@@ -281,7 +287,10 @@ export default function Homepage() {
               </li>
             ))}
           </CardCarousel>
-          <DefaultButton>See More</DefaultButton>
+          {/* <DefaultButton>See More</DefaultButton> */}
+          <DefaultButton isLink={true} href="./events" className=" homepage-see-more">
+            See More
+          </DefaultButton>
           <div className="carousel-padding"></div>
           <hr />
           <div className="carousel-padding"></div>
@@ -310,7 +319,9 @@ export default function Homepage() {
               </li>
             ))}
           </CardCarousel>
-          <DefaultButton>See More</DefaultButton>
+          <DefaultButton isLink={true} href="./attractions" className=" homepage-see-more">
+            See More
+          </DefaultButton>
           <div className="carousel-padding"></div>
           <hr />
           <CardCarousel title="Business" margin="40px 0px 40px 0px">
@@ -338,7 +349,9 @@ export default function Homepage() {
               </li>
             ))}
           </CardCarousel>
-          <DefaultButton>See More</DefaultButton>
+          <DefaultButton isLink={true} href="./business-service" className=" homepage-see-more">
+            See More
+          </DefaultButton>
         </Section>
         <hr />
         <div className="carousel-padding"></div>
@@ -455,19 +468,6 @@ export default function Homepage() {
           justify-content: flex-start;
           padding: 0px 0px 0px 0px;
           max-height: 40px;
-        }
-
-        .see-lincoln {
-          display: flex;
-
-          background: #fff;
-          gap: 10px;
-          backdrop-filter: blur(2px);
-          color: black;
-          font-family: var(--font-roboto);
-          font-size: 14px;
-          font-weight: 800;
-          max-height: 30px;
         }
 
         .search-button-area {
