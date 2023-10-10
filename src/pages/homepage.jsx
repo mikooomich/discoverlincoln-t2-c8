@@ -271,9 +271,9 @@ export default function Homepage() {
               culture, and events that make it a hidden gem worth discovering
             </p>
             <div className="buttons">
-              <button className="events-button">EVENTS</button>
-              <button className="attractions-button">ATTRACTIONS</button>
-              <button className="businesses-button">BUSINESSES</button>
+              <DefaultButton isLink={true} href="./events" className=" hero-under-buttons">EVENTS</DefaultButton>
+              <DefaultButton isLink={true} href="./attractions" className=" hero-under-buttons">ATTRACTIONS</DefaultButton>
+              <DefaultButton isLink={true} href="./business-service" className=" hero-under-buttons">BUSINESSES</DefaultButton>
             </div>
           </div>
         </div>

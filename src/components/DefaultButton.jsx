@@ -209,6 +209,11 @@ export default function DefaultButton({
             padding: 5px 20px;
           }
 
+          .hero-under-buttons {
+            width: auto;
+            padding: 5px 15px;
+            margin-right: 20px;
+          }
 
           .see-lincoln {
             backdrop-filter: blur(2px);
