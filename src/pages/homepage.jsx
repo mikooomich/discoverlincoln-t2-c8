@@ -231,10 +231,12 @@ export default function Homepage() {
           </div>
         </div>
         <div className="page-buttons">
-          <img
-            src="https://images.unsplash.com/photo-1597655601841-214a4cfe8b2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW91bnRhaW4lMjBzY2VuZXJ5fGVufDB8fDB8fHww&w=1000&q=80"
-            className="image-home"
-          ></img>
+          <div className="image-home">
+            <img
+              src="https://images.unsplash.com/photo-1597655601841-214a4cfe8b2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW91bnRhaW4lMjBzY2VuZXJ5fGVufDB8fDB8fHww&w=1000&q=80"
+              style={{ width: "100%", height: "100%" }}
+            ></img>
+          </div>
           <div className="text-and-buttons">
             <p className="image-description">
               Nestled in the heart of Ontarios picturesque Niagara Region,
@@ -253,7 +255,7 @@ export default function Homepage() {
           </div>
         </div>
 
-        <Section marginBottom="40px" marginTop="100px">
+        <Section marginBottom="40px" marginTop="250px">
           <CardCarousel title="Events" margin="0px 0px 40px 0px">
             {eventsStrapiData?.map((card, index) => (
               <li key={index}>
@@ -339,16 +341,7 @@ export default function Homepage() {
         <Footer></Footer>
       </div>
 
-      <style jsx>{`
-        @media screen and (max-width: 870px) {
-          .landing-view-greet {
-            margin-top: 120px;
-            height: 1100px;
-            flex-wrap: wrap;
-            gap: 20px;
-            height: auto;
-          }
-        }
+      <style jsx>{`    
 
         li {
           margin: 20px 20px;
@@ -535,8 +528,16 @@ export default function Homepage() {
         }
 
         .image-home {
-          height: 400px;
-          padding: 20px 50px;
+          height: 430px;
+          width: 390px;
+          border: 5px solid white;
+          position: relative;
+          margin-bottom: -100px;
+          box-shadow: var(--shadow-box-buttons)
+        }
+
+        .image-home img {
+          object-fit: cover;
         }
 
         .text-and-buttons {
@@ -554,7 +555,7 @@ export default function Homepage() {
           font-weight: 500;
           font-size: 24;
           color: white;
-          width: 550px;
+          max-width: 550px;
           text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           line-height: 150%;
           padding-bottom: 35px;
@@ -582,6 +583,49 @@ export default function Homepage() {
           margin-left: 10px;
           margin-right: 10px;
           text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+
+
+
+
+        @media screen and (max-width: 1000px) {
+          .image-description {
+            font-size: 24;
+            width: 350px;
+         }
+
+        }
+
+        @media screen and (max-width: 870px) {
+          .landing-view-greet {
+            margin-top: 120px;
+            height: 1100px;
+            flex-wrap: wrap;
+            gap: 20px;
+            height: auto;
+          }
+
+
+          .image-home {
+            height: 430px;
+            width: auto;
+            max-width: 40%;
+            margin-left: 20px;
+          }
+        }
+
+        @media screen and (max-width: 720px) {
+
+          .image-home {
+            height: 230px;
+            width: auto;
+            max-width: 100%;
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-bottom: 0px;
+            margin-top: 20px;
+          }
         }
       `}</style>
     </>
