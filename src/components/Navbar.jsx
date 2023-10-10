@@ -134,7 +134,7 @@ export default function Navbar({ isHomepage = false }) {
          {
           /* TODO: fix jank */
         }
-        @media screen and (max-width: 845px) {
+        @media screen and (max-width: 855px) {
           .header-links {
             display: none;
           }
