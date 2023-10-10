@@ -23,6 +23,8 @@ export default function Homepage() {
   const [businessStrapiData, setBusinessStrapiData] = useState([]);
   const [galleryStrapiData, setGalleryStrapiData] = useState([]);
 
+  const [searchQuery, setSearchQuery] = useState([]); // the thing to search for
+
   useEffect(() => {
     async function fetchStrapiData() {
       const eventResponse = await fetch(
@@ -53,6 +55,20 @@ export default function Homepage() {
     fetchStrapiData();
   }, []);
 
+
+
+
+  /**
+ * Read from text input component
+ * @param {*} data 
+ */
+  const readQuery = (data) => {
+    setSearchQuery(data)
+  }
+
+
+
+
   return (
     <>
       <div className="homepage">
@@ -81,7 +97,7 @@ export default function Homepage() {
                     SEE LINCOLN
                   </DefaultButton>
                   <div className="search-button-area">
-                    <DefaultButton>
+                    <DefaultButton isLink={true} href={{ pathname: "./search", query: { searchQuery } }} className="see-lincoln ">
                       <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </DefaultButton>
                     <TextInput
@@ -89,6 +105,7 @@ export default function Homepage() {
                       className="search-input"
                       placeholder="Search..."
                       padding={"0px 16px"}
+                      dataOut={readQuery}
                     ></TextInput>
                   </div>
                 </div>
