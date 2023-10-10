@@ -180,6 +180,7 @@ export default function LargeCardDesktop({
 
         .image-container {
           max-width: 35%;
+		  min-width: 35%;
           height: 408px;
           background-position: center center;
           background-repeat: no-repeat;
@@ -198,6 +199,7 @@ export default function LargeCardDesktop({
           flex-direction: column;
           padding: 32px;
           background-color: white;
+		  width: 100%;
         }
 
         .large-info-wrap {
@@ -246,29 +248,28 @@ export default function LargeCardDesktop({
         .description-wrap {
           display: flex;
           flex-direction: row;
-          {/* width: 700px; */}
           margin-top: 10px;
           align-items: center;
         }
 
         .description-text {
           font-family: var(--font-roboto);
-          font-size: var(--font-size-body-M);
+          font-size: var(--font-size-body-Mplus);
           font-weight: 500;
-          {/* width: 450px; */}
+		  max-height: 250px;
           padding-right: 20px;
           line-height: 2;
 
 		  overflow-y: scroll;
-	  		{/* max-height: 150px; */}
         }
 
 		{/* scroll bar settings*/}
 		::-webkit-scrollbar {
 			width: 5px;
+			height: 5px;
 		}
 		::-webkit-scrollbar-thumb {
-			background: var(--color-topographic-green);
+			background: #d4d4d4;
 		}
 
         
@@ -304,14 +305,16 @@ export default function LargeCardDesktop({
         .event-wrap {
           display: flex;
           flex-direction: column;
-          align-items: center;
+		  justify-self: end;
           gap: 5px;
-          margin-left: 40px;
+          margin-left: 25px;
+		  width: 120px;
+		  min-width: 120px;
         }
 
         .ticket-text {
           font-family: var(--font-roboto);
-          font-size: var(--font-size-body-L);
+          font-size: 16px;
           line-height: 1.4;
         }
 

@@ -139,6 +139,7 @@ export default function LargeCardMobile({
 								<p className="ticket-text">
 									Time: {tConvert(timeStart)} to {tConvert(timeEnd)}
 								</p>
+								<hr></hr>
 								<p className="ticket-text">
 									Price: ${(Math.round(ticketPrice * 100) / 100).toFixed(2)}
 								</p>
@@ -264,9 +265,10 @@ export default function LargeCardMobile({
 	{/* scroll bar settings*/}
 	::-webkit-scrollbar {
 		width: 5px;
+		height: 5px;
 	}
 	::-webkit-scrollbar-thumb {
-		background: var(--color-topographic-green);
+		background: #d4d4d4;
 	}
 
         .border-line {
@@ -302,7 +304,6 @@ export default function LargeCardMobile({
         .event-wrap {
           display: flex;
           flex-direction: column;
-          align-items: center;
           gap: 5px;
           margin-left: 5px;
         }
@@ -311,7 +312,8 @@ export default function LargeCardMobile({
           font-family: var(--font-roboto);
           font-size: var(--font-size-body-S);
           line-height: 1.4;
-          padding-right: 10px;
+          {/* padding-right: 10px; */}
+		  text-align: left;
         }
 
 		.markdown-wrap {
