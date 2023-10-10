@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { useEffect, useRef } from 'react'
 import { MapContainer, TileLayer, useMap } from 'react-leaflet'
 import { Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -8,6 +9,16 @@ import DefaultButton from './DefaultButton'
 
 
 export default function MapCard({ strapiDataLink, itemSelector, children }) {
+	let popupRef = useRef();
+
+	// open pin when card is clicked
+	useEffect(() => {
+		try {
+			popupRef.openOn();
+		}
+		catch (e) { } // supress this error when lat and long are null
+
+	}, [strapiDataLink]);
 
 	return (
 		<>
@@ -21,12 +32,15 @@ export default function MapCard({ strapiDataLink, itemSelector, children }) {
 						/>
 						{
 							strapiDataLink?.map((pin, index) => {
-								console.log(pin)
-								if (pin.attributes.latitude != undefined && pin.attributes.longitude != undefined) {
+								if (pin.attributes.latitude != null && pin.attributes.longitude != null) {
 									return (
 										<Marker position={[pin.attributes.latitude, pin.attributes.longitude]}>
 											<DefaultButton onClick={() => { itemSelector(pin.id) }}>
-												<Popup>
+												<Popup
+													ref={pin.isSelected ? (r) => {
+														popupRef = r;
+													}
+														: undefined} >
 													<img src={pin.attributes.image.data.attributes.url} ></img>
 													{pin.attributes.title}
 												</Popup>

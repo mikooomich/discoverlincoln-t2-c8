@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationArrow, faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
+import DefaultButton from "./DefaultButton";
 
 
 /**
@@ -15,14 +16,21 @@ export default function SmallCard({
 	title = "Title wha wah",
 	category = "restaurant",
 	imgSrc = "https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg",
+	scrollLink,
+	scrollLinkMobile,
 	children
 }) {
 
 	const categoryColors = {
-		restaurant: "orange",
-		music: "purple",
-		Other: "blue"
+		Restaurant: "red",
+		Music: "purple",
+		PerformingArts: "green",
+		Festival: "orange",
+		Sports: "blue",
+		Charity: "yellow",
+		Other: "black",
 	};
+
 
 	// default to selecting other tag
 	if (categoryColors[category] == undefined) {
@@ -38,7 +46,7 @@ export default function SmallCard({
 				<div className="card-information-wrap">
 					<div className="large-info-wrap">
 						<div className="large-info-wrap-left">
-							<h1 className="title">{title}</h1>
+							<h4 className="title">{title}</h4>
 						</div>
 
 						<div className="large-info-wrap-right">
@@ -48,7 +56,7 @@ export default function SmallCard({
 									{children}
 								</div>
 								<div className="category-tag">
-									<h1>{category}</h1>
+									<h4>{category}</h4>
 								</div>
 							</div>
 
@@ -60,13 +68,25 @@ export default function SmallCard({
 
 				<div className="action-icon-wrap">
 
-					<div>
+					<div className="action-icon">
 						<FontAwesomeIcon icon={faLocationArrow} />
 					</div>
 
 					<div>
-						<FontAwesomeIcon icon={faArrowUpFromBracket} />
+						<DefaultButton className="blank" onClick={() => {
+							try {
+								scrollLink.scrollIntoView({ behavior: "smooth", block: "center" });
+								scrollLinkMobile.scrollIntoView({ behavior: "smooth", block: "center" });
+							}
+							catch (e) {
+								console.log("SCROLL FAIL")
+							}
 
+						}}>
+							<div className="action-icon">
+								<FontAwesomeIcon icon={faArrowUpFromBracket} />
+							</div>
+						</DefaultButton>
 					</div>
 
 				</div>
@@ -82,6 +102,7 @@ export default function SmallCard({
 				height: 90px;
 				width: 320px;
 				max-width: 320px;
+				padding-right: 10px;
 
 				box-shadow: var(--shadow-box-massive-card);
 				background-color: #FFFFFF;
@@ -127,6 +148,7 @@ export default function SmallCard({
 				font-family: var(--font-calps);
 				font-size: var(--font-size-body-L);
 				font-weight: 500;
+				text-align: left;
 			}
 
 
@@ -135,7 +157,7 @@ export default function SmallCard({
 				justify-self: end;
 				
 			}
-			.action-icon-wrap div {
+			.action-icon {
 				margin: 0px 10px 10px 0px;
 				color: ${categoryColors[category]};
 			}

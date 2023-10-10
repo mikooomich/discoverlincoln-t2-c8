@@ -19,7 +19,6 @@ export default function events() {
 
 	return (
 		<>
-		{console.log(strapiData)}
 			<EventAttractionTemplate variant={"events"} strapiDataLink={strapiData} strapiDataLinkSetter={setStrapiData}></EventAttractionTemplate>
 		</>
 	);

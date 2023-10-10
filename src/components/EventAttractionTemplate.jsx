@@ -37,7 +37,7 @@ export default function EventAttractionTemplate({
 	const itemSelector = (id) => {
 		// create new array, deselect all items first
 		let temp = strapiDataLink?.map((element) => {
-			console.log(element)
+			// console.log(element)
 			if (element.isSelected) {
 				element.isSelected = false;
 			}
@@ -45,23 +45,17 @@ export default function EventAttractionTemplate({
 		}
 		)
 
-		console.log("new with defaulrt")
-		console.log(temp)
 		// select the item with the id
 		temp = temp?.map((element) => {
 			if (element.id == id) {
 				element.isSelected = true;
-				console.log("selected")
-				console.log(element)
+				// console.log("selected"); console.log(element);
 			}
 			return element;
 		})
 
 
 		strapiDataLinkSetter(temp);
-
-
-
 
 	}
 
@@ -309,6 +303,8 @@ export default function EventAttractionTemplate({
 											title={card.attributes.title}
 											imgSrc={card.attributes.image.data.attributes.url}
 											category={card.attributes.tags}
+											scrollLink={card.refLink}
+											scrollLinkMobile={card.refLinkMobile}
 										>
 
 											<img src="Icon-glass.svg" width={20} height={20} alt="uwu" />
@@ -331,7 +327,9 @@ export default function EventAttractionTemplate({
 						<div className="cards-desktop">
 							<LargeCardList>
 								{strapiDataLink?.map((element, index) => (
-									<div key={index}>
+									<div key={index} ref={(r) => {
+										element.refLink = r;
+									}}>
 										<LargeCardDesktop
 											isTicket={false}
 											title={element.attributes.title}
@@ -358,7 +356,9 @@ export default function EventAttractionTemplate({
 						<div className="cards-mobile">
 							<LargeCardList>
 								{strapiDataLink?.map((element, index) => (
-									<div key={index}>
+									<div key={index} ref={(r) => {
+										element.refLinkMobile = r;
+									}}>
 										<LargeCardMobile
 											isTicket={false}
 											isEvent={variant === "events" ? true : false}
