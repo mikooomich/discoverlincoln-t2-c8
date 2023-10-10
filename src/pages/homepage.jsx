@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import TextInput from "@/components/TextInput";
 import Section from "@/components/Section";
@@ -21,6 +22,8 @@ export default function Homepage() {
   const [attractionStrapiData, setAttractionStrapiData] = useState([]);
   const [businessStrapiData, setBusinessStrapiData] = useState([]);
   const [galleryStrapiData, setGalleryStrapiData] = useState([]);
+
+  const [searchQuery, setSearchQuery] = useState([]); // the thing to search for
 
   useEffect(() => {
     async function fetchStrapiData() {
@@ -52,6 +55,20 @@ export default function Homepage() {
     fetchStrapiData();
   }, []);
 
+
+
+
+  /**
+ * Read from text input component
+ * @param {*} data 
+ */
+  const readQuery = (data) => {
+    setSearchQuery(data)
+  }
+
+
+
+
   return (
     <>
       <div className="homepage">
@@ -79,14 +96,15 @@ export default function Homepage() {
                       SEE LINCOLN
                     </DefaultButton>
                     <div className="search-button-area">
-                      <DefaultButton>
+                      <DefaultButton isLink={true} href={{ pathname: "./search", query: { searchQuery } }} className="see-lincoln ">
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                       </DefaultButton>
                       <TextInput
-                        ype="text"
+                        type="text"
                         className="search-input"
                         placeholder="Search..."
                         padding={"0px 16px"}
+                        dataOut={readQuery}
                       ></TextInput>
                     </div>
                   </div>
@@ -120,7 +138,9 @@ export default function Homepage() {
                       ))}
                     </CardCarousel>
                   </div>
-                  <button className="see-all-events-button">SEE ALL</button>
+                  <DefaultButton isLink={true} href="./events" className=" blank homepage-SmallCard">
+                    SEE ALL
+                  </DefaultButton>
                 </div>
               </div>
               <div className="topology-wrap">
@@ -232,10 +252,12 @@ export default function Homepage() {
             </div>
           </div>
           <div className="page-buttons">
+          <div className="image-home">
             <img
               src="https://images.unsplash.com/photo-1597655601841-214a4cfe8b2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW91bnRhaW4lMjBzY2VuZXJ5fGVufDB8fDB8fHww&w=1000&q=80"
-              className="image-home"
+              style={{ width: "100%", height: "100%" }}
             ></img>
+          </div>
             <div className="text-and-buttons">
               <p className="image-description">
                 Nestled in the heart of Ontarios picturesque Niagara Region,
@@ -247,71 +269,96 @@ export default function Homepage() {
                 culture, and events that make it a hidden gem worth discovering
               </p>
               <div className="buttons">
-                <button className="events-button">EVENTS</button>
-                <button className="attractions-button">ATTRACTIONS</button>
-                <button className="businesses-button">BUSINESSES</button>
+              <DefaultButton isLink={true} href="./events" className=" hero-under-buttons">EVENTS</DefaultButton>
+              <DefaultButton isLink={true} href="./attractions" className=" hero-under-buttons">ATTRACTIONS</DefaultButton>
+              <DefaultButton isLink={true} href="./business-service" className=" hero-under-buttons">BUSINESSES</DefaultButton>
               </div>
             </div>
           </div>
 
-          <Section marginBottom="40px" marginTop="100px">
-            <CardCarousel title="Events" margin="0px 0px 40px 0px">
+          <Section marginBottom="40px" marginTop="250px">
+          <CardCarousel title="Events" margin="80px 0px 80px 0px">
               {eventsStrapiData?.map((card, index) => (
                 <li key={index}>
                   <LargeCardMobile
-                    title={card.attributes.title}
-                    imgSrc={card.attributes.image.data.attributes.url}
-                    address={card.attributes.location}
-                    category={card.attributes.tags}
-                    description={card.attributes?.richTextDescription}
-                    rating={card.attributes?.numStars}
-                    isTicket={card.attributes?.isTicket}
-                    ticketDate={card.attributes.date}
-                    timeStart={card.attributes.startTime}
-                    timeEnd={card.attributes.endTime}
+           	isTicket={false}
+             isEvent={true}
+             title={card.attributes.title}
+             description={card.attributes.richTextDescription != undefined ? card.attributes.richTextDescription : card.attributes.description}
+             address={card.attributes.location}
+             ticketDate={card.attributes.date}
+             ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
+             rating={card.attributes.numStars}
+             category={card.attributes.tags}
+             imgSrc={card.attributes.image.data.attributes.url}
+             imgAltText={card.attributes.image.data.attributes.alternativeText}
+             barcodeUID={card.attributes.barcodeUID}
+
+             isRegisterable={card.attributes.isRegisterable}
+             isFull={card.attributes.isFull}
+             isAvail={card.attributes.isAvailable}
+             hoursOfOperation={card.attributes.hoursOfOperation}
                   ></LargeCardMobile>
                 </li>
               ))}
             </CardCarousel>
-            <DefaultButton>See More</DefaultButton>
+            <DefaultButton isLink={true} href="./events" className=" homepage-see-more">
+            See More
+          </DefaultButton>
             <div className="carousel-padding"></div>
             <hr />
             <div className="carousel-padding"></div>
-            <CardCarousel title="Attractions" margin="40px 0px">
+            <CardCarousel title="Attractions" margin="0px 0px 80px 0px">
               {attractionStrapiData?.map((card, index) => (
                 <li key={index}>
                   <LargeCardMobile
+                  	isTicket={false}
+                    isEvent={false}
                     title={card.attributes.title}
-                    imgSrc={card.attributes.image.data.attributes.url}
+                    description={card.attributes.richTextDescription != undefined ? card.attributes.richTextDescription : card.attributes.description}
                     address={card.attributes.location}
-                    category={card.attributes.tags}
-                    description={card.attributes?.richTextDescription}
-                    rating={card.attributes?.numStars}
-                    isTicket={card.attributes?.isTicket}
                     ticketDate={card.attributes.date}
-                    timeStart={card.attributes.startTime}
-                    timeEnd={card.attributes.endTime}
+                    ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
+                    rating={card.attributes.numStars}
+                    category={card.attributes.tags}
+                    imgSrc={card.attributes.image.data.attributes.url}
+                    imgAltText={card.attributes.image.data.attributes.alternativeText}
+                    barcodeUID={card.attributes.barcodeUID}
+    
+                    isRegisterable={card.attributes.isRegisterable}
+                    isFull={card.attributes.isFull}
+                    isAvail={card.attributes.isAvailable}
+                    hoursOfOperation={card.attributes.hoursOfOperation}
                   ></LargeCardMobile>
                 </li>
               ))}
             </CardCarousel>
-            <DefaultButton>See More</DefaultButton>
+            <DefaultButton isLink={true} href="./attractions" className=" homepage-see-more">
+            See More
+          </DefaultButton>
             <div className="carousel-padding"></div>
-            <hr />
-            <CardCarousel title="Business" margin="40px 0px 40px 0px">
+   
+            <CardCarousel title="Business" margin="20px 0px 80px 0px">
               {businessStrapiData?.map((card, index) => (
                 <li key={index}>
                   <LargeCardMobile
-                    title={card.attributes.title}
-                    imgSrc={card.attributes.image.data.attributes.url}
-                    address={card.attributes.location}
-                    category={card.attributes.tags}
-                    description={card.attributes?.richTextDescription}
-                    rating={card.attributes?.numStars}
-                    isTicket={card.attributes?.isTicket}
-                    ticketDate={card.attributes.date}
-                    timeStart={card.attributes.startTime}
-                    timeEnd={card.attributes.endTime}
+                    	isTicket={false}
+                      isEvent={false}
+                      title={card.attributes.title}
+                      description={card.attributes.richTextDescription != undefined ? card.attributes.richTextDescription : card.attributes.description}
+                      address={card.attributes.location}
+                      ticketDate={card.attributes.date}
+                      ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
+                      rating={card.attributes.numStars}
+                      category={card.attributes.tags}
+                      imgSrc={card.attributes.image.data.attributes.url}
+                      imgAltText={card.attributes.image.data.attributes.alternativeText}
+                      barcodeUID={card.attributes.barcodeUID}
+      
+                      isRegisterable={card.attributes.isRegisterable}
+                      isFull={card.attributes.isFull}
+                      isAvail={card.attributes.isAvailable}
+                      hoursOfOperation={card.attributes.hoursOfOperation}
                   ></LargeCardMobile>
                 </li>
               ))}
@@ -336,21 +383,12 @@ export default function Homepage() {
               ))}
             </Gallery>
           </Section>
-        </div>
+        </div >
 
-        <Footer></Footer>
-      </div>
+    <Footer></Footer>
+      </div >
 
-      <style jsx>{`
-        @media screen and (max-width: 870px) {
-          .landing-view-greet {
-            margin-top: 120px;
-            height: 1100px;
-            flex-wrap: wrap;
-            gap: 20px;
-            height: auto;
-          }
-        }
+    <style jsx>{`    
 
         li {
           margin: 20px 20px;
@@ -448,19 +486,6 @@ export default function Homepage() {
           max-height: 40px;
         }
 
-        .see-lincoln {
-          display: flex;
-
-          background: #fff;
-          gap: 10px;
-          backdrop-filter: blur(2px);
-          color: black;
-          font-family: var(--font-roboto);
-          font-size: 14px;
-          font-weight: 800;
-          max-height: 30px;
-        }
-
         .search-button-area {
           display: flex;
           flex-direction: row;
@@ -540,8 +565,16 @@ export default function Homepage() {
         }
 
         .image-home {
-          height: 400px;
-          padding: 20px 50px;
+          height: 430px;
+          width: 390px;
+          border: 5px solid white;
+          position: relative;
+          margin-bottom: -100px;
+          box-shadow: var(--shadow-box-buttons)
+        }
+
+        .image-home img {
+          object-fit: cover;
         }
 
         .text-and-buttons {
@@ -559,7 +592,7 @@ export default function Homepage() {
           font-weight: 500;
           font-size: 24;
           color: white;
-          width: 550px;
+          max-width: 550px;
           text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           line-height: 150%;
           padding-bottom: 35px;
@@ -587,6 +620,49 @@ export default function Homepage() {
           margin-left: 10px;
           margin-right: 10px;
           text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+
+
+
+
+        @media screen and (max-width: 1000px) {
+          .image-description {
+            font-size: 24;
+            width: 350px;
+         }
+
+        }
+
+        @media screen and (max-width: 870px) {
+          .landing-view-greet {
+            margin-top: 120px;
+            height: 1100px;
+            flex-wrap: wrap;
+            gap: 20px;
+            height: auto;
+          }
+
+
+          .image-home {
+            height: 430px;
+            width: auto;
+            max-width: 40%;
+            margin-left: 20px;
+          }
+        }
+
+        @media screen and (max-width: 720px) {
+
+          .image-home {
+            height: 230px;
+            width: auto;
+            max-width: 100%;
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-bottom: 0px;
+            margin-top: 20px;
+          }
         }
       `}</style>
     </>

@@ -4,13 +4,14 @@ import Section from "@/components/Section";
 import TextInput from "@/components/TextInput";
 import LargeCardMobile from "@/components/LargeCardMobile";
 import React, { useEffect, useState } from "react";
+import { useRouter } from 'next/router'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 export default function Search() {
 	const [searchQuery, setSearchQuery] = useState([]); // the thing to search for
-	const [searchReq, setSearchReq] = useState([]); // request for a search opperation
+	const [searchReq, setSearchReq] = useState(false); // request for a search opperation
 	const [sortFlags, setSortFlags] = useState(["title", "des"]);
 	const [reloadLocalCards, setReloadLocalCards] = useState([]); // request for a reload of local cards
 	const [allTags, setAllTags] = useState([]); // all tags avalible at the current moment
@@ -46,6 +47,32 @@ export default function Search() {
 
 		fetchStrapiData()
 	}, [searchReq])
+
+
+	/**
+	 * Read search queries from router and apply them is applicable
+	 */
+
+	let router = useRouter();
+	useEffect(() => {
+		async function workaround() {
+			setTimeout(() => { // avoid asyncrounous programming demons
+				if (router.query == undefined || router.query.searchQuery == undefined) {
+					console.log("router is not ready yet");
+					return;
+				}
+
+				// console.log("router IS READY")
+				// console.log(router.query.searchQuery);
+				setSearchQuery([router.query.searchQuery]);
+				setSearchReq(true);
+
+				router.query = undefined // only read and set once
+			}, 500)
+		}
+
+		workaround()
+	}, [router])
 
 
 
@@ -99,7 +126,11 @@ export default function Search() {
 
 	useEffect(() => {
 		async function fetchSearchResult() {
-			// console.log("Searching for: " + searchQuery);
+			console.log("Searching for: " + searchQuery);
+			if (searchReq == false) {
+				console.log("No search request, aborting")
+				return;
+			}
 
 			// show all results if search is blank
 			if (searchQuery[0] == undefined) {
@@ -427,7 +458,7 @@ export default function Search() {
 						</DefaultButton>
 
 						<div className="searchBox">
-							<TextInput placeholder={"Search"} width={`100%`} dataOut={readQuery}></TextInput>
+							<TextInput placeholder={searchQuery != "" ? searchQuery : "Search"} width={`100%`} dataOut={readQuery}></TextInput>
 						</div>
 					</div>
 					<div className="filter-sort">

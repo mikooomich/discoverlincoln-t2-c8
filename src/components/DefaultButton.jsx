@@ -121,6 +121,14 @@ export default function DefaultButton({
             filter: brightness(70%);
           }
 
+          .blank {
+            background-color: transparent;
+            font-size: default;
+            padding: 0px;
+            color: black;
+            font-family: var(--font-calps);
+          }
+
           .dismissBtn {
             padding: 0px 16px;
 
@@ -193,6 +201,41 @@ export default function DefaultButton({
 
           .filter-sort-btn {
             margin: 10px;
+          }
+
+          .homepage-SmallCard{
+            background-color: white;
+            width: 85px;
+            padding: 10px 15px;
+            align-self: end;
+          }
+
+          .homepage-see-more {
+            width: 103px;
+            padding: 5px 20px;
+            float: right;
+            margin-top: -70px;
+          }
+
+          .hero-under-buttons {
+            width: auto;
+            padding: 5px 15px;
+            margin-right: 20px;
+          }
+
+          .see-lincoln {
+            backdrop-filter: blur(2px);
+
+            font-family: var(--font-roboto);
+            font-size: 14px;
+            font-weight: 800;
+          
+            display: flex;
+            align-items: center;
+          }
+
+          .see-lincoln:hover {
+            filter: brightness(70%);
           }
         `}
       </style>
