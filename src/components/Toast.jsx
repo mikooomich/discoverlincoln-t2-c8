@@ -139,7 +139,8 @@ export default function Toast({
           @media only screen and (max-width: 500px) {
             .toast {
               /* width: 100%; */
-              display: none;
+              width: 90%;
+              margin-top: 0px;
             }
             .toastMobile {
               display: flex;
