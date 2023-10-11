@@ -10,15 +10,23 @@ import Section from "@/components/Section";
 export default function Login() {
   useEffect(() => {
     async function testToken() {
-      if (localStorage.getItem("jwt")) {
+      if (
+        localStorage.getItem("jwt") != "undefined" &&
+        localStorage.getItem("jwt") != undefined
+      ) {
         window.location.href = "/profile";
 
         try {
           await getUserData();
+          console.log("user is logged in");
+
           window.location.href = "/profile";
         } catch (err) {
           localStorage.removeItem("jwt");
         }
+      } else {
+        // delete the token if undefined
+        localStorage.removeItem("jwt");
       }
     }
 
@@ -39,6 +47,8 @@ export default function Login() {
       }
     );
 
+    console.log("gettingUserData");
+
     const data = await response.json();
     console.log(data);
   }
@@ -54,16 +64,16 @@ export default function Login() {
 
     if (password.length < 6) {
       setHideToastErr2(false);
-      console.log("password too short")
-    } if (passwordConfirmation !== password) {
-      console.log("passwords dont match")
+      console.log("password too short");
+    }
+    if (passwordConfirmation !== password) {
+      console.log("passwords dont match");
       setHideToastErr3(false);
-
-    } if (password.length >= 6 && passwordConfirmation === password) {
+    }
+    if (password.length >= 6 && passwordConfirmation === password) {
       await registerUser(email, username, password);
       console.log("Registered:", email, password);
     }
-    
   }
 
   async function registerUser(email, username, password) {
@@ -86,12 +96,14 @@ export default function Login() {
 
       localStorage.setItem("jwt", data.jwt);
       setHideToastSuccess(false);
-      console.log("registered")
+      console.log("registered");
       window.location.href = "/profile";
     } catch (err) {
       console.log(err);
       setHideToastErr4(false);
-      console.log("Your request took too long to process and something has gone wrong.")
+      console.log(
+        "Your request took too long to process and something has gone wrong."
+      );
     }
   }
 
@@ -107,6 +119,7 @@ export default function Login() {
 
   async function loginUser(username, password) {
     try {
+      console.log("trying to log in");
       const response = await fetch(
         "https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/auth/local",
         {
@@ -122,12 +135,15 @@ export default function Login() {
       );
       const data = await response.json();
 
+      if (data.error && data.error.status !== 200)
+        throw new Error("Incorrect username or password");
+      console.log(data);
+
       localStorage.setItem("jwt", data.jwt);
       window.location.href = "/profile";
     } catch (err) {
-      console.log(err);
-      setHideToastErr4(false);
-      console.log("Your request took too long to process and something has gone wrong.")
+      console.log("incorrect password or username");
+      setHideToastErr1(false);
     }
   }
 
@@ -139,7 +155,7 @@ export default function Login() {
 
   useEffect(() => {
     async function hideToast() {
-      console.log("hide toast success: ", hideToastSuccess)
+      console.log("hide toast success: ", hideToastSuccess);
       if (!hideToastSuccess) {
         setTimeout(() => {
           setHideToastSuccess(true);
@@ -152,7 +168,7 @@ export default function Login() {
 
   useEffect(() => {
     async function hideToast() {
-      console.log("error 1: ", hideToastErr1)
+      console.log("error 1: ", hideToastErr1);
       if (!hideToastErr1) {
         setTimeout(() => {
           setHideToastErr1(true);
@@ -165,7 +181,7 @@ export default function Login() {
 
   useEffect(() => {
     async function hideToast() {
-      console.log("error 1: ", hideToastErr2)
+      console.log("error 1: ", hideToastErr2);
       if (!hideToastErr2) {
         setTimeout(() => {
           setHideToastErr2(true);
@@ -178,7 +194,7 @@ export default function Login() {
 
   useEffect(() => {
     async function hideToast() {
-      console.log("error 1: ", hideToastErr3)
+      console.log("error 1: ", hideToastErr3);
       if (!hideToastErr3) {
         setTimeout(() => {
           setHideToastErr3(true);
@@ -191,7 +207,7 @@ export default function Login() {
 
   useEffect(() => {
     async function hideToast() {
-      console.log("error 1: ", hideToastErr4)
+      console.log("error 1: ", hideToastErr4);
       if (!hideToastErr4) {
         setTimeout(() => {
           setHideToastErr3(true);
@@ -200,8 +216,6 @@ export default function Login() {
     }
     hideToast();
   }, [hideToastErr4]);
-
-  
 
   return (
     <>
@@ -316,6 +330,7 @@ export default function Login() {
             align-items: center;
 
             padding: 40px 40px;
+            gap: 8px;
           }
 
           .logindiv * {
@@ -355,10 +370,36 @@ export default function Login() {
 
           @media screen and (max-width: 500px) {
             .toastBox {
-              width: 100%;
-               {
-                /* bottom: 0; */
-              }
+              display: flex;
+              align-items: center;
+              flex-direction: column;
+              color: white;
+              align-self: flex-end;
+              /* margin-top: -350px; */
+              position: sticky;
+
+              float: right;
+            }
+
+            .toast {
+              display: flex;
+            }
+
+            .logindiv {
+              padding: 40px 5px;
+              gap: 8px;
+            }
+
+            .loginTitle {
+              font-size: var(--font-size-body-XL);
+            }
+
+            .hideToast {
+              display: none;
+            }
+
+            #mainContent {
+              margin-bottom: -160px;
             }
 
             #makeAccountDiv {
@@ -367,10 +408,6 @@ export default function Login() {
 
             .loginTitle {
               font-size: var(--font-size-header-XS);
-            }
-
-            .hideToast {
-              display: none;
             }
           }
         `}

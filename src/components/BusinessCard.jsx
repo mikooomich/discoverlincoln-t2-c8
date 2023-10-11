@@ -109,7 +109,7 @@ export default function BuisnessCard({
                                 font-size: var(--font-size-header-XS);
                                 margin-bottom: 15px;
                                 align-self: start;
-                                max-width: 150px; /* maybe needed to control title length but it overlaps so idk*/
+                                max-width: 130px; /* maybe needed to control title length but it overlaps so idk*/
 				margin-right: 20px;
 			}
 

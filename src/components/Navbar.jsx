@@ -22,7 +22,7 @@ export default function Navbar({ isHomepage = false }) {
 		<>
 			{/* html */}
 			<div className="header-wrap" >
-				<div className="header">
+				<div className={`header ${isNavExpanded ? "mobileHeader" : ""}`}>
 
 					<div className="linconLogo">
 						<Link href="./homepage">
@@ -79,7 +79,7 @@ export default function Navbar({ isHomepage = false }) {
           padding: 20px;
 
 			{/* homepage overrides */}
-		  background-color: ${!isHomepage || isNavExpanded ? "var(--color-elevated-green)" : "transparent"};
+		     background-color: ${(!isHomepage || isNavExpanded) ? "var(--color-elevated-green)" : "transparent"}; 
 
 		  position: ${!isHomepage ? "default" : "absolute"};
         }
@@ -131,9 +131,18 @@ export default function Navbar({ isHomepage = false }) {
          {
           /* Mobile view */
         }
-         {
-          /* TODO: fix jank */
+       
+       {/* Close mobile nav when desktop mode */}
+        @media screen and (min-width: 855.1px) {
+          .nav-expanded {
+            display: none;
         }
+
+        .mobileHeader {
+            background-color: transparent;
+          }
+        }
+
         @media screen and (max-width: 855px) {
           .header-links {
             display: none;
@@ -144,6 +153,11 @@ export default function Navbar({ isHomepage = false }) {
 
           .nav-expanded {
             display: inline;
+            background-color: var(--color-elevated-green);
+          }
+
+          .mobileHeader {
+            background-color: var(--color-elevated-green);
           }
 
           .nav-closed {
