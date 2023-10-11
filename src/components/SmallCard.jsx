@@ -103,7 +103,7 @@ export default function SmallCard({
 				width: 320px;
 				padding-right: 10px;
 
-				box-shadow: var(--shadow-box-massive-card);
+				box-shadow: var(--shadow-box-small-card);
 				background-color: #FFFFFF;
 			}
 
@@ -173,7 +173,7 @@ export default function SmallCard({
 			@media screen and (max-width: 365px) {
 
 				.small-card-mobile {
-					width: 240px;
+					width: 80vw;
 				}
 
 			}

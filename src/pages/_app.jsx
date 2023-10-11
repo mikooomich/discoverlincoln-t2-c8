@@ -97,6 +97,7 @@ export default function App({
 					/* Shadows, Border Radius */
 					--shadow-box-buttons: 0px 4px 2px rgba(0, 0, 0, 0.381);
 					--shadow-box-massive-card:  2px 4px 10px rgba(0, 0, 0, 0.762);
+					--shadow-box-small-card: 0px 3px 8px rgba(0, 0, 0, 0.381);
 					--border-radius-pill: max(100vh, 100vw);
 					--border-grey-thin: 1px solid rgb(209, 209, 209);
 

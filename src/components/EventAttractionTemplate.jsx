@@ -164,7 +164,7 @@ export default function EventAttractionTemplate({
 
 {/* Map stuff */}
 		  .mapContainer {
-            background-color: #d4d4d4;
+            {/* background-color: #d4d4d4; */}
 			margin-bottom: 50px;
             width: 100%;
           }
@@ -173,7 +173,7 @@ export default function EventAttractionTemplate({
 			}
 	
 		.mapCarousel-wrap {
-			width: 330px;
+			width: 340px;
 			height: 400px;
 			overflow-y: scroll;
 		}
