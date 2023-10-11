@@ -81,7 +81,7 @@ export default function DefaultButton({
           }
 
           .selectedCard {
-            filter: brightness(70%);
+            box-shadow: -6px 0px 0px var(--color-topographic-green);
           }
           .linkChildren {
             display: flex;

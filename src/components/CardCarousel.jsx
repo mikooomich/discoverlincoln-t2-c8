@@ -26,7 +26,7 @@ export default function CardCarousel({
   if (!scrollable) {
     scrollable = "hidden";
   } else {
-    scrollable = "scroll";
+    scrollable = "auto";
   }
 
   if (singleLineDisplay) {
@@ -70,6 +70,8 @@ export default function CardCarousel({
           .multi-ul {
             flex-wrap: wrap;
             overflow-x: hidden;
+            justify-content: center;
+            margin-top: 5px;
           }
 
            {

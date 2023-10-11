@@ -24,6 +24,7 @@ export default function LargeCardMobile({
 	imgSrc = "https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg",
 	imgAltText,
 	barcodeUID,
+	forceMaxWidth = false,
 }) {
 	//code
 	function renderStars() {
@@ -42,13 +43,26 @@ export default function LargeCardMobile({
 	}
 
 	const categoryColors = {
-		Restaurant: "red",
-		Music: "purple",
-		PerformingArts: "green",
-		Festival: "orange",
-		Sports: "blue",
-		Charity: "yellow",
-		Other: "black",
+		Restaurant: "#ff0303",
+		Music: "#b33978",
+		Performing_Arts: "#8b288f",
+		Festival: "#56288f",
+		Sports: "#1922a6",
+		Charity: "#515cf0",
+		Other: "#10649c",
+		Tours: "#10929e",
+
+		Monument: "#1eb07f",
+		Mall: "#5ea890",
+		Park: "#268034",
+		Food: "#06590a",
+		Shopping: "#74914d",
+		Technology: "#90941e",
+		Financial: "#b58412",
+		Distribution: "#694c0a",
+		Medical: "#009179",
+		Emergency: "#666666",
+		Industrial: "#b04300"
 	};
 
 
@@ -139,6 +153,7 @@ export default function LargeCardMobile({
 								<p className="ticket-text">
 									Time: {tConvert(timeStart)} to {tConvert(timeEnd)}
 								</p>
+								<hr></hr>
 								<p className="ticket-text">
 									Price: ${(Math.round(ticketPrice * 100) / 100).toFixed(2)}
 								</p>
@@ -171,6 +186,7 @@ export default function LargeCardMobile({
           display: flex;
           flex-direction: column;
           max-width: 360px;
+		  min-width: ${forceMaxWidth ? "360px" : "0px"};
           max-height: 400px;
           overflow: hidden;
           box-shadow: var(--shadow-box-massive-card);
@@ -208,6 +224,7 @@ export default function LargeCardMobile({
           display: flex;
           gap: 3px;
           margin-top: 2px;
+		  margin-bottom: 12px;
         }
 
         .category-tag {
@@ -250,23 +267,27 @@ export default function LargeCardMobile({
         }
 
         .description-text {
-          font-family: var(--font-roboto);
-          font-size: var(--font-size-body-M);
-          line-height: 1.6;
-          max-width: 50%;
-	  	  min-width: 50%;
-          font-weight: 400px;
+			font-family: var(--font-roboto);
+			font-size: var(--font-size-body-M);
+			line-height: 1.6;
+			max-width: 50%;
+			min-width: 50%;
+			font-weight: 400px;
+			margin-top: 10px;
+			margin-bottom: auto;
 
-	  overflow-y: scroll;
-	  max-height: 150px;
+			overflow-y: scroll;
+			max-height: 150px;
+			word-wrap: break-word;
         }
 
 	{/* scroll bar settings*/}
 	::-webkit-scrollbar {
 		width: 5px;
+		height: 5px;
 	}
 	::-webkit-scrollbar-thumb {
-		background: var(--color-topographic-green);
+		background: #d4d4d4;
 	}
 
         .border-line {
@@ -279,6 +300,7 @@ export default function LargeCardMobile({
         .description2-wrap {
           display: flex;
           flex-direction: column;
+		  overflow-y: auto;
         }
 
         .hours-title {
@@ -302,20 +324,28 @@ export default function LargeCardMobile({
         .event-wrap {
           display: flex;
           flex-direction: column;
-          align-items: center;
           gap: 5px;
           margin-left: 5px;
+		  overflow-y: auto;
+		  max-height: 100%
         }
 
         .ticket-text {
           font-family: var(--font-roboto);
           font-size: var(--font-size-body-S);
           line-height: 1.4;
-          padding-right: 10px;
+          {/* padding-right: 10px; */}
+		  text-align: left;
         }
 
 		.markdown-wrap {
 		
+		}
+
+		@media screen and (max-width: 500px) {
+			.large-card-mobile {
+				min-width: 270px;
+			}
 		}
 
 
