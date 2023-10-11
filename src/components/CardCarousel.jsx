@@ -72,8 +72,6 @@ export default function CardCarousel({
             overflow-x: hidden;
             justify-content: center;
             margin-top: 5px;
-            padding-right: 10px;
-            padding-left: 7px;
           }
 
            {

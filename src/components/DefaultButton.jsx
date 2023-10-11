@@ -81,8 +81,7 @@ export default function DefaultButton({
           }
 
           .selectedCard {
-            border: 7px solid var(--color-topographic-green);
-            border-style: none none none solid;
+            box-shadow: -6px 0px 0px var(--color-topographic-green);
           }
           .linkChildren {
             display: flex;

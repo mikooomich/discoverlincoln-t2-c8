@@ -173,7 +173,7 @@ export default function SmallCard({
 			@media screen and (max-width: 365px) {
 
 				.small-card-mobile {
-					width: 240px;
+					width: 80vw;
 				}
 
 			}
