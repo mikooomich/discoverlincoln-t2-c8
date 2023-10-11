@@ -54,13 +54,10 @@ export default function Homepage() {
     fetchStrapiData();
   }, []);
 
-
-
-
   /**
- * Read from text input component
- * @param {*} data 
- */
+   * Read from text input component
+   * @param {*} data
+   */
   const readQuery = (data) => {
     setSearchQuery(data)
   }
@@ -98,19 +95,23 @@ export default function Homepage() {
                       fontSize={"18px"}
                       bgColor={"white"}
                       textColor={"black"}
-                      padding={"0px 8px"}
+                      padding={"0px 12px"}
                     >
                       SEE LINCOLN
                     </DefaultButton>
                     <div className="search-button-area">
-                      <DefaultButton isLink={true} href={{ pathname: "./search", query: { searchQuery } }} className="see-lincoln ">
+                      <DefaultButton
+                        isLink={true}
+                        href={{ pathname: "./search", query: { searchQuery } }}
+                        className="see-lincoln"
+                      >
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                       </DefaultButton>
                       <TextInput
                         type="text"
                         className="search-input"
                         placeholder="Search..."
-                        padding={"0px 16px"}
+                        padding={"0px 12px"}
                         dataOut={readQuery}
                         onKeyDownOut={handleKeyPress}
                       ></TextInput>
@@ -146,7 +147,12 @@ export default function Homepage() {
                       ))}
                     </CardCarousel>
                   </div>
-                  <DefaultButton isLink={true} href="./events" className=" blank homepage-SmallCard">
+                  <DefaultButton
+                    isLink={true}
+                    href="./events"
+                    className="homepage-SmallCard"
+                    padding={"0px 12px"}
+                  >
                     SEE ALL
                   </DefaultButton>
                 </div>
@@ -260,79 +266,71 @@ export default function Homepage() {
             </div>
           </div>
           <div className="page-buttons">
-          <div className="image-home">
-            <img
-              src="https://images.unsplash.com/photo-1597655601841-214a4cfe8b2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW91bnRhaW4lMjBzY2VuZXJ5fGVufDB8fDB8fHww&w=1000&q=80"
-              style={{ width: "100%", height: "100%" }}
-            ></img>
-          </div>
+            <div className="image-home">
+              <img
+                src="https://images.unsplash.com/photo-1597655601841-214a4cfe8b2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW91bnRhaW4lMjBzY2VuZXJ5fGVufDB8fDB8fHww&w=1000&q=80"
+                style={{ width: "100%", height: "100%" }}
+              ></img>
+            </div>
             <div className="text-and-buttons">
               <p className="image-description">
                 Nestled in the heart of Ontarios picturesque Niagara Region,
-                Lincoln is a charming and vibrant community that often flies under
-                the radar. Lincoln offers its own unique blend of natural beauty,
-                rich history, and thriving agriculture. <br />
+                Lincoln is a charming and vibrant community that often flies
+                under the radar. Lincoln offers its own unique blend of natural
+                beauty, rich history, and thriving agriculture. <br />
                 <br />
                 On a journey through Lincoln, you will uncover attractions,
                 culture, and events that make it a hidden gem worth discovering
               </p>
               <div className="buttons">
-              <DefaultButton isLink={true} href="./events" className=" hero-under-buttons">EVENTS</DefaultButton>
-              <DefaultButton isLink={true} href="./attractions" className=" hero-under-buttons">ATTRACTIONS</DefaultButton>
-              <DefaultButton isLink={true} href="./business-service" className=" hero-under-buttons">BUSINESSES</DefaultButton>
+                <DefaultButton
+                  isLink={true}
+                  href="./events"
+                  className=" hero-under-buttons"
+                >
+                  Events
+                </DefaultButton>
+                <DefaultButton
+                  isLink={true}
+                  href="./attractions"
+                  className=" hero-under-buttons"
+                >
+                  Attractions
+                </DefaultButton>
+                <DefaultButton
+                  isLink={true}
+                  href="./business-service"
+                  className=" hero-under-buttons"
+                >
+                  Businesses
+                </DefaultButton>
               </div>
             </div>
           </div>
 
-          <Section marginBottom="40px" marginTop="250px">
-          <CardCarousel title="Events" margin="80px 0px 80px 0px">
+          <Section marginBottom="40px" marginTop="200px">
+            <CardCarousel title="Events" margin="80px 0px 80px 0px">
               {eventsStrapiData?.map((card, index) => (
                 <li key={index}>
                   <LargeCardMobile
-           	isTicket={false}
-             isEvent={true}
-             title={card.attributes.title}
-             description={card.attributes.richTextDescription != undefined ? card.attributes.richTextDescription : card.attributes.description}
-             address={card.attributes.location}
-             ticketDate={card.attributes.date}
-             ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
-             rating={card.attributes.numStars}
-             category={card.attributes.tags}
-             imgSrc={card.attributes.image.data.attributes.url}
-             imgAltText={card.attributes.image.data.attributes.alternativeText}
-             barcodeUID={card.attributes.barcodeUID}
-
-             isRegisterable={card.attributes.isRegisterable}
-             isFull={card.attributes.isFull}
-             isAvail={card.attributes.isAvailable}
-             hoursOfOperation={card.attributes.hoursOfOperation}
-                  ></LargeCardMobile>
-                </li>
-              ))}
-            </CardCarousel>
-            <DefaultButton isLink={true} href="./events" className=" homepage-see-more">
-            See More
-          </DefaultButton>
-            <div className="carousel-padding"></div>
-            <hr />
-            <div className="carousel-padding"></div>
-            <CardCarousel title="Attractions" margin="0px 0px 80px 0px">
-              {attractionStrapiData?.map((card, index) => (
-                <li key={index}>
-                  <LargeCardMobile
-                  	isTicket={false}
-                    isEvent={false}
+                    isTicket={false}
+                    isEvent={true}
                     title={card.attributes.title}
-                    description={card.attributes.richTextDescription != undefined ? card.attributes.richTextDescription : card.attributes.description}
+                    description={
+                      card.attributes.richTextDescription != undefined
+                        ? card.attributes.richTextDescription
+                        : card.attributes.description
+                    }
                     address={card.attributes.location}
                     ticketDate={card.attributes.date}
                     ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
                     rating={card.attributes.numStars}
                     category={card.attributes.tags}
                     imgSrc={card.attributes.image.data.attributes.url}
-                    imgAltText={card.attributes.image.data.attributes.alternativeText}
+                    imgAltText={
+                      card.attributes.image.data.attributes.alternativeText
+                    }
                     barcodeUID={card.attributes.barcodeUID}
-    
                     isRegisterable={card.attributes.isRegisterable}
                     isFull={card.attributes.isFull}
                     isAvail={card.attributes.isAvailable}
@@ -341,42 +339,99 @@ export default function Homepage() {
                 </li>
               ))}
             </CardCarousel>
-            <DefaultButton isLink={true} href="./attractions" className=" homepage-see-more">
-            See More
-          </DefaultButton>
+            <DefaultButton
+              isLink={true}
+              href="./events"
+              className=" homepage-see-more"
+            >
+              See More
+            </DefaultButton>
             <div className="carousel-padding"></div>
-   
-            <CardCarousel title="Business" margin="20px 0px 80px 0px">
-              {businessStrapiData?.map((card, index) => (
+            <hr />
+            <div className="carousel-padding"></div>
+            <CardCarousel title="Attractions" margin="0px 0px 80px 0px">
+              {attractionStrapiData?.map((card, index) => (
                 <li key={index}>
                   <LargeCardMobile
-                    	isTicket={false}
-                      isEvent={false}
-                      title={card.attributes.title}
-                      description={card.attributes.richTextDescription != undefined ? card.attributes.richTextDescription : card.attributes.description}
-                      address={card.attributes.location}
-                      ticketDate={card.attributes.date}
-                      ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
-                      rating={card.attributes.numStars}
-                      category={card.attributes.tags}
-                      imgSrc={card.attributes.image.data.attributes.url}
-                      imgAltText={card.attributes.image.data.attributes.alternativeText}
-                      barcodeUID={card.attributes.barcodeUID}
-      
-                      isRegisterable={card.attributes.isRegisterable}
-                      isFull={card.attributes.isFull}
-                      isAvail={card.attributes.isAvailable}
-                      hoursOfOperation={card.attributes.hoursOfOperation}
+                    isTicket={false}
+                    isEvent={false}
+                    title={card.attributes.title}
+                    description={
+                      card.attributes.richTextDescription != undefined
+                        ? card.attributes.richTextDescription
+                        : card.attributes.description
+                    }
+                    address={card.attributes.location}
+                    ticketDate={card.attributes.date}
+                    ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
+                    rating={card.attributes.numStars}
+                    category={card.attributes.tags}
+                    imgSrc={card.attributes.image.data.attributes.url}
+                    imgAltText={
+                      card.attributes.image.data.attributes.alternativeText
+                    }
+                    barcodeUID={card.attributes.barcodeUID}
+                    isRegisterable={card.attributes.isRegisterable}
+                    isFull={card.attributes.isFull}
+                    isAvail={card.attributes.isAvailable}
+                    hoursOfOperation={card.attributes.hoursOfOperation}
                   ></LargeCardMobile>
                 </li>
               ))}
             </CardCarousel>
-            <DefaultButton>See More</DefaultButton>
-          </Section>
-          <hr />
-          <div className="carousel-padding"></div>
+            <DefaultButton
+              isLink={true}
+              href="./attractions"
+              className=" homepage-see-more"
+            >
+              See More
+            </DefaultButton>
+            <div className="carousel-padding"></div>
+            <hr />
+            <div className="carousel-padding"></div>
 
-          <Section marginBottom="100px">
+            <CardCarousel title="Business" margin="20px 0px 80px 0px">
+              {businessStrapiData?.map((card, index) => (
+                <li key={index}>
+                  <LargeCardMobile
+                    isTicket={false}
+                    isEvent={false}
+                    title={card.attributes.title}
+                    description={
+                      card.attributes.richTextDescription != undefined
+                        ? card.attributes.richTextDescription
+                        : card.attributes.description
+                    }
+                    address={card.attributes.location}
+                    ticketDate={card.attributes.date}
+                    ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
+                    rating={card.attributes.numStars}
+                    category={card.attributes.tags}
+                    imgSrc={card.attributes.image.data.attributes.url}
+                    imgAltText={
+                      card.attributes.image.data.attributes.alternativeText
+                    }
+                    barcodeUID={card.attributes.barcodeUID}
+                    isRegisterable={card.attributes.isRegisterable}
+                    isFull={card.attributes.isFull}
+                    isAvail={card.attributes.isAvailable}
+                    hoursOfOperation={card.attributes.hoursOfOperation}
+                  ></LargeCardMobile>
+                </li>
+              ))}
+            </CardCarousel>
+            <DefaultButton
+              isLink={true}
+              href="./business-service"
+              className=" homepage-see-more"
+            >
+              See More
+            </DefaultButton>
+
+            <div className="carousel-padding"></div>
+            <hr />
+            <div className="carousel-padding"></div>
+
             <h2 className="events-title">Gallery</h2>
 
             <Gallery>
@@ -391,13 +446,12 @@ export default function Homepage() {
               ))}
             </Gallery>
           </Section>
-        </div >
+        </div>
 
-    <Footer></Footer>
-      </div >
+        <Footer></Footer>
+      </div>
 
-    <style jsx>{`    
-
+      <style jsx>{`
         li {
           margin: 20px 20px;
         }
@@ -516,7 +570,7 @@ export default function Homepage() {
           align-content: flex-start;
           width: 320px;
           height: auto;
-          padding-top: 0px;
+          margin-top: 40px;
           margin-left: auto;
           margin-right: auto;
         }
@@ -529,6 +583,7 @@ export default function Homepage() {
           font-style: normal;
           font-weight: 700;
           line-height: 75.1%; /* 18.024px */
+          margin-bottom: 20px;
         }
 
         .events-card-frame {
@@ -578,7 +633,7 @@ export default function Homepage() {
           border: 5px solid white;
           position: relative;
           margin-bottom: -100px;
-          box-shadow: var(--shadow-box-buttons)
+          box-shadow: var(--shadow-box-buttons);
         }
 
         .image-home img {
@@ -588,35 +643,40 @@ export default function Homepage() {
         .text-and-buttons {
           display: flex;
           flex-direction: column;
+          width: 900px;
+          padding-left: 20px;
         }
 
         .carousel-padding {
-          height: 20px;
+          height: 30px;
+        }
+
+        .events-title{
+          padding: 20px 0px;
         }
 
         .image-description {
           font-family: var(--font-roboto);
           font-style: normal;
-          font-weight: 500;
-          font-size: 24;
+          font-size: 18px;
           color: white;
-          max-width: 550px;
           text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          line-height: 150%;
+          line-height: 170%;
           padding-bottom: 35px;
+          padding-top: 20px;
         }
 
         .buttons {
           display: flex;
           flex-direction: row;
           margin-bottom: 30px;
+          gap: 15px;
         }
 
         .buttons button {
           display: flex;
           padding: 6px 15px;
           background: var(--color-topographic-green);
-          gap: 10px;
           backdrop-filter: blur(2px);
           color: white;
           font-family: var(--font-roboto);
@@ -630,16 +690,11 @@ export default function Homepage() {
           text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
 
-
-
-
-
         @media screen and (max-width: 1000px) {
           .image-description {
             font-size: 24;
             width: 350px;
-         }
-
+          }
         }
 
         @media screen and (max-width: 870px) {
@@ -651,7 +706,6 @@ export default function Homepage() {
             height: auto;
           }
 
-
           .image-home {
             height: 430px;
             width: auto;
@@ -661,7 +715,6 @@ export default function Homepage() {
         }
 
         @media screen and (max-width: 720px) {
-
           .image-home {
             height: 230px;
             width: auto;
