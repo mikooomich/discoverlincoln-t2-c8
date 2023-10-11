@@ -11,6 +11,7 @@ export default function TextInput({
 	placeholder,
 	width,
 	dataOut,
+  onKeyDownOut,
 	children
 }) {
 
@@ -25,7 +26,7 @@ export default function TextInput({
 
 	return (
 		<>
-			<input className={className} type={type} placeholder={placeholder} onChange={read}></input>
+			<input className={className} type={type} placeholder={placeholder} onChange={read} onKeyDown={onKeyDownOut!= undefined? onKeyDownOut: undefined}></input>
 			
 			<style jsx>
 				{`

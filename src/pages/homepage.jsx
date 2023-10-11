@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 
 import TextInput from "@/components/TextInput";
 import Section from "@/components/Section";
@@ -66,8 +65,16 @@ export default function Homepage() {
     setSearchQuery(data)
   }
 
-
-
+  /**
+	 * Take action on enter press
+	 * @param {*} event 
+	 */
+	const handleKeyPress = (keyPress) => {
+		if (keyPress.key === 'Enter') {
+      // I am not sure how well this works with % encoding but oh well
+      window.location.href = `/search?searchQuery=${searchQuery}`
+		}
+	}
 
   return (
     <>
@@ -105,6 +112,7 @@ export default function Homepage() {
                         placeholder="Search..."
                         padding={"0px 16px"}
                         dataOut={readQuery}
+                        onKeyDownOut={handleKeyPress}
                       ></TextInput>
                     </div>
                   </div>
