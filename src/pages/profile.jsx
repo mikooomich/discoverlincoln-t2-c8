@@ -26,7 +26,10 @@ export default function Profile() {
 
       const userData = await response.json();
       setUserStrapiData(userData);
-      console.log(userData);
+      
+      if (userData.data === null){ //not logged in, redirect to login
+        window.location.href = "/login";
+      }
     }
     getUserData();
   }, []);

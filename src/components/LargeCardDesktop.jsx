@@ -41,14 +41,29 @@ export default function LargeCardDesktop({
 	}
 
 	const categoryColors = {
-		Restaurant: "red",
-		Music: "purple",
-		PerformingArts: "green",
-		Festival: "orange",
-		Sports: "blue",
-		Charity: "yellow",
-		Other: "black",
+		Restaurant: "#ff0303",
+		Music: "#b33978",
+		Performing_Arts: "#8b288f",
+		Festival: "#56288f",
+		Sports: "#1922a6",
+		Charity: "#515cf0",
+		Other: "#10649c",
+		Tours: "#10929e",
+
+		Monument: "#1eb07f",
+		Mall: "#5ea890",
+		Park: "#268034",
+		Food: "#06590a",
+		Shopping: "#74914d",
+		Technology: "#90941e",
+		Financial: "#b58412",
+		Distribution: "#694c0a",
+		Medical: "#009179",
+		Emergency: "#666666",
+		Industrial: "#b04300"
 	};
+
+
 
 
 	/**
@@ -143,7 +158,7 @@ export default function LargeCardDesktop({
 								<h1 className="price">
 									Price: ${(Math.round(ticketPrice * 100) / 100).toFixed(2)}
 								</h1>
-								<DefaultButton isLink={true} href={{pathname: "./checkout", query: {whichSelection: barcodeUID}}}>Purchase</DefaultButton>
+								<DefaultButton isLink={true} href={{ pathname: "./checkout", query: { whichSelection: barcodeUID } }}>Purchase</DefaultButton>
 							</div>
 						) : isEvent && !isTicket && !isRegisterable ? (
 							<div className="event-wrap">
@@ -180,6 +195,7 @@ export default function LargeCardDesktop({
 
         .image-container {
           max-width: 35%;
+		  min-width: 35%;
           height: 408px;
           background-position: center center;
           background-repeat: no-repeat;
@@ -198,6 +214,7 @@ export default function LargeCardDesktop({
           flex-direction: column;
           padding: 32px;
           background-color: white;
+		  width: 100%;
         }
 
         .large-info-wrap {
@@ -246,29 +263,28 @@ export default function LargeCardDesktop({
         .description-wrap {
           display: flex;
           flex-direction: row;
-          {/* width: 700px; */}
           margin-top: 10px;
           align-items: center;
         }
 
         .description-text {
           font-family: var(--font-roboto);
-          font-size: var(--font-size-body-M);
+          font-size: var(--font-size-body-Mplus);
           font-weight: 500;
-          {/* width: 450px; */}
+		  max-height: 250px;
           padding-right: 20px;
           line-height: 2;
 
 		  overflow-y: scroll;
-	  		{/* max-height: 150px; */}
         }
 
 		{/* scroll bar settings*/}
 		::-webkit-scrollbar {
 			width: 5px;
+			height: 5px;
 		}
 		::-webkit-scrollbar-thumb {
-			background: var(--color-topographic-green);
+			background: #d4d4d4;
 		}
 
         
@@ -304,14 +320,16 @@ export default function LargeCardDesktop({
         .event-wrap {
           display: flex;
           flex-direction: column;
-          align-items: center;
+		  justify-self: end;
           gap: 5px;
-          margin-left: 40px;
+          margin-left: 25px;
+		  width: 120px;
+		  min-width: 120px;
         }
 
         .ticket-text {
           font-family: var(--font-roboto);
-          font-size: var(--font-size-body-L);
+          font-size: 16px;
           line-height: 1.4;
         }
 

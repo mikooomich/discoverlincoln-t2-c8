@@ -26,7 +26,7 @@ export default function CardCarousel({
   if (!scrollable) {
     scrollable = "hidden";
   } else {
-    scrollable = "scroll";
+    scrollable = "auto";
   }
 
   if (singleLineDisplay) {
