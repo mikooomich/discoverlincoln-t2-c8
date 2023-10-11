@@ -480,12 +480,9 @@ export default function Homepage() {
         .landing-view-bg {
           display: flex;
           flex-direction: column;
-          background-image: linear-gradient(
-              rgba(0, 0, 0, 0.5),
-              rgba(0, 0, 0, 0.5)
-            ),
-            url("https://dg.imgix.net/does-alcohol-still-sober-you-igdnainm-en/landscape/does-alcohol-still-sober-you-igdnainm-d3b43138ff5a2cce0d3ff444cec97153.jpg?ts=1678406840&ixlib=rails-4.3.1&auto=format%2Ccompress&fit=min&w=700&h=394&dpr=2&ch=Width%2CDPR");
+          background-image: url('https://cdn.discordapp.com/attachments/986414801448235038/1161769104684896366/kelsey-knight-udj2tD3WKsY-unsplash_2.png?ex=653980cb&is=65270bcb&hm=7aa2d5ba68cfdfbf6dbaa77b361365cda1e859a0ce094d587331f5a8f253e4bb&');
           background-size: cover;
+          background-repeat: no-repeat;
         }
 
         .landing-view-greet {
