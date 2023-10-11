@@ -104,7 +104,7 @@ export default function SmallCard({
 				max-width: 320px;
 				padding-right: 10px;
 
-				box-shadow: var(--shadow-box-massive-card);
+				box-shadow: var(--shadow-box-small-card);
 				background-color: #FFFFFF;
 			}
 

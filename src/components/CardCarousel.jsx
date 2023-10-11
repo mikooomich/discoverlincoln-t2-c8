@@ -70,6 +70,10 @@ export default function CardCarousel({
           .multi-ul {
             flex-wrap: wrap;
             overflow-x: hidden;
+            justify-content: center;
+            margin-top: 5px;
+            padding-right: 10px;
+            padding-left: 7px;
           }
 
            {
