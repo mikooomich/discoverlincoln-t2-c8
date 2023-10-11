@@ -1,10 +1,9 @@
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
 import LargeCardList from "@/components/LargeCardList";
 import LargeCardDesktop from "@/components/LargeCardDesktop";
 import React, { useState, useEffect } from "react";
 import LargeCardMobile from "@/components/LargeCardMobile";
 import Section from "@/components/Section";
+import DefaultButton from "@/components/DefaultButton";
 
 export default function Profile() {
   const [userStrapiData, setUserStrapiData] = useState(null);
@@ -26,13 +25,19 @@ export default function Profile() {
 
       const userData = await response.json();
       setUserStrapiData(userData);
-      
-      if (userData.data === null){ //not logged in, redirect to login
+
+      if (userData.data === null) { //not logged in, redirect to login
         window.location.href = "/login";
       }
     }
     getUserData();
   }, []);
+
+
+  function logout() {
+    localStorage.removeItem("jwt");
+    window.location.href = "/login";
+  }
 
   return (
     <>
@@ -42,6 +47,9 @@ export default function Profile() {
           <div className="account-info">
             <img src="https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg"></img>
             <h1>{userStrapiData.username}</h1>
+            <div className="logout-buttons">
+              <DefaultButton onClick={() => { logout() }}>Log out</DefaultButton>
+            </div>
           </div>
 
           <div className="event-tickets-wrap">
@@ -129,6 +137,10 @@ export default function Profile() {
             color: black;
             font-size: 40px;
             font-weight: bold;
+          }
+
+          .logout-buttons {
+            margin: 20px;
           }
 
           .event-ticket-wrap {

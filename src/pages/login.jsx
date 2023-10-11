@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 
 import Toast from "@/components/Toast";
 import TextInput from "@/components/TextInput";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import Section from "@/components/Section";
 
 export default function Login() {
@@ -71,11 +69,23 @@ export default function Login() {
       setHideToastErr3(false);
     }
     if (password.length >= 6 && passwordConfirmation === password) {
-      await registerUser(email, username, password);
-      console.log("Registered:", email, password);
+      if (await registerUser(email, username, password)) {
+        console.log("Registered:", email, password);
+      }
+      else {
+        console.log("REGISTRATION FAILED");
+      }
+
     }
   }
 
+  /**
+   * Registers an user in Strapi
+   * @param {*} email 
+   * @param {*} username 
+   * @param {*} password 
+   * @returns True if sucess, false if failed
+   */
   async function registerUser(email, username, password) {
     try {
       const response = await fetch(
@@ -93,17 +103,26 @@ export default function Login() {
         }
       );
       const data = await response.json();
+      // console.log("GOT FROM SERVER")
+      // console.log(data);
+      if (data.error == undefined) {
+        localStorage.setItem("jwt", data.jwt);
+        setHideToastSuccess(false);
+        console.log("registered");
+        setHideToastErr5(true)
+        window.location.href = "/profile";
+        return true;
+      }
+      setHideToastErr5(false)
+      return false;
 
-      localStorage.setItem("jwt", data.jwt);
-      setHideToastSuccess(false);
-      console.log("registered");
-      window.location.href = "/profile";
     } catch (err) {
       console.log(err);
       setHideToastErr4(false);
       console.log(
         "Your request took too long to process and something has gone wrong."
       );
+      return false;
     }
   }
 
@@ -152,6 +171,7 @@ export default function Login() {
   const [hideToastErr2, setHideToastErr2] = useState(true);
   const [hideToastErr3, setHideToastErr3] = useState(true);
   const [hideToastErr4, setHideToastErr4] = useState(true);
+  const [hideToastErr5, setHideToastErr5] = useState(true);
 
   useEffect(() => {
     async function hideToast() {
@@ -181,7 +201,7 @@ export default function Login() {
 
   useEffect(() => {
     async function hideToast() {
-      console.log("error 1: ", hideToastErr2);
+      console.log("error 2: ", hideToastErr2);
       if (!hideToastErr2) {
         setTimeout(() => {
           setHideToastErr2(true);
@@ -194,7 +214,7 @@ export default function Login() {
 
   useEffect(() => {
     async function hideToast() {
-      console.log("error 1: ", hideToastErr3);
+      console.log("error 3: ", hideToastErr3);
       if (!hideToastErr3) {
         setTimeout(() => {
           setHideToastErr3(true);
@@ -207,15 +227,27 @@ export default function Login() {
 
   useEffect(() => {
     async function hideToast() {
-      console.log("error 1: ", hideToastErr4);
+      console.log("error 4: ", hideToastErr4);
       if (!hideToastErr4) {
         setTimeout(() => {
-          setHideToastErr3(true);
+          setHideToastErr4(true);
         }, 5000);
       }
     }
     hideToast();
   }, [hideToastErr4]);
+
+  useEffect(() => {
+    async function hideToast() {
+      console.log("error 4: ", hideToastErr5);
+      if (!hideToastErr5) {
+        setTimeout(() => {
+          setHideToastErr5(true);
+        }, 5000);
+      }
+    }
+    hideToast();
+  }, [hideToastErr5]);
 
   return (
     <>
@@ -286,6 +318,11 @@ export default function Login() {
             bgColor="err"
             text="Your request took too long to process and something has gone wrong."
             hide={hideToastErr4}
+          ></Toast>
+          <Toast
+            bgColor="err"
+            text="Registration failed. Username or email already exists."
+            hide={hideToastErr5}
           ></Toast>
           <Toast
             bgColor="success"
