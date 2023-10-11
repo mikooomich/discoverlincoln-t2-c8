@@ -53,13 +53,6 @@ export default function MobileHamburgerMenu({isHomepage = false}) {
 					<h2>Profile</h2>
 				</DefaultButton>
 
-				<DefaultButton className="mobileNav" isLink={true} href="./checkout">
-					<div className='icon'>
-						<FontAwesomeIcon icon={faUser} />
-					</div>
-					<h2>Checkout-debug link</h2>
-				</DefaultButton>
-
 			</div>
 
 			{/* styles */}
