@@ -303,6 +303,7 @@ export default function Business() {
               {strapiData?.map((element, index) => (
                 <li key={index}>
                   <LargeCardMobile
+                    forceMaxWidth={true}
                     isTicket={false}
                     title={element.attributes.title}
                     description={element.attributes.description}

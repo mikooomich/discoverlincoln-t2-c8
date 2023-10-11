@@ -97,11 +97,10 @@ export default function SmallCard({
 			.small-card-mobile {
 				display: flex;
 				align-items: center;
-
+				justify-content: space-between;
 				
-				height: 90px;
+				min-height: 90px;
 				width: 320px;
-				max-width: 320px;
 				padding-right: 10px;
 
 				box-shadow: var(--shadow-box-small-card);
@@ -124,7 +123,7 @@ export default function SmallCard({
 				display: flex;
 				flex-direction: column;
 				padding: 10px 15px;
-				width:100%;
+				width: 100%;
 			}
 
 	
@@ -169,6 +168,14 @@ export default function SmallCard({
 
 			.icon {
 				margin-right: 10px;
+			}
+
+			@media screen and (max-width: 365px) {
+
+				.small-card-mobile {
+					width: 240px;
+				}
+
 			}
 
 			
