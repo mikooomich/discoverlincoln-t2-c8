@@ -314,7 +314,9 @@ export default function LargeCardDesktop({
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          padding: 0px 15px;
+          padding-left: 15px;
+		  width: 150px;
+		  min-width: 150px;
         }
 
         .event-wrap {

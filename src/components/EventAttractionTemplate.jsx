@@ -69,9 +69,9 @@ export default function EventAttractionTemplate({
             height: 500px;
             position: fixed;
             z-index: -99;
+			top: 40px;
 
-            transform: rotate(-25deg) translate(20px, 80px);
-            background-color: rgb(170, 170, 170);
+            transform: rotate(-15deg) translate(10px, 80px);
           }
 
           .psudoBody {
@@ -268,7 +268,11 @@ export default function EventAttractionTemplate({
 			</style>
 
 			<div className="psudoBody">
-				<div className="iconBackdrop"></div>
+				<div className="iconBackdrop">
+					<svg xmlns="http://www.w3.org/2000/svg" width="569" height="589" viewBox="0 0 569 589" fill="none">
+						<path className="backdrop-icon" d="M70.5684 89.6993C86.411 81.8063 105.587 88.2288 113.48 104.072L127.75 132.714L242.319 75.6339L228.049 46.9918C220.156 31.1491 226.578 11.9728 242.421 4.07978C258.264 -3.81328 277.44 2.60929 285.333 18.4519L299.603 47.094L342.566 25.6891C366.285 13.8719 395.117 23.5282 406.934 47.2474L428.339 90.2105L27.3496 289.989L5.94474 247.026C-5.87254 223.307 3.78376 194.476 27.503 182.658L70.4661 161.253L56.1962 132.611C48.3031 116.769 54.7257 97.5924 70.5684 89.6993ZM41.6196 318.632L442.609 118.853L563.903 362.31C575.72 386.03 566.064 414.861 542.345 426.678L227.282 583.648C203.563 595.465 174.731 585.809 162.914 562.089L41.6196 318.632ZM134.579 361.697L148.848 390.339C152.773 398.216 162.428 401.449 170.304 397.525L198.947 383.255C206.823 379.331 210.057 369.676 206.133 361.799L191.863 333.157C187.939 325.281 178.283 322.047 170.407 325.971L141.765 340.241C133.888 344.165 130.654 353.82 134.579 361.697ZM249.147 304.617L263.417 333.259C267.341 341.136 276.996 344.37 284.873 340.445L313.515 326.175C321.392 322.251 324.625 312.596 320.701 304.719L306.431 276.077C302.507 268.201 292.852 264.967 284.975 268.891L256.333 283.161C248.456 287.085 245.223 296.741 249.147 304.617ZM370.901 226.082C363.025 230.006 359.791 239.661 363.715 247.538L377.985 276.18C381.909 284.056 391.565 287.29 399.441 283.366L428.083 269.096C435.96 265.172 439.194 255.516 435.269 247.64L420.999 218.998C417.075 211.121 407.42 207.887 399.543 211.812L370.901 226.082ZM191.658 476.265L205.928 504.907C209.852 512.784 219.508 516.018 227.384 512.093L256.026 497.824C263.903 493.899 267.137 484.244 263.212 476.368L248.942 447.725C245.018 439.849 235.363 436.615 227.486 440.539L198.844 454.809C190.968 458.734 187.734 468.389 191.658 476.265ZM313.413 397.73C305.536 401.654 302.302 411.309 306.227 419.186L320.497 447.828C324.421 455.704 334.076 458.938 341.953 455.014L370.595 440.744C378.471 436.82 381.705 427.164 377.781 419.288L363.511 390.646C359.587 382.769 349.931 379.535 342.055 383.46L313.413 397.73ZM420.795 362.106L435.065 390.748C438.989 398.625 448.644 401.858 456.521 397.934L485.163 383.664C493.04 379.74 496.273 370.085 492.349 362.208L478.079 333.566C474.155 325.689 464.5 322.456 456.623 326.38L427.981 340.65C420.104 344.574 416.871 354.229 420.795 362.106Z" fill="#F2F2F2" />
+					</svg>
+				</div>
 
 				<div className="maincontent">
 					<div className="titleBlock">
@@ -290,34 +294,34 @@ export default function EventAttractionTemplate({
 
 					<div className="mapContainer">
 						<MapCard strapiDataLink={strapiDataLink} itemSelector={itemSelector}>
-					
-					
-						<div className="mapCarousel-wrap">
-						<CardCarousel margin="0px 0px 20px 0px">
-							{strapiDataLink?.map((card, index) => (
-								<li key={index} className={`smallCardli`}>
-									<DefaultButton onClick={() => { itemSelector(card.id) }} className={`blank ${card.isSelected ? "selectedCard" : ""}`}>
 
 
-										<SmallCard
-											title={card.attributes.title}
-											imgSrc={card.attributes.image.data.attributes.url}
-											category={card.attributes.tags}
-											scrollLink={card.refLink}
-											scrollLinkMobile={card.refLinkMobile}
-										>
+							<div className="mapCarousel-wrap">
+								<CardCarousel margin="0px 0px 20px 0px">
+									{strapiDataLink?.map((card, index) => (
+										<li key={index} className={`smallCardli`}>
+											<DefaultButton onClick={() => { itemSelector(card.id) }} className={`blank ${card.isSelected ? "selectedCard" : ""}`}>
 
-											<img src="Icon-glass.svg" width={20} height={20} alt="uwu" />
-										</SmallCard>
-									</DefaultButton>
-								</li>
-							))}
-						</CardCarousel>
+
+												<SmallCard
+													title={card.attributes.title}
+													imgSrc={card.attributes.image.data.attributes.url}
+													category={card.attributes.tags}
+													scrollLink={card.refLink}
+													scrollLinkMobile={card.refLinkMobile}
+												>
+
+													<img src="Icon-glass.svg" width={20} height={20} alt="uwu" />
+												</SmallCard>
+											</DefaultButton>
+										</li>
+									))}
+								</CardCarousel>
+							</div>
+						</MapCard>
 					</div>
-					</MapCard>
-					</div>
 
-				
+
 
 
 					<div className="offerings">
