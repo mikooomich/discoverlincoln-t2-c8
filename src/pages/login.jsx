@@ -9,17 +9,24 @@ import Section from "@/components/Section";
 
 export default function Login() {
   useEffect(() => {
-    async function testToken() {
-      if (localStorage.getItem("jwt")) {
+    async function testToken(){
+      if (localStorage.getItem("jwt") != "undefined" && localStorage.getItem("jwt") != undefined) {
         window.location.href = "/profile";
-
-        try {
-          await getUserData();
+  
+        try{
+          await getUserData()
+          console.log("user is logged in")
+          
           window.location.href = "/profile";
         } catch (err) {
           localStorage.removeItem("jwt");
         }
       }
+      else { // delete the token if undefined
+        localStorage.removeItem("jwt")
+      }
+      
+
     }
 
     testToken();
@@ -316,6 +323,7 @@ export default function Login() {
             align-items: center;
 
             padding: 40px 40px;
+            gap: 8px;
           }
 
           .logindiv * {
