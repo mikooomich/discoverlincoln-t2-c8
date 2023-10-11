@@ -22,13 +22,26 @@ export default function SmallCard({
 }) {
 
 	const categoryColors = {
-		Restaurant: "red",
-		Music: "purple",
-		PerformingArts: "green",
-		Festival: "orange",
-		Sports: "blue",
-		Charity: "yellow",
-		Other: "black",
+		Restaurant: "#ff0303",
+		Music: "#b33978",
+		Performing_Arts: "#8b288f",
+		Festival: "#56288f",
+		Sports: "#1922a6",
+		Charity: "#515cf0",
+		Other: "#10649c",
+		Tours: "#10929e",
+
+		Monument: "#1eb07f",
+		Mall: "#5ea890",
+		Park: "#268034",
+		Food: "#06590a",
+		Shopping: "#74914d",
+		Technology: "#90941e",
+		Financial: "#b58412",
+		Distribution: "#694c0a",
+		Medical: "#009179",
+		Emergency: "#666666",
+		Industrial: "#b04300"
 	};
 
 
