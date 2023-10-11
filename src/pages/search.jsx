@@ -22,6 +22,8 @@ export default function Search() {
 	const [attractionStrapiData, setAttractionStrapiData] = useState([]);
 	const [businessStrapiData, setBusinessStrapiData] = useState([]);
 
+	const [showFilterSortOptions, setShowFilterSortOptions] = useState(false); // show filter and sort options
+
 
 	useEffect(() => {
 		async function fetchStrapiData() {
@@ -383,7 +385,6 @@ export default function Search() {
             display: flex;
             flex-direction: column;
             margin: auto;
-            max-width: 1100px;
           }
           .searchBox {
             width: 100%;
@@ -425,7 +426,7 @@ export default function Search() {
 
 		  {/* Sorting and filtering */}
 			.sortOptions-wrap {
-				display: flex;
+				display: ${showFilterSortOptions ? "flex" : "none"};
 				flex-direction: column;
 				align-items: start;
 				margin-right: 20px;
@@ -511,8 +512,9 @@ export default function Search() {
 
 						</div>
 						<div>
-							<DefaultButton className="filter-sort-btn" onClick={() => { doFilter() }}>Filter</DefaultButton>
+							<DefaultButton className="filter-sort-btn" onClick={() => { setShowFilterSortOptions(true); doFilter() }}>Filter</DefaultButton>
 							<DefaultButton className="filter-sort-btn" onClick={() => {
+								setShowFilterSortOptions(true);
 								doSort(eventStrapiData, setEventsStrapiData);
 								doSort(attractionStrapiData, setAttractionStrapiData);
 								doSort(businessStrapiData, setBusinessStrapiData);
