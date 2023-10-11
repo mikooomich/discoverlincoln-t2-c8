@@ -52,7 +52,9 @@ export default function DefaultButton({
       {isLink && (
         <div className={`defaultStyle ${className}`}>
           <Link href={href}>
-            <div className={`linkChildren + ${useMaxWidth}`} onClick={onClick}>{children}</div>
+            <div className={`linkChildren + ${useMaxWidth}`} onClick={onClick}>
+              {children}
+            </div>
           </Link>
         </div>
       )}
@@ -203,11 +205,14 @@ export default function DefaultButton({
             margin: 10px;
           }
 
-          .homepage-SmallCard{
+          .homepage-SmallCard {
             background-color: white;
-            width: 85px;
-            padding: 10px 15px;
+            width: 70px;
+            padding: 10px 4px;
             align-self: end;
+            font-size: 18px;
+            color: black;
+            padding-left: 12px;
           }
 
           .homepage-see-more {
@@ -229,7 +234,7 @@ export default function DefaultButton({
             font-family: var(--font-roboto);
             font-size: 14px;
             font-weight: 800;
-          
+
             display: flex;
             align-items: center;
           }
