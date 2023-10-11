@@ -107,9 +107,6 @@ export default function Business() {
             margin: 20px;
           }
 
-          .selectionsBtn {
-            align-self: end;
-          }
 
            {
             /* Buisness cards */
@@ -321,10 +318,6 @@ export default function Business() {
               ))}
             </CardCarousel>
 
-            <div className="selectionsBtn">
-              <DefaultButton>{"<---"}</DefaultButton>
-              <DefaultButton>{"--->"}</DefaultButton>
-            </div>
           </div>
 
           <div className="buisnessCardBox">

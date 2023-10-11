@@ -74,6 +74,17 @@ export default function CardCarousel({
             margin-top: 5px;
           }
 
+
+          {/* scroll bar settings*/}
+          ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+            background: #d4d4d4;
+          }
+          ::-webkit-scrollbar-thumb {
+            background: #7a7a7a;
+          }
+        
            {
             /* For mobile vertical scrolling*/
           }
