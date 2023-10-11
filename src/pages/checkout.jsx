@@ -158,11 +158,14 @@ export default function Checkout() {
 
 
                 .costBox  {
-					width: 100%
-					display: flex;
-					flex-direction: column;
-					
-					align-items: start;
+                  width: 100%
+                  display: flex;
+                  flex-direction: column;
+                  
+                  align-items: start;
+                  border: 1px solid #d1d1d1;
+                  padding-right: 18px;
+                  margin-top: 10px;
                 }
 
                 .costEntry {
@@ -248,7 +251,7 @@ export default function Checkout() {
         <div className="orderSummary">
           <div className="actionBar">
             <h1>Confirm Your Order</h1>
-            <DefaultButton children="< Back"></DefaultButton>
+            <DefaultButton isLink={true} href="./homepage" children=" Cancel"></DefaultButton>
           </div>
 
           <div className="card">
@@ -383,8 +386,8 @@ export default function Checkout() {
                   <p>
                     $
                     {selectedCard != undefined
-                      ? selectedCard.attributes.ticketCost
-                      : 0.0}
+                      ?  parseFloat(selectedCard.attributes.ticketCost).toFixed(2)
+                      : 0.00}
                   </p>
                 </span>
                 <span className="costEntry">
@@ -392,8 +395,8 @@ export default function Checkout() {
                   <p>
                     $
                     {selectedCard != undefined
-                      ? selectedCard.attributes.ticketCost * 0.13
-                      : 0.0}
+                      ? parseFloat(selectedCard.attributes.ticketCost * 0.13).toFixed(2)
+                      : 0.00}
                   </p>
                 </span>
                 <span className="costEntry">
@@ -401,9 +404,9 @@ export default function Checkout() {
                   <p>
                     $
                     {selectedCard != undefined
-                      ? selectedCard.attributes.ticketCost * 0.13 +
-                        selectedCard.attributes.ticketCost
-                      : 0.0}
+                      ?  parseFloat(selectedCard.attributes.ticketCost * 0.13 +
+                        selectedCard.attributes.ticketCost).toFixed(2)
+                      : 0.00}
                   </p>
                 </span>
               </li>
