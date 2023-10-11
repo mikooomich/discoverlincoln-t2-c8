@@ -22,6 +22,8 @@ export default function Search() {
 	const [attractionStrapiData, setAttractionStrapiData] = useState([]);
 	const [businessStrapiData, setBusinessStrapiData] = useState([]);
 
+	const [showFilterSortOptions, setShowFilterSortOptions] = useState(false); // show filter and sort options
+
 
 	useEffect(() => {
 		async function fetchStrapiData() {
@@ -64,8 +66,10 @@ export default function Search() {
 
 				// console.log("router IS READY")
 				// console.log(router.query.searchQuery);
-				setSearchQuery([router.query.searchQuery]);
-				setSearchReq(true);
+				if (router.query.searchQuery != "") {
+					setSearchQuery([router.query.searchQuery]);
+					setSearchReq(true);
+				}
 
 				router.query = undefined // only read and set once
 			}, 500)
@@ -337,6 +341,16 @@ export default function Search() {
 	}
 
 	/**
+	 * Take action on enter press
+	 * @param {*} event 
+	 */
+	const handleKeyPress = (keyPress) => {
+		if (keyPress.key === 'Enter') {
+			setSearchReq(true);
+		}
+	}
+
+	/**
 	 * Trigger a reload of the cards
 	 */
 	useEffect(() => {
@@ -350,6 +364,7 @@ export default function Search() {
 
 		fetchStrapiData()
 	}, [reloadLocalCards])
+
 
 
 	return (
@@ -370,7 +385,6 @@ export default function Search() {
             display: flex;
             flex-direction: column;
             margin: auto;
-            max-width: 1100px;
           }
           .searchBox {
             width: 100%;
@@ -412,7 +426,7 @@ export default function Search() {
 
 		  {/* Sorting and filtering */}
 			.sortOptions-wrap {
-				display: flex;
+				display: ${showFilterSortOptions ? "flex" : "none"};
 				flex-direction: column;
 				align-items: start;
 				margin-right: 20px;
@@ -458,7 +472,8 @@ export default function Search() {
 						</DefaultButton>
 
 						<div className="searchBox">
-							<TextInput placeholder={searchQuery != "" ? searchQuery : "Search"} width={`100%`} dataOut={readQuery}></TextInput>
+							<TextInput placeholder={searchQuery != "" ? searchQuery : "Search"} width={`100%`} 
+							dataOut={readQuery} onKeyDownOut={handleKeyPress}></TextInput>
 						</div>
 					</div>
 					<div className="filter-sort">
@@ -497,8 +512,9 @@ export default function Search() {
 
 						</div>
 						<div>
-							<DefaultButton className="filter-sort-btn" onClick={() => { doFilter() }}>Filter</DefaultButton>
+							<DefaultButton className="filter-sort-btn" onClick={() => { setShowFilterSortOptions(true); doFilter() }}>Filter</DefaultButton>
 							<DefaultButton className="filter-sort-btn" onClick={() => {
+								setShowFilterSortOptions(true);
 								doSort(eventStrapiData, setEventsStrapiData);
 								doSort(attractionStrapiData, setAttractionStrapiData);
 								doSort(businessStrapiData, setBusinessStrapiData);
