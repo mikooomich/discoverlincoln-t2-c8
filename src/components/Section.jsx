@@ -44,8 +44,6 @@ export default function Section({ fullWidth = false, usePadding = true, marginTo
 
 				@media (max-width: 400px) {
 					.outer-container {
-						margin-top: 10px;
-						margin-bottom: 10px;
 						padding: 0px 0px;
 					}
 				}

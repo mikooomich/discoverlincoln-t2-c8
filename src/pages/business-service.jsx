@@ -136,6 +136,8 @@ export default function Business() {
 
           .cardBodyTxt {
             margin-left: 5px;
+            line-height: 1.5;
+            {/* font-size: 12.5px; */}
           }
 
            {
@@ -329,7 +331,7 @@ export default function Business() {
                   isAltOrientation="true"
                   icons={faCircleInfo}
                 >
-                  <p>
+                  <p className="cardBodyTxt">
                     Have a question about your ventures? Visit an information
                     center or
                     <Link href=""> Click here </Link>
@@ -346,7 +348,7 @@ export default function Business() {
                   icons={null}
                 >
                   <div className="partnersCard">
-                    <p>
+                    <p className="cardBodyTxt">
                       Megasoft
                       <br />
                       Months Inn
@@ -391,7 +393,7 @@ export default function Business() {
                   icons={faTruckMedical}
                 >
                   <div className="phoneNunbers">
-                    <p>
+                    <p className="cardBodyTxt">
                       Emergency
                       <br />
                       Police
@@ -422,7 +424,7 @@ export default function Business() {
                   icons={faStore}
                 >
                   <div className="phoneNunbers">
-                    <p>
+                    <p className="cardBodyTxt">
                       City Hall
                       <br />
                       Ontario Parks
@@ -460,7 +462,7 @@ export default function Business() {
                   isAltOrientation={true}
                   icons={faCircleInfo}
                 >
-                  <p>
+                  <p className="cardBodyTxt">
                     Have a question about your ventures? Visit an information
                     center or <Link href="">Click here</Link> to view a map of
                     our in person information centers.
@@ -476,7 +478,7 @@ export default function Business() {
                   icons={null}
                 >
                   <div className="partnersCard">
-                    <p>
+                    <p className="cardBodyTxt">
                       Megasoft
                       <br />
                       Months Inn
@@ -518,7 +520,7 @@ export default function Business() {
                   title="Emergency Services"
                   icons={faTruckMedical}
                 >
-                  <p>
+                  <p className="cardBodyTxt">
                     Emergency
                     <br />
                     Police
@@ -547,7 +549,7 @@ export default function Business() {
                   title="Other Useful Contacts"
                   icons={faStore}
                 >
-                  <p>
+                  <p className="cardBodyTxt">
                     City Hall
                     <br />
                     Ontario Parks
