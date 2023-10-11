@@ -41,6 +41,15 @@ export default function Section({ fullWidth = false, usePadding = true, marginTo
 					max-width: ${fullWidth ? '100%' : 'var(--section-max-width)'};
 				}
 
+
+				@media (max-width: 400px) {
+					.outer-container {
+						margin-top: 10px;
+						margin-bottom: 10px;
+						padding: 0px 0px;
+					}
+				}
+
 			`}</style>
 		</>
 	)
