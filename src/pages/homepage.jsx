@@ -103,7 +103,7 @@ export default function Homepage() {
                       SEE LINCOLN
                     </DefaultButton>
                     <div className="search-button-area">
-                      <DefaultButton isLink={true} href={{ pathname: "./search", query: { searchQuery } }} className="see-lincoln ">
+                      <DefaultButton isLink={true} href={{ pathname: "./search", query: { searchQuery } }} className="see-lincoln home-search-btn">
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                       </DefaultButton>
                       <TextInput

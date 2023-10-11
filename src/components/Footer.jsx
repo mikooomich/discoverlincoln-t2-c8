@@ -118,8 +118,12 @@ export default function Footer() {
 			}
 		}
 
-		@media only screen and (max-width: 725px){
+		@media only screen and (max-width: 411px) {
+      .footer {
+        min-height: 270px;
+      }
 
+     
 
 		}
  

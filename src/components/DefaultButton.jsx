@@ -237,6 +237,11 @@ export default function DefaultButton({
           .see-lincoln:hover {
             filter: brightness(70%);
           }
+
+
+          .home-search-btn {
+            font-size: 20px;
+          }
         `}
       </style>
     </>
