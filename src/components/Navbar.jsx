@@ -79,7 +79,7 @@ export default function Navbar({ isHomepage = false }) {
           padding: 20px;
 
 			{/* homepage overrides */}
-		  /* background-color: ${(!isHomepage || isNavExpanded) ? "var(--color-elevated-green)" : "transparent"}; */
+		     background-color: ${(!isHomepage || isNavExpanded) ? "var(--color-elevated-green)" : "transparent"}; 
 
 		  position: ${!isHomepage ? "default" : "absolute"};
         }
