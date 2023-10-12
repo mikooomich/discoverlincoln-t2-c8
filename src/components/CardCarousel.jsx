@@ -65,6 +65,7 @@ export default function CardCarousel({
             display: flex;
             flex-direction: row;
             overflow-x: ${scrollable};
+            justify-content: center;
           }
 
           .multi-ul {
@@ -72,7 +73,6 @@ export default function CardCarousel({
             overflow-x: hidden;
             margin-top: 5px;
           }
-
 
           {/* scroll bar settings*/}
           ::-webkit-scrollbar {

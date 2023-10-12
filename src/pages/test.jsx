@@ -60,6 +60,7 @@ export default function test() {
 
       <LargeCardDesktop isEvent={true} isTicket={false} isRegisterable={false}></LargeCardDesktop>
       <LargeCardDesktop isEvent={true} isTicket={true}></LargeCardDesktop>
+      <LargeCardDesktop isEvent={true} isTicket={true} isRegisterable={true}></LargeCardDesktop>
 
       <ExampleState />
 

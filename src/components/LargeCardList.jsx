@@ -14,7 +14,7 @@ export default function LargeCardList({children}) {
 				.card-container {
 					display: flex;
 					flex-direction: column;
-					align-items: center;
+					align-items: stretch;
 					gap: 50px;
 					padding-bottom: 50px;
 					padding-top: 20px;

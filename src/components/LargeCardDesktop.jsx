@@ -144,10 +144,13 @@ export default function LargeCardDesktop({
 								<p className="ticket-text">
 									Time: {tConvert(timeStart)} to {tConvert(timeEnd)}
 								</p>
-								<img
-									src="https://i.stack.imgur.com/oSqy5.png"
-									className="ticket-code-img"
-								></img>
+								<div className="ticket-code-img">
+									<img
+										src="https://i.stack.imgur.com/oSqy5.png"
+										stlye={{ width: "100%", height: "100%"}}
+									></img>
+								</div>
+
 							</div>
 						) : isEvent && !isTicket && isRegisterable ? (
 							<div className="event-wrap">
@@ -273,7 +276,8 @@ export default function LargeCardDesktop({
           font-weight: 500;
 		  max-height: 250px;
           padding-right: 20px;
-          line-height: 2;
+          line-height: 1.7;
+		  flex-grow: 1;
 
 		  overflow-y: scroll;
         }
@@ -287,8 +291,6 @@ export default function LargeCardDesktop({
 			background: #d4d4d4;
 		}
 
-        
-
         .border-line {
           border-left: 1px solid grey;
           height: 215px;
@@ -298,8 +300,16 @@ export default function LargeCardDesktop({
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding: 0px 15px;
+          padding: 0px 0px 0px 15px;
           max-width: 200px;
+        }
+
+		.description2-text > h1 {
+			white-space: nowrap;
+        }
+
+		.description2-text > p {
+			white-space: nowrap;
         }
 
         .hours-title {
@@ -315,9 +325,17 @@ export default function LargeCardDesktop({
           justify-content: center;
           align-items: center;
           padding-left: 15px;
-		  width: 150px;
-		  min-width: 150px;
+		  min-width: 240px;
+		  text-align: center;
+		  flex-grow: 1;
+
         }
+
+		.ticket-code-img {
+			display: block;
+			width: 200px;
+			margin-top: 12px;
+		}
 
         .event-wrap {
           display: flex;
@@ -327,11 +345,13 @@ export default function LargeCardDesktop({
           margin-left: 25px;
 		  width: 120px;
 		  min-width: 120px;
+		  text-align: center;
         }
 
         .ticket-text {
           font-family: var(--font-roboto);
-          font-size: 16px;
+          font-size: 18px;
+		  font-weight: 600;
           line-height: 1.4;
         }
 
@@ -339,6 +359,7 @@ export default function LargeCardDesktop({
 			{/* text-align: center;
 			 */}
 		}
+
       `}</style>
 		</>
 	);

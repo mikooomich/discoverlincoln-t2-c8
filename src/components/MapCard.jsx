@@ -73,11 +73,11 @@ export default function MapCard({ strapiDataLink, itemSelector, children }) {
 			<style jsx>{`
 				.map-card {
 					display: flex;
-					box-shadow: var(--shadow-box-massive-card);
 				}
 
 				.map {
 					width: 100%;
+					box-shadow: var(--shadow-box-massive-card);
 				}
 
 				.children {

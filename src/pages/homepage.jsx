@@ -63,15 +63,15 @@ export default function Homepage() {
   }
 
   /**
-	 * Take action on enter press
-	 * @param {*} event 
-	 */
-	const handleKeyPress = (keyPress) => {
-		if (keyPress.key === 'Enter') {
+   * Take action on enter press
+   * @param {*} event 
+   */
+  const handleKeyPress = (keyPress) => {
+    if (keyPress.key === 'Enter') {
       // I am not sure how well this works with % encoding but oh well
       window.location.href = `/search?searchQuery=${searchQuery}`
-		}
-	}
+    }
+  }
 
   return (
     <>
@@ -90,15 +90,17 @@ export default function Homepage() {
                     favour.
                   </p>
                   <div className="search-area">
-                    <DefaultButton
-                      className="see-lincoln"
-                      fontSize={"18px"}
-                      bgColor={"white"}
-                      textColor={"black"}
-                      padding={"0px 12px"}
-                    >
-                      SEE LINCOLN
-                    </DefaultButton>
+                    <div className="see-lincoln-wrapper">
+                      <DefaultButton
+                        className="see-lincoln"
+                        fontSize={"18px"}
+                        bgColor={"white"}
+                        textColor={"black"}
+                        padding={"0px 12px"}
+                      >
+                        SEE LINCOLN
+                      </DefaultButton>
+                    </div>
                     <div className="search-button-area">
                       <DefaultButton isLink={true} href={{ pathname: "./search", query: { searchQuery } }} className="see-lincoln home-search-btn">
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -526,7 +528,7 @@ export default function Homepage() {
           font-weight: 500;
           font-size: 24;
           color: white;
-          width: 550px;
+          max-width: 550px;
           text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           line-height: 150%;
           padding-top: 20px;
@@ -561,7 +563,7 @@ export default function Homepage() {
           display: flex;
           flex-flow: column wrap;
           align-content: flex-start;
-          width: 320px;
+          max-width: 320px;
           height: auto;
           margin-top: 40px;
           margin-left: auto;
@@ -636,7 +638,7 @@ export default function Homepage() {
         .text-and-buttons {
           display: flex;
           flex-direction: column;
-          width: 900px;
+          max-width: 900px;
           padding-left: 20px;
         }
 
@@ -683,7 +685,14 @@ export default function Homepage() {
           text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
 
-        @media screen and (max-width: 1000px) {
+
+        .see-lincoln-wrapper {
+          display: flex;
+          flex-direction: row;
+          align-items: stretch;
+        }
+
+        @media screen and (max-width: 3000px) {
           .image-description {
             font-size: 24;
             width: 350px;
@@ -716,6 +725,26 @@ export default function Homepage() {
             margin-right: 20px;
             margin-bottom: 0px;
             margin-top: 20px;
+          }
+        }
+
+        @media screen and (max-width: 550px) {
+          .discover-text {
+			    	font-size: 64px;
+			    }
+
+          .lincoln-text {
+            font-size: 82px;
+          }
+
+          .see-lincoln-wrapper {
+            display: none;
+          }
+
+          .greeting-frame {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
           }
         }
       `}</style>

@@ -270,11 +270,10 @@ export default function LargeCardMobile({
 			font-family: var(--font-roboto);
 			font-size: var(--font-size-body-M);
 			line-height: 1.6;
-			max-width: 50%;
-			min-width: 50%;
 			font-weight: 400px;
 			margin-top: 10px;
 			margin-bottom: auto;
+			flex-grow: 1;
 
 			overflow-y: scroll;
 			max-height: 150px;
@@ -327,7 +326,8 @@ export default function LargeCardMobile({
           gap: 5px;
           margin-left: 5px;
 		  overflow-y: auto;
-		  max-height: 100%
+		  max-height: 100%;
+		  min-width: 100px;
         }
 
         .ticket-text {
@@ -335,7 +335,7 @@ export default function LargeCardMobile({
           font-size: var(--font-size-body-S);
           line-height: 1.4;
           {/* padding-right: 10px; */}
-		  text-align: left;
+		  text-align: center;
         }
 
 		.markdown-wrap {

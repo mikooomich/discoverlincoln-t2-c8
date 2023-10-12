@@ -92,12 +92,14 @@ export default function Navbar({ isHomepage = false }) {
         .header-links {
           float: right;
           margin-right: 20px;
+          font-size: 18px;
         }
 
         .header-links * {
           float: left;
           color: white;
-          padding: 16px 16px;
+          padding: 16px 14px;
+          text-decoration: underline;
         }
 
 		.header-links *:hover{
