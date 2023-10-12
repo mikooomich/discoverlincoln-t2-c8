@@ -526,7 +526,7 @@ export default function Homepage() {
           font-weight: 500;
           font-size: 24;
           color: white;
-          width: 550px;
+          max-width: 550px;
           text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           line-height: 150%;
           padding-top: 20px;
@@ -561,7 +561,7 @@ export default function Homepage() {
           display: flex;
           flex-flow: column wrap;
           align-content: flex-start;
-          width: 320px;
+          max-width: 320px;
           height: auto;
           margin-top: 40px;
           margin-left: auto;
@@ -636,7 +636,7 @@ export default function Homepage() {
         .text-and-buttons {
           display: flex;
           flex-direction: column;
-          width: 900px;
+          max-width: 900px;
           padding-left: 20px;
         }
 
