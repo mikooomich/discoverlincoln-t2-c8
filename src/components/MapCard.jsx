@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Leaflet from 'leaflet';
 import { useEffect, useRef } from 'react'
 import { MapContainer, TileLayer, useMap } from 'react-leaflet'
 import { Marker, Popup } from 'react-leaflet'
@@ -10,6 +11,17 @@ import DefaultButton from './DefaultButton'
 
 export default function MapCard({ strapiDataLink, itemSelector, children }) {
 	let popupRef = useRef();
+
+	useEffect(() => {
+		(async function init() {
+			delete Leaflet.Icon.Default.prototype._getIconUrl;
+			Leaflet.Icon.Default.mergeOptions({
+				iconRetinaUrl: 'leaflet/images/marker-icon-2x.png',
+				iconUrl: 'leaflet/images/marker-icon.png',
+				shadowUrl: 'leaflet/images/marker-shadow.png',
+			});
+		})();
+	}, []);
 
 	// open pin when card is clicked
 	useEffect(() => {
