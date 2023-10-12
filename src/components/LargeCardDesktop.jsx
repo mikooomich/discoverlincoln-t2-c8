@@ -274,6 +274,7 @@ export default function LargeCardDesktop({
 		  max-height: 250px;
           padding-right: 20px;
           line-height: 2;
+		  flex-grow: 1;
 
 		  overflow-y: scroll;
         }
