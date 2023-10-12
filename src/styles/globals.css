@@ -42,5 +42,8 @@ body {
   font-size: var(--font-size-body-M);
   font-weight: 400;
   line-height: 1.5;
-  padding-left: 30px;
+}
+
+.hours-description-lc > p {
+  white-space: nowrap;
 }
