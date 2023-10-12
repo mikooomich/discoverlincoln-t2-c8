@@ -9,6 +9,7 @@ import dynamic from 'next/dynamic'
 import DefaultButton from "./DefaultButton";
 const MapCard = dynamic(() => import("@/components/MapCard"), { ssr: false })
 import { useEffect } from "react";
+import Section from "./Section";
 
 export default function EventAttractionTemplate({
 	variant = "events",
@@ -328,6 +329,7 @@ export default function EventAttractionTemplate({
 						<h1 className="offerings-text">All Offerings</h1>
 
 						{/* scrollable offerings */}
+						<Section>
 						<div className="cards-desktop">
 							<LargeCardList>
 								{strapiDataLink?.map((element, index) => (
@@ -357,6 +359,8 @@ export default function EventAttractionTemplate({
 								))}
 							</LargeCardList>
 						</div>
+						</Section>
+						<Section>
 						<div className="cards-mobile">
 							<LargeCardList>
 								{strapiDataLink?.map((element, index) => (
@@ -386,6 +390,7 @@ export default function EventAttractionTemplate({
 								))}
 							</LargeCardList>
 						</div>
+						</Section>
 					</div>
 				</div>
 			</div >
