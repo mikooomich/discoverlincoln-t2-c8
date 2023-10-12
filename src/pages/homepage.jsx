@@ -692,7 +692,7 @@ export default function Homepage() {
           align-items: stretch;
         }
 
-        @media screen and (max-width: 1000px) {
+        @media screen and (max-width: 3000px) {
           .image-description {
             font-size: 24;
             width: 350px;
