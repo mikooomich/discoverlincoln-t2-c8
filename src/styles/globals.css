@@ -36,6 +36,10 @@ body {
   padding-left: 10px;
 }
 
+.hours-description > p {
+  white-space: nowrap;
+}
+
 /* Large card hours of opp */
 .hours-description-lc {
   font-family: var(--font-roboto);
