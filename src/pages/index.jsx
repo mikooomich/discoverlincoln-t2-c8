@@ -133,7 +133,7 @@ export default function Homepage() {
                         <li key={index} className="smallCardli">
                           <SmallCard
                             title={card.attributes.title}
-                            imgSrc={card.image.url}
+                            imgSrc={card.image.data || card.image.url}
                             category={card.attributes.tags}
                           >
                             {" "}
@@ -327,7 +327,7 @@ export default function Homepage() {
                     ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
                     rating={card.attributes.numStars}
                     category={card.attributes.tags}
-                    imgSrc={card.image.url}
+                    imgSrc={card.image.data || card.image.url}
                     imgAltText={
                       card.image.alternativeText
                     }
@@ -367,7 +367,7 @@ export default function Homepage() {
                     ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
                     rating={card.attributes.numStars}
                     category={card.attributes.tags}
-                    imgSrc={card.image.url}
+                    imgSrc={card.image.data || card.image.url}
                     imgAltText={
                       card.image.alternativeText
                     }
@@ -408,7 +408,7 @@ export default function Homepage() {
                     ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
                     rating={card.attributes.numStars}
                     category={card.attributes.tags}
-                    imgSrc={card.image.url}
+                    imgSrc={card.image.data || card.image.url}
                     imgAltText={
                       card.image.alternativeText
                     }
@@ -438,7 +438,7 @@ export default function Homepage() {
             <Gallery>
               {galleryStrapiData?.map((image, index) => (
                 <GalleryImage
-                  src={image.url}
+                  src={image.data || image.url}
                   alt={image.alternativeText}
                   key={index}
                 />

@@ -335,7 +335,7 @@ export default function Business() {
                     ticketDate={`${element.attributes.dateStart} - ${element.attributes.dateEnd}`}
                     rating={element.attributes.numStars}
                     category={element.attributes.tags}
-                    imgSrc={element.image.url}
+                    imgSrc={element.image.data || element.image.url}
                     imgAltText={
                       element.image.alternativeText
                     }

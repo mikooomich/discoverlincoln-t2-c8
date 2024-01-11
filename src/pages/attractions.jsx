@@ -1,6 +1,7 @@
 import EventAttractionTemplate from "@/components/EventAttractionTemplate";
 import React from "react";
 import { useEffect, useState } from 'react'
+import { SERVER_URL } from "./index";
 
 export default function attractions() {
 	const [strapiData, setStrapiData] = useState();

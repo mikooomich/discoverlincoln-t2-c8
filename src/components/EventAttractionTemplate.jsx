@@ -306,7 +306,7 @@ export default function EventAttractionTemplate({
 
 												<SmallCard
 													title={card.attributes.title}
-													imgSrc={card.image.url}
+													imgSrc={card.image.data || card.image.url}
 													category={card.attributes.tags}
 													scrollLink={card.refLink}
 													scrollLinkMobile={card.refLinkMobile}
@@ -346,7 +346,7 @@ export default function EventAttractionTemplate({
 											ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
 											rating={element.attributes.numStars}
 											category={element.attributes.tags}
-											imgSrc={element.image.url}
+											imgSrc={element.image.data || element.image.url}
 											imgAltText={element.image.alternativeText}
 											barcodeUID={element.attributes.barcodeUID}
 
@@ -377,7 +377,7 @@ export default function EventAttractionTemplate({
 											ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
 											rating={element.attributes.numStars}
 											category={element.attributes.tags}
-											imgSrc={element.image.url}
+											imgSrc={element.image.data || element.image.url}
 											imgAltText={element.image.alternativeText}
 											barcodeUID={element.attributes.barcodeUID}
 
