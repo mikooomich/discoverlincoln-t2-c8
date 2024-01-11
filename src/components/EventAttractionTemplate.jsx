@@ -19,7 +19,7 @@ export default function EventAttractionTemplate({
 
 
 
-	/**
+/**
  * Trigger a reload of the cards
  */
 	useEffect(() => {
@@ -28,11 +28,16 @@ export default function EventAttractionTemplate({
 
 			// console.log(eventStrapiData);
 			strapiDataLinkSetter(strapiDataLink);
+
+			// required for map "pin jump highlighting"
+			// console.log("Setting map ids"); 
+			strapiDataLink?.map((element, index) => {
+				element.id = index;
+			})
 		}
 
 		fetchStrapiData()
 	}, [strapiDataLink])
-
 
 
 	const itemSelector = (id) => {
@@ -296,7 +301,7 @@ export default function EventAttractionTemplate({
 					<div className="mapContainer">
 						<MapCard strapiDataLink={strapiDataLink} itemSelector={itemSelector}>
 
-
+{console.log(strapiDataLink)}
 							<div className="mapCarousel-wrap">
 								<CardCarousel margin="0px 0px 20px 0px">
 									{strapiDataLink?.map((card, index) => (

@@ -53,7 +53,7 @@ export default function MapCard({ strapiDataLink, itemSelector, children }) {
 														popupRef = r;
 													}
 														: undefined} >
-													<img src={pin.attributes.image.data.attributes.url} ></img>
+													<img src={pin.image.data || pin.image.url} ></img>
 													{pin.attributes.title}
 												</Popup>
 											</DefaultButton>

@@ -20,6 +20,8 @@ export type EventData = LincolnDataTemplate & {
 		date: string
 		startTime: string
 		endTime: string
+		latitude: number
+		longitude: number
 
 		isRegisterable: boolean
 		isFull: boolean
@@ -52,10 +54,12 @@ export let events: EventData[] = [
 		attributes: {
 			title: "Event 1",
 			description: "Description for Event 1",
-			location: "Location 1",
+			location: "Highland Park Drive",
 			date: "2023-12-31",
 			startTime: "10:00 AM",
 			endTime: "3:00 PM",
+			latitude: 43.159045,
+			longitude: -79.484618,
 			numStars: 4,
 			tags: "Mall",
 			isRegisterable: true,
@@ -74,10 +78,12 @@ export let events: EventData[] = [
 		attributes: {
 			title: "Event 2",
 			description: "Description for Event 2",
-			location: "Location 2",
+			location: "The Middle Of Nowhere",
 			date: "2023-11-15",
 			startTime: "2:00 PM",
 			endTime: "6:00 PM",
+			latitude: 43.151045,
+			longitude: -79.483618,
 			numStars: 5,
 			tags: "Monument",
 			isRegisterable: true,
