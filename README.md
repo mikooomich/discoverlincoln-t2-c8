@@ -36,20 +36,6 @@ pnpm dev
 ```
 
 # Environment Variables
-
-To run this project, you'll need to get access to the environment variables.  We use [infisical](https://infisical.com) to securely store and share environment variables.
-
-To get started using environment variables from infisical, follow the steps below:
-
-1. Create an account on [civiconnect's infisical portal](https://infisical.civiconnect.net/) if you don't already have one.
-2. Get access to the project, or create a new one if it hasn't already been created by someone else.  all of your environment variables should be stored in a subfolder in the project named `nextjs`
-3. Install the infisical CLI: [https://infisical.com/docs/cli/overview](https://infisical.com/docs/cli/overview)
-4. From the terminal, run `infisical login` and login with your infisical credentials.
-5. If a `.infisical.json` file doesn't already exist in your project, run `infisical init` and select your project.
-6. Finally, check that it's all been set up properly by starting your project with `npm run dev`.
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
 You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.

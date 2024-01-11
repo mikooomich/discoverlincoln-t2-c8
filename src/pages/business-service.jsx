@@ -5,6 +5,7 @@ import CardCarousel from "@/components/CardCarousel";
 import LargeCardMobile from "@/components/LargeCardMobile";
 import Section from "@/components/Section";
 import Link from "next/link";
+import { SERVER_URL } from "./index";
 
 import {
   faWindowRestore,
@@ -25,10 +26,10 @@ export default function Business() {
   useEffect(() => {
     async function fetchStrapiData() {
       const response = await fetch(
-        "https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/businesses?populate=*"
+        `${SERVER_URL}/api/businesses`
       );
       const data = await response.json();
-      setStrapiData(data.data);
+      setStrapiData(data);
     }
 
     fetchStrapiData();
@@ -334,9 +335,9 @@ export default function Business() {
                     ticketDate={`${element.attributes.dateStart} - ${element.attributes.dateEnd}`}
                     rating={element.attributes.numStars}
                     category={element.attributes.tags}
-                    imgSrc={element.attributes.image.data.attributes.url}
+                    imgSrc={element.image.url}
                     imgAltText={
-                      element.attributes.image.data.attributes.alternativeText
+                      element.image.alternativeText
                     }
                     hoursOfOperation={element.attributes.hoursOfOperation}
                   ></LargeCardMobile>

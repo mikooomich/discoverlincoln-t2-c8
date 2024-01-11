@@ -7,9 +7,9 @@ export default function attractions() {
 
 	useEffect(() => {
 		async function fetchStrapiData() {
-			const response = await fetch(`https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/attrractions?populate=*`) // it is spelt like this in api
+			const response = await fetch(`${SERVER_URL}/api/attractions`)
 			const data = await response.json()
-			setStrapiData(data.data)
+			setStrapiData(data)
 		}
 
 		fetchStrapiData()
