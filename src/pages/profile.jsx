@@ -25,19 +25,19 @@ export default function Profile() {
         }
       );
 
-      const userData = await response.json();
-      setUserStrapiData(userData);
-
-      if (userData.data === null) { //not logged in, redirect to login
+      if (response.status != 200) { //not logged in, redirect to login
         window.location.href = "/login";
       }
+      const userData = await response.json();
+      setUserStrapiData(userData);
     }
     getUserData();
   }, []);
 
 
-  function logout() {
+  async function logout() {
     localStorage.removeItem("jwt");
+    const response = await fetch(`${SERVER_URL}/users/logout`, {method: "POST"});
     window.location.href = "/login";
   }
 

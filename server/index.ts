@@ -9,6 +9,19 @@ const port = 25753
 app.use(cors());
 app.use(express.json());
 
+
+// for demo purposes, a "global user"
+let mockUser = {
+	id: 1,
+	username: "demo",
+	password: "123456",
+	email: "demoUser@AAAAA.com",
+	loggedIn: false,
+	registeredEvents: [{}], // event ids
+}
+mockUser.registeredEvents.pop(); // Why I need to do this workaround is beyond me. Typescript wtf
+
+
 /**
  * Convert all images of a dataset to base 64
  * 
@@ -64,28 +77,14 @@ app.get('/api/gallery', async (req: Request, res: Response) => {
 	res.status(200).json(galleryFiles);
 })
 
-
-/**
- * User API
- */
-
-// for demo purposes, a "global user"
-let mockUser = {
-	id: 1,
-	registeredEvents: [{}], // event ids
-}
-mockUser.registeredEvents.pop(); // Why I need to do this workaround is beyond me. Typescript wtf
-
-// get user
-app.get('/users/me', async (req: Request, res: Response) => {
-	console.log("GET /users/me");
-	console.log(mockUser);
-	res.status(200).json(mockUser);
-})
-
 // add event to user
 app.post('/api/events', async (req: Request, res: Response) => {
 	console.log("POST /api/events");
+
+	if (mockUser.loggedIn === false) {
+		res.status(401).send("User is not logged in");
+		return;
+	}
 
 	try {
 		let eventID: number = parseInt(req.body.registerForEventID);
@@ -127,6 +126,46 @@ app.get('/api/events/:id', async (req: Request, res: Response) => {
 })
 
 
+/**
+ * User API
+ */
+
+// get user
+app.get('/users/me', async (req: Request, res: Response) => {
+	console.log("GET /users/me");
+	if (mockUser.loggedIn === false) {
+		res.status(401).send("User is not logged in");
+		return;
+	}
+
+	res.status(200).json(mockUser);
+})
+
+// Pretend the year is 1970 and this is cutting edge technology.
+app.post('/users/login', async (req: Request, res: Response) => {
+	console.log("GET /users/login");
+
+	let username = req.body.identifier;
+	let password = req.body.password;
+
+	if (username === mockUser.username && password === mockUser.password) {
+		mockUser.loggedIn = true;
+		res.status(200).json(mockUser);
+		return;
+	}
+	else {
+		res.status(401).send("Invalid credentials");
+		return;
+	}
+})
+
+app.post('/users/logout', async (req: Request, res: Response) => {
+	console.log("POST /users/logout");
+
+	mockUser.loggedIn = false;
+	res.status(200).send("Logged out");
+})
+
 app.listen(port, () => {
-	console.log(`Hewwo! Port ${port}`);
+	console.log(`Hewwo World! Port ${port}`);
 })

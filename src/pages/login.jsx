@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Toast from "@/components/Toast";
 import TextInput from "@/components/TextInput";
 import Section from "@/components/Section";
+import { SERVER_URL } from "./index";
 
 export default function Login() {
   useEffect(() => {
@@ -35,7 +36,7 @@ export default function Login() {
     const jwt = localStorage.getItem("jwt");
 
     const response = await fetch(
-      "https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/users/me?populate=*",
+      `${SERVER_URL}/api/users/me`,
       {
         method: "GET",
         headers: {
@@ -140,7 +141,7 @@ export default function Login() {
     try {
       console.log("trying to log in");
       const response = await fetch(
-        "https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/auth/local",
+        `${SERVER_URL}/users/login`,
         {
           method: "POST",
           headers: {
@@ -255,10 +256,11 @@ export default function Login() {
         <Section marginBottom="100px;">
           <div id="mainContent">
             <form className="logindiv" onSubmit={login}>
+            <p className="loginInput">Note: Create account is for demo purposes and will not actually create an account. Use the following credentials to test the login.<br/>Username: demo<br/>Password: 123456 </p>
               <h2 className="loginTitle">LOG IN</h2>
               <TextInput
                 className="loginInput"
-                placeholder="Enter email address"
+                placeholder="Enter username"
               ></TextInput>
               <TextInput
                 className="loginInput"
