@@ -27,10 +27,7 @@ export type EventData = LincolnDataTemplate & {
 		isFull: boolean
 		isAvailable: boolean
 		hoursOfOperation: any // figure out rich text
-	}
-
-	image: {
-		barcodeUID: string
+		barcodeUID: number
 	}
 }
 
@@ -66,12 +63,12 @@ export let events: EventData[] = [
 			isFull: false,
 			isAvailable: true,
 			hoursOfOperation: "Rich text for Event 1", // Replace with actual rich text data
+			barcodeUID: 123456789,
 		},
 		image: {
 			url: "kym-ellis-aF1NPSnDQLw-unsplash.jpg",
 			data: null,
-			alternativeText: "Event 1 Image",
-			barcodeUID: "123456789",
+			alternativeText: "Event 1 Image",	
 		},
 	},
 	{
@@ -90,12 +87,12 @@ export let events: EventData[] = [
 			isFull: true,
 			isAvailable: false,
 			hoursOfOperation: "Rich text for Event 2", // Replace with actual rich text data
+			barcodeUID: 987654321,
 		},
 		image: {
 			url: "roberta-sorge-IywM7AQTZcM-unsplash.jpg",
 			data: null,
 			alternativeText: "Event 2 Image",
-			barcodeUID: "987654321",
 		},
 	},
 ];

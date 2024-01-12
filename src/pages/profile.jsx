@@ -5,6 +5,8 @@ import LargeCardMobile from "@/components/LargeCardMobile";
 import Section from "@/components/Section";
 import DefaultButton from "@/components/DefaultButton";
 
+import { SERVER_URL } from "./index";
+
 export default function Profile() {
   const [userStrapiData, setUserStrapiData] = useState(null);
 
@@ -13,7 +15,7 @@ export default function Profile() {
       const jwt = localStorage.getItem("jwt");
 
       const response = await fetch(
-        "https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/users/me?populate=registeredEvents.image",
+        `${SERVER_URL}/users/me`,
         {
           method: "GET",
           headers: {
@@ -60,21 +62,21 @@ export default function Profile() {
                   <LargeCardDesktop
                     isTicket={true}
                     isEvent={true}
-                    title={card.title}
-                    description={card.description}
-                    address={card.location}
-                    ticketDate={card.date}
-                    ticketTime={`${card.startTime} - ${card.endTime}`}
-                    rating={card.numStars}
-                    category={card.tags}
-                    imgSrc={card.image.url}
+                    title={card.attributes.title}
+                    description={card.attributes.description}
+                    address={card.attributes.location}
+                    ticketDate={card.attributes.date}
+                    ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
+                    rating={card.attributes.numStars}
+                    category={card.attributes.tags}
+                    imgSrc={card.image.data || card.image.url}
                     imgAltText={card.image.alternativeText}
-                    barcodeUID={card.barcodeUID}
+                    barcodeUID={card.attributes.barcodeUID}
 
-                    isRegisterable={card.isRegisterable}
-                    isFull={card.isFull}
-                    isAvail={card.isAvailable}
-                    hoursOfOperation={card.hoursOfOperation}
+                    isRegisterable={card.attributes.isRegisterable}
+                    isFull={card.attributes.isFull}
+                    isAvail={card.attributes.isAvailable}
+                    hoursOfOperation={card.attributes.hoursOfOperation}
                   ></LargeCardDesktop>
                 </div>
               ))}
@@ -89,21 +91,21 @@ export default function Profile() {
                   <LargeCardMobile
                     isTicket={true}
                     isEvent={true}
-                    title={card.title}
-                    description={card.description}
-                    address={card.location}
-                    ticketDate={card.date}
-                    ticketTime={`${card.startTime} - ${card.endTime}`}
-                    rating={card.numStars}
-                    category={card.tags}
-                    imgSrc={card.image.url}
+                    title={card.attributes.title}
+                    description={card.attributes.description}
+                    address={card.attributes.location}
+                    ticketDate={card.attributes.date}
+                    ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
+                    rating={card.attributes.numStars}
+                    category={card.attributes.tags}
+                    imgSrc={card.image.data || card.image.url}
                     imgAltText={card.image.alternativeText}
-                    barcodeUID={card.barcodeUID}
+                    barcodeUID={card.attributes.barcodeUID}
 
-                    isRegisterable={card.isRegisterable}
-                    isFull={card.isFull}
-                    isAvail={card.isAvailable}
-                    hoursOfOperation={card.hoursOfOperation}
+                    isRegisterable={card.attributes.isRegisterable}
+                    isFull={card.attributes.isFull}
+                    isAvail={card.attributes.isAvailable}
+                    hoursOfOperation={card.attributes.hoursOfOperation}
                   ></LargeCardMobile>
                 </div>
               ))}

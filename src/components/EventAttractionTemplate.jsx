@@ -301,7 +301,6 @@ export default function EventAttractionTemplate({
 					<div className="mapContainer">
 						<MapCard strapiDataLink={strapiDataLink} itemSelector={itemSelector}>
 
-{console.log(strapiDataLink)}
 							<div className="mapCarousel-wrap">
 								<CardCarousel margin="0px 0px 20px 0px">
 									{strapiDataLink?.map((card, index) => (
