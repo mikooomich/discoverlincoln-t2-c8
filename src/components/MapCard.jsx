@@ -35,7 +35,6 @@ export default function MapCard({ strapiDataLink, itemSelector, children }) {
 	return (
 		<>
 			<div className="map-card">
-				{/* {children} */}
 				<div className='map'>
 					<MapContainer center={[43.155, -79.483]} zoom={12} scrollWheelZoom={true} style={{ backgroundColor: "#d9d9d9", width: "100%", height: "400px", overflow: "hidden" }}>
 						<TileLayer
@@ -70,7 +69,8 @@ export default function MapCard({ strapiDataLink, itemSelector, children }) {
 				</div>
 			</div>
 
-			<style jsx>{`
+			<style jsx>
+				{`
 				.map-card {
 					display: flex;
 				}
@@ -94,7 +94,8 @@ export default function MapCard({ strapiDataLink, itemSelector, children }) {
 					}
 				}
 
-			`}</style>
+				`}
+			</style>
 		</>
 	)
 }

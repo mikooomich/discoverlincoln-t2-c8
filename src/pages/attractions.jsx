@@ -16,9 +16,6 @@ export default function attractions() {
 		fetchStrapiData()
 	}, [])
 
-	return (
-		<>
-			<EventAttractionTemplate variant="attractions" strapiDataLink= {strapiData} strapiDataLinkSetter={setStrapiData}></EventAttractionTemplate>
-		</>
-	);
+	return <EventAttractionTemplate variant="attractions" strapiDataLink={strapiData} strapiDataLinkSetter={setStrapiData}></EventAttractionTemplate>
+
 }

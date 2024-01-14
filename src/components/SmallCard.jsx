@@ -13,7 +13,7 @@ import DefaultButton from "./DefaultButton";
  * @returns 
  */
 export default function SmallCard({
-	title = "Title wha wah",
+	title = "Title",
 	category = "restaurant",
 	imgSrc = "https://travelforfoodhub.com/wp-content/uploads/2023/05/Best-Wine-Regions-in-Europe.jpg",
 	scrollLink,
@@ -105,94 +105,91 @@ export default function SmallCard({
 				</div>
 			</div>
 
-			<style jsx>{`	
-
-			.small-card-mobile {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				
-				min-height: 90px;
-				width: 320px;
-				padding-right: 10px;
-
-				box-shadow: var(--shadow-box-small-card);
-				background-color: #FFFFFF;
-			}
-
-			.image-container {
-				width: 160px;
-				height: 65px;
-				background-position: center center;
-				background-repeat: no-repeat;
-				background-image: url(${imgSrc});
-				background-size: cover;
-				border-radius: 5px;
-				border: 1px solid #B7B7B7;
-				margin-left: 10px;
-			}
-
-			.card-information-wrap {
-				display: flex;
-				flex-direction: column;
-				padding: 10px 15px;
-				width: 100%;
-			}
-
-	
-
-			.category-tag {
-				border-radius: var(--border-radius-pill);
-				color: white;
-				background-color: ${categoryColors[category]};
-				padding: 5px;
-				
-				font-weight: 500;
-				font-family: var(--font-roboto);
-				font-size: var(--font-size-body-S);
-				text-align: center;
-
-				width: fit-content;
-				min-width: 60px;
-			}
-
-			.title {
-				font-family: var(--font-calps);
-				font-size: var(--font-size-body-L);
-				font-weight: 500;
-				text-align: left;
-			}
-
-
-			.action-icon-wrap {
-				align-self: center;
-				justify-self: end;
-				
-			}
-			.action-icon {
-				margin: 0px 10px 10px 0px;
-				color: ${categoryColors[category]};
-			}
-
-			.title-wrap {
-				display: flex;
-				align-items: center;
-			}
-
-			.icon {
-				margin-right: 10px;
-			}
-
-			@media screen and (max-width: 365px) {
-
+			<style jsx>
+				{`	
 				.small-card-mobile {
-					width: 80vw;
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					
+					min-height: 90px;
+					width: 320px;
+					padding-right: 10px;
+
+					box-shadow: var(--shadow-box-small-card);
+					background-color: #FFFFFF;
 				}
 
-			}
+				.image-container {
+					width: 160px;
+					height: 65px;
+					background-position: center center;
+					background-repeat: no-repeat;
+					background-image: url(${imgSrc});
+					background-size: cover;
+					border-radius: 5px;
+					border: 1px solid #B7B7B7;
+					margin-left: 10px;
+				}
 
-			
-		`}</style>
+				.card-information-wrap {
+					display: flex;
+					flex-direction: column;
+					padding: 10px 15px;
+					width: 100%;
+				}
+
+				.category-tag {
+					border-radius: var(--border-radius-pill);
+					color: white;
+					background-color: ${categoryColors[category]};
+					padding: 5px;
+					
+					font-weight: 500;
+					font-family: var(--font-roboto);
+					font-size: var(--font-size-body-S);
+					text-align: center;
+
+					width: fit-content;
+					min-width: 60px;
+				}
+
+				.title {
+					font-family: var(--font-calps);
+					font-size: var(--font-size-body-L);
+					font-weight: 500;
+					text-align: left;
+				}
+
+
+				.action-icon-wrap {
+					align-self: center;
+					justify-self: end;
+					
+				}
+				.action-icon {
+					margin: 0px 10px 10px 0px;
+					color: ${categoryColors[category]};
+				}
+
+				.title-wrap {
+					display: flex;
+					align-items: center;
+				}
+
+				.icon {
+					margin-right: 10px;
+				}
+
+				@media screen and (max-width: 365px) {
+					.small-card-mobile {
+						width: 80vw;
+					}
+
+				}
+
+				`}
+			</style>
 		</>
 	);
 }

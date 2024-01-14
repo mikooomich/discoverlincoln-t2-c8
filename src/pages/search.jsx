@@ -43,7 +43,6 @@ export default function Search() {
 				setBusinessStrapiData(businessData.data)
 			}
 
-
 			// console.log(eventStrapiData)
 		}
 
@@ -54,7 +53,6 @@ export default function Search() {
 	/**
 	 * Read search queries from router and apply them is applicable
 	 */
-
 	let router = useRouter();
 	useEffect(() => {
 		async function workaround() {
@@ -371,121 +369,103 @@ export default function Search() {
 		<>
 			<style jsx>
 				{`
-           {
-            /* heading, search bar, filter buttons */
-          }
+           		{/* heading, search bar, filter buttons */}
 
-          h1 {
-            font-size: var(--font-size-header-M);
-            font-weight: var(--font-weight-titles);
-            font-family: var(--font-calps);
-          }
+				h1 {
+					font-size: var(--font-size-header-M);
+					font-weight: var(--font-weight-titles);
+					font-family: var(--font-calps);
+				}
 
-          .topPart {
-            display: flex;
-            flex-direction: column;
-            margin: auto;
-          }
-          .searchBox {
-            width: 100%;
-          }
-          .searchBoxWithIcon {
-            display: flex;
-            margin: 20px;
-            box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.25);
-          }
+				.topPart {
+					display: flex;
+					flex-direction: column;
+					margin: auto;
+				}
+				.searchBox {
+					width: 100%;
+				}
+				.searchBoxWithIcon {
+					display: flex;
+					margin: 20px;
+					box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.25);
+				}
 
-          .search-title {
-            font-size: var(--font-size-header-M);
-            margin: 0px 10px;
-          }
+				.search-title {
+					font-size: var(--font-size-header-M);
+					margin: 0px 10px;
+				}
 
 
-          .filter-sort {
-			display: flex;
-            align-self: end;
-			flex-wrap: wrap;
-          }
+				.filter-sort {
+					display: flex;
+					align-self: end;
+					flex-wrap: wrap;
+				}
 
-           {
-            /* Carousel */
-          }
-          .cardPlaceholder {
-            width: 360px;
-            height: 360px;
-            background-color: grey;
-          }
+				{/* Carousel */}
+				.cardPlaceholder {
+					width: 360px;
+					height: 360px;
+					background-color: grey;
+				}
 
-           {
-            /* for card spacing */
-          }
-          li {
-            margin: 20px;
-          }
+				{/* for card spacing */}
+				li {
+					margin: 20px;
+				}
 
 
-		  {/* Sorting and filtering */}
-			.sortOptions-wrap {
-				display: ${showFilterSortOptions ? "flex" : "none"};
-				flex-direction: column;
-				align-items: start;
-				margin-right: 20px;
-				font-size: var(--font-size-body-Mplus);
-            	font-family: var(--font-roboto);
-			}
-		  .sortOptions-wrap div {
-			display: flex;
-			justify-content: center;
-			flex-wrap: wrap;
-			{/* margin: 0px 5px */}
-		  }
-		  .sortOptions * {
-			margin-right: 5px;
-		  }
+				{/* Sorting and filtering */}
+				.sortOptions-wrap {
+					display: ${showFilterSortOptions ? "flex" : "none"};
+					flex-direction: column;
+					align-items: start;
+					margin-right: 20px;
+					font-size: var(--font-size-body-Mplus);
+					font-family: var(--font-roboto);
+				}
+				.sortOptions-wrap div {
+					display: flex;
+					justify-content: center;
+					flex-wrap: wrap;
+					{/* margin: 0px 5px */}
+				}
+				.sortOptions * {
+					margin-right: 5px;
+				}
 
-		  .filterOptions-wrap {
-			flex-wrap: wrap;
-			max-height: 60px;
-		  }
+				.filterOptions-wrap {
+					flex-wrap: wrap;
+					max-height: 60px;
+				}
+
+				.iconBackdrop {
+					width: 450px;
+					height: 500px;
+					position: fixed;
+					z-index: -99;
+					top: 140px;
+					left: 40px;
+				}
 
 
-		  .iconBackdrop {
-            width: 450px;
-            height: 500px;
-            position: fixed;
-            z-index: -99;
-			top: 140px;
-			left: 40px;
-          }
+				@media screen and (max-width: 639px) {
+					.search-title {
+						font-size: var(--font-size-header-S);
+					}
 
-
-		  @media screen and (max-width: 639px) {
-            .search-title {
-              font-size: var(--font-size-header-S);
-            }
-
-			.filterOptions-wrap {
-				max-height: none;
-				margin-bottom: 20px;
-			}
-          }
-        `}
+					.filterOptions-wrap {
+						max-height: none;
+						margin-bottom: 20px;
+					}
+				}
+				`}
 			</style>
 
 
 			<div className="iconBackdrop">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="512"
-					height="512"
-					viewBox="0 0 512 512"
-					fill="none"
-				>
-					<path className=""
-						d="M416 208C416 253.9 401.1 296.3 376 330.7L502.6 457.4C515.1 469.9 515.1 490.2 502.6 502.7C490.1 515.2 469.8 515.2 457.3 502.7L330.7 376C296.3 401.2 253.9 416 208 416C93.1 416 0 322.9 0 208C0 93.1 93.1 0 208 0C322.9 0 416 93.1 416 208ZM208 352C226.91 352 245.636 348.275 263.106 341.039C280.577 333.802 296.452 323.195 309.823 309.823C323.195 296.452 333.802 280.577 341.039 263.106C348.275 245.636 352 226.91 352 208C352 189.09 348.275 170.364 341.039 152.894C333.802 135.423 323.195 119.548 309.823 106.177C296.452 92.805 280.577 82.198 263.106 74.9613C245.636 67.7247 226.91 64 208 64C189.09 64 170.364 67.7247 152.894 74.9613C135.423 82.198 119.548 92.805 106.177 106.177C92.805 119.548 82.198 135.423 74.9613 152.894C67.7247 170.364 64 189.09 64 208C64 226.91 67.7247 245.636 74.9613 263.106C82.198 280.577 92.805 296.452 106.177 309.823C119.548 323.195 135.423 333.802 152.894 341.039C170.364 348.275 189.09 352 208 352Z"
-						fill="#F2F2F2"
-					/>
-				</svg>
+				<img src="backdrop-search.svg" />
 			</div>
 
 			<Section marginTop="20px">
@@ -519,7 +499,6 @@ export default function Search() {
 						<div className="sortOptions-wrap">
 							<p style={{ fontSize: "16px", marginBottom: "5px", fontWeight: "bold" }}>Sort By:</p>
 							<div className="sortOptions">
-
 								<label htmlFor="type1">ID</label>
 								<input type="radio" id="type1" name="type" value="id" onChange={readSortType} />
 								<label htmlFor="type2">Title</label>

@@ -5,8 +5,7 @@ import { faHouse, faMagnifyingGlass, faCalendarCheck, faCamera, faStore, faUser 
 import DefaultButton from './DefaultButton'
 
 
-export default function MobileHamburgerMenu({isHomepage = false}) {
-	//html
+export default function MobileHamburgerMenu({ isHomepage = false }) {
 	return (
 		<>
 			<div id='psudoHamburgeBody'>
@@ -38,7 +37,6 @@ export default function MobileHamburgerMenu({isHomepage = false}) {
 					<h2>Attractions</h2>
 				</DefaultButton>
 
-
 				<DefaultButton className="mobileNav" isLink={true} href="./business-service">
 					<div className='icon'>
 						<FontAwesomeIcon icon={faStore} />
@@ -56,9 +54,9 @@ export default function MobileHamburgerMenu({isHomepage = false}) {
 			</div>
 
 			{/* styles */}
-			<style jsx>{`
+			<style jsx>
+				{`
 				#psudoHamburgeBody {
-					// ask how to hadel transparency
 					{/* homepage overrides */}
 					background-color: var(--color-elevated-green);
 					position: ${!isHomepage ? "default" : "absolute"};
@@ -72,8 +70,8 @@ export default function MobileHamburgerMenu({isHomepage = false}) {
 					text-align: left;
 				}
 
-				
-			`}</style>
+				`}
+			</style>
 		</>
 	)
 }

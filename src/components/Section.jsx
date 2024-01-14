@@ -27,7 +27,8 @@ export default function Section({ fullWidth = false, usePadding = true, marginTo
 				</div>
 			</section>
 
-			<style jsx>{`
+			<style jsx>
+				{`
 				.outer-container {
 					display: flex;
 					justify-content: center;
@@ -48,7 +49,8 @@ export default function Section({ fullWidth = false, usePadding = true, marginTo
 					}
 				}
 
-			`}</style>
+				`}
+			</style>
 		</>
 	)
 }

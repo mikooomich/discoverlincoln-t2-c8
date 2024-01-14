@@ -25,7 +25,7 @@ export default function Navbar({ isHomepage = false }) {
 				<div className={`header ${isNavExpanded ? "mobileHeader" : ""}`}>
 
 					<div className="linconLogo">
-						<Link href="./homepage">
+						<Link href="./">
 							{/* home page uses different icon */}
 							{!isHomepage ? <Image src="headerIcons.svg" width={100} height={95} alt="Discover Lincon" />
 								:
@@ -65,112 +65,114 @@ export default function Navbar({ isHomepage = false }) {
 			</div>
 
 			{/* styles */}
-			<style jsx>{`
-        .header-wrap {
-          display: flex;
-          flex-direction: column;
-        }
-        .header {
-          display: flex;
-          width: 100%;
-          height: 95px;
-          overflow: hidden;
-          justify-content: space-between;
-          padding: 20px;
+			<style jsx>
+				{`
+				.header-wrap {
+					display: flex;
+					flex-direction: column;
+				}
+				.header {
+					display: flex;
+					width: 100%;
+					height: 95px;
+					overflow: hidden;
+					justify-content: space-between;
+					padding: 20px;
 
-			{/* homepage overrides */}
-		     background-color: ${(!isHomepage || isNavExpanded) ? "var(--color-elevated-green)" : "transparent"}; 
+					{/* homepage overrides */}
+					background-color: ${(!isHomepage || isNavExpanded) ? "var(--color-elevated-green)" : "transparent"}; 
 
-		  position: ${!isHomepage ? "default" : "absolute"};
-        }
+					position: ${!isHomepage ? "default" : "absolute"};
+				}
 
-        .logo {
-          width: 300px;
-          display: center;
-        }
+				.logo {
+					width: 300px;
+					display: center;
+				}
 
-        .header-links {
-          float: right;
-          margin-right: 20px;
-        }
+				.header-links {
+					float: right;
+					margin-right: 20px;
+				}
 
-        .header-links * {
-          float: left;
-          color: white;
-          padding: 16px 14px;
-          font-size: 22px;
-          font-family: "Calps"
-        }
+				.header-links * {
+					float: left;
+					color: white;
+					padding: 16px 14px;
+					font-size: 22px;
+					font-family: "Calps"
+				}
 
-		.header-links *:hover{
-			text-decoration: underline;
-			transform: scale(1.1);
-			transition: 0.3s;
-        }
+				.header-links *:hover{
+					text-decoration: underline;
+					transform: scale(1.1);
+					transition: 0.3s;
+				}
 
-        .linconLogo {
-          display: flex;
-		  align-items: center;
-          margin-left: 20px;
-        }
+				.linconLogo {
+					display: flex;
+					align-items: center;
+					margin-left: 20px;
+				}
 
-        .mobilenav {
-          display: none;
-        }
+				.mobilenav {
+					display: none;
+				}
 
-        .mobileNavShow {
-          font-size: 20pt;
-          color: white;
-          display: none;
-          margin-top: 10px;
-          margin-right: 10px;
-        }
+				.mobileNavShow {
+					font-size: 20pt;
+					color: white;
+					display: none;
+					margin-top: 10px;
+					margin-right: 10px;
+				}
 
-        .nav-closed {
-          display: none;
-        }
+				.nav-closed {
+					display: none;
+				}
 
-         {
-          /* Mobile view */
-        }
-       
-       {/* Close mobile nav when desktop mode */}
-        @media screen and (min-width: 855.1px) {
-          .nav-expanded {
-            display: none;
-        }
+				{
+				/* Mobile view */
+				}
+			
+				{/* Close mobile nav when desktop mode */}
+				@media screen and (min-width: 855.1px) {
+					.nav-expanded {
+						display: none;
+					}
 
-        .mobileHeader {
-            background-color: transparent;
-          }
-        }
+					.mobileHeader {
+						background-color: transparent;
+					}
+				}
 
-        @media screen and (max-width: 855px) {
-          .header-links {
-            display: none;
-          }
-          .mobileNavShow {
-            display: inline;
-          }
+				@media screen and (max-width: 855px) {
+					.header-links {
+						display: none;
+					}
+					.mobileNavShow {
+						display: inline;
+					}
 
-          .nav-expanded {
-            display: inline;
-            background-color: var(--color-elevated-green);
-          }
+					.nav-expanded {
+						display: inline;
+						background-color: var(--color-elevated-green);
+					}
 
-          .mobileHeader {
-            background-color: var(--color-elevated-green);
-          }
+					.mobileHeader {
+						background-color: var(--color-elevated-green);
+					}
 
-          .nav-closed {
-            display: none;
-          }
+					.nav-closed {
+						display: none;
+					}
 
-          .header {
-            height: auto;
-          }
-        }
-      `}</style>
+					.header {
+						height: auto;
+					}
+				}
+      			`}
+	  		</style>
 		</>
 	);
 }

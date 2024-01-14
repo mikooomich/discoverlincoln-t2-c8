@@ -17,9 +17,6 @@ export default function events() {
 
 	// console.log(strapiData)
 
-	return (
-		<>
-			<EventAttractionTemplate variant={"events"} strapiDataLink={strapiData} strapiDataLinkSetter={setStrapiData}></EventAttractionTemplate>
-		</>
-	);
+	return <EventAttractionTemplate variant={"events"} strapiDataLink={strapiData} strapiDataLinkSetter={setStrapiData}></EventAttractionTemplate>
+	
 }
