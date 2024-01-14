@@ -91,6 +91,8 @@ export default function Homepage() {
                     Welcome to the Town of Lincoln! The places you will go, and
                     the sights you will see, may the rolling hills be in your
                     favour.
+                    <br/><br/>
+                    <span style={{color: "red", fontWeight: "bold"}}>DISCLAIMER:</span>THE THEME OF THE WEBSITE IS ABOUT LINCOLN, HOWEVER IS NOT REPRESENTATIVE AND IS NOT AFFILIATED WITH THE TOWN OF LINCOLN IN ANY WAY.
                   </p>
                   <div className="search-area">
                     <div className="see-lincoln-wrapper">
