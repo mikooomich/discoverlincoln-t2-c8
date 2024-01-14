@@ -60,7 +60,7 @@ app.get('/api/businesses', async (req: Request, res: Response) => {
 app.get('/api/gallery', async (req: Request, res: Response) => {
 	console.log("GET /api/gallery");
 
-	let files = fs.readdirSync("./res");
+	let files = fs.readdirSync("./res/gallery");
 	let galleryFiles: GalleryImage[] = [];
 
 	// dump all files in ./res for now...
@@ -69,7 +69,7 @@ app.get('/api/gallery', async (req: Request, res: Response) => {
 		galleryFiles.push({
 			url: files[i],
 			data: `data:image/${img.split('.').pop()};base64,` +
-				fs.readFileSync("./res/" + img, { encoding: 'base64' }),
+				fs.readFileSync("./res/gallery/" + img, { encoding: 'base64' }),
 			alternativeText: files[i]
 		})
 	}
