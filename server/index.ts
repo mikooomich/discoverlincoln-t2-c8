@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express"
 import { events, attractions, businesses, LincolnDataTemplate, GalleryImage, EventData } from "./data";
+import Fuse from 'fuse.js';
 const fs = require('fs');
 const cors = require("cors");
 
@@ -124,6 +125,39 @@ app.get('/api/events/:id', async (req: Request, res: Response) => {
 
 	res.status(200).json(eventFound);
 })
+
+app.post('/api/search', async (req: Request, res: Response) => {
+	console.log("/api/search");
+
+	let query = req.body.query; // search
+	let tags = req.body.filter; // filter
+	// console.log("Query:", query);
+	// console.log("Tags:", tags);
+	let arrayToSearch: Array<any> = [events, attractions, businesses]
+
+	for (let i = 0; i < arrayToSearch.length; i++) {
+		const fuse = new Fuse(arrayToSearch[i], { keys: ["attributes.title", "attributes.tags", "attributes.description", "attributes.location"] });
+		// put item that matches in result array
+		arrayToSearch[i] = [];
+		fuse.search(query).map((result) => arrayToSearch[i].push(result.item));
+	}
+
+	// deduplicate within each array
+	for (let i = 0; i < arrayToSearch.length; i++) {
+		arrayToSearch[i] = arrayToSearch[i].filter((item: any, index: any) => {
+			// also filter for tags
+			return arrayToSearch[i].indexOf(item) === index && (tags.length == 0 || item.attributes.tags == tags[i]);
+		})
+	}
+
+	let finalResult = {
+		"events": retrieveImages( arrayToSearch[0]),
+		"attractions": retrieveImages(arrayToSearch[1]),
+		"businesses": retrieveImages(arrayToSearch[2])
+	};
+
+	res.status(200).json(finalResult);
+});
 
 
 /**

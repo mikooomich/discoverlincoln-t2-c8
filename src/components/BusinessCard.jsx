@@ -83,6 +83,7 @@ export default function BuisnessCard({
 					align-items: center;
 					justify-content: start;
 					padding: 0px 0px 40px 30px; 
+					border-radius: 15px;
 		
 					font-size: var(--font-size-body-S);
 					font-family: var(--font-roboto);

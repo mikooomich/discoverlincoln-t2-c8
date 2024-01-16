@@ -9,6 +9,8 @@ import { useRouter } from 'next/router'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
+import { SERVER_URL } from "./index";
+
 export default function Search() {
 	const [searchQuery, setSearchQuery] = useState([]); // the thing to search for
 	const [searchReq, setSearchReq] = useState(false); // request for a search opperation
@@ -30,17 +32,17 @@ export default function Search() {
 			if (searchQuery == "") {
 				console.log("No search query, load all")
 
-				const eventResponse = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/events?populate=*')
+				const eventResponse = await fetch(`${SERVER_URL}/api/events`)
 				const eventData = await eventResponse.json()
-				setEventsStrapiData(eventData.data)
+				setEventsStrapiData(eventData)
 
-				const attractionResponse = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/attrractions?populate=*')
+				const attractionResponse = await fetch(`${SERVER_URL}/api/attractions`)
 				const attractionData = await attractionResponse.json()
-				setAttractionStrapiData(attractionData.data)
+				setAttractionStrapiData(attractionData)
 
-				const businessResponse = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/businesses?populate=*')
+				const businessResponse = await fetch(`${SERVER_URL}/api/businesses`)
 				const businessData = await businessResponse.json()
-				setBusinessStrapiData(businessData.data)
+				setBusinessStrapiData(businessData)
 			}
 
 			// console.log(eventStrapiData)
@@ -82,51 +84,9 @@ export default function Search() {
 	 * Search and sort functions
 	 */
 
-	/**
-	 * {0: data...} ===> {0: attributes: {data...}}
-	 * @param {*} oldArray 
-	 * @returns 
-	 */
-	async function reMap(oldArray, variant) {
-		if (oldArray.length <= 0) return undefined;
-
-		// let newArray = [];
-
-		let strapiQuery = ""
-
-		// get strapi query, then search for all ids
-		oldArray.map((item) => {
-			strapiQuery += `&filters[id][$in]=${item.id}`;
-		})
-		// console.log(oldArray);
-
-		/**
-		 * Fetch data with images from strapi
-		 * @returns 
-		 */
-		async function getImages() {
-			const imagesPulled = await fetch(`https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/${variant}?populate=*${strapiQuery}`);
-			const imageData = await imagesPulled.json();
-			// console.log("Raw images")
-			// console.log(imageData)
-
-
-			// sort the data to ensure parity
-			imageData.data.sort((a, b) => {
-				return a.id > b.id ? 1 : -1;
-			})
-
-			return imageData.data;
-		}
-
-		let newData = await getImages();
-		// console.log("New data")
-		// console.log(newData)
-
-		return newData;
-	}
-
 	useEffect(() => {
+		getAllCurrentTagsArray(); // update filter options
+
 		async function fetchSearchResult() {
 			console.log("Searching for: " + searchQuery);
 			if (searchReq == false) {
@@ -140,15 +100,28 @@ export default function Search() {
 				return;
 			}
 
-			const gotData = await fetch(`https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/fuzzy-search/search?query=${searchQuery}`);
+			const gotData = await fetch(
+				`${SERVER_URL}/api/search`,
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						query: searchQuery,
+						filter: getAllSelectedTagsInFormat(),
+					}),
+				}
+			);
+
 			const searchData = await gotData.json();
 			// console.log("got data")
 			// console.log(searchData);
 
 			// set the data
-			setEventsStrapiData(await reMap(searchData.events, "events"));
-			setBusinessStrapiData(await reMap(searchData.businesses, "businesses"));
-			setAttractionStrapiData(await reMap(searchData.attrractions, "attrractions"));
+			setEventsStrapiData(searchData.events);
+			setBusinessStrapiData(searchData.businesses);
+			setAttractionStrapiData(searchData.attractions);
 			setSearchReq(false); // end search request
 
 			// console.log("ending data");
@@ -158,6 +131,7 @@ export default function Search() {
 		}
 
 		fetchSearchResult()
+		setSelectedTags([]); // hax reset selected tags
 	}, [searchReq, reloadLocalCards])
 
 
@@ -225,9 +199,12 @@ export default function Search() {
 	 * @returns
 	 */
 	function getAllSelectedTagsInFormat() {
-		let strapiQuery = "";
+		let strapiQuery = [];
 		selectedTags.map((item) => {
-			strapiQuery += `&filters[tags][$in]=${item}`;
+			// only accept tags that are currently on screen
+			if (getAllCurrentTagsArray().includes(item)) {
+				strapiQuery.push(item);
+			}
 		})
 
 		return strapiQuery;
@@ -255,41 +232,6 @@ export default function Search() {
 
 		setAllTags([...new Set(allTags)]); // remove duplicates
 		return allTags;
-	}
-
-	/**
-	 * This will request a new set of cards based on the tags selected
-	 */
-	function doFilter() {
-		getAllCurrentTagsArray(); // get all current tags
-
-		console.log("filtering...")
-		async function fetchFilterResult() {
-			// abort if no tags
-			if (selectedTags[0] === undefined) {
-				console.log("No tags, aborting, showing all results")
-				return;
-			}
-
-			/**
-			 * @param {*} variant useState to read
-			 * @param {*} setter setter for the useState
-			 */
-			async function askStrapiForFilters(variant, setter) {
-				const gotData = await fetch(
-					`https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/${variant}/?populate=*${getAllSelectedTagsInFormat()}`);
-				const searchData = await gotData.json();
-				// console.log("got data")
-				// console.log(searchData);
-				setter(searchData.data);
-			}
-
-			askStrapiForFilters("events", setEventsStrapiData);
-			askStrapiForFilters("businesses", setBusinessStrapiData);
-			askStrapiForFilters("attrractions", setAttractionStrapiData);
-		}
-
-		fetchFilterResult()
 	}
 
 
@@ -440,6 +382,15 @@ export default function Search() {
 					max-height: 60px;
 				}
 
+				.filterSortToolip {
+					font-size: var(--font-size-body-Mplus);
+					font-family: var(--font-roboto);
+					color: #5A6F55;
+					text-wrap: wrap;
+					max-width: 180px;
+					position: absolute;
+				}
+
 				.iconBackdrop {
 					width: 450px;
 					height: 500px;
@@ -458,6 +409,10 @@ export default function Search() {
 					.filterOptions-wrap {
 						max-height: none;
 						margin-bottom: 20px;
+					}
+
+					.filterSortToolip {
+						position: relative;
 					}
 				}
 				`}
@@ -482,7 +437,6 @@ export default function Search() {
 						</div>
 					</div>
 					<div className="filter-sort">
-
 						<div className="sortOptions-wrap filterOptions-wrap ">
 							<p style={{ fontSize: "16px", marginBottom: "5px", fontWeight: "bold" }}>Filter By:</p>
 							{
@@ -516,13 +470,14 @@ export default function Search() {
 
 						</div>
 						<div>
-							<DefaultButton className="filter-sort-btn" onClick={() => { setShowFilterSortOptions(true); doFilter() }}>Filter</DefaultButton>
+							<DefaultButton className="filter-sort-btn" onClick={() => { setShowFilterSortOptions(true); setSearchReq(true) }}>Filter</DefaultButton>
 							<DefaultButton className="filter-sort-btn" onClick={() => {
 								setShowFilterSortOptions(true);
 								doSort(eventStrapiData, setEventsStrapiData);
 								doSort(attractionStrapiData, setAttractionStrapiData);
 								doSort(businessStrapiData, setBusinessStrapiData);
 							}}>Sort</DefaultButton>
+							<p className="filterSortToolip">Click on filter/sort to reveal options. click on filter/sort again to perform such actions.</p>
 						</div>
 					</div>
 				</div>
@@ -542,8 +497,8 @@ export default function Search() {
 								ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
 								rating={card.attributes.numStars}
 								category={card.attributes.tags}
-								imgSrc={card.attributes.image.data.attributes.url}
-								imgAltText={card.attributes.image.data.attributes.alternativeText}
+								imgSrc={card.image.data || card.image.url}
+								imgAltText={card.image.alternativeText}
 								barcodeUID={card.attributes.barcodeUID}
 
 								isRegisterable={card.attributes.isRegisterable}
@@ -571,8 +526,8 @@ export default function Search() {
 								ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
 								rating={card.attributes.numStars}
 								category={card.attributes.tags}
-								imgSrc={card.attributes.image.data.attributes.url}
-								imgAltText={card.attributes.image.data.attributes.alternativeText}
+								imgSrc={card.image.data || card.image.url}
+								imgAltText={card.image.alternativeText}
 								barcodeUID={card.attributes.barcodeUID}
 
 								isRegisterable={card.attributes.isRegisterable}
@@ -601,8 +556,8 @@ export default function Search() {
 								ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
 								rating={card.attributes.numStars}
 								category={card.attributes.tags}
-								imgSrc={card.attributes.image.data.attributes.url}
-								imgAltText={card.attributes.image.data.attributes.alternativeText}
+								imgSrc={card.image.data || card.image.url}
+								imgAltText={card.image.alternativeText}
 								barcodeUID={card.attributes.barcodeUID}
 
 								isRegisterable={card.attributes.isRegisterable}
