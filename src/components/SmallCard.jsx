@@ -97,6 +97,7 @@ export default function SmallCard({
 
 					box-shadow: var(--shadow-box-small-card);
 					background-color: #FFFFFF;
+					border-radius: 10px;
 				}
 
 				.image-container {

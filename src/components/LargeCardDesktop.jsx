@@ -149,6 +149,7 @@ export default function LargeCardDesktop({
 					max-height: 408px;
 					overflow: hidden;
 					box-shadow: var(--shadow-box-massive-card);
+					border-radius: 15px;
 				}
 
 				.image-container {

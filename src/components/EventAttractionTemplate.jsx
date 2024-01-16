@@ -164,6 +164,7 @@ export default function EventAttractionTemplate({
 					{/* background-color: #d4d4d4; */}
 					margin-bottom: 50px;
 					width: 100%;
+					max-width: 2000px;
 				}
 
 				.smallCardli {

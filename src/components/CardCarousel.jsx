@@ -65,7 +65,6 @@ export default function CardCarousel({
 					display: flex;
 					flex-direction: row;
 					overflow-x: ${scrollable};
-					justify-content: center;
 				}
 
 				.multi-ul {

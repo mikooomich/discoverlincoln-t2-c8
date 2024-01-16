@@ -148,6 +148,7 @@ export default function LargeCardMobile({
 					max-height: 400px;
 					overflow: hidden;
 					box-shadow: var(--shadow-box-massive-card);
+					border-radius: 10px;
 				}
 
 				.image-container {

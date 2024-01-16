@@ -102,7 +102,7 @@ export default function App({
 					--border-grey-thin: 1px solid rgb(209, 209, 209);
 
 					/* Page Layout */
-					--section-max-width: 1200px;
+					--section-max-width: 1400px;
 					--section-padding: 36px;
 					
 					/* Default Styles */
