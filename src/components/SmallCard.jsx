@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationArrow, faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
 import DefaultButton from "./DefaultButton";
+import {categoryColors} from "../../server/data";
 
 
 /**
@@ -20,29 +21,6 @@ export default function SmallCard({
 	scrollLinkMobile,
 	children
 }) {
-
-	const categoryColors = {
-		Restaurant: "#ff0303",
-		Music: "#b33978",
-		Performing_Arts: "#8b288f",
-		Festival: "#56288f",
-		Sports: "#1922a6",
-		Charity: "#515cf0",
-		Other: "#10649c",
-		Tours: "#10929e",
-
-		Monument: "#1eb07f",
-		Mall: "#5ea890",
-		Park: "#268034",
-		Food: "#06590a",
-		Shopping: "#74914d",
-		Technology: "#90941e",
-		Financial: "#b58412",
-		Distribution: "#694c0a",
-		Medical: "#009179",
-		Emergency: "#666666",
-		Industrial: "#b04300"
-	};
 
 
 	// default to selecting other tag
@@ -97,7 +75,8 @@ export default function SmallCard({
 
 						}}>
 							<div className="action-icon">
-								<FontAwesomeIcon icon={faArrowUpFromBracket} />
+								{/* <FontAwesomeIcon icon={faArrowUpFromBracket} /> */}
+								More
 							</div>
 						</DefaultButton>
 					</div>
@@ -170,6 +149,10 @@ export default function SmallCard({
 				.action-icon {
 					margin: 0px 10px 10px 0px;
 					color: ${categoryColors[category]};
+				}
+
+				.action-icon:hover {
+					transform: scale(1.1);
 				}
 
 				.title-wrap {

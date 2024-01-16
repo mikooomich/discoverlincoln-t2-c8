@@ -130,7 +130,7 @@ export default function Homepage() {
 											</h1>
 
 											{/* small event cards */}
-											{eventsStrapiData?.map((card, index) => (
+											{eventsStrapiData?.slice(0, 3).map((card, index) => (
 												<li key={index} className="smallCardli">
 													<SmallCard
 														title={card.attributes.title}
@@ -223,6 +223,7 @@ export default function Homepage() {
 										address={card.attributes.location}
 										ticketDate={card.attributes.date}
 										ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
+										ticketPrice={card.attributes.cost}
 										rating={card.attributes.numStars}
 										category={card.attributes.tags}
 										imgSrc={card.image.data || card.image.url}

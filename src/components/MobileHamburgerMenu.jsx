@@ -9,7 +9,7 @@ export default function MobileHamburgerMenu({ isHomepage = false }) {
 	return (
 		<>
 			<div id='psudoHamburgeBody'>
-				<DefaultButton className="mobileNav" isLink={true} href="./homepage">
+				<DefaultButton className="mobileNav" isLink={true} href="./">
 					<div className='icon'>
 						<FontAwesomeIcon icon={faHouse} />
 					</div>

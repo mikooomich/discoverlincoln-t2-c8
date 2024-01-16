@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarOutline } from "@fortawesome/free-regular-svg-icons";
 import DefaultButton from "./DefaultButton";
 import ReactMarkdown from "react-markdown";
+import {categoryColors} from "../../server/data";
 
 export default function LargeCardMobile({
 	title = "Title",
@@ -41,29 +42,6 @@ export default function LargeCardMobile({
 		const hour = +hourString % 24;
 		return (hour % 12 || 12) + ":" + minute + (hour < 12 ? "AM" : "PM");
 	}
-
-	const categoryColors = {
-		Restaurant: "#ff0303",
-		Music: "#b33978",
-		Performing_Arts: "#8b288f",
-		Festival: "#56288f",
-		Sports: "#1922a6",
-		Charity: "#515cf0",
-		Other: "#10649c",
-		Tours: "#10929e",
-
-		Monument: "#1eb07f",
-		Mall: "#5ea890",
-		Park: "#268034",
-		Food: "#06590a",
-		Shopping: "#74914d",
-		Technology: "#90941e",
-		Financial: "#b58412",
-		Distribution: "#694c0a",
-		Medical: "#009179",
-		Emergency: "#666666",
-		Industrial: "#b04300"
-	};
 
 
 	/**

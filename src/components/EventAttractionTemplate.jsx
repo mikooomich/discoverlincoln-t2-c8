@@ -322,6 +322,7 @@ export default function EventAttractionTemplate({
 												address={element.attributes.location}
 												ticketDate={element.attributes.date}
 												ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
+												ticketPrice={element.attributes.cost}
 												rating={element.attributes.numStars}
 												category={element.attributes.tags}
 												imgSrc={element.image.data || element.image.url}
@@ -340,6 +341,7 @@ export default function EventAttractionTemplate({
 						</Section>
 						<Section>
 							<div className="cards-mobile">
+							
 								<LargeCardList>
 									{strapiDataLink?.map((element, index) => (
 										<div key={index} ref={(r) => {
@@ -353,6 +355,7 @@ export default function EventAttractionTemplate({
 												address={element.attributes.location}
 												ticketDate={element.attributes.date}
 												ticketTime={`${element.attributes.startTime} - ${element.attributes.endTime}`}
+												ticketPrice={element.attributes.cost}
 												rating={element.attributes.numStars}
 												category={element.attributes.tags}
 												imgSrc={element.image.data || element.image.url}
