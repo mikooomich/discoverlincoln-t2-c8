@@ -8,14 +8,25 @@ import SmallCard from "./SmallCard";
 import dynamic from 'next/dynamic'
 import DefaultButton from "./DefaultButton";
 const MapCard = dynamic(() => import("@/components/MapCard"), { ssr: false })
-import { useEffect } from "react";
+import { useEffect, useState } from 'react'
 import Section from "./Section";
+
+import { SERVER_URL } from "../pages/index";
 
 export default function EventAttractionTemplate({
 	variant = "events",
-	strapiDataLink,
-	strapiDataLinkSetter
 }) {
+
+	const [strapiData, setStrapiData] = useState();
+	useEffect(() => {
+		async function fetchStrapiData() {
+			const response = await fetch(`${SERVER_URL}/api/${variant == "events" ? "events" : "attractions"}`)
+			const data = await response.json()
+			setStrapiData(data)
+		}
+
+		fetchStrapiData()
+	}, [])
 
 
 
@@ -27,22 +38,22 @@ export default function EventAttractionTemplate({
 			console.log("Reloading all");
 
 			// console.log(eventStrapiData);
-			strapiDataLinkSetter(strapiDataLink);
+			setStrapiData(strapiData);
 
 			// required for map "pin jump highlighting"
 			// console.log("Setting map ids"); 
-			strapiDataLink?.map((element, index) => {
+			strapiData?.map((element, index) => {
 				element.id = index;
 			})
 		}
 
 		fetchStrapiData()
-	}, [strapiDataLink])
+	}, [strapiData])
 
 
 	const itemSelector = (id) => {
 		// create new array, deselect all items first
-		let temp = strapiDataLink?.map((element) => {
+		let temp = strapiData?.map((element) => {
 			// console.log(element)
 			if (element.isSelected) {
 				element.isSelected = false;
@@ -60,7 +71,7 @@ export default function EventAttractionTemplate({
 		})
 
 
-		strapiDataLinkSetter(temp);
+		setStrapiData(temp);
 	}
 
 
@@ -253,7 +264,7 @@ export default function EventAttractionTemplate({
 
 			<div className="psudoBody">
 				<div className="iconBackdrop">
-					<img src="backdrop-events.svg"/>
+					<img src="backdrop-events.svg" />
 				</div>
 
 				<div className="maincontent">
@@ -275,11 +286,11 @@ export default function EventAttractionTemplate({
 
 
 					<div className="mapContainer">
-						<MapCard strapiDataLink={strapiDataLink} itemSelector={itemSelector}>
+						<MapCard strapiDataLink={strapiData} itemSelector={itemSelector}>
 
 							<div className="mapCarousel-wrap">
 								<CardCarousel margin="0px 0px 20px 0px">
-									{strapiDataLink?.map((card, index) => (
+									{strapiData?.map((card, index) => (
 										<li key={index} className={`smallCardli`}>
 											<DefaultButton onClick={() => { itemSelector(card.id) }} className={`blank ${card.isSelected ? "selectedCard" : ""}`}>
 
@@ -311,7 +322,7 @@ export default function EventAttractionTemplate({
 						<Section>
 							<div className="cards-desktop">
 								<LargeCardList>
-									{strapiDataLink?.map((element, index) => (
+									{strapiData?.map((element, index) => (
 										<div key={index} ref={(r) => {
 											element.refLink = r;
 										}}>
@@ -342,9 +353,9 @@ export default function EventAttractionTemplate({
 						</Section>
 						<Section>
 							<div className="cards-mobile">
-							
+
 								<LargeCardList>
-									{strapiDataLink?.map((element, index) => (
+									{strapiData?.map((element, index) => (
 										<div key={index} ref={(r) => {
 											element.refLinkMobile = r;
 										}}>

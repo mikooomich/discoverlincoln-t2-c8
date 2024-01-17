@@ -631,8 +631,8 @@ export default function Homepage() {
 
 				@media screen and (max-width: 550px) {
 					.discover-text {
-								font-size: 64px;
-							}
+						font-size: 64px;
+					}
 
 					.lincoln-text {
 						font-size: 82px;
@@ -645,7 +645,8 @@ export default function Homepage() {
 					.greeting-frame {
 						display: flex;
 						flex-direction: column;
-						align-items: center;
+						{/* align-items: center; */}
+						max-width: 90%;
 					}
 				}
 				`}

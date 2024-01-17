@@ -146,7 +146,7 @@ app.post('/api/search', async (req: Request, res: Response) => {
 	for (let i = 0; i < arrayToSearch.length; i++) {
 		arrayToSearch[i] = arrayToSearch[i].filter((item: any, index: any) => {
 			// also filter for tags
-			return arrayToSearch[i].indexOf(item) === index && (tags.length == 0 || item.attributes.tags == tags[i]);
+			return arrayToSearch[i].indexOf(item) === index && (tags.length == 0 || tags.includes(item.attributes.tags));
 		})
 	}
 

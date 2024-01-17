@@ -45,7 +45,7 @@ export default function MapCard({ strapiDataLink, itemSelector, children }) {
 							strapiDataLink?.map((pin, index) => {
 								if (pin.attributes.latitude != null && pin.attributes.longitude != null) {
 									return (
-										<Marker position={[pin.attributes.latitude, pin.attributes.longitude]}>
+										<Marker key={index} position={[pin.attributes.latitude, pin.attributes.longitude]}>
 											<DefaultButton onClick={() => { itemSelector(pin.id) }}>
 												<Popup
 													ref={pin.isSelected ? (r) => {

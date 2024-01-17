@@ -76,8 +76,8 @@ export default function Checkout() {
           Authorization: `Bearer ${jwt}`,
         },
         body: JSON.stringify({
-            userId: userStrapiData.id,
-            registerForEventID: selectedCard.attributes.barcodeUID,
+          userId: userStrapiData.id,
+          registerForEventID: selectedCard.attributes.barcodeUID,
         }),
       }
     );
@@ -245,7 +245,7 @@ export default function Checkout() {
         <div className="orderSummary">
           <div className="actionBar">
             <h1>Confirm Your Order</h1>
-            <DefaultButton isLink={true} href="./homepage" children=" Cancel"></DefaultButton>
+            <DefaultButton isLink={true} href="./homepage"> Cancel</DefaultButton>
           </div>
 
           <div className="card">
@@ -371,7 +371,7 @@ export default function Checkout() {
                     type="text"
                     placeholder="Discount Code"
                   ></TextInput>
-                  <DefaultButton children="Apply"></DefaultButton>
+                  <DefaultButton>Apply</DefaultButton>
                 </span>
               </li>
               <li className="costBox">
@@ -380,7 +380,7 @@ export default function Checkout() {
                   <p>
                     $
                     {selectedCard != undefined
-                      ?  parseFloat(selectedCard.attributes.ticketCost).toFixed(2)
+                      ? parseFloat(selectedCard.attributes.ticketCost).toFixed(2)
                       : 0.00}
                   </p>
                 </span>
@@ -398,7 +398,7 @@ export default function Checkout() {
                   <p>
                     $
                     {selectedCard != undefined
-                      ?  parseFloat(selectedCard.attributes.ticketCost * 0.13 +
+                      ? parseFloat(selectedCard.attributes.ticketCost * 0.13 +
                         selectedCard.attributes.ticketCost).toFixed(2)
                       : 0.00}
                   </p>
