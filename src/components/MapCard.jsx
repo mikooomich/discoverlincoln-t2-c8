@@ -35,7 +35,6 @@ export default function MapCard({ strapiDataLink, itemSelector, children }) {
 	return (
 		<>
 			<div className="map-card">
-				{/* {children} */}
 				<div className='map'>
 					<MapContainer center={[43.155, -79.483]} zoom={12} scrollWheelZoom={true} style={{ backgroundColor: "#d9d9d9", width: "100%", height: "400px", overflow: "hidden" }}>
 						<TileLayer
@@ -46,14 +45,14 @@ export default function MapCard({ strapiDataLink, itemSelector, children }) {
 							strapiDataLink?.map((pin, index) => {
 								if (pin.attributes.latitude != null && pin.attributes.longitude != null) {
 									return (
-										<Marker position={[pin.attributes.latitude, pin.attributes.longitude]}>
+										<Marker key={index} position={[pin.attributes.latitude, pin.attributes.longitude]}>
 											<DefaultButton onClick={() => { itemSelector(pin.id) }}>
 												<Popup
 													ref={pin.isSelected ? (r) => {
 														popupRef = r;
 													}
 														: undefined} >
-													<img src={pin.attributes.image.data.attributes.url} ></img>
+													<img src={pin.image.data || pin.image.url} ></img>
 													{pin.attributes.title}
 												</Popup>
 											</DefaultButton>
@@ -70,7 +69,8 @@ export default function MapCard({ strapiDataLink, itemSelector, children }) {
 				</div>
 			</div>
 
-			<style jsx>{`
+			<style jsx>
+				{`
 				.map-card {
 					display: flex;
 				}
@@ -94,7 +94,8 @@ export default function MapCard({ strapiDataLink, itemSelector, children }) {
 					}
 				}
 
-			`}</style>
+				`}
+			</style>
 		</>
 	)
 }

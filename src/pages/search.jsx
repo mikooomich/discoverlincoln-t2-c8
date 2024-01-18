@@ -9,6 +9,8 @@ import { useRouter } from 'next/router'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
+import { SERVER_URL } from "./index";
+
 export default function Search() {
 	const [searchQuery, setSearchQuery] = useState([]); // the thing to search for
 	const [searchReq, setSearchReq] = useState(false); // request for a search opperation
@@ -30,19 +32,18 @@ export default function Search() {
 			if (searchQuery == "") {
 				console.log("No search query, load all")
 
-				const eventResponse = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/events?populate=*')
+				const eventResponse = await fetch(`${SERVER_URL}/api/events`)
 				const eventData = await eventResponse.json()
-				setEventsStrapiData(eventData.data)
+				setEventsStrapiData(eventData)
 
-				const attractionResponse = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/attrractions?populate=*')
+				const attractionResponse = await fetch(`${SERVER_URL}/api/attractions`)
 				const attractionData = await attractionResponse.json()
-				setAttractionStrapiData(attractionData.data)
+				setAttractionStrapiData(attractionData)
 
-				const businessResponse = await fetch('https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/businesses?populate=*')
+				const businessResponse = await fetch(`${SERVER_URL}/api/businesses`)
 				const businessData = await businessResponse.json()
-				setBusinessStrapiData(businessData.data)
+				setBusinessStrapiData(businessData)
 			}
-
 
 			// console.log(eventStrapiData)
 		}
@@ -54,7 +55,6 @@ export default function Search() {
 	/**
 	 * Read search queries from router and apply them is applicable
 	 */
-
 	let router = useRouter();
 	useEffect(() => {
 		async function workaround() {
@@ -84,51 +84,9 @@ export default function Search() {
 	 * Search and sort functions
 	 */
 
-	/**
-	 * {0: data...} ===> {0: attributes: {data...}}
-	 * @param {*} oldArray 
-	 * @returns 
-	 */
-	async function reMap(oldArray, variant) {
-		if (oldArray.length <= 0) return undefined;
-
-		// let newArray = [];
-
-		let strapiQuery = ""
-
-		// get strapi query, then search for all ids
-		oldArray.map((item) => {
-			strapiQuery += `&filters[id][$in]=${item.id}`;
-		})
-		// console.log(oldArray);
-
-		/**
-		 * Fetch data with images from strapi
-		 * @returns 
-		 */
-		async function getImages() {
-			const imagesPulled = await fetch(`https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/${variant}?populate=*${strapiQuery}`);
-			const imageData = await imagesPulled.json();
-			// console.log("Raw images")
-			// console.log(imageData)
-
-
-			// sort the data to ensure parity
-			imageData.data.sort((a, b) => {
-				return a.id > b.id ? 1 : -1;
-			})
-
-			return imageData.data;
-		}
-
-		let newData = await getImages();
-		// console.log("New data")
-		// console.log(newData)
-
-		return newData;
-	}
-
 	useEffect(() => {
+		getAllCurrentTagsArray(); // update filter options
+
 		async function fetchSearchResult() {
 			console.log("Searching for: " + searchQuery);
 			if (searchReq == false) {
@@ -142,15 +100,28 @@ export default function Search() {
 				return;
 			}
 
-			const gotData = await fetch(`https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/fuzzy-search/search?query=${searchQuery}`);
+			const gotData = await fetch(
+				`${SERVER_URL}/api/search`,
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						query: searchQuery,
+						filter: getAllSelectedTagsInFormat(),
+					}),
+				}
+			);
+
 			const searchData = await gotData.json();
 			// console.log("got data")
 			// console.log(searchData);
 
 			// set the data
-			setEventsStrapiData(await reMap(searchData.events, "events"));
-			setBusinessStrapiData(await reMap(searchData.businesses, "businesses"));
-			setAttractionStrapiData(await reMap(searchData.attrractions, "attrractions"));
+			setEventsStrapiData(searchData.events);
+			setBusinessStrapiData(searchData.businesses);
+			setAttractionStrapiData(searchData.attractions);
 			setSearchReq(false); // end search request
 
 			// console.log("ending data");
@@ -160,6 +131,7 @@ export default function Search() {
 		}
 
 		fetchSearchResult()
+		setSelectedTags([]); // hax reset selected tags
 	}, [searchReq, reloadLocalCards])
 
 
@@ -227,9 +199,12 @@ export default function Search() {
 	 * @returns
 	 */
 	function getAllSelectedTagsInFormat() {
-		let strapiQuery = "";
+		let strapiQuery = [];
 		selectedTags.map((item) => {
-			strapiQuery += `&filters[tags][$in]=${item}`;
+			// only accept tags that are currently on screen
+			if (getAllCurrentTagsArray().includes(item)) {
+				strapiQuery.push(item);
+			}
 		})
 
 		return strapiQuery;
@@ -257,41 +232,6 @@ export default function Search() {
 
 		setAllTags([...new Set(allTags)]); // remove duplicates
 		return allTags;
-	}
-
-	/**
-	 * This will request a new set of cards based on the tags selected
-	 */
-	function doFilter() {
-		getAllCurrentTagsArray(); // get all current tags
-
-		console.log("filtering...")
-		async function fetchFilterResult() {
-			// abort if no tags
-			if (selectedTags[0] === undefined) {
-				console.log("No tags, aborting, showing all results")
-				return;
-			}
-
-			/**
-			 * @param {*} variant useState to read
-			 * @param {*} setter setter for the useState
-			 */
-			async function askStrapiForFilters(variant, setter) {
-				const gotData = await fetch(
-					`https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/${variant}/?populate=*${getAllSelectedTagsInFormat()}`);
-				const searchData = await gotData.json();
-				// console.log("got data")
-				// console.log(searchData);
-				setter(searchData.data);
-			}
-
-			askStrapiForFilters("events", setEventsStrapiData);
-			askStrapiForFilters("businesses", setBusinessStrapiData);
-			askStrapiForFilters("attrractions", setAttractionStrapiData);
-		}
-
-		fetchFilterResult()
 	}
 
 
@@ -371,121 +311,116 @@ export default function Search() {
 		<>
 			<style jsx>
 				{`
-           {
-            /* heading, search bar, filter buttons */
-          }
+           		{/* heading, search bar, filter buttons */}
 
-          h1 {
-            font-size: var(--font-size-header-M);
-            font-weight: var(--font-weight-titles);
-            font-family: var(--font-calps);
-          }
+				h1 {
+					font-size: var(--font-size-header-M);
+					font-weight: var(--font-weight-titles);
+					font-family: var(--font-calps);
+				}
 
-          .topPart {
-            display: flex;
-            flex-direction: column;
-            margin: auto;
-          }
-          .searchBox {
-            width: 100%;
-          }
-          .searchBoxWithIcon {
-            display: flex;
-            margin: 20px;
-            box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.25);
-          }
+				.topPart {
+					display: flex;
+					flex-direction: column;
+					margin: auto;
+				}
+				.searchBox {
+					width: 100%;
+				}
+				.searchBoxWithIcon {
+					display: flex;
+					margin: 20px;
+					box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.25);
+				}
 
-          .search-title {
-            font-size: var(--font-size-header-M);
-            margin: 0px 10px;
-          }
+				.search-title {
+					font-size: var(--font-size-header-M);
+					margin: 0px 10px;
+				}
 
 
-          .filter-sort {
-			display: flex;
-            align-self: end;
-			flex-wrap: wrap;
-          }
+				.filter-sort {
+					display: flex;
+					align-self: end;
+					flex-wrap: wrap;
+				}
 
-           {
-            /* Carousel */
-          }
-          .cardPlaceholder {
-            width: 360px;
-            height: 360px;
-            background-color: grey;
-          }
+				{/* Carousel */}
+				.cardPlaceholder {
+					width: 360px;
+					height: 360px;
+					background-color: grey;
+				}
 
-           {
-            /* for card spacing */
-          }
-          li {
-            margin: 20px;
-          }
+				{/* for card spacing */}
+				li {
+					margin: 20px;
+				}
 
 
-		  {/* Sorting and filtering */}
-			.sortOptions-wrap {
-				display: ${showFilterSortOptions ? "flex" : "none"};
-				flex-direction: column;
-				align-items: start;
-				margin-right: 20px;
-				font-size: var(--font-size-body-Mplus);
-            	font-family: var(--font-roboto);
-			}
-		  .sortOptions-wrap div {
-			display: flex;
-			justify-content: center;
-			flex-wrap: wrap;
-			{/* margin: 0px 5px */}
-		  }
-		  .sortOptions * {
-			margin-right: 5px;
-		  }
+				{/* Sorting and filtering */}
+				.sortOptions-wrap {
+					display: ${showFilterSortOptions ? "flex" : "none"};
+					flex-direction: column;
+					align-items: start;
+					margin-right: 20px;
+					font-size: var(--font-size-body-Mplus);
+					font-family: var(--font-roboto);
+				}
+				.sortOptions-wrap div {
+					display: flex;
+					justify-content: center;
+					flex-wrap: wrap;
+					{/* margin: 0px 5px */}
+				}
+				.sortOptions * {
+					margin-right: 5px;
+				}
 
-		  .filterOptions-wrap {
-			flex-wrap: wrap;
-			max-height: 60px;
-		  }
+				.filterOptions-wrap {
+					flex-wrap: wrap;
+					max-height: 60px;
+				}
+
+				.filterSortToolip {
+					font-size: var(--font-size-body-Mplus);
+					font-family: var(--font-roboto);
+					color: #5A6F55;
+					text-wrap: wrap;
+					max-width: 180px;
+					position: absolute;
+				}
+
+				.iconBackdrop {
+					width: 450px;
+					height: 500px;
+					position: fixed;
+					z-index: -99;
+					top: 140px;
+					left: 40px;
+				}
 
 
-		  .iconBackdrop {
-            width: 450px;
-            height: 500px;
-            position: fixed;
-            z-index: -99;
-			top: 140px;
-			left: 40px;
-          }
+				@media screen and (max-width: 639px) {
+					.search-title {
+						font-size: var(--font-size-header-S);
+					}
 
+					.filterOptions-wrap {
+						max-height: none;
+						margin-bottom: 20px;
+					}
 
-		  @media screen and (max-width: 639px) {
-            .search-title {
-              font-size: var(--font-size-header-S);
-            }
-
-			.filterOptions-wrap {
-				max-height: none;
-				margin-bottom: 20px;
-			}
-          }
-        `}
+					.filterSortToolip {
+						position: relative;
+					}
+				}
+				`}
 			</style>
 
 
 			<div className="iconBackdrop">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="512"
-					height="512"
-					viewBox="0 0 512 512"
-					fill="none"
-				>
-					<path className=""
-						d="M416 208C416 253.9 401.1 296.3 376 330.7L502.6 457.4C515.1 469.9 515.1 490.2 502.6 502.7C490.1 515.2 469.8 515.2 457.3 502.7L330.7 376C296.3 401.2 253.9 416 208 416C93.1 416 0 322.9 0 208C0 93.1 93.1 0 208 0C322.9 0 416 93.1 416 208ZM208 352C226.91 352 245.636 348.275 263.106 341.039C280.577 333.802 296.452 323.195 309.823 309.823C323.195 296.452 333.802 280.577 341.039 263.106C348.275 245.636 352 226.91 352 208C352 189.09 348.275 170.364 341.039 152.894C333.802 135.423 323.195 119.548 309.823 106.177C296.452 92.805 280.577 82.198 263.106 74.9613C245.636 67.7247 226.91 64 208 64C189.09 64 170.364 67.7247 152.894 74.9613C135.423 82.198 119.548 92.805 106.177 106.177C92.805 119.548 82.198 135.423 74.9613 152.894C67.7247 170.364 64 189.09 64 208C64 226.91 67.7247 245.636 74.9613 263.106C82.198 280.577 92.805 296.452 106.177 309.823C119.548 323.195 135.423 333.802 152.894 341.039C170.364 348.275 189.09 352 208 352Z"
-						fill="#F2F2F2"
-					/>
-				</svg>
+				<img src="backdrop-search.svg" />
 			</div>
 
 			<Section marginTop="20px">
@@ -502,7 +437,6 @@ export default function Search() {
 						</div>
 					</div>
 					<div className="filter-sort">
-
 						<div className="sortOptions-wrap filterOptions-wrap ">
 							<p style={{ fontSize: "16px", marginBottom: "5px", fontWeight: "bold" }}>Filter By:</p>
 							{
@@ -519,7 +453,6 @@ export default function Search() {
 						<div className="sortOptions-wrap">
 							<p style={{ fontSize: "16px", marginBottom: "5px", fontWeight: "bold" }}>Sort By:</p>
 							<div className="sortOptions">
-
 								<label htmlFor="type1">ID</label>
 								<input type="radio" id="type1" name="type" value="id" onChange={readSortType} />
 								<label htmlFor="type2">Title</label>
@@ -537,13 +470,14 @@ export default function Search() {
 
 						</div>
 						<div>
-							<DefaultButton className="filter-sort-btn" onClick={() => { setShowFilterSortOptions(true); doFilter() }}>Filter</DefaultButton>
+							<DefaultButton className="filter-sort-btn" onClick={() => { setShowFilterSortOptions(true); setSearchReq(true) }}>Filter</DefaultButton>
 							<DefaultButton className="filter-sort-btn" onClick={() => {
 								setShowFilterSortOptions(true);
 								doSort(eventStrapiData, setEventsStrapiData);
 								doSort(attractionStrapiData, setAttractionStrapiData);
 								doSort(businessStrapiData, setBusinessStrapiData);
 							}}>Sort</DefaultButton>
+							<p className="filterSortToolip">Click on filter/sort to reveal options. click on filter/sort again to perform such actions.</p>
 						</div>
 					</div>
 				</div>
@@ -563,8 +497,8 @@ export default function Search() {
 								ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
 								rating={card.attributes.numStars}
 								category={card.attributes.tags}
-								imgSrc={card.attributes.image.data.attributes.url}
-								imgAltText={card.attributes.image.data.attributes.alternativeText}
+								imgSrc={card.image.data || card.image.url}
+								imgAltText={card.image.alternativeText}
 								barcodeUID={card.attributes.barcodeUID}
 
 								isRegisterable={card.attributes.isRegisterable}
@@ -592,8 +526,8 @@ export default function Search() {
 								ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
 								rating={card.attributes.numStars}
 								category={card.attributes.tags}
-								imgSrc={card.attributes.image.data.attributes.url}
-								imgAltText={card.attributes.image.data.attributes.alternativeText}
+								imgSrc={card.image.data || card.image.url}
+								imgAltText={card.image.alternativeText}
 								barcodeUID={card.attributes.barcodeUID}
 
 								isRegisterable={card.attributes.isRegisterable}
@@ -622,8 +556,8 @@ export default function Search() {
 								ticketTime={`${card.attributes.startTime} - ${card.attributes.endTime}`}
 								rating={card.attributes.numStars}
 								category={card.attributes.tags}
-								imgSrc={card.attributes.image.data.attributes.url}
-								imgAltText={card.attributes.image.data.attributes.alternativeText}
+								imgSrc={card.image.data || card.image.url}
+								imgAltText={card.image.alternativeText}
 								barcodeUID={card.attributes.barcodeUID}
 
 								isRegisterable={card.attributes.isRegisterable}

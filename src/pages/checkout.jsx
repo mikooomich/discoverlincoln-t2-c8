@@ -8,6 +8,8 @@ import Section from "@/components/Section";
 import LargeCardDesktop from "@/components/LargeCardDesktop";
 import LargeCardMobile from "@/components/LargeCardMobile";
 
+import { SERVER_URL } from "./index";
+
 export default function Checkout() {
   const [selectedCard, setSelectedCard] = useState();
   const router = useRouter();
@@ -19,7 +21,7 @@ export default function Checkout() {
       const jwt = localStorage.getItem("jwt");
 
       const response = await fetch(
-        "https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/users/me?populate=registeredEvents.image",
+        `${SERVER_URL}/users/me`,
         {
           method: "GET",
           headers: {
@@ -48,23 +50,14 @@ export default function Checkout() {
         return;
       }
 
-      // if (router.query.paid == true) {
-      // 	console.log("paid already, doing database stuff");
-      // 	/**
-      // 	 * do databbser stuff here?
-      // 	 */
-      // 	// now redirect to profile?
-      // 	return;
-      // }
-
       console.log("router IS READY");
-      // console.log(router.query)
+      console.log(router.query)
 
       const eventResponse = await fetch(
-        `https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/events?populate=*&filters[barcodeUID][$in]=${router.query.whichSelection}`
+        `${SERVER_URL}/api/events/${router.query.whichSelection}`
       );
       const eventData = await eventResponse.json();
-      setSelectedCard(eventData.data[0]);
+      setSelectedCard(eventData[0]);
       console.log(selectedCard);
     }
 
@@ -75,15 +68,16 @@ export default function Checkout() {
     const jwt = localStorage.getItem("jwt");
 
     const response = await fetch(
-      `https://strapi.discoverlincoln-t2-c8.civiconnect.net/api/users/${userStrapiData.id}`,
+      `${SERVER_URL}/api/events`,
       {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${jwt}`,
         },
         body: JSON.stringify({
-            registeredEvents: [selectedCard.id],
+          userId: userStrapiData.id,
+          registerForEventID: selectedCard.attributes.barcodeUID,
         }),
       }
     );
@@ -251,7 +245,7 @@ export default function Checkout() {
         <div className="orderSummary">
           <div className="actionBar">
             <h1>Confirm Your Order</h1>
-            <DefaultButton isLink={true} href="./homepage" children=" Cancel"></DefaultButton>
+            <DefaultButton isLink={true} href="./homepage"> Cancel</DefaultButton>
           </div>
 
           <div className="card">
@@ -270,9 +264,9 @@ export default function Checkout() {
                 ticketTime={`${selectedCard.attributes.startTime} - ${selectedCard.attributes.endTime}`}
                 rating={selectedCard.attributes.numStars}
                 category={selectedCard.attributes.tags}
-                imgSrc={selectedCard.attributes.image.data.attributes.url}
+                imgSrc={selectedCard.image.data || selectedCard.image.url}
                 imgAltText={
-                  selectedCard.attributes.image.data.attributes.alternativeText
+                  selectedCard.image.alternativeText
                 }
                 barcodeUID={selectedCard.attributes.barcodeUID}
                 isRegisterable={selectedCard.attributes.isRegisterable}
@@ -301,9 +295,9 @@ export default function Checkout() {
                 ticketTime={`${selectedCard.attributes.startTime} - ${selectedCard.attributes.endTime}`}
                 rating={selectedCard.attributes.numStars}
                 category={selectedCard.attributes.tags}
-                imgSrc={selectedCard.attributes.image.data.attributes.url}
+                imgSrc={selectedCard.image.data || selectedCard.image.url}
                 imgAltText={
-                  selectedCard.attributes.image.data.attributes.alternativeText
+                  selectedCard.image.alternativeText
                 }
                 barcodeUID={selectedCard.attributes.barcodeUID}
                 isRegisterable={selectedCard.attributes.isRegisterable}
@@ -377,7 +371,7 @@ export default function Checkout() {
                     type="text"
                     placeholder="Discount Code"
                   ></TextInput>
-                  <DefaultButton children="Apply"></DefaultButton>
+                  <DefaultButton>Apply</DefaultButton>
                 </span>
               </li>
               <li className="costBox">
@@ -386,7 +380,7 @@ export default function Checkout() {
                   <p>
                     $
                     {selectedCard != undefined
-                      ?  parseFloat(selectedCard.attributes.ticketCost).toFixed(2)
+                      ? parseFloat(selectedCard.attributes.ticketCost).toFixed(2)
                       : 0.00}
                   </p>
                 </span>
@@ -404,7 +398,7 @@ export default function Checkout() {
                   <p>
                     $
                     {selectedCard != undefined
-                      ?  parseFloat(selectedCard.attributes.ticketCost * 0.13 +
+                      ? parseFloat(selectedCard.attributes.ticketCost * 0.13 +
                         selectedCard.attributes.ticketCost).toFixed(2)
                       : 0.00}
                   </p>
